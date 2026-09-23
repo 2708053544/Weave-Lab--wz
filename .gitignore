@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+temp_video.mp4
+video_viewer.html
+
+# Reference files (large binaries)
+参考/

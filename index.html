@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weave Lab | 智能体验与服务工程实验室</title>
+  <meta name="description" content="Weave Lab 智能体验与服务工程实验室 - 高校产品设计专业双创工作室">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar hidden-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link active">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="#hero" class="dropdown-item">首页首屏</a>
+            <a href="#about" class="dropdown-item">工作室简介</a>
+            <a href="#research" class="dropdown-item">研究方向</a>
+            <a href="#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/mentors.html" class="dropdown-item">指导老师</a>
+            <a href="pages/about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="pages/projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="pages/projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/activities.html" class="dropdown-item">活动</a>
+            <a href="pages/cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/contact.html" class="dropdown-item">联系方式</a>
+            <a href="pages/contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <button class="nav-mobile-toggle" id="navMobileToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-immersive">
+    <!-- Particle Canvas -->
+    <canvas id="hero-particle-canvas"></canvas>
+
+    <div class="hero-noise"></div>
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+    </div>
+
+    <div class="hero-content" id="heroContent">
+      <span class="hero-label">智能体验与服务工程实验室</span>
+      <h1 class="hero-title hero-title-wrapper" id="heroTitle">
+        <span class="line">Weave Lab</span>
+      </h1>
+      <p class="hero-subtitle">
+        编织创意 · 智造体验
+        <br>
+        Weaving Creativity, Engineering Experience
+      </p>
+      <div class="hero-cta">
+        <a href="#about" class="btn btn-primary">了解实验室</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-bottom">
+      <span>向下滚动</span>
+      <div class="scroll-arrow-bottom">↓</div>
+    </div>
+  </section>
+
+  <!-- About + Research Section -->
+  <section id="about" class="section about-research-section">
+    <div class="container">
+      <div class="about-research-grid">
+        <div class="about-research-left fade-in">
+          <span class="section-label">About Us</span>
+          <h2 class="about-research-title">关于<br>Weave Lab</h2>
+          <p class="about-research-text">
+            智能体验与服务工程实验室是高校产品设计专业的双创工作室，
+            致力于探索智能时代下的体验设计与服务创新。
+          </p>
+          <p class="about-research-text">
+            我们相信设计的力量能够编织创意、智造体验，
+            让技术与人文在产品中完美融合。
+          </p>
+          <a href="pages/about.html" class="btn btn-text">了解更多 →</a>
+        </div>
+        <div class="about-research-right">
+          <ul class="research-list">
+            <li class="research-list-item fade-in" style="--delay: 0.1s">
+              <span class="research-list-num">01</span>
+              <span class="research-list-name">手术机器人</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.15s">
+              <span class="research-list-num">02</span>
+              <span class="research-list-name">AI人工智能</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.2s">
+              <span class="research-list-num">03</span>
+              <span class="research-list-name">智能硬件</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.25s">
+              <span class="research-list-num">04</span>
+              <span class="research-list-name">服务设计</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.3s">
+              <span class="research-list-num">05</span>
+              <span class="research-list-name">市场营销</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.35s">
+              <span class="research-list-num">06</span>
+              <span class="research-list-name">VR/AR</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.4s">
+              <span class="research-list-num">07</span>
+              <span class="research-list-name">产品创新设计</span>
+            </li>
+            <li class="research-list-item fade-in" style="--delay: 0.45s">
+              <span class="research-list-num">08</span>
+              <span class="research-list-name">智能家居</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Works -->
+  <section id="works" class="section works-section alt-bg">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Featured Works</span>
+        <h2 class="section-title">精选项目</h2>
+        <p class="section-subtitle">优秀毕业设计与工作室项目</p>
+      </div>
+      <div class="works-grid">
+        <div class="work-card fade-in" style="--delay: 0.1s">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">毕设作品</span>
+            <h3 class="work-title">项目名称占位一</h3>
+            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
+          </div>
+        </div>
+        <div class="work-card fade-in" style="--delay: 0.2s">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">优秀毕设</span>
+            <h3 class="work-title">项目名称占位二</h3>
+            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
+          </div>
+        </div>
+        <div class="work-card fade-in" style="--delay: 0.3s">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">工作室项目</span>
+            <h3 class="work-title">项目名称占位三</h3>
+            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-more fade-in">
+        <a href="pages/projects.html" class="btn btn-text">查看全部项目 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-content fade-in">
+        <h2>开启你的设计之旅</h2>
+        <p>加入 Weave Lab，与我们一起探索智能体验与服务设计的无限可能</p>
+        <a href="pages/contact.html" class="btn btn-primary">联系我们</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="index.html">首页</a>
+            <a href="pages/about.html">关于工作室</a>
+            <a href="pages/projects.html">项目成果</a>
+            <a href="pages/contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="pages/activities.html">活动</a>
+            <a href="pages/cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="pages/contact.html">地址占位</a>
+            <a href="mailto:contact@weavelab.com">邮箱占位</a>
+            <a href="tel:+86xxx">电话占位</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab 智能体验与服务工程实验室. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="微信">微信</a>
+          <a href="#" aria-label="微博">微博</a>
+          <a href="#" aria-label="邮箱">邮箱</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/hero-particle.js"></script>
+</body>
+</html>
