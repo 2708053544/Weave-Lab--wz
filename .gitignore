@@ -12,6 +12,9 @@ Thumbs.db
 *.log
 temp_video.mp4
 video_viewer.html
+首页.mp4
+ref_video.mp4
+temp_frames/
 
 # Reference files (large binaries)
 参考/

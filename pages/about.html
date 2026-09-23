@@ -66,109 +66,73 @@
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <!-- Mentor Team Section - Fullscreen Immersive -->
-  <section id="mentors" class="mentor-fullpage-section">
-    <div class="mentor-fullpage-inner">
-      <div class="mentor-fp-slides" id="mentorFpSlides">
-        <!-- Mentor 01 -->
-        <div class="mentor-fp-slide active">
-          <div class="mentor-fp-bg" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);"></div>
-          <div class="mentor-fp-overlay"></div>
-          <div class="mentor-fp-content">
-            <div class="mentor-fp-label">MENTOR 01 / 04</div>
-            <h2 class="mentor-fp-name">导师姓名一</h2>
-            <p class="mentor-fp-title">教授 / 博士生导师 / 研究方向主任</p>
-            <p class="mentor-fp-desc">
-              个人简介占位文本区域。详细介绍导师的教育背景、学术经历、研究领域、社会兼职等信息。此处为全屏沉浸式展示，每位导师占据一整屏，滚动切换到下一位。
-            </p>
-            <a href="mentor-detail.html?id=1" class="mentor-fp-btn">
-              查看详情 →
-            </a>
+  <!-- Mentor Team Section - Card Carousel -->
+  <section id="mentors" class="section mentors-preview-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Mentor Team</span>
+        <h2 class="section-title">指导老师</h2>
+        <p class="section-subtitle">四位资深导师引领工作室发展方向</p>
+      </div>
+    </div>
+
+    <div class="mentor-preview-carousel fade-in">
+      <div class="mentor-preview-track" id="mentorsCarouselTrack">
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">01</span>
+            <h3 class="mentor-preview-name">导师姓名一</h3>
+            <p class="mentor-preview-title">教授 / 博士生导师</p>
+            <span class="mentor-preview-more">查看详情 →</span>
           </div>
         </div>
 
-        <!-- Mentor 02 -->
-        <div class="mentor-fp-slide">
-          <div class="mentor-fp-bg" style="background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);"></div>
-          <div class="mentor-fp-overlay"></div>
-          <div class="mentor-fp-content">
-            <div class="mentor-fp-label">MENTOR 02 / 04</div>
-            <h2 class="mentor-fp-name">导师姓名二</h2>
-            <p class="mentor-fp-title">副教授 / 硕士生导师 / 研究方向副主任</p>
-            <p class="mentor-fp-desc">
-              个人简介占位文本区域。详细介绍导师的教育背景、学术经历、研究领域、社会兼职等信息。研究方向聚焦于交互设计与用户体验，拥有丰富的产学研合作经验。
-            </p>
-            <a href="mentor-detail.html?id=2" class="mentor-fp-btn">
-              查看详情 →
-            </a>
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">02</span>
+            <h3 class="mentor-preview-name">导师姓名二</h3>
+            <p class="mentor-preview-title">副教授 / 硕士生导师</p>
+            <span class="mentor-preview-more">查看详情 →</span>
           </div>
         </div>
 
-        <!-- Mentor 03 -->
-        <div class="mentor-fp-slide">
-          <div class="mentor-fp-bg" style="background: linear-gradient(135deg, #181818 0%, #282828 100%);"></div>
-          <div class="mentor-fp-overlay"></div>
-          <div class="mentor-fp-content">
-            <div class="mentor-fp-label">MENTOR 03 / 04</div>
-            <h2 class="mentor-fp-name">导师姓名三</h2>
-            <p class="mentor-fp-title">教授 / 博士生导师 / 学科带头人</p>
-            <p class="mentor-fp-desc">
-              个人简介占位文本区域。详细介绍导师的教育背景、学术经历、研究领域、社会兼职等信息。主持多项国家级科研项目，发表高水平论文数十篇。
-            </p>
-            <a href="mentor-detail.html?id=3" class="mentor-fp-btn">
-              查看详情 →
-            </a>
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #181818 0%, #282828 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">03</span>
+            <h3 class="mentor-preview-name">导师姓名三</h3>
+            <p class="mentor-preview-title">教授 / 博士生导师</p>
+            <span class="mentor-preview-more">查看详情 →</span>
           </div>
         </div>
 
-        <!-- Mentor 04 -->
-        <div class="mentor-fp-slide">
-          <div class="mentor-fp-bg" style="background: linear-gradient(135deg, #0d0d0d 0%, #222222 100%);"></div>
-          <div class="mentor-fp-overlay"></div>
-          <div class="mentor-fp-content">
-            <div class="mentor-fp-label">MENTOR 04 / 04</div>
-            <h2 class="mentor-fp-name">导师姓名四</h2>
-            <p class="mentor-fp-title">讲师 / 研究方向骨干</p>
-            <p class="mentor-fp-desc">
-              个人简介占位文本区域。详细介绍导师的教育背景、学术经历、研究领域、社会兼职等信息。专注于服务设计与创新方法，指导学生获得多项设计大奖。
-            </p>
-            <a href="mentor-detail.html?id=4" class="mentor-fp-btn">
-              查看详情 →
-            </a>
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0d0d0d 0%, #222222 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">04</span>
+            <h3 class="mentor-preview-name">导师姓名四</h3>
+            <p class="mentor-preview-title">讲师 / 研究骨干</p>
+            <span class="mentor-preview-more">查看详情 →</span>
           </div>
         </div>
       </div>
 
-      <!-- Navigation Arrows -->
-      <button class="mentor-fp-arrow prev" id="mentorFpPrev">←</button>
-      <button class="mentor-fp-arrow next" id="mentorFpNext">→</button>
+      <button class="mentor-preview-arrow prev" id="mentorsCarouselPrev">←</button>
+      <button class="mentor-preview-arrow next" id="mentorsCarouselNext">→</button>
+    </div>
 
-      <!-- Side Dots Navigation -->
-      <div class="mentor-fp-dots" id="mentorFpDots">
-        <span class="mentor-fp-dot active" data-index="0"></span>
-        <span class="mentor-fp-dot" data-index="1"></span>
-        <span class="mentor-fp-dot" data-index="2"></span>
-        <span class="mentor-fp-dot" data-index="3"></span>
-      </div>
-
-      <!-- Counter -->
-      <div class="mentor-fp-counter">
-        <span class="current" id="mentorFpCurrent">01</span>
-        <span class="divider">/</span>
-        <span class="total">04</span>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <div class="mentor-fp-scroll-hint">
-        <span>SCROLL</span>
-        <div class="scroll-line"></div>
-      </div>
-
-      <!-- Section Header (top left) -->
-      <div class="mentor-fp-header">
-        <span class="mentor-fp-section-label">Mentor Team</span>
-        <h2 class="mentor-fp-section-title">指导老师</h2>
+    <div class="container">
+      <div class="mentor-preview-dots" id="mentorsCarouselDots">
+        <span class="mentor-preview-dot active" data-index="0"></span>
+        <span class="mentor-preview-dot" data-index="1"></span>
+        <span class="mentor-preview-dot" data-index="2"></span>
+        <span class="mentor-preview-dot" data-index="3"></span>
       </div>
     </div>
   </section>
@@ -338,5 +302,105 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    // Mentor cards carousel
+    (function() {
+      const track = document.getElementById('mentorsCarouselTrack');
+      const cards = track ? track.querySelectorAll('.mentor-preview-card') : [];
+      const dots = document.querySelectorAll('.mentor-preview-dot');
+      const prevBtn = document.getElementById('mentorsCarouselPrev');
+      const nextBtn = document.getElementById('mentorsCarouselNext');
+      if (!track || cards.length === 0) return;
+
+      let currentIndex = 0;
+      const total = cards.length;
+      let isDragging = false;
+      let startX = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+
+      function getCardWidth() {
+        const container = track.parentElement;
+        const containerWidth = container.offsetWidth;
+        let visible = 3;
+        if (window.innerWidth <= 768) visible = 2;
+        if (window.innerWidth <= 480) visible = 1;
+        const gap = 24;
+        const cardWidth = (containerWidth - (visible - 1) * gap) / visible;
+        return { cardWidth, gap, visible };
+      }
+
+      function goToSlide(index) {
+        const { cardWidth, gap, visible } = getCardWidth();
+        const maxIndex = Math.max(0, total - visible);
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+        const offset = currentIndex * (cardWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+        currentTranslate = -offset;
+        prevTranslate = -offset;
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        if (prevBtn) prevBtn.classList.toggle('disabled', currentIndex === 0);
+        if (nextBtn) nextBtn.classList.toggle('disabled', currentIndex >= maxIndex);
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          goToSlide(parseInt(this.getAttribute('data-index')));
+        });
+      });
+
+      // Drag
+      let dragIndex = 0;
+      function dragStart(e) {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        dragIndex = currentIndex;
+        track.style.transition = 'none';
+        track.classList.add('dragging');
+      }
+      function dragMove(e) {
+        if (!isDragging) return;
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        track.style.transform = `translateX(${prevTranslate + (currentX - startX)}px)`;
+      }
+      function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.transition = '';
+        track.classList.remove('dragging');
+        const { cardWidth } = getCardWidth();
+        const moved = currentTranslate - prevTranslate;
+        if (moved < -cardWidth * 0.2) goToSlide(dragIndex + 1);
+        else if (moved > cardWidth * 0.2) goToSlide(dragIndex - 1);
+        else goToSlide(dragIndex);
+      }
+
+      track.addEventListener('mousedown', dragStart);
+      window.addEventListener('mousemove', dragMove);
+      window.addEventListener('mouseup', dragEnd);
+      track.addEventListener('touchstart', dragStart, { passive: true });
+      track.addEventListener('touchmove', dragMove, { passive: true });
+      track.addEventListener('touchend', dragEnd);
+
+      // Wheel
+      let wheelTimer;
+      track.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) return;
+        e.preventDefault();
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => {
+          if (e.deltaX > 30) goToSlide(currentIndex + 1);
+          else if (e.deltaX < -30) goToSlide(currentIndex - 1);
+        }, 50);
+      }, { passive: false });
+
+      window.addEventListener('resize', () => goToSlide(currentIndex));
+      goToSlide(0);
+    })();
+  </script>
 </body>
 </html>
