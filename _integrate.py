@@ -1,74 +1,22 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weave Lab | 智能体验与服务工程实验室</title>
-  <meta name="description" content="Weave Lab 智能体验与服务工程实验室 - 高校产品设计专业双创工作室">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
-</head>
-<body>
+import re
 
-  <!-- Navigation -->
-  <nav class="navbar hidden-nav">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-mark">W</div>
-        <span>Weave Lab</span>
-      </a>
-      <div class="nav-menu">
-        <div class="nav-item">
-          <span class="nav-link active">首页 ▾</span>
-          <div class="nav-dropdown">
-            <a href="#hero" class="dropdown-item">首页首屏</a>
-            <a href="#about" class="dropdown-item">工作室简介</a>
-            <a href="#research" class="dropdown-item">研究方向</a>
-            <a href="#works" class="dropdown-item">精选项目</a>
-          </div>
-        </div>
-        <div class="nav-item">
-          <span class="nav-link">关于工作室 ▾</span>
-          <div class="nav-dropdown">
-            <a href="pages/about.html#mentors" class="dropdown-item">指导老师</a>
-            <a href="pages/about.html#students" class="dropdown-item">学生团队</a>
-          </div>
-        </div>
-        <div class="nav-item">
-          <span class="nav-link">项目成果 ▾</span>
-          <div class="nav-dropdown">
-            <a href="pages/projects.html#studio" class="dropdown-item">工作室项目</a>
-            <a href="pages/projects.html#works" class="dropdown-item">毕设作品</a>
-            <a href="pages/projects.html#awards" class="dropdown-item">获奖荣誉</a>
-          </div>
-        </div>
-        <div class="nav-item">
-          <span class="nav-link">活动与合作 ▾</span>
-          <div class="nav-dropdown">
-            <a href="pages/activities.html" class="dropdown-item">活动</a>
-            <a href="pages/cooperation.html" class="dropdown-item">合作资源</a>
-          </div>
-        </div>
-        <div class="nav-item">
-          <span class="nav-link">联系我们 ▾</span>
-          <div class="nav-dropdown">
-            <a href="pages/contact.html" class="dropdown-item">联系方式</a>
-            <a href="pages/contact.html" class="dropdown-item">留言咨询</a>
-          </div>
-        </div>
-      </div>
-      <button class="nav-mobile-toggle" id="navMobileToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+p = r'E:\AA\网站\Weave-Lab--wz\index.html'
+with open(p, 'r', encoding='utf-8') as f:
+    s = f.read()
 
-  <!-- Hero Section: Weave Light Canvas -->
+# 1. Add Cormorant Garamond font after existing Google Fonts link
+old_font = '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">'
+new_font = old_font + '\n<link href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">'
+assert old_font in s
+s = s.replace(old_font, new_font)
+
+# 2. Replace the entire hero section
+old_hero_start = '  <!-- Hero Section -->'
+old_hero_end = '  </section>\n\n  <!-- About + Research Section -->'
+i1 = s.index(old_hero_start)
+i2 = s.index(old_hero_end) + len('  </section>')
+
+new_hero = '''  <!-- Hero Section: Weave Light Canvas -->
   <section id="hero" class="hero-immersive hero-weave">
     <canvas id="weave-stage"></canvas>
     <div class="weave-grain"></div>
@@ -83,187 +31,19 @@
     </div>
 
     <div class="weave-scroll-hint">SCROLL</div>
-  </section>
+  </section>'''
 
-  <!-- About + Research Section -->
-  <section id="about" class="section about-research-section">
-    <div class="container">
-      <div class="about-research-grid">
-        <div class="about-research-left fade-in">
-          <span class="section-label">About Us</span>
-          <h2 class="about-research-title">关于<br>Weave Lab</h2>
-          <p class="about-research-text">
-            智能体验与服务工程实验室是高校产品设计专业的双创工作室，
-            致力于探索智能时代下的体验设计与服务创新。
-          </p>
-          <p class="about-research-text">
-            我们相信设计的力量能够编织创意、智造体验，
-            让技术与人文在产品中完美融合。
-          </p>
-          <a href="pages/about.html" class="btn btn-text">了解更多 →</a>
-        </div>
-        <div class="about-research-right">
-          <ul class="research-list">
-            <li class="research-list-item fade-in" style="--delay: 0.1s" onclick="location.href='pages/research-detail.html?id=1'">
-              <span class="research-list-num">01</span>
-              <span class="research-list-name">手术机器人</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.15s" onclick="location.href='pages/research-detail.html?id=2'">
-              <span class="research-list-num">02</span>
-              <span class="research-list-name">AI人工智能</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.2s" onclick="location.href='pages/research-detail.html?id=3'">
-              <span class="research-list-num">03</span>
-              <span class="research-list-name">智能硬件</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.25s" onclick="location.href='pages/research-detail.html?id=4'">
-              <span class="research-list-num">04</span>
-              <span class="research-list-name">服务设计</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.3s" onclick="location.href='pages/research-detail.html?id=5'">
-              <span class="research-list-num">05</span>
-              <span class="research-list-name">市场营销</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.35s" onclick="location.href='pages/research-detail.html?id=6'">
-              <span class="research-list-num">06</span>
-              <span class="research-list-name">VR/AR</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.4s" onclick="location.href='pages/research-detail.html?id=7'">
-              <span class="research-list-num">07</span>
-              <span class="research-list-name">产品创新设计</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-            <li class="research-list-item fade-in" style="--delay: 0.45s" onclick="location.href='pages/research-detail.html?id=8'">
-              <span class="research-list-num">08</span>
-              <span class="research-list-name">智能家居</span>
-              <span class="research-list-arrow">→</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+s = s[:i1] + new_hero + s[i2:]
 
-  <!-- Featured Works -->
-  <section id="works" class="section works-section alt-bg">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Featured Works</span>
-        <h2 class="section-title">精选项目</h2>
-        <p class="section-subtitle">优秀毕业设计与工作室项目</p>
-      </div>
-      <div class="works-grid">
-        <div class="work-card fade-in" style="--delay: 0.1s">
-          <div class="work-image placeholder-pulse"></div>
-          <div class="work-info">
-            <span class="work-category">毕设作品</span>
-            <h3 class="work-title">项目名称占位一</h3>
-            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
-          </div>
-        </div>
-        <div class="work-card fade-in" style="--delay: 0.2s">
-          <div class="work-image placeholder-pulse"></div>
-          <div class="work-info">
-            <span class="work-category">优秀毕设</span>
-            <h3 class="work-title">项目名称占位二</h3>
-            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
-          </div>
-        </div>
-        <div class="work-card fade-in" style="--delay: 0.3s">
-          <div class="work-image placeholder-pulse"></div>
-          <div class="work-info">
-            <span class="work-category">工作室项目</span>
-            <h3 class="work-title">项目名称占位三</h3>
-            <p class="work-desc">项目简介占位文本，简述项目的设计理念和创新点。</p>
-          </div>
-        </div>
-      </div>
-      <div class="section-more fade-in">
-        <a href="pages/projects.html" class="btn btn-text">查看全部项目 →</a>
-      </div>
-    </div>
-  </section>
+# 3. Remove hero-particle.js script tag
+s = s.replace('  <script src="js/hero-particle.js"></script>\n', '')
 
-  <!-- CTA Section -->
-  <section class="cta-banner">
-    <div class="container">
-      <div class="cta-content fade-in">
-        <h2>开启你的设计之旅</h2>
-        <p>加入 Weave Lab，与我们一起探索智能体验与服务设计的无限可能</p>
-        <a href="pages/contact.html" class="btn btn-primary">联系我们</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <div class="footer-logo-mark">W</div>
-            <span>Weave Lab</span>
-          </div>
-          <p class="footer-tagline">
-            智能体验与服务工程实验室
-            <br>
-            Intelligent Experience & Service Engineering Lab
-          </p>
-        </div>
-        <div class="footer-column">
-          <h4>导航</h4>
-          <div class="footer-links">
-            <a href="index.html">首页</a>
-            <a href="pages/about.html">关于工作室</a>
-            <a href="pages/projects.html">项目成果</a>
-            <a href="pages/contact.html">联系我们</a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h4>活动与合作</h4>
-          <div class="footer-links">
-            <a href="pages/activities.html">活动</a>
-            <a href="pages/cooperation.html">合作资源</a>
-          </div>
-        </div>
-        <div class="footer-column">
-          <h4>联系方式</h4>
-          <div class="footer-links">
-            <a href="pages/contact.html">地址占位</a>
-            <a href="mailto:contact@weavelab.com">邮箱占位</a>
-            <a href="tel:+86xxx">电话占位</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Weave Lab 智能体验与服务工程实验室. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="微信">微信</a>
-          <a href="#" aria-label="微博">微博</a>
-          <a href="#" aria-label="邮箱">邮箱</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-
+# 4. Add weave styles + script before </body>
+weave_style_and_script = '''
   <!-- Weave Light Hero (self-contained) -->
   <style>
-    .hero-weave {
-      background:
-        radial-gradient(ellipse 80% 60% at 25% 35%, rgba(70,80,180,0.18), transparent 60%),
-        radial-gradient(ellipse 60% 50% at 75% 65%, rgba(160,90,200,0.12), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(60,120,200,0.08), transparent 60%),
-        linear-gradient(180deg, #050508 0%, #0a0814 50%, #080612 100%);
-    }
-    #weave-stage { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; transform:translateZ(0); will-change:transform; }
+    .hero-weave { background:#050508; }
+    #weave-stage { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; }
     .weave-grain {
       position:absolute; inset:0; z-index:3; pointer-events:none;
       opacity:0.05; mix-blend-mode:overlay;
@@ -280,7 +60,7 @@
     }
     .weave-title {
       font-family:'Cormorant Garamond','Times New Roman',serif;
-      font-weight:400; font-size:clamp(60px,11vw,160px);
+      font-weight:400; font-size:clamp(60px,9vw,130px);
       line-height:0.95; letter-spacing:0.02em; color:#fff;
       text-shadow:0 0 40px rgba(180,200,255,0.2);
     }
@@ -528,6 +308,11 @@
     resize(); animate();
   })();
   </script>
+'''
 
-</body>
-</html>
+# Insert before </body>
+s = s.replace('</body>', weave_style_and_script + '\n</body>')
+
+with open(p, 'w', encoding='utf-8') as f:
+    f.write(s)
+print("OK")
