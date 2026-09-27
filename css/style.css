@@ -138,7 +138,8 @@ body > * {
   z-index: 1;
 }
 
-/* 深色模式下各区块背景透明，让全局柔光透出来 */
+/* 深色模式下各区块背景透明，让全局柔光透出来
+   注意：只在深色模式（默认）下透明，亮色模式下保持白底 */
 body:not(.theme-light) .section,
 body:not(.theme-light) .detail-section,
 body:not(.theme-light) .about-research-section,
@@ -164,6 +165,58 @@ body:not(.theme-light) .m3-section {
 /* 深色模式下页脚也透明 */
 body:not(.theme-light) footer {
   background: transparent !important;
+}
+
+/* 亮色模式下m3-section恢复白底黑字 */
+body.theme-light .m3-section {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.theme-light .m3-section .m3-info-name,
+body.theme-light .m3-section .m3-info-title,
+body.theme-light .m3-section .m3-sec-header .section-title,
+body.theme-light .m3-section .m3-counter,
+body.theme-light .m3-section .m3-back {
+  color: #000000 !important;
+}
+
+body.theme-light .m3-section .m3-info-label,
+body.theme-light .m3-section .m3-info-key,
+body.theme-light .m3-section .m3-info-val,
+body.theme-light .m3-section .m3-sec-header .section-label,
+body.theme-light .m3-section .m3-counter,
+body.theme-light .m3-section .m3-scroll-hint {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+body.theme-light .m3-section .m3-card {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .m3-section .m3-dot {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+body.theme-light .m3-section .m3-dot.active {
+  background: #000000 !important;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.theme-light .m3-section .m3-arrow {
+  border-color: rgba(0, 0, 0, 0.18) !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+body.theme-light .m3-section .m3-glow {
+  display: none !important;
+}
+
+/* 亮色模式下学生3D区恢复白底 */
+body.theme-light .student-3d-section {
+  background: #ffffff !important;
 }
 
 a {
