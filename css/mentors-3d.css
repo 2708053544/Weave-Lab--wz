@@ -1,0 +1,525 @@
+/* ============================================================
+   mentors-3d.css — 导师 3D 卡片展示
+   两种用法：
+   1) 独立整页：body.m3-page + .m3-root（pages/mentors.html）
+   2) 嵌入长页 section：section.m3-section > .m3-root（about.html）
+   换老师只改 js/mentors-3d.js 的 TEACHERS 数组
+   ============================================================ */
+
+:root {
+  --m3-bg: #050508;
+  --m3-ink: #ffffff;
+  --m3-ink-dim: rgba(255, 255, 255, 0.55);
+  --m3-glow-a: #4f6bff;
+  --m3-glow-b: #9b5cff;
+  --m3-glow-c: #2fd4ff;
+  --m3-card-bg: #0d0d16;
+  --m3-card-border: rgba(255, 255, 255, 0.1);
+}
+
+html, body { margin: 0; padding: 0; }
+
+/* ---------- 独立整页模式 ---------- */
+body.m3-page {
+  background: var(--m3-bg);
+  color: var(--m3-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ---------- 嵌入 section 模式 ---------- */
+section.m3-section {
+  position: relative;
+  height: 100vh;
+  min-height: 620px;
+  overflow: hidden;
+  background: var(--m3-bg);
+  color: var(--m3-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* 所有 3D UI 都装在 .m3-root 里，fixed=整页 / absolute=嵌入 */
+.m3-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+section.m3-section .m3-root {
+  position: absolute;
+  z-index: 2;
+}
+
+/* 嵌入模式下不需要返回按钮 */
+section.m3-section .m3-back { display: none; }
+
+/* ---------- 背景光晕 ---------- */
+.m3-glow-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.m3-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.m3-glow.g1 {
+  width: 55vmax;
+  height: 55vmax;
+  left: -15vmax;
+  top: -12vmax;
+  background: radial-gradient(circle, var(--m3-glow-a) 0%, transparent 65%);
+  animation: m3-drift-a 26s ease-in-out infinite alternate;
+}
+
+.m3-glow.g2 {
+  width: 48vmax;
+  height: 48vmax;
+  right: -14vmax;
+  bottom: -16vmax;
+  background: radial-gradient(circle, var(--m3-glow-b) 0%, transparent 65%);
+  animation: m3-drift-b 32s ease-in-out infinite alternate;
+}
+
+.m3-glow.g3 {
+  width: 34vmax;
+  height: 34vmax;
+  right: 8vw;
+  top: -10vmax;
+  background: radial-gradient(circle, var(--m3-glow-c) 0%, transparent 65%);
+  opacity: 0.35;
+  animation: m3-drift-c 22s ease-in-out infinite alternate;
+}
+
+@keyframes m3-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(9vw, 7vh, 0) scale(1.15); }
+}
+@keyframes m3-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-8vw, -6vh, 0) scale(0.95); }
+}
+@keyframes m3-drift-c {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-6vw, 9vh, 0); }
+}
+
+/* 光晕随鼠标轻微视差（JS 写 CSS 变量） */
+.m3-glow-field {
+  transform: translate3d(calc(var(--mx, 0) * 18px), calc(var(--my, 0) * 14px), 0);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 微噪点，避免大面积纯黑的塑料感 */
+.m3-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+/* ---------- 嵌入模式：板块标题（沿用站点 section-header） ---------- */
+section.m3-section .m3-sec-header {
+  position: absolute;
+  top: 96px;
+  left: 6vw;
+  z-index: 25;
+}
+section.m3-section .m3-sec-header .section-label { color: var(--m3-ink-dim); }
+section.m3-section .m3-sec-header .section-title,
+section.m3-section .m3-sec-header .section-subtitle { color: var(--m3-ink); }
+section.m3-section .m3-sec-header .section-title { margin: 0 0 6px; }
+
+/* ---------- 顶部返回 / 计数 ---------- */
+.m3-back {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  z-index: 30;
+  color: var(--m3-ink-dim);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  transition: color 0.3s, border-color 0.3s;
+}
+.m3-back:hover { color: #fff; border-color: rgba(255, 255, 255, 0.5); }
+
+.m3-counter {
+  position: absolute;
+  top: 32px;
+  right: 36px;
+  z-index: 30;
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 13px;
+  color: var(--m3-ink-dim);
+  letter-spacing: 0.15em;
+}
+section.m3-section .m3-counter { top: 96px; }
+.m3-counter .cur { color: #fff; font-size: 20px; }
+
+/* ---------- 左侧文字区 ---------- */
+.m3-info {
+  position: absolute;
+  left: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  max-width: 34vw;
+  pointer-events: none;
+}
+
+.m3-info-label {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: var(--m3-ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.m3-info-name {
+  font-family: 'Cormorant Garamond', 'Noto Sans SC', serif;
+  font-weight: 500;
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 1.08;
+  margin: 0 0 14px;
+  min-height: 1.1em;
+}
+
+.m3-info-title {
+  font-size: 14px;
+  color: var(--m3-ink-dim);
+  letter-spacing: 0.08em;
+  margin: 0 0 26px;
+  min-height: 1.4em;
+}
+
+.m3-info-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--m3-ink-dim);
+  letter-spacing: 0.15em;
+}
+.m3-info-hint::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* 文字切换动画 */
+.m3-fade-swap {
+  animation: m3-fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes m3-fade-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 进场动画期间隐藏文字/控件：HTML 直接带 m3-booting 类，
+   JS 在卡片收回后移除该类并逐个播放浮现动画。
+   visibility 不在 m3-fade-in 关键帧内，可稳定压住元素自带的动画 */
+.m3-root.m3-booting .m3-sec-header,
+.m3-root.m3-booting .m3-info-label,
+.m3-root.m3-booting .m3-info-name,
+.m3-root.m3-booting .m3-info-title,
+.m3-root.m3-booting .m3-info-hint,
+.m3-root.m3-booting .m3-counter,
+.m3-root.m3-booting .m3-dots,
+.m3-root.m3-booting .m3-arrow { opacity: 0; visibility: hidden; }
+
+/* 进场拉尾特效的残影卡（JS 播完自动移除） */
+.m3-card.m3-ghost {
+  pointer-events: none;
+  cursor: default;
+  filter: blur(1px);
+}
+
+/* ---------- 右侧卡片堆 ---------- */
+.m3-stage {
+  position: absolute;
+  right: 8vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: min(30vw, 420px);
+  aspect-ratio: 3 / 3.8;
+  perspective: 1400px;
+}
+
+.m3-stack {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* 鼠标视差倾斜（JS 写 CSS 变量） */
+  transform: rotateX(calc(var(--my, 0) * -6deg)) rotateY(calc(var(--mx, 0) * 8deg));
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.m3-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: var(--m3-card-bg);
+  border: 1px solid var(--m3-card-border);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.65s;
+  will-change: transform, opacity;
+}
+
+/* 堆叠层级位置：pos-0 在最前 */
+.m3-card.pos-0 {
+  transform: translate3d(0, 0, 0) rotateZ(0deg);
+  z-index: 5;
+}
+.m3-card.pos-1 {
+  transform: translate3d(4.5%, -3.5%, -90px) rotateZ(3.5deg);
+  z-index: 4;
+}
+.m3-card.pos-2 {
+  transform: translate3d(-4%, -7%, -180px) rotateZ(-2.5deg);
+  z-index: 3;
+}
+.m3-card.pos-3 {
+  transform: translate3d(6.5%, 4%, -270px) rotateZ(5deg);
+  z-index: 2;
+}
+.m3-card.pos-back {
+  transform: translate3d(-2%, -9%, -340px) rotateZ(-4deg);
+  z-index: 1;
+}
+
+/* 飞出动画 */
+.m3-card.out-next {
+  transform: translate3d(38%, 12%, 60px) rotateZ(14deg);
+  opacity: 0;
+  z-index: 6;
+}
+.m3-card.out-prev {
+  transform: translate3d(-42%, 14%, 60px) rotateZ(-14deg);
+  opacity: 0;
+  z-index: 6;
+}
+
+.m3-card:hover.pos-0 {
+  box-shadow: 0 40px 90px rgba(79, 107, 255, 0.25),
+              0 30px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* 卡片照片 */
+.m3-card-photo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, #1c1c2e 0%, #10101c 55%, #1a1630 100%);
+}
+
+.m3-card-photo .m3-initial {
+  font-family: 'Cormorant Garamond', 'Noto Sans SC', serif;
+  font-size: clamp(90px, 9vw, 150px);
+  color: rgba(255, 255, 255, 0.14);
+  user-select: none;
+}
+
+.m3-card-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.m3-card-photo img.loaded { opacity: 1; }
+
+/* 卡片底部小标题条 */
+.m3-card-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+.m3-card-caption .cap-name { font-weight: 600; }
+.m3-card-caption .cap-idx {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  color: var(--m3-ink-dim);
+  font-size: 11px;
+}
+
+/* 卡片顶部小徽标 */
+.m3-card-badge {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 5px 12px;
+  backdrop-filter: blur(6px);
+}
+
+/* ---------- 右侧导航点 ---------- */
+.m3-dots {
+  position: absolute;
+  right: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.m3-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.m3-dot.active {
+  background: #fff;
+  transform: scale(1.25);
+  box-shadow: 0 0 12px rgba(120, 140, 255, 0.9);
+}
+.m3-dot:hover::after {
+  content: attr(data-name);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  background: rgba(10, 10, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* ---------- 底部提示 ---------- */
+.m3-scroll-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--m3-ink-dim);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.m3-scroll-hint .line {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.6));
+  animation: m3-pulse-line 2s ease-in-out infinite;
+}
+@keyframes m3-pulse-line {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* 左右箭头（桌面端） */
+.m3-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.m3-arrow:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.m3-arrow.prev { left: 3vw; }
+.m3-arrow.next { right: 3vw; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 900px) {
+  .m3-info {
+    left: 50%;
+    top: auto;
+    bottom: 9vh;
+    transform: translateX(-50%);
+    max-width: 86vw;
+    text-align: center;
+  }
+  .m3-info-name { font-size: clamp(30px, 8vw, 44px); }
+  .m3-info-hint::before { display: none; }
+  .m3-info-hint { letter-spacing: 0.08em; }
+  .m3-info-title { margin-bottom: 14px; }
+
+  .m3-stage {
+    right: 50%;
+    top: 42%;
+    transform: translate(50%, -50%);
+    width: min(64vw, 320px);
+  }
+
+  .m3-dots { right: 14px; gap: 14px; }
+  .m3-counter { top: auto; bottom: 20px; right: 20px; }
+  section.m3-section .m3-counter { top: auto; bottom: 20px; }
+  .m3-back { top: 18px; left: 18px; }
+  .m3-arrow { display: none; }
+  .m3-scroll-hint { display: none; } /* 触屏用户自然滑动，避免与文字区重叠 */
+  section.m3-section .m3-sec-header { display: none; } /* 手机端信息块已含 OUR MENTORS */
+}
+
+/* 尊重系统减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .m3-glow { animation: none; }
+  .m3-card, .m3-stack, .m3-glow-field { transition: none; }
+}
