@@ -25,12 +25,12 @@ const TEACHERS = [
   },
   {
     id: '2',
-    name: '老师名称占位二',
-    short: '师二',
-    title: '副教授 / 硕士生导师 / 方向负责人',
-    email: 'mentor2@weavelab.com',
-    major: '人工智能 / 交互设计',
-    blog: 'https://blog.weavelab.com/mentor2',
+    name: '刘海斌',
+    short: '刘',
+    title: '副教授 / 人工智能教育专家',
+    email: '#',
+    major: '人工智能教育 / 智能硬件 / AI工程化',
+    blog: '#',
     photo: '../images/teachers/teacher2.jpg',
     link: 'mentor-detail.html?id=2'
   },
