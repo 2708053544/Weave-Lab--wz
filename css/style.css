@@ -122,9 +122,9 @@ body::before {
   opacity: 1;
   transition: opacity var(--transition-slow);
   background:
-    radial-gradient(circle at 15% 20%, rgba(79, 107, 255, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 85% 70%, rgba(155, 92, 255, 0.2) 0%, transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(47, 212, 255, 0.12) 0%, transparent 50%);
+    radial-gradient(circle at 15% 20%, rgba(79, 107, 255, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 70%, rgba(155, 92, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(47, 212, 255, 0.1) 0%, transparent 50%);
   filter: blur(60px);
 }
 
@@ -152,7 +152,10 @@ body:not(.theme-light) .mentors-preview-section,
 body:not(.theme-light) .mentor-thumbs-section,
 body:not(.theme-light) .marquee-section,
 body:not(.theme-light) .cta-section,
-body:not(.theme-light) .student-3d-section {
+body:not(.theme-light) .student-3d-section,
+body:not(.theme-light) .about-v2,
+body:not(.theme-light) .research-item-v2,
+body:not(.theme-light) .footer-v2 {
   background: transparent !important;
 }
 
