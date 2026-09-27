@@ -122,10 +122,10 @@ body::before {
   opacity: 1;
   transition: opacity var(--transition-slow);
   background:
-    radial-gradient(circle at 15% 20%, rgba(79, 107, 255, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 85% 70%, rgba(155, 92, 255, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(47, 212, 255, 0.1) 0%, transparent 50%);
-  filter: blur(40px);
+    radial-gradient(circle at 15% 20%, rgba(79, 107, 255, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 85% 70%, rgba(155, 92, 255, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(47, 212, 255, 0.12) 0%, transparent 50%);
+  filter: blur(60px);
 }
 
 body.theme-light::before {
@@ -136,6 +136,29 @@ body.theme-light::before {
 body > * {
   position: relative;
   z-index: 1;
+}
+
+/* 深色模式下各区块背景透明，让全局柔光透出来 */
+body:not(.theme-light) .section,
+body:not(.theme-light) .detail-section,
+body:not(.theme-light) .about-research-section,
+body:not(.theme-light) .cooperation-section,
+body:not(.theme-light) .contact-section,
+body:not(.theme-light) .mentor-content-section,
+body:not(.theme-light) .mentor-gallery-section,
+body:not(.theme-light) .research-pills-section,
+body:not(.theme-light) .research-cta-section,
+body:not(.theme-light) .mentors-preview-section,
+body:not(.theme-light) .mentor-thumbs-section,
+body:not(.theme-light) .marquee-section,
+body:not(.theme-light) .cta-section,
+body:not(.theme-light) .student-3d-section {
+  background: transparent !important;
+}
+
+/* 深色模式下页脚也透明 */
+body:not(.theme-light) footer {
+  background: transparent !important;
 }
 
 a {
