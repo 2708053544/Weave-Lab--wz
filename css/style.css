@@ -1433,9 +1433,11 @@ h4 {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   position: relative;
+  background-size: cover;
+  background-position: center;
 }
 
-.detail-hero-image::before {
+.detail-hero-image.placeholder-pulse::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -5024,14 +5026,14 @@ body.theme-dark * {
 }
 
 .research-cta-btns .btn-primary {
-  background: var(--card-bg);
-  color: var(--color-dark);
-  border: 1px solid #fff;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
 }
 
 .research-cta-btns .btn-primary:hover {
   background: transparent;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .research-cta-btns .btn-outline {
