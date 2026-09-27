@@ -679,6 +679,7 @@
     <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
       <span class="mentor-detail-tag" id="mentorEmailTag">📧 chenmy@weavelab.com</span>
       <span class="mentor-detail-tag" id="mentorOfficeTag">📍 创新设计大楼 502 室</span>
+      <a href="#" class="mentor-detail-tag mentor-blog-tag" id="mentorBlogTag">🔗 个人博客</a>
     </div>
   </section>
 
@@ -741,6 +742,7 @@
         title: "讲师 / 创新创业教育导师 / 工作室负责人",
         email: "1016520133@qq.com",
         office: "天津仁爱学院 · 数智传媒与设计艺术学院",
+        blog: "#",
         tags: ["服务设计", "互联网营销", "AI产品与智能交互", "创新创业教育", "演示表达与PPT制作"],
         intro: [
           "张寞轩，讲师，天津仁爱学院专业教师，主持校重点「智驱无界触点服务创新实验工作室」。兼具企业实战与高校教学经验的创新创业教育实践者，长期深耕服务设计与 AI 产品方向。",
@@ -820,6 +822,7 @@
         title: "副教授 / 硕士生导师 / 方向负责人",
         email: "linyw@weavelab.com",
         office: "创新设计大楼 502 室",
+        blog: "#",
         tags: ["人工智能", "生成式设计", "计算机视觉", "VR/AR"],
         intro: [
           "林雨薇，副教授、硕士生导师，负责 AI 人工智能与 VR/AR 研究方向。计算机科学与技术博士，长期关注人工智能与体验设计的交叉领域。",
@@ -869,6 +872,7 @@
         title: "副教授 / 硕士生导师 / 方向负责人",
         email: "zhengkw@weavelab.com",
         office: "创新设计大楼 502 室",
+        blog: "#",
         tags: ["服务设计", "产品创新方法", "用户研究", "社会创新"],
         intro: [
           "郑凯文，副教授、硕士生导师，负责服务设计与产品创新设计方向。设计学博士，曾在国内头部设计咨询公司担任资深服务设计师。",
@@ -918,6 +922,7 @@
         title: "讲师 / 设计实践导师",
         email: "suwq@weavelab.com",
         office: "创新设计大楼 502 室",
+        blog: "#",
         tags: ["品牌设计", "数字营销", "新媒体传播", "竞赛辅导"],
         intro: [
           "苏婉清，讲师、设计实践导师，负责市场营销方向与工作室对外品牌建设。毕业于视觉传达设计专业，曾任职于知名品牌设计咨询公司。",
@@ -975,6 +980,13 @@
       document.getElementById('mentorTitle').textContent = data.title;
       document.getElementById('mentorEmailTag').textContent = '📧 ' + data.email;
       document.getElementById('mentorOfficeTag').textContent = '📍 ' + data.office;
+      const blogTag = document.getElementById('mentorBlogTag');
+      if (data.blog) {
+        blogTag.href = data.blog;
+        blogTag.style.display = '';
+      } else {
+        blogTag.style.display = 'none';
+      }
       document.getElementById('mentorTags').innerHTML = data.tags.map(t => '<span class="mentor-detail-tag">' + t + '</span>').join('');
 
       // 个人简介 - 概况

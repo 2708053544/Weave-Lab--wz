@@ -2844,6 +2844,19 @@ h4 {
   color: var(--text-secondary);
 }
 
+a.mentor-detail-tag {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+a.mentor-detail-tag:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: var(--bg-secondary);
+}
+
 /* Blog-style content sections */
 .mentor-content-section {
   max-width: 720px;

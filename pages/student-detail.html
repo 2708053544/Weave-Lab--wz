@@ -104,50 +104,6 @@
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="detail-section">
-    <div class="container-narrow">
-      <h2 class="fade-in">擅长方向与技能</h2>
-      <div class="detail-list fade-in" id="studentSkills">
-        <div class="detail-list-item">产品设计</div>
-        <div class="detail-list-item">人机交互设计</div>
-        <div class="detail-list-item">Rhino / KeyShot</div>
-        <div class="detail-list-item">Arduino 原型开发</div>
-        <div class="detail-list-item">项目统筹</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects & Awards -->
-  <section class="detail-section" style="background: var(--bg-secondary);">
-    <div class="container-narrow">
-      <h2 class="fade-in">参与项目与竞赛成果</h2>
-      <div class="detail-list fade-in" id="studentAchievements">
-        <div class="detail-list-item">腔镜手术机器人系统 — 项目核心成员</div>
-        <div class="detail-list-item">骨科手术导航机器人 — 交互设计</div>
-        <div class="detail-list-item">省级工业设计大赛金奖 — 团队成员</div>
-        <div class="detail-list-item">红点设计概念奖 — 团队成员</div>
-        <div class="detail-list-item">校级优秀研究生干部</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio -->
-  <section class="detail-section">
-    <div class="container">
-      <div class="container-narrow" style="margin-bottom: 48px;">
-        <h2 class="fade-in">个人作品集</h2>
-        <p class="text-secondary fade-in">精选作品展示</p>
-      </div>
-      <div class="detail-gallery fade-in">
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-      </div>
-    </div>
-  </section>
-
   <!-- Back -->
   <section class="section text-center" style="padding: 60px 0;">
     <a href="about.html" class="btn btn-outline">← 返回团队页面</a>
@@ -311,8 +267,6 @@
       document.getElementById('metaMajor').textContent = data.major;
       document.getElementById('metaPosition').textContent = data.position;
       document.getElementById('metaEmail').textContent = data.email;
-      document.getElementById('studentSkills').innerHTML = data.skills.map(s => '<div class="detail-list-item">' + s + '</div>').join('');
-      document.getElementById('studentAchievements').innerHTML = data.achievements.map(a => '<div class="detail-list-item">' + a + '</div>').join('');
     }
 
     document.addEventListener('DOMContentLoaded', function () {
