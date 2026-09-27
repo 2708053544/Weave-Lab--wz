@@ -2786,22 +2786,39 @@ h4 {
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  gap: 6px;
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
   font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-weight: 300;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  opacity: 0.6;
+  transition: all var(--transition-normal);
 }
 
 .back-button:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: var(--text-primary);
+  color: var(--text-primary);
   opacity: 1;
+  transform: translateX(-4px);
+}
+
+.back-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--text-primary);
+  transition: width var(--transition-normal);
+}
+
+.back-button:hover::before {
+  width: 20px;
 }
 
 /* Mentor info overlay */
