@@ -40,7 +40,7 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.5s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -53,6 +53,45 @@
       height: 100%;
       object-fit: cover;
       object-position: top center;
+    }
+    /* 左右箭头按钮 */
+    .graduation-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+    }
+    .graduation-board-carousel:hover .graduation-arrow {
+      opacity: 1;
+    }
+    .graduation-arrow:hover {
+      background: rgba(0, 0, 0, 0.6) !important;
+    }
+    .graduation-arrow.prev {
+      left: 10px;
+    }
+    .graduation-arrow.next {
+      right: 10px;
+    }
+    .graduation-arrow svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
     }
     .graduation-carousel-dots {
       position: absolute;
@@ -75,6 +114,19 @@
       width: 20px;
       border-radius: 3px;
       background: #fff;
+    }
+    /* 展板数量标识 */
+    .graduation-board-count {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      font-size: 0.75rem;
+      border-radius: 12px;
+      z-index: 2;
+      backdrop-filter: blur(8px);
     }
     .graduation-card-info {
       margin-top: 16px;
@@ -521,6 +573,17 @@
             '</div>';
         });
 
+        // 左右箭头
+        const arrowLeft = '<button class="graduation-arrow prev" aria-label="上一张">' +
+          '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>' +
+          '</button>';
+        const arrowRight = '<button class="graduation-arrow next" aria-label="下一张">' +
+          '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+          '</button>';
+
+        // 页码
+        const countBadge = '<div class="graduation-board-count">1 / ' + project.boards.length + '</div>';
+
         // 小圆点
         let dotsHtml = '<div class="graduation-carousel-dots">';
         project.boards.forEach((_, idx) => {
@@ -529,7 +592,7 @@
         dotsHtml += '</div>';
 
         card.innerHTML = '<div class="graduation-board-carousel" data-project="' + project.id + '">' +
-          slidesHtml + dotsHtml + '</div>' +
+          countBadge + slidesHtml + arrowLeft + arrowRight + dotsHtml + '</div>' +
           '<div class="graduation-card-info">' +
           '<h3 class="graduation-card-title">' + project.title + '</h3>' +
           '<p class="graduation-card-author">' + project.author + '</p>' +
@@ -538,18 +601,21 @@
         grid.appendChild(card);
       });
 
-      // 启动每个卡片的轮播
-      startGraduationCarousels();
+      // 绑定轮播交互
+      bindGraduationCarousels();
     }
 
-    // 启动所有轮播
-    function startGraduationCarousels() {
+    // 绑定所有轮播的手动翻页
+    function bindGraduationCarousels() {
       const carousels = document.querySelectorAll('.graduation-board-carousel');
       carousels.forEach(carousel => {
         const slides = carousel.querySelectorAll('.graduation-board-slide');
         const dots = carousel.querySelectorAll('.graduation-dot');
+        const countBadge = carousel.querySelector('.graduation-board-count');
+        const prevBtn = carousel.querySelector('.graduation-arrow.prev');
+        const nextBtn = carousel.querySelector('.graduation-arrow.next');
         let current = 0;
-        let timer = null;
+        const total = slides.length;
 
         function goTo(index) {
           slides[current].classList.remove('active');
@@ -557,36 +623,41 @@
           current = index;
           slides[current].classList.add('active');
           dots[current].classList.add('active');
+          if (countBadge) {
+            countBadge.textContent = (current + 1) + ' / ' + total;
+          }
+        }
+
+        function prev() {
+          goTo((current - 1 + total) % total);
         }
 
         function next() {
-          goTo((current + 1) % slides.length);
+          goTo((current + 1) % total);
         }
 
-        // 自动播放
-        function startAuto() {
-          timer = setInterval(next, 3000);
-        }
-
-        function stopAuto() {
-          clearInterval(timer);
-        }
+        // 左右箭头
+        prevBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          prev();
+        });
+        nextBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          next();
+        });
 
         // 点击圆点切换
         dots.forEach((dot, idx) => {
           dot.addEventListener('click', function(e) {
             e.stopPropagation();
             goTo(idx);
-            stopAuto();
-            startAuto();
           });
         });
 
-        // hover暂停
-        carousel.addEventListener('mouseenter', stopAuto);
-        carousel.addEventListener('mouseleave', startAuto);
-
-        startAuto();
+        // 阻止点击轮播区域跳转（只有点击卡片信息区域才跳转）
+        carousel.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
       });
     }
 
