@@ -5,6 +5,7 @@
 
 // DOM Ready
 document.addEventListener('DOMContentLoaded', function () {
+  initTheme();
   initNavbar();
   initScrollAnimations();
   initHorizontalScroll();
@@ -18,6 +19,26 @@ document.addEventListener('DOMContentLoaded', function () {
   initMentorFullpageSection();
   initStudent3DCarousel();
 });
+
+/* ---------- Theme Toggle ---------- */
+function initTheme() {
+  // Read saved preference
+  var saved = localStorage.getItem('theme') || 'dark';
+  if (saved === 'light') {
+    document.body.classList.add('theme-light');
+  }
+  // Remove theme-dark class if present (from old index.html)
+  document.body.classList.remove('theme-dark');
+
+  // Bind toggle button
+  var toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', function () {
+    document.body.classList.toggle('theme-light');
+    var mode = document.body.classList.contains('theme-light') ? 'light' : 'dark';
+    localStorage.setItem('theme', mode);
+  });
+}
 
 /* ---------- Navbar ---------- */
 function initNavbar() {

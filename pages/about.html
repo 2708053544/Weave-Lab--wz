@@ -6,6 +6,7 @@
   <title>关于工作室 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="了解 Weave Lab 智能体验与服务工程实验室的导师团队和学生成员">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/mentors-3d.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -58,6 +59,7 @@
           </div>
         </div>
       </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
       <div class="nav-toggle">
         <span></span>
         <span></span>
@@ -66,73 +68,71 @@
     </div>
   </nav>
 
-  <!-- Mentor Team Section - Card Carousel -->
-  <section id="mentors" class="section mentors-preview-section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Mentor Team</span>
-        <h2 class="section-title">指导老师</h2>
-        <p class="section-subtitle">四位资深导师引领工作室发展方向</p>
+  <!-- Mentor Team Section - 3D 光晕卡片（数据与交互见 js/mentors-3d.js） -->
+  <section id="mentors" class="m3-section">
+    <div class="m3-root m3-booting">
+
+      <!-- 背景光晕 -->
+      <div class="m3-glow-field" aria-hidden="true">
+        <div class="m3-glow g1"></div>
+        <div class="m3-glow g2"></div>
+        <div class="m3-glow g3"></div>
       </div>
-    </div>
+      <div class="m3-grain" aria-hidden="true"></div>
 
-    <div class="mentor-preview-carousel fade-in">
-      <div class="mentor-preview-track" id="mentorsCarouselTrack">
-        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
-          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);"></div>
-          <div class="mentor-preview-overlay"></div>
-          <div class="mentor-preview-info">
-            <span class="mentor-preview-num">01</span>
-            <h3 class="mentor-preview-name">陈明远</h3>
-            <p class="mentor-preview-title">教授 / 博士生导师 · 医疗产品与智能机器人</p>
-            <span class="mentor-preview-more">查看详情 →</span>
-          </div>
-        </div>
-
-        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
-          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);"></div>
-          <div class="mentor-preview-overlay"></div>
-          <div class="mentor-preview-info">
-            <span class="mentor-preview-num">02</span>
-            <h3 class="mentor-preview-name">林雨薇</h3>
-            <p class="mentor-preview-title">副教授 / 硕士生导师 · AI与体验设计</p>
-            <span class="mentor-preview-more">查看详情 →</span>
-          </div>
-        </div>
-
-        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
-          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #181818 0%, #282828 100%);"></div>
-          <div class="mentor-preview-overlay"></div>
-          <div class="mentor-preview-info">
-            <span class="mentor-preview-num">03</span>
-            <h3 class="mentor-preview-name">郑凯文</h3>
-            <p class="mentor-preview-title">副教授 / 硕士生导师 · 服务设计与创新方法</p>
-            <span class="mentor-preview-more">查看详情 →</span>
-          </div>
-        </div>
-
-        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
-          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0d0d0d 0%, #222222 100%);"></div>
-          <div class="mentor-preview-overlay"></div>
-          <div class="mentor-preview-info">
-            <span class="mentor-preview-num">04</span>
-            <h3 class="mentor-preview-name">苏婉清</h3>
-            <p class="mentor-preview-title">讲师 / 设计实践导师 · 品牌与市场营销</p>
-            <span class="mentor-preview-more">查看详情 →</span>
-          </div>
+      <!-- 板块标题（白字，覆盖在深色光晕上） -->
+      <div class="m3-sec-header">
+        <div class="section-header fade-in">
+          <span class="section-label">Mentor Team</span>
+          <h2 class="section-title">指导老师</h2>
+          <p class="section-subtitle">四位资深导师引领工作室发展方向</p>
         </div>
       </div>
 
-      <button class="mentor-preview-arrow prev" id="mentorsCarouselPrev">←</button>
-      <button class="mentor-preview-arrow next" id="mentorsCarouselNext">→</button>
-    </div>
+      <!-- 计数 -->
+      <div class="m3-counter">
+        <span class="cur" id="m3Cur">01</span>
+        <span> / 0<span id="m3Total">4</span></span>
+      </div>
 
-    <div class="container">
-      <div class="mentor-preview-dots" id="mentorsCarouselDots">
-        <span class="mentor-preview-dot active" data-index="0"></span>
-        <span class="mentor-preview-dot" data-index="1"></span>
-        <span class="mentor-preview-dot" data-index="2"></span>
-        <span class="mentor-preview-dot" data-index="3"></span>
+      <!-- 左侧文字区 -->
+      <div class="m3-info">
+        <div class="m3-info-label">Our Mentors</div>
+        <h3 class="m3-info-name" id="m3Name">老师名称占位一</h3>
+        <p class="m3-info-title" id="m3Title">教授 / 博士生导师 / 研究方向主任</p>
+        <div class="m3-info-details">
+          <div class="m3-info-row">
+            <span class="m3-info-key">邮箱</span>
+            <span class="m3-info-val" id="m3Email">—</span>
+          </div>
+          <div class="m3-info-row">
+            <span class="m3-info-key">专业</span>
+            <span class="m3-info-val" id="m3Major">—</span>
+          </div>
+          <div class="m3-info-row">
+            <span class="m3-info-key">个人博客</span>
+            <a class="m3-info-val m3-info-link" id="m3Blog" href="#">—</a>
+          </div>
+        </div>
+        <span class="m3-info-hint">滚动切换 · 点击卡片查看详情</span>
+      </div>
+
+      <!-- 右侧 3D 卡片堆 -->
+      <div class="m3-stage">
+        <div class="m3-stack" id="m3Stack"><!-- JS 渲染 --></div>
+      </div>
+
+      <!-- 导航点 -->
+      <div class="m3-dots" id="m3Dots"></div>
+
+      <!-- 左右箭头 -->
+      <div class="m3-arrow prev" aria-label="上一位">←</div>
+      <div class="m3-arrow next" aria-label="下一位">→</div>
+
+      <!-- 底部提示：滑到最后一位后继续下滑即进入学生团队 -->
+      <div class="m3-scroll-hint">
+        <div class="line"></div>
+        <span>Scroll / Swipe</span>
       </div>
     </div>
   </section>
@@ -401,6 +401,10 @@
       window.addEventListener('resize', () => goToSlide(currentIndex));
       goToSlide(0);
     })();
+  </script>
+  <script src="../js/mentors-3d.js"></script>
+  <script>
+    document.getElementById('m3Total').textContent = TEACHERS.length;
   </script>
 </body>
 </html>
