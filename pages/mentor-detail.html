@@ -263,5 +263,24 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    /* 读取 ?id= 显示对应导师基本信息（与 js/mentors-3d.js 的 TEACHERS 数组 id 对应） */
+    (function () {
+      var MENTORS = {
+        '1': { name: '老师名称占位一', title: '教授 / 博士生导师 / 研究方向主任' },
+        '2': { name: '老师名称占位二', title: '副教授 / 硕士生导师 / 方向负责人' },
+        '3': { name: '老师名称占位三', title: '教授 / 研究员 / 实验室主任' },
+        '4': { name: '老师名称占位四', title: '副教授 / 副研究员 / 项目负责人' }
+      };
+      var id = new URLSearchParams(location.search).get('id');
+      var m = MENTORS[id];
+      if (!m) return;
+      var nameEl = document.querySelector('.mentor-detail-name');
+      var titleEl = document.querySelector('.mentor-detail-title');
+      if (nameEl) nameEl.textContent = m.name;
+      if (titleEl) titleEl.textContent = m.title;
+      document.title = m.name + ' | Weave Lab 智能体验与服务工程实验室';
+    })();
+  </script>
 </body>
 </html>
