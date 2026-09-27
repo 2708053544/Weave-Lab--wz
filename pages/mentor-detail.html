@@ -901,6 +901,14 @@
           "PLC/GD师资培训认证",
           "国家级职业培训师资认证",
           "公众号「AI科技改变生活」主理人"
+        ],
+        gallery: [
+          "../images/teachers/liu-gallery/liu-gallery-01.png",
+          "../images/teachers/liu-gallery/liu-gallery-02.png",
+          "../images/teachers/liu-gallery/liu-gallery-03.png",
+          "../images/teachers/liu-gallery/liu-gallery-04.png",
+          "../images/teachers/liu-gallery/liu-gallery-05.png",
+          "../images/teachers/liu-gallery/liu-gallery-06.png"
         ]
       },
       "3": {
@@ -1022,9 +1030,11 @@
         mentorImage.style.backgroundSize = 'cover';
         mentorImage.style.backgroundPosition = 'center top';
         mentorImage.classList.remove('placeholder-pulse');
+        mentorImage.classList.add('has-photo');
       } else {
         mentorImage.style.backgroundImage = '';
         mentorImage.classList.add('placeholder-pulse');
+        mentorImage.classList.remove('has-photo');
       }
       document.getElementById('mentorEmailTag').textContent = '📧 ' + data.email;
       document.getElementById('mentorOfficeTag').textContent = '📍 ' + data.office;
