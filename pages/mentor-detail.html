@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导师详情 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="导师个人详情页面">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <a href="../index.html" class="nav-link">首页 ▾</a>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="about.html" class="nav-link active">关于工作室 ▾</a>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="projects.html" class="nav-link">项目成果 ▾</a>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Back Button -->
+  <a href="about.html" class="back-button">
+    ← 返回
+  </a>
+
+  <!-- Mentor Detail Hero -->
+  <section class="mentor-detail-hero">
+    <div class="mentor-detail-image-wrapper">
+      <div class="mentor-detail-image placeholder-pulse">
+        <!-- 导师高清形象照大图占位 -->
+      </div>
+      <div class="mentor-detail-curve"></div>
+    </div>
+
+    <div class="mentor-detail-info fade-in">
+      <span class="section-label" style="margin-bottom: 16px;">Mentor Profile</span>
+      <h1 class="mentor-detail-name" id="mentorName">陈明远</h1>
+      <p class="mentor-detail-title" id="mentorTitle">教授 / 博士生导师 / 实验室主任</p>
+      <div class="mentor-detail-tags" id="mentorTags">
+        <span class="mentor-detail-tag">医疗产品设计</span>
+        <span class="mentor-detail-tag">手术机器人</span>
+        <span class="mentor-detail-tag">人机交互</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Introduction -->
+  <section class="mentor-content-section fade-in">
+    <h2>个人简介</h2>
+    <div id="mentorIntro">
+      <p>
+        陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。
+      </p>
+      <p>
+        他主持国家自然科学基金项目 2 项、省部级课题 4 项及多项企业合作课题，在腔镜手术机器人的人机交互与力反馈设计方面取得系列成果，相关设计多次获得国内外设计奖项。
+      </p>
+      <p>
+        他坚持“从临床需求出发”的实验教学理念，鼓励学生走进手术室观察真实流程，把技术复杂度转化为可感知的体验温度。
+      </p>
+    </div>
+  </section>
+
+  <!-- Research Direction -->
+  <section class="mentor-content-section fade-in" style="background: var(--bg-secondary); max-width: 100%; padding-left: 0; padding-right: 0;">
+    <div style="max-width: 720px; margin: 0 auto; padding: 0 40px;">
+      <h2>研究方向</h2>
+      <div class="detail-list" id="mentorResearch">
+        <div class="detail-list-item">
+          <strong>手术机器人系统设计</strong> — 主从式机器人机构、运动学分析与临床场景系统集成
+        </div>
+        <div class="detail-list-item">
+          <strong>人机交互与力反馈</strong> — 医生操控端界面、触觉反馈技术与操作舒适度评估
+        </div>
+        <div class="detail-list-item">
+          <strong>医疗产品体验设计</strong> — 围绕诊疗全流程的产品与服务系统设计
+        </div>
+        <div class="detail-list-item">
+          <strong>智能家居与人居健康</strong> — 面向家庭健康监测的场景化智能产品设计
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Timeline -->
+  <section class="mentor-content-section fade-in">
+    <h2>科研成果与获奖荣誉</h2>
+    <div class="timeline-list" id="mentorTimeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">红点设计概念奖</div>
+        <div class="timeline-desc">团队作品「忆路」认知辅助产品设计获奖，指导教师。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-title">国家自然科学基金面上项目</div>
+        <div class="timeline-desc">面向微创手术的力反馈交互设计研究，项目主持人，执行期 2023-2026。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-title">省级教学成果奖一等奖</div>
+        <div class="timeline-desc">“设计+工程”交叉人才培养模式探索，主要完成人。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-title">核心期刊论文 2 篇</div>
+        <div class="timeline-desc">医疗机器人交互设计方向，第一作者。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-title">校企联合实验室共建</div>
+        <div class="timeline-desc">与云栖机器人共建联合实验室，负责人。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching -->
+  <section class="mentor-content-section fade-in" style="background: var(--bg-secondary); max-width: 100%; padding-left: 0; padding-right: 0;">
+    <div style="max-width: 720px; margin: 0 auto; padding: 0 40px;">
+      <h2>负责项目与教学课程</h2>
+      <div class="detail-list" id="mentorTeaching">
+        <div class="detail-list-item">
+          <strong>《产品设计程序与方法》</strong> — 本科核心课，48 学时，面向设计类二年级
+        </div>
+        <div class="detail-list-item">
+          <strong>《智能产品设计》</strong> — 研究生课程，32 学时，聚焦智能技术应用
+        </div>
+        <div class="detail-list-item">
+          <strong>国家自然科学基金面上项目</strong> — 力反馈交互设计研究，2023-2026，主持人
+        </div>
+        <div class="detail-list-item">
+          <strong>校企联合实验室</strong> — 与云栖机器人共建，2020 年至今，负责人
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="mentor-gallery-section fade-in">
+    <div class="container-narrow" style="margin-bottom: 48px;">
+      <span class="section-label">Gallery</span>
+      <h2 style="font-size: 2rem; font-weight: 700;">风采展示</h2>
+      <p class="text-secondary">教学、科研、活动照片</p>
+    </div>
+    <div class="container">
+      <div class="mentor-gallery">
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+        <div class="mentor-gallery-item placeholder-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="mentor-content-section fade-in text-center">
+    <h2 style="text-align: center;">联系方式</h2>
+    <p style="text-align: center; max-width: 500px; margin: 0 auto 32px;">
+      欢迎对相关研究方向感兴趣的同学加入实验室，也欢迎各界人士交流合作。
+    </p>
+    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <span class="mentor-detail-tag" id="mentorEmailTag">📧 chenmy@weavelab.com</span>
+      <span class="mentor-detail-tag" id="mentorOfficeTag">📍 创新设计大楼 502 室</span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <a href="about.html">关于工作室</a>
+            <a href="projects.html">项目成果</a>
+            <a href="contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="activities.html">活动</a>
+            <a href="cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="contact.html">创新设计大楼 502 室</a>
+            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
+            <a href="tel:+8651088886666">0510-8888 6666</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WeChat">W</a>
+          <a href="#" aria-label="Weibo">B</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const mentorData = {
+      "1": {
+        name: "陈明远",
+        title: "教授 / 博士生导师 / 实验室主任",
+        email: "chenmy@weavelab.com",
+        office: "创新设计大楼 502 室",
+        tags: ["医疗产品设计", "手术机器人", "人机交互", "智能家居"],
+        intro: [
+          "陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。",
+          "他主持国家自然科学基金项目 2 项、省部级课题 4 项及多项企业合作课题，在腔镜手术机器人的人机交互与力反馈设计方面取得系列成果，相关设计多次获得国内外设计奖项。",
+          "他坚持“从临床需求出发”的实验教学理念，鼓励学生走进手术室观察真实流程，把技术复杂度转化为可感知的体验温度。"
+        ],
+        research: [
+          { title: "手术机器人系统设计", desc: "主从式机器人机构、运动学分析与临床场景系统集成" },
+          { title: "人机交互与力反馈", desc: "医生操控端界面、触觉反馈技术与操作舒适度评估" },
+          { title: "医疗产品体验设计", desc: "围绕诊疗全流程的产品与服务系统设计" },
+          { title: "智能家居与人居健康", desc: "面向家庭健康监测的场景化智能产品设计" }
+        ],
+        timeline: [
+          { year: "2024", title: "红点设计概念奖", desc: "团队作品「忆路」认知辅助产品设计获奖，指导教师。" },
+          { year: "2023", title: "国家自然科学基金面上项目", desc: "面向微创手术的力反馈交互设计研究，项目主持人，执行期 2023-2026。" },
+          { year: "2022", title: "省级教学成果奖一等奖", desc: "“设计+工程”交叉人才培养模式探索，主要完成人。" },
+          { year: "2021", title: "核心期刊论文 2 篇", desc: "医疗机器人交互设计方向，第一作者。" },
+          { year: "2020", title: "校企联合实验室共建", desc: "与云栖机器人共建联合实验室，负责人。" }
+        ],
+        teaching: [
+          { title: "《产品设计程序与方法》", desc: "本科核心课，48 学时，面向设计类二年级" },
+          { title: "《智能产品设计》", desc: "研究生课程，32 学时，聚焦智能技术应用" },
+          { title: "国家自然科学基金面上项目", desc: "力反馈交互设计研究，2023-2026，主持人" },
+          { title: "校企联合实验室", desc: "与云栖机器人共建，2020 年至今，负责人" }
+        ]
+      },
+      "2": {
+        name: "林雨薇",
+        title: "副教授 / 硕士生导师 / 方向负责人",
+        email: "linyw@weavelab.com",
+        office: "创新设计大楼 502 室",
+        tags: ["人工智能", "生成式设计", "计算机视觉", "VR/AR"],
+        intro: [
+          "林雨薇，副教授、硕士生导师，负责 AI 人工智能与 VR/AR 研究方向。计算机科学与技术博士，长期关注人工智能与体验设计的交叉领域。",
+          "她主持省部级教研课题 3 项，发表核心论文十余篇，重点研究生成式 AI 在概念设计阶段的辅助范式。其主导开发的「AI 辅助产品设计工具」已在工作室教学与项目中投入使用。",
+          "她相信“AI 不会取代设计师，但会重新定义设计”，鼓励学生以开放心态驾驭新工具，同时坚守以人为中心的设计伦理。"
+        ],
+        research: [
+          { title: "生成式 AI 辅助设计", desc: "图像生成、方案发散与概念评估的 AI 工作流研究" },
+          { title: "计算机视觉应用", desc: "图像识别、姿态估计在智能产品中的落地应用" },
+          { title: "沉浸式交互与空间计算", desc: "VR/AR 环境下的交互范式与体验评估" },
+          { title: "智能对话系统", desc: "面向服务场景的多轮对话与意图理解设计" }
+        ],
+        timeline: [
+          { year: "2024", title: "省级教学创新大赛二等奖", desc: "“AIGC 进课堂”课程改革实践。" },
+          { year: "2023", title: "省级一流本科课程", desc: "《智能产品设计》课程负责人。" },
+          { year: "2023", title: "校级优秀研究生导师", desc: "指导学生获国家级设计竞赛奖项 4 项。" },
+          { year: "2022", title: "教育部产学合作协同育人项目", desc: "AI 设计工具教学平台建设，负责人。" },
+          { year: "2021", title: "核心期刊论文 3 篇", desc: "生成式设计与设计教育方向。" }
+        ],
+        teaching: [
+          { title: "《人工智能与设计》", desc: "本科选修课，32 学时，AI 工具实战" },
+          { title: "《VR/AR 设计基础》", desc: "本科方向课，Unity 原型开发" },
+          { title: "省级教研课题", desc: "生成式 AI 融入设计教学的路径研究，2023-2025" },
+          { title: "校企课程共建项目", desc: "与未岚智能科技联合开发 AIGC 课程模块" }
+        ]
+      },
+      "3": {
+        name: "郑凯文",
+        title: "副教授 / 硕士生导师 / 方向负责人",
+        email: "zhengkw@weavelab.com",
+        office: "创新设计大楼 502 室",
+        tags: ["服务设计", "产品创新方法", "用户研究", "社会创新"],
+        intro: [
+          "郑凯文，副教授、硕士生导师，负责服务设计与产品创新设计方向。设计学博士，曾在国内头部设计咨询公司担任资深服务设计师。",
+          "他为政务、医疗、社区等领域提供过十余项服务设计咨询服务，主导的“政务服务体验升级”项目被多家媒体报道，出版服务设计译著 1 部。",
+          "他倡导“以系统视角解决复杂问题”，负责工作室的方法课程与项目复盘机制建设，坚持每个项目都要“从真实的人和真实的问题出发”。"
+        ],
+        research: [
+          { title: "服务系统设计方法", desc: "服务蓝图、利益相关者地图与商业模式创新" },
+          { title: "公共服务与社会创新", desc: "面向政府与社区的服务流程再造" },
+          { title: "用户研究与洞察", desc: "定性定量研究工具的组合应用与洞察提炼" },
+          { title: "设计思维与共创方法", desc: "共创工作坊的组织与引导方法研究" }
+        ],
+        timeline: [
+          { year: "2024", title: "省哲学社会科学优秀成果奖", desc: "服务设计方法论研究成果。" },
+          { year: "2023", title: "“挑战杯”省赛二等奖", desc: "指导「绿洲」流浪动物救助服务系统团队。" },
+          { year: "2022", title: "横向课题 3 项", desc: "政务、医疗与社区服务设计咨询，负责人。" },
+          { year: "2021", title: "出版译著《服务设计与创新实践》", desc: "主要译者。" },
+          { year: "2020", title: "校级青年教师教学竞赛一等奖", desc: "《服务设计》课程教学。" }
+        ],
+        teaching: [
+          { title: "《服务设计》", desc: "本科方向课，40 学时，真实项目驱动" },
+          { title: "《设计调研方法》", desc: "本科核心课，32 学时" },
+          { title: "社区共创项目", desc: "与青禾社区合作的助老服务试点，2023 年至今" },
+          { title: "企业咨询课题", desc: "门诊就诊体验优化咨询，2023 年，负责人" }
+        ]
+      },
+      "4": {
+        name: "苏婉清",
+        title: "讲师 / 设计实践导师",
+        email: "suwq@weavelab.com",
+        office: "创新设计大楼 502 室",
+        tags: ["品牌设计", "数字营销", "新媒体传播", "竞赛辅导"],
+        intro: [
+          "苏婉清，讲师、设计实践导师，负责市场营销方向与工作室对外品牌建设。毕业于视觉传达设计专业，曾任职于知名品牌设计咨询公司。",
+          "她主导过多个新消费品牌的从 0 到 1 全案，擅长品牌策略、视觉识别系统与整合营销传播，主张“好作品也需要被看见”。",
+          "她负责工作室的竞赛申报辅导与对外传播，指导学生累计获省级以上竞赛奖项 20 余项，把商业思维与传播视角带入设计教学。"
+        ],
+        research: [
+          { title: "品牌策略与体验", desc: "品牌定位、识别系统与接触点体验设计" },
+          { title: "数字营销与内容传播", desc: "社交媒体内容策略与用户增长方法" },
+          { title: "消费者行为研究", desc: "购买决策、品牌态度与市场洞察" },
+          { title: "设计竞赛策略", desc: "设计作品的叙事表达与申报方法" }
+        ],
+        timeline: [
+          { year: "2024", title: "全国大学生工业设计大赛一等奖", desc: "指导「药伴」智能用药管理系统团队。" },
+          { year: "2023", title: "省级设计竞赛优秀指导教师", desc: "指导学生获奖 6 项。" },
+          { year: "2022", title: "校级教学优秀奖", desc: "《品牌设计》课程改革。" },
+          { year: "2021", title: "新消费品牌全案项目", desc: "服务品牌客户 3 家，品牌负责人。" },
+          { year: "2020", title: "国际设计奖项入围", desc: "品牌视觉设计作品。" }
+        ],
+        teaching: [
+          { title: "《品牌设计》", desc: "本科方向课，40 学时" },
+          { title: "《设计表达与叙事》", desc: "本科选修课，32 学时" },
+          { title: "工作室品牌建设项目", desc: "Weave Lab 视觉识别与新媒体运营，负责人" },
+          { title: "竞赛申报辅导计划", desc: "工作室年度竞赛申报统筹，负责人" }
+        ]
+      }
+    };
+
+    function renderMentorDetail() {
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get('id');
+      if (!id || !mentorData[id]) id = '1';
+      const data = mentorData[id];
+
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('mentorName').textContent = data.name;
+      document.getElementById('mentorTitle').textContent = data.title;
+      document.getElementById('mentorEmailTag').textContent = '📧 ' + data.email;
+      document.getElementById('mentorOfficeTag').textContent = '📍 ' + data.office;
+      document.getElementById('mentorTags').innerHTML = data.tags.map(t => '<span class="mentor-detail-tag">' + t + '</span>').join('');
+      document.getElementById('mentorIntro').innerHTML = data.intro.map(p => '<p>' + p + '</p>').join('');
+      document.getElementById('mentorResearch').innerHTML = data.research.map(r => '<div class="detail-list-item"><strong>' + r.title + '</strong> — ' + r.desc + '</div>').join('');
+      document.getElementById('mentorTimeline').innerHTML = data.timeline.map(t => '<div class="timeline-item"><div class="timeline-year">' + t.year + '</div><div class="timeline-title">' + t.title + '</div><div class="timeline-desc">' + t.desc + '</div></div>').join('');
+      document.getElementById('mentorTeaching').innerHTML = data.teaching.map(t => '<div class="detail-list-item"><strong>' + t.title + '</strong> — ' + t.desc + '</div>').join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderMentorDetail();
+      initScrollAnimations();
+    });
+  </script>
+</body>
+</html>

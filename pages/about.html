@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于工作室 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="了解 Weave Lab 智能体验与服务工程实验室的导师团队和学生成员">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="mentors.html" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mentor Team Section - Card Carousel -->
+  <section id="mentors" class="section mentors-preview-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Mentor Team</span>
+        <h2 class="section-title">指导老师</h2>
+        <p class="section-subtitle">四位资深导师引领工作室发展方向</p>
+      </div>
+    </div>
+
+    <div class="mentor-preview-carousel fade-in">
+      <div class="mentor-preview-track" id="mentorsCarouselTrack">
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">01</span>
+            <h3 class="mentor-preview-name">陈明远</h3>
+            <p class="mentor-preview-title">教授 / 博士生导师 · 医疗产品与智能机器人</p>
+            <span class="mentor-preview-more">查看详情 →</span>
+          </div>
+        </div>
+
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0f0f0f 0%, #1f1f1f 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">02</span>
+            <h3 class="mentor-preview-name">林雨薇</h3>
+            <p class="mentor-preview-title">副教授 / 硕士生导师 · AI与体验设计</p>
+            <span class="mentor-preview-more">查看详情 →</span>
+          </div>
+        </div>
+
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #181818 0%, #282828 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">03</span>
+            <h3 class="mentor-preview-name">郑凯文</h3>
+            <p class="mentor-preview-title">副教授 / 硕士生导师 · 服务设计与创新方法</p>
+            <span class="mentor-preview-more">查看详情 →</span>
+          </div>
+        </div>
+
+        <div class="mentor-preview-card" onclick="location.href='mentors.html'">
+          <div class="mentor-preview-img placeholder-pulse" style="background: linear-gradient(135deg, #0d0d0d 0%, #222222 100%);"></div>
+          <div class="mentor-preview-overlay"></div>
+          <div class="mentor-preview-info">
+            <span class="mentor-preview-num">04</span>
+            <h3 class="mentor-preview-name">苏婉清</h3>
+            <p class="mentor-preview-title">讲师 / 设计实践导师 · 品牌与市场营销</p>
+            <span class="mentor-preview-more">查看详情 →</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="mentor-preview-arrow prev" id="mentorsCarouselPrev">←</button>
+      <button class="mentor-preview-arrow next" id="mentorsCarouselNext">→</button>
+    </div>
+
+    <div class="container">
+      <div class="mentor-preview-dots" id="mentorsCarouselDots">
+        <span class="mentor-preview-dot active" data-index="0"></span>
+        <span class="mentor-preview-dot" data-index="1"></span>
+        <span class="mentor-preview-dot" data-index="2"></span>
+        <span class="mentor-preview-dot" data-index="3"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Team Section -->
+  <section id="students" class="section student-3d-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Student Team</span>
+        <h2 class="section-title">学生成员</h2>
+        <p class="section-subtitle">八位优秀学生成员组成工作室核心团队</p>
+      </div>
+    </div>
+
+    <div class="student-3d-carousel fade-in" id="student3DCarousel">
+      <div class="student-3d-stage" id="student3DStage">
+        <div class="student-3d-card" data-index="0" onclick="location.href='student-detail.html?id=1'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">队长</span>
+            <h3 class="student-3d-name">王梓轩</h3>
+            <p class="student-3d-info">研三 · 产品设计 · 工作室队长</p>
+            <div class="student-3d-tags"><span>手术机器人</span><span>智能硬件</span></div>
+          </div>
+          <div class="student-3d-num">01</div>
+        </div>
+        <div class="student-3d-card" data-index="1" onclick="location.href='student-detail.html?id=2'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">学术组长</span>
+            <h3 class="student-3d-name">李思彤</h3>
+            <p class="student-3d-info">研三 · 产品设计 · 学术组长</p>
+            <div class="student-3d-tags"><span>服务设计</span><span>用户研究</span></div>
+          </div>
+          <div class="student-3d-num">02</div>
+        </div>
+        <div class="student-3d-card" data-index="2" onclick="location.href='student-detail.html?id=3'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">硬件组长</span>
+            <h3 class="student-3d-name">张若晨</h3>
+            <p class="student-3d-info">研二 · 工业设计工程 · 硬件组长</p>
+            <div class="student-3d-tags"><span>智能硬件</span><span>嵌入式开发</span></div>
+          </div>
+          <div class="student-3d-num">03</div>
+        </div>
+        <div class="student-3d-card" data-index="3" onclick="location.href='student-detail.html?id=4'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">数据负责人</span>
+            <h3 class="student-3d-name">刘一诺</h3>
+            <p class="student-3d-info">研二 · 设计学 · 数据与AI应用</p>
+            <div class="student-3d-tags"><span>AI应用</span><span>数据可视化</span></div>
+          </div>
+          <div class="student-3d-num">04</div>
+        </div>
+        <div class="student-3d-card" data-index="4" onclick="location.href='student-detail.html?id=5'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">核心成员</span>
+            <h3 class="student-3d-name">赵天宇</h3>
+            <p class="student-3d-info">大四 · 产品设计 · 2024届</p>
+            <div class="student-3d-tags"><span>VR/AR</span><span>空间交互</span></div>
+          </div>
+          <div class="student-3d-num">05</div>
+        </div>
+        <div class="student-3d-card" data-index="5" onclick="location.href='student-detail.html?id=6'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">核心成员</span>
+            <h3 class="student-3d-name">周诗涵</h3>
+            <p class="student-3d-info">大四 · 产品设计 · 2024届</p>
+            <div class="student-3d-tags"><span>产品造型</span><span>CMF设计</span></div>
+          </div>
+          <div class="student-3d-num">06</div>
+        </div>
+        <div class="student-3d-card" data-index="6" onclick="location.href='student-detail.html?id=7'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">核心成员</span>
+            <h3 class="student-3d-name">吴沛霖</h3>
+            <p class="student-3d-info">大三 · 产品设计 · 物联网方向</p>
+            <div class="student-3d-tags"><span>智能家居</span><span>物联网</span></div>
+          </div>
+          <div class="student-3d-num">07</div>
+        </div>
+        <div class="student-3d-card" data-index="7" onclick="location.href='student-detail.html?id=8'">
+          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-overlay">
+            <span class="student-3d-role">核心成员</span>
+            <h3 class="student-3d-name">孙佳琪</h3>
+            <p class="student-3d-info">大三 · 视觉传达设计 · 品牌方向</p>
+            <div class="student-3d-tags"><span>品牌设计</span><span>新媒体运营</span></div>
+          </div>
+          <div class="student-3d-num">08</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="student-3d-controls">
+      <button class="student-3d-arrow prev" id="student3DPrev" aria-label="上一个">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="student-3d-dots" id="student3DDots"></div>
+      <button class="student-3d-arrow next" id="student3DNext" aria-label="下一个">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <div class="student-3d-info-bar">
+      <span class="student-3d-counter"><span id="student3DCurrent">01</span> / 08</span>
+      <div class="student-3d-progress">
+        <div class="student-3d-progress-fill" id="student3DProgress"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <a href="about.html">关于工作室</a>
+            <a href="projects.html">项目成果</a>
+            <a href="contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="activities.html">活动</a>
+            <a href="cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="contact.html">创新设计大楼 502 室</a>
+            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
+            <a href="tel:+8651088886666">0510-8888 6666</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WeChat">W</a>
+          <a href="#" aria-label="Weibo">B</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Mentor cards carousel
+    (function() {
+      const track = document.getElementById('mentorsCarouselTrack');
+      const cards = track ? track.querySelectorAll('.mentor-preview-card') : [];
+      const dots = document.querySelectorAll('.mentor-preview-dot');
+      const prevBtn = document.getElementById('mentorsCarouselPrev');
+      const nextBtn = document.getElementById('mentorsCarouselNext');
+      if (!track || cards.length === 0) return;
+
+      let currentIndex = 0;
+      const total = cards.length;
+      let isDragging = false;
+      let startX = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+
+      function getCardWidth() {
+        const container = track.parentElement;
+        const containerWidth = container.offsetWidth;
+        let visible = 3;
+        if (window.innerWidth <= 768) visible = 2;
+        if (window.innerWidth <= 480) visible = 1;
+        const gap = 24;
+        const cardWidth = (containerWidth - (visible - 1) * gap) / visible;
+        return { cardWidth, gap, visible };
+      }
+
+      function goToSlide(index) {
+        const { cardWidth, gap, visible } = getCardWidth();
+        const maxIndex = Math.max(0, total - visible);
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+        const offset = currentIndex * (cardWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+        currentTranslate = -offset;
+        prevTranslate = -offset;
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        if (prevBtn) prevBtn.classList.toggle('disabled', currentIndex === 0);
+        if (nextBtn) nextBtn.classList.toggle('disabled', currentIndex >= maxIndex);
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          goToSlide(parseInt(this.getAttribute('data-index')));
+        });
+      });
+
+      // Drag
+      let dragIndex = 0;
+      function dragStart(e) {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        dragIndex = currentIndex;
+        track.style.transition = 'none';
+        track.classList.add('dragging');
+      }
+      function dragMove(e) {
+        if (!isDragging) return;
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        track.style.transform = `translateX(${prevTranslate + (currentX - startX)}px)`;
+      }
+      function dragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.transition = '';
+        track.classList.remove('dragging');
+        const { cardWidth } = getCardWidth();
+        const moved = currentTranslate - prevTranslate;
+        if (moved < -cardWidth * 0.2) goToSlide(dragIndex + 1);
+        else if (moved > cardWidth * 0.2) goToSlide(dragIndex - 1);
+        else goToSlide(dragIndex);
+      }
+
+      track.addEventListener('mousedown', dragStart);
+      window.addEventListener('mousemove', dragMove);
+      window.addEventListener('mouseup', dragEnd);
+      track.addEventListener('touchstart', dragStart, { passive: true });
+      track.addEventListener('touchmove', dragMove, { passive: true });
+      track.addEventListener('touchend', dragEnd);
+
+      // Wheel
+      let wheelTimer;
+      track.addEventListener('wheel', function(e) {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) return;
+        e.preventDefault();
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => {
+          if (e.deltaX > 30) goToSlide(currentIndex + 1);
+          else if (e.deltaX < -30) goToSlide(currentIndex - 1);
+        }, 50);
+      }, { passive: false });
+
+      window.addEventListener('resize', () => goToSlide(currentIndex));
+      goToSlide(0);
+    })();
+  </script>
+</body>
+</html>

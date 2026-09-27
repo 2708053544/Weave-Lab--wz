@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品详情 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="项目作品详情页面">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Detail Hero -->
+  <section class="detail-hero">
+    <div class="container">
+      <div class="detail-hero-content" style="grid-template-columns: 1fr; gap: 40px;">
+        <div class="detail-hero-text text-center" style="max-width: 800px; margin: 0 auto;">
+          <span class="section-label fade-in">Project</span>
+          <h1 class="fade-in" id="projName">忆路 —— 认知辅助产品设计</h1>
+          <p class="fade-in" style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 24px;" id="projCategory">
+            毕设作品
+          </p>
+          <p class="fade-in" id="projIntro">
+            面向阿尔茨海默病患者的记忆辅助与安全监护产品，通过环境提示、用药提醒与定位监护三大功能模块，用克制而温暖的形态语言降低患者与家属的日常负担。
+          </p>
+          <div class="detail-meta fade-in" style="max-width: 600px; margin: 32px auto 0;">
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">时间</span>
+              <span class="detail-meta-value" id="projYear">2024年</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">类型</span>
+              <span class="detail-meta-value" id="projType">毕业设计</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">指导老师</span>
+              <span class="detail-meta-value" id="projMentor">陈明远</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">团队成员</span>
+              <span class="detail-meta-value" id="projTeam">周诗涵</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="detail-gallery fade-in" style="grid-template-columns: 1fr;">
+        <div class="detail-gallery-item placeholder-pulse" style="aspect-ratio: 16/9;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design Background -->
+  <section class="detail-section">
+    <div class="container-narrow">
+      <h2 class="fade-in">设计背景</h2>
+      <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projBackground">
+        我国阿尔茨海默病患者已超过千万，患者家庭长期面临“记忆力衰退带来的安全隐患”与“照护压力”双重困境。现有产品多聚焦单一功能，缺乏对居家场景的整体回应。本项目从真实家庭访谈出发，试图用系统化的产品设计减轻患者与家属的日常负担。
+      </p>
+    </div>
+  </section>
+
+  <!-- Design Concept -->
+  <section class="detail-section" style="background: var(--bg-secondary);">
+    <div class="container-narrow">
+      <h2 class="fade-in">设计思路</h2>
+      <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projConcept">
+        以“不打扰的守护”为核心概念，通过环境提示、用药提醒与定位监护三大功能模块构建居家安全感；造型上采用圆润克制的形态与柔和 CMF，避免医疗器械带来的心理压迫感，让产品融入家庭氛围而非凸显“病人”身份。
+      </p>
+    </div>
+  </section>
+
+  <!-- More Images -->
+  <section class="section">
+    <div class="container">
+      <div class="detail-gallery fade-in">
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team & Results -->
+  <section class="detail-section" style="background: var(--bg-secondary);">
+    <div class="container-narrow">
+      <h2 class="fade-in">设计成果与落地效果</h2>
+      <div class="detail-list fade-in" id="projResults">
+        <div class="detail-list-item">完成产品定义、造型设计与交互原型</div>
+        <div class="detail-list-item">完成三轮家庭场景用户测试并迭代</div>
+        <div class="detail-list-item">与社区养老机构达成试点意向</div>
+        <div class="detail-list-item">获 2023 年红点设计概念奖</div>
+      </div>
+
+      <h2 class="fade-in" style="margin-top: 60px;">团队成员</h2>
+      <div class="detail-list fade-in" id="projTeamList">
+        <div class="detail-list-item">指导老师：陈明远</div>
+        <div class="detail-list-item">设计成员：周诗涵</div>
+        <div class="detail-list-item">用户研究支持：李思彤</div>
+        <div class="detail-list-item">工程验证支持：张若晨</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Placeholder -->
+  <section class="section">
+    <div class="container-narrow">
+      <h2 class="fade-in text-center">展示视频</h2>
+      <div class="fade-in" style="aspect-ratio: 16/9; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; margin-top: 32px;">
+        <span style="color: var(--text-secondary); font-size: 0.9rem;">展示视频待补充</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back -->
+  <section class="section text-center" style="padding: 60px 0;">
+    <a href="projects.html" class="btn btn-outline">← 返回作品列表</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <a href="about.html">关于工作室</a>
+            <a href="projects.html">项目成果</a>
+            <a href="contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="activities.html">活动</a>
+            <a href="cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="contact.html">创新设计大楼 502 室</a>
+            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
+            <a href="tel:+8651088886666">0510-8888 6666</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WeChat">W</a>
+          <a href="#" aria-label="Weibo">B</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const projectData = {
+      "1": {
+        name: "忆路 —— 认知辅助产品设计", category: "毕设作品", year: "2024年", type: "毕业设计", mentor: "陈明远", team: "周诗涵",
+        intro: "面向阿尔茨海默病患者的记忆辅助与安全监护产品，通过环境提示、用药提醒与定位监护三大功能模块，用克制而温暖的形态语言降低患者与家属的日常负担。",
+        background: "我国阿尔茨海默病患者已超过千万，患者家庭长期面临“记忆力衰退带来的安全隐患”与“照护压力”双重困境。现有产品多聚焦单一功能，缺乏对居家场景的整体回应。本项目从真实家庭访谈出发，试图用系统化的产品设计减轻患者与家属的日常负担。",
+        concept: "以“不打扰的守护”为核心概念，通过环境提示、用药提醒与定位监护三大功能模块构建居家安全感；造型上采用圆润克制的形态与柔和 CMF，避免医疗器械带来的心理压迫感，让产品融入家庭氛围而非凸显“病人”身份。",
+        results: ["完成产品定义、造型设计与交互原型", "完成三轮家庭场景用户测试并迭代", "与社区养老机构达成试点意向", "获 2023 年红点设计概念奖"],
+        teamList: ["指导老师：陈明远", "设计成员：周诗涵", "用户研究支持：李思彤", "工程验证支持：张若晨"]
+      },
+      "2": {
+        name: "绿洲 —— 流浪动物救助服务系统", category: "毕设作品", year: "2024年", type: "服务设计", mentor: "郑凯文", team: "李思彤",
+        intro: "连接救助站、志愿者与领养家庭的系统性服务设计，通过救助流程数字化与领养陪伴机制，让每一次善意都能形成闭环。",
+        background: "城市流浪动物救助长期依赖零散的个人善举，救助站普遍面临“接得进来、送不出去”的困境：领养率低、退养率高、志愿者流失快。本项目对三个城市救助站进行了为期两个月的田野调查与旅程分析。",
+        concept: "以服务设计方法重构救助旅程，设计“救助—寄养—领养—回访”四阶段触点体系，并通过领养匹配与陪伴机制降低退养率；同时为志愿者设计轻量化的参与入口，让帮助流浪动物像点外卖一样简单。",
+        results: ["完成服务蓝图与触点系统设计", "完成救助站小程序高保真原型", "在合作救助站完成 4 周试点", "获 2023 年“挑战杯”省级二等奖"],
+        teamList: ["指导老师：郑凯文", "项目负责人：李思彤", "视觉设计：孙佳琪", "用户研究：刘一诺"]
+      },
+      "3": {
+        name: "药伴 —— 智能用药管理系统", category: "优秀作品", year: "2024年", type: "产品设计", mentor: "苏婉清", team: "周诗涵、吴沛霖",
+        intro: "面向慢病人群的用药提醒与依从性管理终端，以家庭场景为核心，帮助慢性病患者按时、按量、安心服药。",
+        background: "慢性病患者需要长期规律服药，但据统计约有 50% 的患者存在漏服、错服问题，直接影响治疗效果。现有药盒产品普遍存在提醒方式生硬、交互复杂、缺乏家人协同等问题。",
+        concept: "以“温和的陪伴”为设计理念，通过灯光与语音的双通道提醒降低打扰感；结合分格药仓与视觉化进度，让服药状态一目了然；家人可通过小程序远程了解服药情况，形成“患者—设备—家人”的三方安心闭环。",
+        results: ["完成产品造型与结构设计", "完成电子原型与 App 联调", "获 2024 年全国大学生工业设计大赛一等奖", "申请实用新型专利 1 项"],
+        teamList: ["指导老师：苏婉清", "设计成员：周诗涵、吴沛霖", "硬件开发：张若晨", "用户测试：李思彤"]
+      },
+      "4": {
+        name: "视界同行 —— 无障碍浏览设备", category: "优秀作品", year: "2024年", type: "交互产品设计", mentor: "林雨薇", team: "赵天宇、刘一诺",
+        intro: "基于眼动交互的无障碍信息浏览设备，帮助上肢障碍与渐冻症等特殊人群重新获得“打开互联网”的能力。",
+        background: "我国肢体障碍人群超过 2400 万，其中大量上肢功能障碍者无法使用常规键鼠设备，在信息获取上被数字世界隔离。眼动交互是极具潜力的替代输入方式，但现有设备价格昂贵、体验粗糙。",
+        concept: "以“用眼神点亮视界”为理念，设计低成本的桌面级眼动浏览工作站：视线即光标、凝视即点击、眨眼即确认，并针对中文场景优化虚拟键盘与阅读流，让特殊人群以自然姿态畅游网络。",
+        results: ["完成眼动交互原型开发", "完成特殊用户可用性测试", "获 2024 年华灿奖二等奖", "受邀参加省级无障碍设计展"],
+        teamList: ["指导老师：林雨薇", "项目负责人：赵天宇", "算法支持：刘一诺", "人因测试：李思彤"]
+      },
+      "5": {
+        name: "腔镜手术机器人系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "王梓轩、张若晨",
+        intro: "面向腹腔微创手术的主从式机器人操作平台，聚焦医生操控端的力反馈体验与手术安全设计，是与云栖机器人联合研发的代表性成果。",
+        background: "微创手术对医生的操作精度与手感经验要求极高，传统腔镜器械存在“触觉缺失、操作疲劳、学习曲线长”三大痛点。与云栖机器人的联合实验室项目聚焦于操控端体验的人因优化。",
+        concept: "以“把手感还给医生”为设计目标，通过主端力反馈操控器还原组织触感，配合可调节的操控姿态与自适应操作系统降低长时间手术疲劳；整体设计遵循医疗器械的人因工程规范。",
+        results: ["完成主端操控器三代迭代", "完成 40 例模拟手术操作实验", "发表核心期刊论文 1 篇", "校企联合实验室年度重点项目"],
+        teamList: ["指导老师：陈明远", "项目负责人：王梓轩", "控制系统：张若晨", "造型设计：周诗涵"]
+      },
+      "6": {
+        name: "AI辅助产品设计工具", category: "工作室项目", year: "2024年", type: "工作室自研项目", mentor: "林雨薇", team: "刘一诺、赵天宇",
+        intro: "基于生成式 AI 的概念草图与方案发散辅助系统，将 AI 融入设计前期工作流，帮助设计师更快地“想得更多、看得更远”。",
+        background: "生成式 AI 正在重塑设计工作流，但通用工具缺乏对产品设计场景的针对性：概念发散难以控制、风格难以延续、结果难以评估。工作室基于三年教学与项目经验，探索面向产品设计的 AI 辅助范式。",
+        concept: "以“设计师的灵感织机”为隐喻，构建“文字—草图—渲染”三级生成链路，内置产品造型语言约束与评估反馈模块；AI 不替代设计师决策，而是提供可控的发散与跳变，让灵感像织物一样在指尖流转。",
+        results: ["完成工具内测版并接入工作室教学", "覆盖 3 门课程、60 余名学生使用", "获省级教学创新成果", "形成 3 份设计范式研究报告"],
+        teamList: ["指导老师：林雨薇", "产品负责人：刘一诺", "交互开发：赵天宇", "内测组织：李思彤"]
+      },
+      "7": {
+        name: "格致 —— 模块化校园家具设计", category: "毕设作品", year: "2023年", type: "产品设计", mentor: "郑凯文", team: "周诗涵",
+        intro: "可持续理念下的模块化公共校园家具，通过标准化接口与灵活组合，适应自习、小组讨论、休憩等多种校园场景。",
+        background: "高校公共空间的使用需求日益多元，传统固定式家具难以适应自习、讨论、休憩等场景切换，同时校园家具更新换代产生大量浪费，与绿色校园建设理念相悖。",
+        concept: "以“格物致知”为设计理念，采用统一的模块接口体系，座椅、桌面、屏风可自由组合重构；材料选用可回收铝型材与再生塑料，零部件可拆卸、可维修、可循环，用设计延长产品生命周期。",
+        results: ["完成模块体系与连接结构设计", "完成 1:1 场景化样机验证", "获 2023 年省工业设计大赛金奖", "入围校级绿色校园示范项目"],
+        teamList: ["指导老师：郑凯文", "设计成员：周诗涵", "结构支持：张若晨", "场景调研：王梓轩"]
+      },
+      "8": {
+        name: "声桥 —— 智能手语翻译终端", category: "优秀作品", year: "2022年", type: "智能硬件设计", mentor: "林雨薇", team: "刘一诺、赵天宇",
+        intro: "面向听障人群的双向手语翻译设备，通过视觉识别与语音合成，在无声世界与有声世界之间搭建一座沟通的桥。",
+        background: "我国听障人群超过 2700 万，手语与口语之间的翻译依赖专业且稀缺的手语老师。日常就医、办事等场景中，听障人士的沟通障碍直接影响了生活质量与社会融入。",
+        concept: "以“双向翻译”为核心：摄像头识别手语并转译为语音，同时将对方语音实时转译为文字与手语动画；桌面式设计降低使用门槛，重点优化医疗、政务两大高频场景的专用词库。",
+        results: ["完成识别原型与翻译链路", "完成听障用户共创工作坊", "获 2022 年 iF 设计新秀奖", "受邀参加省级助残科技展"],
+        teamList: ["指导老师：林雨薇", "项目负责人：刘一诺", "视觉算法：赵天宇", "用户共创：李思彤"]
+      },
+      "9": {
+        name: "全屋智能中控系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "吴沛霖、张若晨",
+        intro: "统一控制与多场景联动的家居中枢产品设计，让照明、温控、安防等子系统以“人”为中心协同运转。",
+        background: "全屋智能设备数量激增，但多品牌割裂、操作分散、场景联动僵硬，用户往往需要打开五六个 App 才能完成一次“回家模式”。合作企业希望以一台家庭中枢重新整合全屋体验。",
+        concept: "以“懂你而不打扰你”为设计原则：中控通过无感学习家庭作息自动生成场景建议，重要信息通过环境光与轻触反馈温和传递；同时保留物理旋钮与按键，让老人与孩子也能零门槛使用。",
+        results: ["完成产品定义与造型设计", "完成场景引擎与联调", "完成三代样机与家庭实测", "获企业年度创新产品提名"],
+        teamList: ["指导老师：陈明远", "项目负责人：吴沛霖", "系统架构：张若晨", "用户测试：周诗涵"]
+      }
+    };
+
+    function renderProjectDetail() {
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get('id');
+      if (!id || !projectData[id]) id = '1';
+      const data = projectData[id];
+
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('projName').textContent = data.name;
+      document.getElementById('projCategory').textContent = data.category;
+      document.getElementById('projIntro').textContent = data.intro;
+      document.getElementById('projYear').textContent = data.year;
+      document.getElementById('projType').textContent = data.type;
+      document.getElementById('projMentor').textContent = data.mentor;
+      document.getElementById('projTeam').textContent = data.team;
+      document.getElementById('projBackground').textContent = data.background;
+      document.getElementById('projConcept').textContent = data.concept;
+      document.getElementById('projResults').innerHTML = data.results.map(r => '<div class="detail-list-item">' + r + '</div>').join('');
+      document.getElementById('projTeamList').innerHTML = data.teamList.map(t => '<div class="detail-list-item">' + t + '</div>').join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderProjectDetail();
+      initScrollAnimations();
+    });
+  </script>
+</body>
+</html>

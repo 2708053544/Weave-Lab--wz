@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成员详情 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="学生成员个人详情页面">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Detail Hero -->
+  <section class="detail-hero">
+    <div class="container">
+      <div class="detail-hero-content">
+        <div class="detail-hero-image placeholder-pulse"></div>
+        <div class="detail-hero-text">
+          <span class="section-label fade-in">Team Member</span>
+          <h1 class="fade-in" id="studentName">王梓轩</h1>
+          <p class="fade-in" style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 16px;" id="studentRole">
+            研三 · 产品设计 · 工作室队长
+          </p>
+          <p class="fade-in" id="studentIntro">
+            工作室队长，主攻医疗产品与手术机器人方向。从本科起就在实验室参与腔镜手术机器人项目，三年间完成了从造型设计到人机交互验证的完整闭环。
+          </p>
+          <div class="detail-meta fade-in">
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">年级</span>
+              <span class="detail-meta-value" id="metaGrade">研究生三年级</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">专业</span>
+              <span class="detail-meta-value" id="metaMajor">产品设计</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">职务</span>
+              <span class="detail-meta-value" id="metaPosition">工作室队长</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">邮箱</span>
+              <span class="detail-meta-value" id="metaEmail">wangzx@weavelab.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="detail-section">
+    <div class="container-narrow">
+      <h2 class="fade-in">擅长方向与技能</h2>
+      <div class="detail-list fade-in" id="studentSkills">
+        <div class="detail-list-item">产品设计</div>
+        <div class="detail-list-item">人机交互设计</div>
+        <div class="detail-list-item">Rhino / KeyShot</div>
+        <div class="detail-list-item">Arduino 原型开发</div>
+        <div class="detail-list-item">项目统筹</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects & Awards -->
+  <section class="detail-section" style="background: var(--bg-secondary);">
+    <div class="container-narrow">
+      <h2 class="fade-in">参与项目与竞赛成果</h2>
+      <div class="detail-list fade-in" id="studentAchievements">
+        <div class="detail-list-item">腔镜手术机器人系统 — 项目核心成员</div>
+        <div class="detail-list-item">骨科手术导航机器人 — 交互设计</div>
+        <div class="detail-list-item">省级工业设计大赛金奖 — 团队成员</div>
+        <div class="detail-list-item">红点设计概念奖 — 团队成员</div>
+        <div class="detail-list-item">校级优秀研究生干部</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="container-narrow" style="margin-bottom: 48px;">
+        <h2 class="fade-in">个人作品集</h2>
+        <p class="text-secondary fade-in">精选作品展示</p>
+      </div>
+      <div class="detail-gallery fade-in">
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+        <div class="detail-gallery-item placeholder-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back -->
+  <section class="section text-center" style="padding: 60px 0;">
+    <a href="about.html" class="btn btn-outline">← 返回团队页面</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <a href="about.html">关于工作室</a>
+            <a href="projects.html">项目成果</a>
+            <a href="contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="activities.html">活动</a>
+            <a href="cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="contact.html">创新设计大楼 502 室</a>
+            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
+            <a href="tel:+8651088886666">0510-8888 6666</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WeChat">W</a>
+          <a href="#" aria-label="Weibo">B</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const studentData = {
+      "1": {
+        name: "王梓轩",
+        role: "研三 · 产品设计 · 工作室队长",
+        grade: "研究生三年级",
+        major: "产品设计",
+        position: "工作室队长",
+        email: "wangzx@weavelab.com",
+        intro: "工作室队长，主攻医疗产品与手术机器人方向。从本科起就在实验室参与腔镜手术机器人项目，三年间完成了从造型设计到人机交互验证的完整闭环。相信“好的医疗设计是对生命的温柔”，习惯把每一次临床访谈都当作设计课。",
+        skills: ["产品设计", "人机交互设计", "Rhino / KeyShot", "Arduino 原型开发", "项目统筹"],
+        achievements: ["腔镜手术机器人系统 — 项目核心成员", "骨科手术导航机器人 — 交互设计", "省级工业设计大赛金奖 — 团队成员", "红点设计概念奖 — 团队成员", "校级优秀研究生干部"]
+      },
+      "2": {
+        name: "李思彤",
+        role: "研三 · 产品设计 · 学术组长",
+        grade: "研究生三年级",
+        major: "产品设计",
+        position: "学术组长",
+        email: "list@weavelab.com",
+        intro: "学术组长，服务设计方向。喜欢用服务蓝图拆解复杂问题，先后主导了社区养老与流浪动物救助两个社会创新项目。她的信条是“设计不止于物，更在于人与人之间的连接”，平时负责组织工作室的文献共读与项目复盘。",
+        skills: ["服务设计", "用户访谈与洞察", "旅程图与服务蓝图", "Figma", "学术论文写作"],
+        achievements: ["绿洲·流浪动物救助服务系统 — 项目负责人", "社区居家养老服务共创 — 联合负责人", "“挑战杯”省赛二等奖 — 团队负责人", "省级学术成果奖（参与）", "校一等奖学金"]
+      },
+      "3": {
+        name: "张若晨",
+        role: "研二 · 工业设计工程 · 硬件组长",
+        grade: "研究生二年级",
+        major: "工业设计工程",
+        position: "硬件组长",
+        email: "zhangrc@weavelab.com",
+        intro: "硬件组长，设计工程交叉背景，是工作室“让想法通电”的人。从电路设计、固件开发到低功耗调优都能独立完成，主导开发了力反馈操控器的控制模块。享受在示波器上看到波形正确跳动的那一刻。",
+        skills: ["嵌入式开发（STM32/ESP32）", "传感器应用", "PCB 设计", "Python 数据处理", "快速原型"],
+        achievements: ["手术器械力反馈装置 — 硬件开发负责人", "智能环境监测设备 — 项目负责人", "校企联合实验室项目 — 核心成员", "大学生创新创业训练计划 — 项目负责人", "校电子设计竞赛二等奖"]
+      },
+      "4": {
+        name: "刘一诺",
+        role: "研二 · 设计学 · 数据与AI应用",
+        grade: "研究生二年级",
+        major: "设计学",
+        position: "数据与AI应用",
+        email: "liyn@weavelab.com",
+        intro: "负责把“看不见的数据”变成“看得懂的体验”。搭建了工作室的行为识别分析流程，也是 AI 辅助设计工具的内测主理人。喜欢用可视化讲故事，认为“数据是新时代的画笔”。",
+        skills: ["机器学习基础", "数据可视化", "Python", "计算机视觉应用", "AIGC 工作流"],
+        achievements: ["AI辅助产品设计工具 — 内测负责人", "行为识别与分析平台 — 数据分析", "智能客服对话系统 — 对话设计", "校级研究生创新项目 — 主持人", "数据可视化作品入选省级展"]
+      },
+      "5": {
+        name: "赵天宇",
+        role: "大四 · 产品设计 · 2024届",
+        grade: "本科四年级",
+        major: "产品设计",
+        position: "2024届毕业设计",
+        email: "zhaoty@weavelab.com",
+        intro: "VR/AR 方向，2024 届毕业设计主题是基于眼动交互的无障碍浏览设备。三年里从 Unity 零基础做到能独立开发可交互原型，坚信“虚拟世界的真实价值在于服务真实的人”。闲暇时间喜欢混迹于各种线下 VR 体验店做“田野调查”。",
+        skills: ["Unity 开发", "VR/AR 交互设计", "C# 基础", "3D 建模（Blender）", "可用性测试"],
+        achievements: ["视界同行·眼动交互无障碍设备 — 毕设作品", "华灿奖·两岸新锐设计竞赛二等奖", "元宇宙社交空间原型 — 开发者", "校级优秀毕业设计", "iF 设计新秀奖（团队）"]
+      },
+      "6": {
+        name: "周诗涵",
+        role: "大四 · 产品设计 · 2024届",
+        grade: "本科四年级",
+        major: "产品设计",
+        position: "2024届毕业设计",
+        email: "zhoush@weavelab.com",
+        intro: "产品造型与 CMF 方向，2024 届毕业生，工作室“审美守门员”。毕设作品「忆路」聚焦阿尔茨海默病患者的认知辅助产品，用克制的形态语言表达医疗产品的温度。对材料和工艺有近乎执念的热爱，桌面上永远摆着 CMF 样品板。",
+        skills: ["产品造型设计", "CMF 设计", "油泥模型", "Rhino / KeyShot", "手绘表达"],
+        achievements: ["忆路·认知辅助产品设计 — 毕设作品", "红点设计概念奖 — 团队核心成员", "格致·模块化校园家具 — 造型设计", "校级优秀毕业设计", "省级工业设计大赛二等奖"]
+      },
+      "7": {
+        name: "吴沛霖",
+        role: "大三 · 产品设计 · 物联网方向",
+        grade: "本科三年级",
+        major: "产品设计",
+        position: "智能家居方向",
+        email: "wupl@weavelab.com",
+        intro: "智能家居与物联网方向，工作室最年轻的“全屋智能专家”。从智能环境监测设备起步，现在负责家庭健康场景的产品探索。喜欢拆解各种智能家居产品，梦想是“让家的每个角落都懂你，但又不打扰你”。",
+        skills: ["物联网原型（MQTT/HomeKit）", "智能家居场景设计", "Arduino / ESP32", "交互设计", "用户测试"],
+        achievements: ["智能环境监测设备 — 核心成员", "全屋智能中控系统 — 场景设计", "家庭陪伴机器人 — 概念设计", "校级大创项目在研 — 主持人", "新生工作坊助教"]
+      },
+      "8": {
+        name: "孙佳琪",
+        role: "大三 · 视觉传达设计 · 品牌方向",
+        grade: "本科三年级",
+        major: "视觉传达设计",
+        position: "品牌与新媒体",
+        email: "sunjq@weavelab.com",
+        intro: "视觉传达专业，负责工作室的品牌与内容输出，是社交媒体账号背后的“键盘手”。从招新海报到竞赛版面都经她手，擅长把复杂的项目故事讲得让人想点转发，目标是“让工作室被更多人看见”。",
+        skills: ["品牌视觉设计", "新媒体运营", "版式与信息设计", "Adobe Suite", "AIGC 视觉工具"],
+        achievements: ["工作室品牌形象升级 — 主设计", "全国大学生电子商务“三创赛”省赛二等奖 — 品牌策划", "拾光文创电商概念 — 视觉负责人", "校新媒体大赛一等奖", "工作室公众号运营 — 负责人"]
+      }
+    };
+
+    function renderStudentDetail() {
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get('id');
+      if (!id || !studentData[id]) id = '1';
+      const data = studentData[id];
+
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('studentName').textContent = data.name;
+      document.getElementById('studentRole').textContent = data.role;
+      document.getElementById('studentIntro').textContent = data.intro;
+      document.getElementById('metaGrade').textContent = data.grade;
+      document.getElementById('metaMajor').textContent = data.major;
+      document.getElementById('metaPosition').textContent = data.position;
+      document.getElementById('metaEmail').textContent = data.email;
+      document.getElementById('studentSkills').innerHTML = data.skills.map(s => '<div class="detail-list-item">' + s + '</div>').join('');
+      document.getElementById('studentAchievements').innerHTML = data.achievements.map(a => '<div class="detail-list-item">' + a + '</div>').join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderStudentDetail();
+      initScrollAnimations();
+    });
+  </script>
+</body>
+</html>

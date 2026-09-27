@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>获奖详情 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="获奖荣誉详情页面">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Detail Hero -->
+  <section class="detail-hero">
+    <div class="container">
+      <div class="detail-hero-content">
+        <div class="detail-hero-image placeholder-pulse" style="aspect-ratio: 4/3;">
+          <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-secondary); font-size: 0.9rem;">证书图片待补充</span>
+        </div>
+        <div class="detail-hero-text">
+          <span class="section-label fade-in">Award</span>
+          <h1 class="fade-in" id="awardName">全国大学生工业设计大赛一等奖</h1>
+          <p class="fade-in" style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 16px;" id="awardComp">
+            全国大学生工业设计大赛 · 教育部高等学校工业设计专业教学指导委员会
+          </p>
+          <p class="fade-in" id="awardIntro">
+            工作室作品「药伴」智能用药管理系统在全国总决赛中获一等奖。该赛事是国内规模最大、规格最高的工业设计学科竞赛之一，本届共收到全国高校作品 3 万余件。
+          </p>
+          <div class="detail-meta fade-in">
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">获奖时间</span>
+              <span class="detail-meta-value" id="awardYear">2024年</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">奖项等级</span>
+              <span class="detail-meta-value" id="awardLevel">一等奖</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">竞赛名称</span>
+              <span class="detail-meta-value" id="awardCompMeta">全国大学生工业设计大赛</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="detail-meta-label">指导老师</span>
+              <span class="detail-meta-value" id="awardMentor">苏婉清</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Background -->
+  <section class="detail-section">
+    <div class="container-narrow">
+      <h2 class="fade-in">项目背景</h2>
+      <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="awardBackground">
+        慢性病患者长期面临漏服、错服药物的困扰。参赛作品「药伴」从真实家庭场景出发，通过温和的灯光与语音双通道提醒、分格药仓与家人远程协同机制，构建“患者—设备—家人”的安心闭环，用设计回应了慢病管理这一重要社会议题。
+      </p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="detail-section" style="background: var(--bg-secondary);">
+    <div class="container-narrow">
+      <h2 class="fade-in">参赛团队</h2>
+      <div class="detail-list fade-in" id="awardTeam">
+        <div class="detail-list-item">指导老师：苏婉清</div>
+        <div class="detail-list-item">团队负责人：周诗涵（产品设计）</div>
+        <div class="detail-list-item">团队成员：吴沛霖（交互与硬件）</div>
+        <div class="detail-list-item">团队成员：张若晨（电子原型）</div>
+        <div class="detail-list-item">团队成员：李思彤（用户测试）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value -->
+  <section class="detail-section">
+    <div class="container-narrow">
+      <h2 class="fade-in">成果价值</h2>
+      <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="awardValue">
+        该作品获评竞赛评审团“洞察真实、落地扎实”的高度评价，相关设计已申请实用新型专利，并与社区养老机构达成试点合作意向。作品展现了工作室在健康设计方向的持续深耕，也为学生团队树立了“从社会问题出发做设计”的范本。
+      </p>
+    </div>
+  </section>
+
+  <!-- Back -->
+  <section class="section text-center" style="padding: 60px 0;">
+    <a href="projects.html" class="btn btn-outline">← 返回项目成果</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">W</div>
+            <span>Weave Lab</span>
+          </div>
+          <p class="footer-tagline">
+            智能体验与服务工程实验室
+            <br>
+            Intelligent Experience & Service Engineering Lab
+          </p>
+        </div>
+        <div class="footer-column">
+          <h4>导航</h4>
+          <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <a href="about.html">关于工作室</a>
+            <a href="projects.html">项目成果</a>
+            <a href="contact.html">联系我们</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>活动与合作</h4>
+          <div class="footer-links">
+            <a href="activities.html">活动</a>
+            <a href="cooperation.html">合作资源</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>联系方式</h4>
+          <div class="footer-links">
+            <a href="contact.html">创新设计大楼 502 室</a>
+            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
+            <a href="tel:+8651088886666">0510-8888 6666</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WeChat">W</a>
+          <a href="#" aria-label="Weibo">B</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const awardData = {
+      "1": {
+        name: "全国大学生工业设计大赛一等奖", comp: "全国大学生工业设计大赛 · 教育部高等学校工业设计专业教学指导委员会", year: "2024年", level: "一等奖", mentor: "苏婉清",
+        intro: "工作室作品「药伴」智能用药管理系统在全国总决赛中获一等奖。该赛事是国内规模最大、规格最高的工业设计学科竞赛之一，本届共收到全国高校作品 3 万余件。",
+        background: "慢性病患者长期面临漏服、错服药物的困扰。参赛作品「药伴」从真实家庭场景出发，通过温和的灯光与语音双通道提醒、分格药仓与家人远程协同机制，构建“患者—设备—家人”的安心闭环，用设计回应了慢病管理这一重要社会议题。",
+        team: ["指导老师：苏婉清", "团队负责人：周诗涵（产品设计）", "团队成员：吴沛霖（交互与硬件）", "团队成员：张若晨（电子原型）", "团队成员：李思彤（用户测试）"],
+        value: "该作品获评竞赛评审团“洞察真实、落地扎实”的高度评价，相关设计已申请实用新型专利，并与社区养老机构达成试点合作意向。作品展现了工作室在健康设计方向的持续深耕，也为学生团队树立了“从社会问题出发做设计”的范本。"
+      },
+      "2": {
+        name: "华灿奖·两岸新锐设计竞赛二等奖", comp: "华灿奖 · 两岸高校设计竞赛组委会", year: "2024年", level: "二等奖", mentor: "林雨薇",
+        intro: "工作室作品「视界同行」无障碍浏览设备获华灿奖二等奖。华灿奖是面向两岸暨港澳高校的重要设计奖项，本届共吸引百余所高校参与。",
+        background: "上肢功能障碍人群难以使用常规键鼠设备，在信息获取上被数字世界隔离。参赛作品「视界同行」以低成本桌面级眼动交互替代传统输入，完成“视线即光标、凝视即点击”的自然交互设计，让特殊人群重新获得畅游网络的能力。",
+        team: ["指导老师：林雨薇", "团队负责人：赵天宇（交互与开发）", "团队成员：刘一诺（视觉算法）", "团队成员：李思彤（人因测试）"],
+        value: "作品受邀参加省级无障碍设计展，并与康复辅助器具机构建立合作意向。项目验证了眼动交互在中文场景下的可行性，为工作室在无障碍设计方向积累了完整的用户研究与技术验证经验。"
+      },
+      "3": {
+        name: "红点设计概念奖", comp: "Red Dot Award: Design Concept · 德国设计协会", year: "2023年", level: "Winner", mentor: "陈明远",
+        intro: "工作室作品「忆路」认知辅助产品设计获红点设计概念奖。红点奖与 iF、IDEA 并称世界三大设计奖，设计概念奖面向全球征集未量产的前沿概念。",
+        background: "阿尔茨海默病患者家庭面临安全隐患与照护压力的双重困境。「忆路」通过环境提示、用药提醒与定位监护三大模块构建居家安全感，圆润克制的造型语言让产品融入家庭氛围而非凸显“病人”身份。",
+        team: ["指导老师：陈明远", "团队负责人：李思彤（用户研究）", "团队成员：周诗涵（造型与 CMF）", "团队成员：张若晨（原型验证）"],
+        value: "获奖作品代表工作室医疗健康设计首次登上国际舞台，相关研究形成论文成果并发表于核心期刊。作品的设计方法被整理为工作室医疗产品设计的教学案例，持续影响后续毕设选题方向。"
+      },
+      "4": {
+        name: "“挑战杯”省级二等奖", comp: "“挑战杯”大学生课外学术科技作品竞赛 · 省级决赛", year: "2023年", level: "二等奖", mentor: "郑凯文",
+        intro: "工作室作品「绿洲」流浪动物救助服务系统获“挑战杯”省级决赛二等奖。“挑战杯”是国内最具代表性的大学生科创竞赛之一。",
+        background: "城市流浪动物救助长期依赖零散善举，救助站面临领养率低、退养率高的困境。「绿洲」以服务设计方法重构“救助—寄养—领养—回访”旅程，通过领养匹配与陪伴机制降低退养率，让善意形成闭环。",
+        team: ["指导老师：郑凯文", "团队负责人：李思彤（服务设计）", "团队成员：孙佳琪（视觉传播）", "团队成员：刘一诺（数据分析）"],
+        value: "作品在合作救助站完成 4 周试点，领养匹配效率显著提升，获竞赛评审“社会价值突出”评价。项目沉淀的服务设计方法已成为工作室社会创新方向的标准流程。"
+      },
+      "5": {
+        name: "省工业设计大赛金奖", comp: "省工业设计大赛 · 省工业和信息化厅", year: "2023年", level: "金奖", mentor: "郑凯文",
+        intro: "工作室作品「格致」模块化校园家具获省工业设计大赛金奖，为本届竞赛家具类最高奖项。",
+        background: "传统固定式校园家具难以适应自习、讨论、休憩等多元场景切换，更新换代亦造成大量浪费。「格致」以统一模块接口实现自由组合重构，选用可回收铝型材与再生塑料，零部件可拆卸、可维修、可循环。",
+        team: ["指导老师：郑凯文", "团队负责人：周诗涵（造型设计）", "团队成员：张若晨（结构工程）", "团队成员：王梓轩（场景调研）"],
+        value: "作品入围校级绿色校园示范项目，其模块化连接结构已申请实用新型专利。设计验证了“可持续 + 模块化”路径在公共家具中的可行性，相关成果正在与合作企业洽谈量产转化。"
+      },
+      "6": {
+        name: "iF 设计新秀奖", comp: "iF Design Talent Award · 德国 iF 设计奖组委会", year: "2022年", level: "Winner", mentor: "林雨薇",
+        intro: "工作室作品「声桥」智能手语翻译终端获 iF 设计新秀奖。iF 设计奖创立于 1953 年，新秀奖专门面向全球学生与青年设计师。",
+        background: "我国听障人群超过 2700 万，日常就医、办事等场景的沟通障碍直接影响生活质量。「声桥」通过视觉识别与语音合成实现手语与口语的双向翻译，并针对医疗、政务高频场景优化专用词库。",
+        team: ["指导老师：林雨薇", "团队负责人：刘一诺（交互设计）", "团队成员：赵天宇（视觉算法）", "团队成员：李思彤（用户共创）"],
+        value: "作品受邀参加省级助残科技展，并与特殊教育学院建立共创合作。项目为工作室在无障碍与包容性设计方向打下扎实基础，此后工作室将其列为持续深耕的重点方向之一。"
+      },
+      "7": {
+        name: "校级创新创业训练计划优秀结题", comp: "大学生创新创业训练计划 · 校级", year: "2024年", level: "优秀结题", mentor: "陈明远",
+        intro: "工作室项目“腔镜手术机器人人机交互研究”在校级创新创业训练计划中获评优秀结题，为本年度同批项目中评分最高。",
+        background: "传统腔镜器械存在“触觉缺失、操作疲劳、学习曲线长”三大痛点。项目围绕医生操控端展开人因研究，完成主端力反馈操控器的三代迭代与 40 例模拟手术操作实验。",
+        team: ["指导老师：陈明远", "团队负责人：王梓轩（人机交互）", "团队成员：张若晨（控制系统）", "团队成员：周诗涵（造型设计）"],
+        value: "项目成果直接支撑校企联合实验室年度课题，并形成核心期刊论文 1 篇。项目培养的全流程研发经验已成为工作室产学研结合的标杆案例。"
+      },
+      "8": {
+        name: "全国大学生电子商务“三创赛”省赛二等奖", comp: "全国大学生电子商务“创新、创意及创业”挑战赛 · 省级选拔赛", year: "2024年", level: "二等奖", mentor: "苏婉清",
+        intro: "工作室项目「拾光」文创电商概念平台获“三创赛”省赛二等奖。「三创赛”是国内电子商务领域参与人数最多的大学生竞赛之一。",
+        background: "「拾光」以“文创 + 数字”为核心概念，将工作室设计成果转化为可销售的文创产品体系，并设计完整的品牌传播与用户增长策略，探索设计成果市场化路径。",
+        team: ["指导老师：苏婉清", "团队负责人：孙佳琪（品牌策划）", "团队成员：吴沛霖（产品体系）", "团队成员：李思彤（用户增长）"],
+        value: "项目验证了“设计驱动品牌”的商业路径，相关品牌视觉体系已应用于工作室对外传播。项目为市场营销方向的教学提供了完整的实战案例。"
+      }
+    };
+
+    function renderAwardDetail() {
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get('id');
+      if (!id || !awardData[id]) id = '1';
+      const data = awardData[id];
+
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('awardName').textContent = data.name;
+      document.getElementById('awardComp').textContent = data.comp;
+      document.getElementById('awardIntro').textContent = data.intro;
+      document.getElementById('awardYear').textContent = data.year;
+      document.getElementById('awardLevel').textContent = data.level;
+      document.getElementById('awardCompMeta').textContent = data.comp.split(' · ')[0];
+      document.getElementById('awardMentor').textContent = data.mentor;
+      document.getElementById('awardBackground').textContent = data.background;
+      document.getElementById('awardTeam').innerHTML = data.team.map(t => '<div class="detail-list-item">' + t + '</div>').join('');
+      document.getElementById('awardValue').textContent = data.value;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderAwardDetail();
+      initScrollAnimations();
+    });
+  </script>
+</body>
+</html>
