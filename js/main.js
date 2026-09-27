@@ -889,7 +889,11 @@ function initStudent3DCarousel() {
 
   function updateCards() {
     cards.forEach((card, i) => {
-      const offset = i - current;
+      // 环形偏移计算：取最短路径
+      let offset = i - current;
+      if (offset > total / 2) offset -= total;
+      if (offset < -total / 2) offset += total;
+      
       const absOffset = Math.abs(offset);
       
       if (absOffset > 2) {
