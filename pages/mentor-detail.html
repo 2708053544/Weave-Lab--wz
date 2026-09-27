@@ -71,6 +71,79 @@
       }
     }
 
+    /* ---------- Sub Tabs (第二层 tab) ---------- */
+    .mentor-subtabs-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8px 40px 28px;
+    }
+
+    .mentor-subtabs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mentor-subtab-btn {
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      letter-spacing: 0.02em;
+    }
+
+    .mentor-subtab-btn:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    .mentor-subtab-btn.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    .mentor-subtab-panel {
+      display: none;
+      animation: fadeInTab 0.4s ease;
+    }
+
+    .mentor-subtab-panel.active {
+      display: block;
+    }
+
+    .mentor-subtab-content {
+      padding: 20px 0 60px;
+    }
+
+    .mentor-subtab-content.alt-bg {
+      background: var(--bg-secondary);
+    }
+
+    .mentor-subtab-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Gallery inside sub-tab */
+    .mentor-subtab-gallery {
+      padding: 20px 0 60px;
+      background: var(--bg-secondary);
+    }
+
+    .mentor-subtab-gallery .mentor-gallery {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
     /* Tab content sub-sections */
     .mentor-tab-subsection {
       margin-bottom: 48px;
@@ -245,6 +318,31 @@
         font-size: 0.95rem;
       }
 
+      .mentor-subtabs-wrapper {
+        padding: 8px 24px 24px;
+      }
+
+      .mentor-subtab-btn {
+        padding: 10px 18px;
+        font-size: 0.88rem;
+      }
+
+      .mentor-subtab-inner {
+        padding: 0 24px;
+      }
+
+      .mentor-subtab-gallery .mentor-gallery {
+        padding: 0 24px;
+      }
+
+      .mentor-subtab-content {
+        padding: 16px 0 40px;
+      }
+
+      .mentor-subtab-gallery {
+        padding: 16px 0 40px;
+      }
+
       .teaching-stats {
         grid-template-columns: 1fr;
       }
@@ -267,6 +365,16 @@
       .mentor-tab-btn {
         max-width: 100%;
         width: 100%;
+      }
+
+      .mentor-subtabs {
+        gap: 8px;
+      }
+
+      .mentor-subtab-btn {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        border-radius: 8px;
       }
 
       .teaching-stat-number {
@@ -369,155 +477,198 @@
 
   <!-- Tab Panel 1: 个人简介 -->
   <div class="mentor-tab-panel active" id="tab-profile">
-    <!-- 概况 -->
-    <section class="mentor-tab-section">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Overview</span>
-          <h3>概况</h3>
-          <div id="mentorIntro">
-            <p>
-              陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。
-            </p>
-          </div>
-        </div>
+    <!-- Sub-tabs -->
+    <div class="mentor-subtabs-wrapper">
+      <div class="mentor-subtabs">
+        <button class="mentor-subtab-btn active" data-subtab="overview" data-parent="profile">概况</button>
+        <button class="mentor-subtab-btn" data-subtab="education" data-parent="profile">教育背景</button>
+        <button class="mentor-subtab-btn" data-subtab="experience" data-parent="profile">任职经历</button>
+        <button class="mentor-subtab-btn" data-subtab="gallery" data-parent="profile">风采展示</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 教育背景 -->
-    <section class="mentor-tab-section alt-bg">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Education</span>
-          <h3>教育背景</h3>
-          <div class="exp-list" id="mentorEducation">
-            <div class="exp-item">
-              <div class="exp-title">天津大学</div>
-              <div class="exp-desc">博士 · 设计学</div>
+    <!-- Sub-panel: 概况 -->
+    <div class="mentor-subtab-panel active" id="subtab-profile-overview">
+      <div class="mentor-subtab-content">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Overview</span>
+            <h3>概况</h3>
+            <div id="mentorIntro">
+              <p>
+                陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 任职经历 -->
-    <section class="mentor-tab-section">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Experience</span>
-          <h3>任职经历</h3>
-          <div class="exp-list" id="mentorExperience">
-            <div class="exp-item">
-              <span class="exp-type">现任</span>
-              <div class="exp-title">智能体验与服务工程实验室</div>
-              <div class="exp-desc">实验室主任</div>
+    <!-- Sub-panel: 教育背景 -->
+    <div class="mentor-subtab-panel" id="subtab-profile-education">
+      <div class="mentor-subtab-content alt-bg">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Education</span>
+            <h3>教育背景</h3>
+            <div class="exp-list" id="mentorEducation">
+              <div class="exp-item">
+                <div class="exp-title">天津大学</div>
+                <div class="exp-desc">博士 · 设计学</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Sub-panel: 任职经历 -->
+    <div class="mentor-subtab-panel" id="subtab-profile-experience">
+      <div class="mentor-subtab-content">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Experience</span>
+            <h3>任职经历</h3>
+            <div class="exp-list" id="mentorExperience">
+              <div class="exp-item">
+                <span class="exp-type">现任</span>
+                <div class="exp-title">智能体验与服务工程实验室</div>
+                <div class="exp-desc">实验室主任</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-panel: 风采展示 -->
+    <div class="mentor-subtab-panel" id="subtab-profile-gallery">
+      <div class="mentor-subtab-gallery">
+        <div class="mentor-subtab-inner" style="margin-bottom: 32px;">
+          <span class="section-label">Gallery</span>
+          <h3>风采展示</h3>
+          <p class="text-secondary">教学、科研、活动照片</p>
+        </div>
+        <div class="mentor-gallery" id="mentorGallery">
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+          <div class="mentor-gallery-item placeholder-pulse"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Tab Panel 2: 教育教学 -->
   <div class="mentor-tab-panel" id="tab-teaching">
-    <!-- 讲授课程 -->
-    <section class="mentor-tab-section">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Courses</span>
-          <h3>讲授课程</h3>
-          <div class="detail-list" id="mentorTeaching">
-            <div class="detail-list-item">
-              <strong>《产品设计程序与方法》</strong> — 本科核心课，48 学时，面向设计类二年级
-            </div>
-          </div>
-        </div>
+    <!-- Sub-tabs -->
+    <div class="mentor-subtabs-wrapper">
+      <div class="mentor-subtabs">
+        <button class="mentor-subtab-btn active" data-subtab="courses" data-parent="teaching">讲授课程</button>
+        <button class="mentor-subtab-btn" data-subtab="achievements" data-parent="teaching">教学成果</button>
       </div>
-    </section>
+    </div>
 
-    <!-- 教学成果 -->
-    <section class="mentor-tab-section alt-bg">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Achievements</span>
-          <h3>教学成果</h3>
-          <div class="teaching-stats" id="mentorTeachingStats">
-            <div class="teaching-stat-card">
-              <div class="teaching-stat-number">60+</div>
-              <div class="teaching-stat-label">指导学生获国家级、省市级、校级竞赛奖项</div>
+    <!-- Sub-panel: 讲授课程 -->
+    <div class="mentor-subtab-panel active" id="subtab-teaching-courses">
+      <div class="mentor-subtab-content">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Courses</span>
+            <h3>讲授课程</h3>
+            <div class="detail-list" id="mentorTeaching">
+              <div class="detail-list-item">
+                <strong>《产品设计程序与方法》</strong> — 本科核心课，48 学时，面向设计类二年级
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Sub-panel: 教学成果 -->
+    <div class="mentor-subtab-panel" id="subtab-teaching-achievements">
+      <div class="mentor-subtab-content alt-bg">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Achievements</span>
+            <h3>教学成果</h3>
+            <div class="teaching-stats" id="mentorTeachingStats">
+              <div class="teaching-stat-card">
+                <div class="teaching-stat-number">60+</div>
+                <div class="teaching-stat-label">指导学生获国家级、省市级、校级竞赛奖项</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Tab Panel 3: 科学研究 -->
   <div class="mentor-tab-panel" id="tab-research">
-    <!-- 研究方向 -->
-    <section class="mentor-tab-section">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Research Areas</span>
-          <h3>研究方向</h3>
-          <div class="detail-list" id="mentorResearch">
-            <div class="detail-list-item">
-              <strong>手术机器人系统设计</strong> — 主从式机器人机构、运动学分析与临床场景系统集成
+    <!-- Sub-tabs -->
+    <div class="mentor-subtabs-wrapper">
+      <div class="mentor-subtabs">
+        <button class="mentor-subtab-btn active" data-subtab="areas" data-parent="research">研究方向</button>
+        <button class="mentor-subtab-btn" data-subtab="projects" data-parent="research">科研项目及成果</button>
+        <button class="mentor-subtab-btn" data-subtab="roles" data-parent="research">学术兼职与资质</button>
+      </div>
+    </div>
+
+    <!-- Sub-panel: 研究方向 -->
+    <div class="mentor-subtab-panel active" id="subtab-research-areas">
+      <div class="mentor-subtab-content">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Research Areas</span>
+            <h3>研究方向</h3>
+            <div class="detail-list" id="mentorResearch">
+              <div class="detail-list-item">
+                <strong>手术机器人系统设计</strong> — 主从式机器人机构、运动学分析与临床场景系统集成
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 科研项目及成果 -->
-    <section class="mentor-tab-section alt-bg">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Projects & Awards</span>
-          <h3>科研项目及成果</h3>
-          <div class="timeline-list" id="mentorTimeline">
-            <div class="timeline-item">
-              <div class="timeline-year">2024</div>
-              <div class="timeline-title">红点设计概念奖</div>
-              <div class="timeline-desc">团队作品「忆路」认知辅助产品设计获奖，指导教师。</div>
+    <!-- Sub-panel: 科研项目及成果 -->
+    <div class="mentor-subtab-panel" id="subtab-research-projects">
+      <div class="mentor-subtab-content alt-bg">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Projects & Awards</span>
+            <h3>科研项目及成果</h3>
+            <div class="timeline-list" id="mentorTimeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-title">红点设计概念奖</div>
+                <div class="timeline-desc">团队作品「忆路」认知辅助产品设计获奖，指导教师。</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 学术兼职与资质 -->
-    <section class="mentor-tab-section">
-      <div class="mentor-tab-inner">
-        <div class="mentor-tab-subsection">
-          <span class="section-label">Academic Roles</span>
-          <h3>学术兼职与资质</h3>
-          <div class="academic-tags" id="mentorAcademicRoles">
-            <span class="academic-tag">全球服务设计联盟（SDN）华北地区核心讲师</span>
+    <!-- Sub-panel: 学术兼职与资质 -->
+    <div class="mentor-subtab-panel" id="subtab-research-roles">
+      <div class="mentor-subtab-content">
+        <div class="mentor-subtab-inner">
+          <div class="mentor-tab-subsection">
+            <span class="section-label">Academic Roles</span>
+            <h3>学术兼职与资质</h3>
+            <div class="academic-tags" id="mentorAcademicRoles">
+              <span class="academic-tag">全球服务设计联盟（SDN）华北地区核心讲师</span>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-
-  <!-- Gallery -->
-  <section class="mentor-gallery-section fade-in">
-    <div class="container-narrow" style="margin-bottom: 48px;">
-      <span class="section-label">Gallery</span>
-      <h2 style="font-size: 2rem; font-weight: 700;">风采展示</h2>
-      <p class="text-secondary">教学、科研、活动照片</p>
-    </div>
-    <div class="container">
-      <div class="mentor-gallery">
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-        <div class="mentor-gallery-item placeholder-pulse"></div>
-      </div>
-    </div>
-  </section>
 
   <!-- Contact Info -->
   <section class="mentor-content-section fade-in text-center">
@@ -598,7 +749,7 @@
         ],
         education: [
           { school: "高丽大学（韩国）", degree: "硕士 · 服务设计与产品运营" },
-          { school: "天津大学", degree: "本科、硕士 · 建筑学" }
+          { school: "天津大学", degree: "硕士 · 建筑学" }
         ],
         experience: [
           { type: "现任", title: "天津仁爱学院", desc: "专业教师 · 校重点工作室负责人" },
@@ -873,7 +1024,7 @@
       }
 
       // Render gallery (mentor-specific activity photos)
-      const galleryEl = document.querySelector('.mentor-gallery');
+      const galleryEl = document.getElementById('mentorGallery');
       if (galleryEl && data.gallery && data.gallery.length) {
         galleryEl.innerHTML = data.gallery.map(src => '<div class="mentor-gallery-item has-image" style="background-image:url(\'' + src + '\')"></div>').join('');
       }
@@ -903,9 +1054,37 @@
       });
     }
 
+    // Sub-Tab 切换功能（每个大 tab 下的子 tab 独立切换）
+    function initMentorSubTabs() {
+      const subTabBtns = document.querySelectorAll('.mentor-subtab-btn');
+
+      subTabBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const parentTab = this.getAttribute('data-parent');
+          const targetSubtab = this.getAttribute('data-subtab');
+
+          // 只更新当前大 tab 下的子 tab 按钮状态
+          const parentPanel = document.getElementById('tab-' + parentTab);
+          const siblingBtns = parentPanel.querySelectorAll('.mentor-subtab-btn');
+          siblingBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          // 只更新当前大 tab 下的子面板显示
+          const subPanels = parentPanel.querySelectorAll('.mentor-subtab-panel');
+          subPanels.forEach(panel => {
+            panel.classList.remove('active');
+            if (panel.id === 'subtab-' + parentTab + '-' + targetSubtab) {
+              panel.classList.add('active');
+            }
+          });
+        });
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       renderMentorDetail();
       initMentorTabs();
+      initMentorSubTabs();
       initScrollAnimations();
     });
   </script>
