@@ -75,7 +75,7 @@
   <section class="detail-hero">
     <div class="container">
       <div class="detail-hero-content">
-        <div class="detail-hero-image placeholder-pulse"></div>
+        <div class="detail-hero-image" id="studentAvatar"></div>
         <div class="detail-hero-text">
           <span class="section-label fade-in">Team Member</span>
           <h1 class="fade-in" id="studentName">王梓轩</h1>
@@ -179,15 +179,16 @@
         achievements: ["腔镜手术机器人系统 — 项目核心成员", "骨科手术导航机器人 — 交互设计", "省级工业设计大赛金奖 — 团队成员", "红点设计概念奖 — 团队成员", "校级优秀研究生干部"]
       },
       "2": {
-        name: "李思彤",
-        role: "研三 · 产品设计 · 学术组长",
-        grade: "研究生三年级",
+        name: "贾静瑄",
+        avatar: "../images/students/student2.jpg",
+        role: "产品设计四班 · 工作室副负责人",
+        grade: "数智传媒与设计艺术学院",
         major: "产品设计",
-        position: "学术组长",
-        email: "list@weavelab.com",
-        intro: "学术组长，服务设计方向。喜欢用服务蓝图拆解复杂问题，先后主导了社区养老与流浪动物救助两个社会创新项目。她的信条是“设计不止于物，更在于人与人之间的连接”，平时负责组织工作室的文献共读与项目复盘。",
-        skills: ["服务设计", "用户访谈与洞察", "旅程图与服务蓝图", "Figma", "学术论文写作"],
-        achievements: ["绿洲·流浪动物救助服务系统 — 项目负责人", "社区居家养老服务共创 — 联合负责人", "“挑战杯”省赛二等奖 — 团队负责人", "省级学术成果奖（参与）", "校一等奖学金"]
+        position: "工作室副负责人",
+        email: "jiajx@weavelab.com",
+        intro: "工作室副负责人，数智传媒与设计艺术学院产品设计四班。专注于产品设计与数字媒体的交叉领域，善于将艺术审美与技术实现相结合。作为工作室副负责人，协助管理日常事务并推动项目进展，相信好的设计是技术与艺术的完美融合。",
+        skills: ["产品设计", "数字媒体设计", "视觉传达", "3D建模", "项目管理"],
+        achievements: ["工作室副负责人", "产品设计专业", "数智传媒方向"]
       },
       "3": {
         name: "张若晨",
@@ -271,6 +272,16 @@
       document.getElementById('metaMajor').textContent = data.major;
       document.getElementById('metaPosition').textContent = data.position;
       document.getElementById('metaEmail').textContent = data.email;
+      
+      // 设置头像
+      const avatar = document.getElementById('studentAvatar');
+      if (data.avatar) {
+        avatar.style.backgroundImage = "url('" + data.avatar + "')";
+        avatar.style.backgroundSize = 'cover';
+        avatar.style.backgroundPosition = 'center';
+      } else {
+        avatar.classList.add('placeholder-pulse');
+      }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
