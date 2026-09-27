@@ -930,14 +930,16 @@ function initStudent3DCarousel() {
       currentLabel.textContent = String(current + 1).padStart(2, '0');
     }
 
-    // Update buttons
-    if (prevBtn) prevBtn.disabled = current === 0;
-    if (nextBtn) nextBtn.disabled = current === total - 1;
+    // Update buttons - 循环模式下按钮一直可用
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
   }
 
   function goTo(index) {
     if (isAnimating) return;
-    index = Math.max(0, Math.min(total - 1, index));
+    // 循环模式：超出边界时绕到另一端
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
     if (index === current) return;
     
     isAnimating = true;
