@@ -31,7 +31,7 @@ const TEACHERS = [
     email: '#',
     major: '人工智能教育 / 智能硬件 / AI工程化',
     blog: '#',
-    photo: '../images/teachers/teacher2.jpg',
+    photo: '../images/teachers/teacher2.png',
     link: 'mentor-detail.html?id=2'
   },
   {

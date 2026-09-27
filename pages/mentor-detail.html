@@ -823,6 +823,7 @@
         email: "#",
         office: "#",
         blog: "#",
+        photo: "../images/teachers/teacher2.png",
         tags: ["人工智能教育", "智能硬件", "全栈开发", "机器学习", "AI工程化"],
         intro: [
           "刘海斌，副教授、人工智能教育专家、全栈开发工程师、机器学习研究员。中国民航大学通信与信息系统专业硕士，拥有15年高校教学经验，40+项学生竞赛奖项，18个开源教学作品，是AI通识与智能硬件双栖专家。",
@@ -1013,6 +1014,18 @@
       document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
       document.getElementById('mentorName').textContent = data.name;
       document.getElementById('mentorTitle').textContent = data.title;
+
+      // 导师头像图片
+      const mentorImage = document.querySelector('.mentor-detail-image');
+      if (data.photo) {
+        mentorImage.style.backgroundImage = 'url(' + data.photo + ')';
+        mentorImage.style.backgroundSize = 'cover';
+        mentorImage.style.backgroundPosition = 'center top';
+        mentorImage.classList.remove('placeholder-pulse');
+      } else {
+        mentorImage.style.backgroundImage = '';
+        mentorImage.classList.add('placeholder-pulse');
+      }
       document.getElementById('mentorEmailTag').textContent = '📧 ' + data.email;
       document.getElementById('mentorOfficeTag').textContent = '📍 ' + data.office;
       const blogTag = document.getElementById('mentorBlogTag');
