@@ -36,13 +36,13 @@ const TEACHERS = [
   },
   {
     id: '3',
-    name: '老师名称占位三',
-    short: '师三',
-    title: '教授 / 研究员 / 实验室主任',
-    email: 'mentor3@weavelab.com',
-    major: '服务设计 / 社会创新',
-    blog: 'https://blog.weavelab.com/mentor3',
-    photo: '../images/teachers/teacher3.jpg',
+    name: '边元',
+    short: '边',
+    title: '助教 / 智能交互设计专业教师',
+    email: 'bianyuan0326@163.com',
+    major: '工业设计 / 微创手术机器人 / 人机交互',
+    blog: '#',
+    photo: '../images/teachers/teacher3.png',
     link: 'mentor-detail.html?id=3'
   },
   {
