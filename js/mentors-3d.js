@@ -47,13 +47,13 @@ const TEACHERS = [
   },
   {
     id: '4',
-    name: '老师名称占位四',
-    short: '师四',
-    title: '副教授 / 副研究员 / 项目负责人',
-    email: 'mentor4@weavelab.com',
+    name: '苏婉清',
+    short: '苏',
+    title: '讲师 / 设计实践导师',
+    email: 'suwq@weavelab.com',
     major: '品牌设计 / 数字营销',
-    blog: 'https://blog.weavelab.com/mentor4',
-    photo: '../images/teachers/teacher4.jpg',
+    blog: '#',
+    photo: '../images/teachers/teacher4.png',
     link: 'mentor-detail.html?id=4'
   }
 ];
