@@ -155,7 +155,9 @@ body:not(.theme-light) .cta-section,
 body:not(.theme-light) .student-3d-section,
 body:not(.theme-light) .about-v2,
 body:not(.theme-light) .research-item-v2,
-body:not(.theme-light) .footer-v2 {
+body:not(.theme-light) .footer-v2,
+body:not(.theme-light) .horizontal-scroll-section,
+body:not(.theme-light) .m3-section {
   background: transparent !important;
 }
 
