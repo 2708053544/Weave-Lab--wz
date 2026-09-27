@@ -9,6 +9,271 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Mentor Detail Tabs ---------- */
+    .mentor-tabs-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px 40px;
+    }
+
+    .mentor-tabs {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mentor-tab-btn {
+      flex: 1;
+      min-width: 140px;
+      max-width: 220px;
+      padding: 16px 32px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      letter-spacing: 0.02em;
+    }
+
+    .mentor-tab-btn:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .mentor-tab-btn.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    .mentor-tab-panel {
+      display: none;
+      animation: fadeInTab 0.4s ease;
+    }
+
+    .mentor-tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeInTab {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tab content sub-sections */
+    .mentor-tab-subsection {
+      margin-bottom: 48px;
+    }
+
+    .mentor-tab-subsection:last-child {
+      margin-bottom: 0;
+    }
+
+    .mentor-tab-subsection .section-label {
+      margin-bottom: 8px;
+    }
+
+    .mentor-tab-subsection h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .mentor-tab-subsection h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 36px;
+      height: 2px;
+      background: var(--text-primary);
+    }
+
+    /* Teaching achievements - stat cards */
+    .teaching-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .teaching-stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: all var(--transition-normal);
+    }
+
+    .teaching-stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .teaching-stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .teaching-stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Academic roles - tag cloud style */
+    .academic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .academic-tag {
+      padding: 10px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .academic-tag:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Education / Experience list with timeline style */
+    .exp-list {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .exp-list::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border-color);
+    }
+
+    .exp-item {
+      position: relative;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 22px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-primary);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+    }
+
+    .exp-type {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .exp-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .exp-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Alternating bg for tab panels */
+    .mentor-tab-section {
+      padding: 60px 0;
+    }
+
+    .mentor-tab-section.alt-bg {
+      background: var(--bg-secondary);
+    }
+
+    .mentor-tab-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .mentor-tabs-wrapper {
+        padding: 0 24px 32px;
+      }
+
+      .mentor-tab-btn {
+        min-width: 120px;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+      }
+
+      .teaching-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .mentor-tab-inner {
+        padding: 0 24px;
+      }
+
+      .mentor-tab-section {
+        padding: 40px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mentor-tabs {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .mentor-tab-btn {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .teaching-stat-number {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -93,95 +358,147 @@
     </div>
   </section>
 
-  <!-- Personal Introduction -->
-  <section class="mentor-content-section fade-in">
-    <h2>个人简介</h2>
-    <div id="mentorIntro">
-      <p>
-        陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。
-      </p>
-      <p>
-        他主持国家自然科学基金项目 2 项、省部级课题 4 项及多项企业合作课题，在腔镜手术机器人的人机交互与力反馈设计方面取得系列成果，相关设计多次获得国内外设计奖项。
-      </p>
-      <p>
-        他坚持\u201C从临床需求出发\u201D的实验教学理念，鼓励学生走进手术室观察真实流程，把技术复杂度转化为可感知的体验温度。
-      </p>
+  <!-- Mentor Tabs Navigation -->
+  <div class="mentor-tabs-wrapper fade-in">
+    <div class="mentor-tabs">
+      <button class="mentor-tab-btn active" data-tab="profile">个人简介</button>
+      <button class="mentor-tab-btn" data-tab="teaching">教育教学</button>
+      <button class="mentor-tab-btn" data-tab="research">科学研究</button>
     </div>
-  </section>
+  </div>
 
-  <!-- Research Direction -->
-  <section class="mentor-content-section fade-in" style="background: var(--bg-secondary); max-width: 100%; padding-left: 0; padding-right: 0;">
-    <div style="max-width: 720px; margin: 0 auto; padding: 0 40px;">
-      <h2>研究方向</h2>
-      <div class="detail-list" id="mentorResearch">
-        <div class="detail-list-item">
-          <strong>手术机器人系统设计</strong> — 主从式机器人机构、运动学分析与临床场景系统集成
-        </div>
-        <div class="detail-list-item">
-          <strong>人机交互与力反馈</strong> — 医生操控端界面、触觉反馈技术与操作舒适度评估
-        </div>
-        <div class="detail-list-item">
-          <strong>医疗产品体验设计</strong> — 围绕诊疗全流程的产品与服务系统设计
-        </div>
-        <div class="detail-list-item">
-          <strong>智能家居与人居健康</strong> — 面向家庭健康监测的场景化智能产品设计
+  <!-- Tab Panel 1: 个人简介 -->
+  <div class="mentor-tab-panel active" id="tab-profile">
+    <!-- 概况 -->
+    <section class="mentor-tab-section">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Overview</span>
+          <h3>概况</h3>
+          <div id="mentorIntro">
+            <p>
+              陈明远，教授、博士生导师，智能体验与服务工程实验室主任。本科毕业于工业设计专业，获设计学博士学位，曾赴德国亚琛工业大学机器人研究所访学两年，长期从事医疗产品设计与智能机器人系统研究。
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Achievements Timeline -->
-  <section class="mentor-content-section fade-in">
-    <h2>科研成果与获奖荣誉</h2>
-    <div class="timeline-list" id="mentorTimeline">
-      <div class="timeline-item">
-        <div class="timeline-year">2024</div>
-        <div class="timeline-title">红点设计概念奖</div>
-        <div class="timeline-desc">团队作品「忆路」认知辅助产品设计获奖，指导教师。</div>
+    <!-- 教育背景 -->
+    <section class="mentor-tab-section alt-bg">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Education</span>
+          <h3>教育背景</h3>
+          <div class="exp-list" id="mentorEducation">
+            <div class="exp-item">
+              <div class="exp-title">天津大学</div>
+              <div class="exp-desc">博士 · 设计学</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2023</div>
-        <div class="timeline-title">国家自然科学基金面上项目</div>
-        <div class="timeline-desc">面向微创手术的力反馈交互设计研究，项目主持人，执行期 2023-2026。</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2022</div>
-        <div class="timeline-title">省级教学成果奖一等奖</div>
-        <div class="timeline-desc">\u201C设计+工程\u201D交叉人才培养模式探索，主要完成人。</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2021</div>
-        <div class="timeline-title">核心期刊论文 2 篇</div>
-        <div class="timeline-desc">医疗机器人交互设计方向，第一作者。</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2020</div>
-        <div class="timeline-title">校企联合实验室共建</div>
-        <div class="timeline-desc">与云栖机器人共建联合实验室，负责人。</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Teaching -->
-  <section class="mentor-content-section fade-in" style="background: var(--bg-secondary); max-width: 100%; padding-left: 0; padding-right: 0;">
-    <div style="max-width: 720px; margin: 0 auto; padding: 0 40px;">
-      <h2>负责项目与教学课程</h2>
-      <div class="detail-list" id="mentorTeaching">
-        <div class="detail-list-item">
-          <strong>《产品设计程序与方法》</strong> — 本科核心课，48 学时，面向设计类二年级
-        </div>
-        <div class="detail-list-item">
-          <strong>《智能产品设计》</strong> — 研究生课程，32 学时，聚焦智能技术应用
-        </div>
-        <div class="detail-list-item">
-          <strong>国家自然科学基金面上项目</strong> — 力反馈交互设计研究，2023-2026，主持人
-        </div>
-        <div class="detail-list-item">
-          <strong>校企联合实验室</strong> — 与云栖机器人共建，2020 年至今，负责人
+    <!-- 任职经历 -->
+    <section class="mentor-tab-section">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Experience</span>
+          <h3>任职经历</h3>
+          <div class="exp-list" id="mentorExperience">
+            <div class="exp-item">
+              <span class="exp-type">现任</span>
+              <div class="exp-title">智能体验与服务工程实验室</div>
+              <div class="exp-desc">实验室主任</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+
+  <!-- Tab Panel 2: 教育教学 -->
+  <div class="mentor-tab-panel" id="tab-teaching">
+    <!-- 讲授课程 -->
+    <section class="mentor-tab-section">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Courses</span>
+          <h3>讲授课程</h3>
+          <div class="detail-list" id="mentorTeaching">
+            <div class="detail-list-item">
+              <strong>《产品设计程序与方法》</strong> — 本科核心课，48 学时，面向设计类二年级
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 教学成果 -->
+    <section class="mentor-tab-section alt-bg">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Achievements</span>
+          <h3>教学成果</h3>
+          <div class="teaching-stats" id="mentorTeachingStats">
+            <div class="teaching-stat-card">
+              <div class="teaching-stat-number">60+</div>
+              <div class="teaching-stat-label">指导学生获国家级、省市级、校级竞赛奖项</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Tab Panel 3: 科学研究 -->
+  <div class="mentor-tab-panel" id="tab-research">
+    <!-- 研究方向 -->
+    <section class="mentor-tab-section">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Research Areas</span>
+          <h3>研究方向</h3>
+          <div class="detail-list" id="mentorResearch">
+            <div class="detail-list-item">
+              <strong>手术机器人系统设计</strong> — 主从式机器人机构、运动学分析与临床场景系统集成
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 科研项目及成果 -->
+    <section class="mentor-tab-section alt-bg">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Projects & Awards</span>
+          <h3>科研项目及成果</h3>
+          <div class="timeline-list" id="mentorTimeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <div class="timeline-title">红点设计概念奖</div>
+              <div class="timeline-desc">团队作品「忆路」认知辅助产品设计获奖，指导教师。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学术兼职与资质 -->
+    <section class="mentor-tab-section">
+      <div class="mentor-tab-inner">
+        <div class="mentor-tab-subsection">
+          <span class="section-label">Academic Roles</span>
+          <h3>学术兼职与资质</h3>
+          <div class="academic-tags" id="mentorAcademicRoles">
+            <span class="academic-tag">全球服务设计联盟（SDN）华北地区核心讲师</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- Gallery -->
   <section class="mentor-gallery-section fade-in">
@@ -279,6 +596,19 @@
           "曾任融创地产集团产品经理、大韩航空国际培训中心主任讲师；现任众河集团股东、多克盟科技咨询公司董事兼合伙人。依托产业经验融入创新创业教育，指导学生团队累计获国家级、省市级、校级竞赛奖项 60 余项。",
           "持有 MOS（微软办公专家）、Adobe 官方认证、TTT 讲师培训认证及 ATD 人才发展协会专业认证，将「先讲原理、再做示范、后练实战」的培训方法论系统融入高校课堂与企业内训。"
         ],
+        education: [
+          { school: "高丽大学（韩国）", degree: "硕士 · 服务设计与产品运营" },
+          { school: "天津大学", degree: "本科、硕士 · 建筑学" }
+        ],
+        experience: [
+          { type: "现任", title: "天津仁爱学院", desc: "专业教师 · 校重点工作室负责人" },
+          { type: "现任", title: "众河集团", desc: "股东" },
+          { type: "现任", title: "多克盟科技咨询公司", desc: "董事兼合伙人" },
+          { type: "现任", title: "蓟县商会", desc: "理事副会长" },
+          { type: "曾任", title: "融创集团", desc: "产品经理" },
+          { type: "曾任", title: "大韩航空公司", desc: "国际培训中心主任讲师" },
+          { type: "曾任", title: "俄罗斯空桥货运航空公司", desc: "运航培训讲师" }
+        ],
         research: [
           { title: "服务设计与创新思维", desc: "以国际服务设计方法论与产业案例为支撑，讲解以用户为中心的创新方法" },
           { title: "AI 产品与智能交互", desc: "结合 AI 产品设计实践，介绍智能产品从需求洞察、方案设计到落地应用的完整链路" },
@@ -287,16 +617,14 @@
           { title: "高效演讲表达与 AI 演示制作", desc: "面向企业职工讲授汇报表达、演示设计与 AI 辅助 PPT 制作完整链路" }
         ],
         timeline: [
-          { year: "2025", title: "工作室建设", desc: "智驱无界触点服务创新实验工作室建于天津仁爱学院数智传媒与设计艺术学院，负责人" },
+          { year: "2025", title: "智驱无界触点服务创新实验工作室建设", desc: "工作室建于天津仁爱学院数智传媒与设计艺术学院，负责人" },
           { year: "2024", title: "Home+ 国际服务设计大赛优秀奖", desc: "与贤服务设计策略公司联合参赛并获奖" },
-          { year: "2024", title: "「互联网+」大赛入围", desc: "「沉默玩家」创新项目入围「互联网+」比赛" },
-          { year: "2024", title: "新加坡 Wonder Wash 合作", desc: "为全系智能洗衣设备定制归集方案，推进门店改造项目" },
-          { year: "2024", title: "河北翼龙航空科技战略合作", desc: "共建天津市首个无人机全资质教育基地，年培养学员 200 人" },
-          { year: "2023", title: "北京「淮扬春」餐饮老字号活化", desc: "项目入选服务设计十大优秀案例" },
-          { year: "—", title: "大韩航空国际培训", desc: "国际培训中心主任讲师，主讲国际航空服务与安全，累计培训超 1000 人" },
-          { year: "—", title: "空桥货运航空培训", desc: "俄罗斯空桥货运航空公司运航培训讲师" },
-          { year: "—", title: "天津市互联网营销专业评委", desc: "天津市人社局互联网营销专业评委；天津市「互联网+」大赛艺术类专项评委" },
-          { year: "—", title: "全球服务设计联盟（SDN）华北地区核心讲师", desc: "参与 2025 全球服务设计共创节等行业活动" }
+          { year: "2024", title: "「沉默玩家」创新项目入围「互联网+」大赛", desc: "创新项目入围「互联网+」比赛" },
+          { year: "2024", title: "新加坡 WonderWash 智能洗衣合作项目", desc: "为全系智能洗衣设备定制归集方案，推进门店改造项目" },
+          { year: "2024", title: "河北翼龙航空科技产教融合战略合作", desc: "共建天津市首个无人机全资质教育基地，年培养学员 200 人" },
+          { year: "2023", title: "北京「淮扬春」餐饮老字号活化项目", desc: "项目入选服务设计十大优秀案例" },
+          { year: "—", title: "累计建立合作企业 10+ 家", desc: "与多家企业建立产学研合作关系" },
+          { year: "—", title: "搭建新媒体矩阵", desc: "专业网站、公众号、视频号、抖音等全平台运营" }
         ],
         teaching: [
           { title: "《TTT——内训师授课技术与呈现》", desc: "企业内训师培训课程" },
@@ -309,6 +637,23 @@
           { title: "《美轮美奂——商务PPT逻辑设计与美化》", desc: "企业半天内训课程" },
           { title: "《AI赋能·言而有据——高效演讲表达与AI演示制作》", desc: "AI辅助PPT制作与演讲表达" },
           { title: "《企业汇报PPT制作：结构搭建与数据可视化》", desc: "企业汇报场景PPT制作" }
+        ],
+        teachingStats: [
+          { number: "60+", label: "指导学生获国家级、省市级、校级竞赛奖项" },
+          { number: "1000+", label: "大韩航空国际培训中心主任讲师，累计培训超千人" },
+          { number: "7000+", label: "全国高校学习通优质网课讲师，课程累计下载超七千次" },
+          { number: "40人", label: "带领跨专业学生团队（覆盖21—24级）" }
+        ],
+        academicRoles: [
+          "全球服务设计联盟（SDN）华北地区核心讲师",
+          "天津市人社局互联网营销专业评委",
+          "天津市「互联网+」大赛艺术类专项评委",
+          "CAAC 国际无人驾驶航空器理论培训讲师资格",
+          "微软 MOS（Microsoft Office Specialist）认证",
+          "Adobe 官方认证",
+          "TTT（Train the Trainer）讲师培训认证",
+          "ATD（人才发展协会）专业认证",
+          "蓟县商会理事副会长"
         ],
         gallery: [
           "../images/teachers/gallery-1.jpg",
@@ -330,6 +675,13 @@
           "她主持省部级教研课题 3 项，发表核心论文十余篇，重点研究生成式 AI 在概念设计阶段的辅助范式。其主导开发的「AI 辅助产品设计工具」已在工作室教学与项目中投入使用。",
           "她相信\u201CAI 不会取代设计师，但会重新定义设计\u201D，鼓励学生以开放心态驾驭新工具，同时坚守以人为中心的设计伦理。"
         ],
+        education: [
+          { school: "浙江大学", degree: "博士 · 计算机科学与技术" }
+        ],
+        experience: [
+          { type: "现任", title: "智能体验与服务工程实验室", desc: "AI 与 VR/AR 方向负责人" },
+          { type: "现任", title: "未岚智能科技", desc: "技术顾问（兼职）" }
+        ],
         research: [
           { title: "生成式 AI 辅助设计", desc: "图像生成、方案发散与概念评估的 AI 工作流研究" },
           { title: "计算机视觉应用", desc: "图像识别、姿态估计在智能产品中的落地应用" },
@@ -337,17 +689,28 @@
           { title: "智能对话系统", desc: "面向服务场景的多轮对话与意图理解设计" }
         ],
         timeline: [
-          { year: "2024", title: "省级教学创新大赛二等奖", desc: "\u201CAIGC 进课堂\u201D课程改革实践。" },
-          { year: "2023", title: "省级一流本科课程", desc: "《智能产品设计》课程负责人。" },
-          { year: "2023", title: "校级优秀研究生导师", desc: "指导学生获国家级设计竞赛奖项 4 项。" },
-          { year: "2022", title: "教育部产学合作协同育人项目", desc: "AI 设计工具教学平台建设，负责人。" },
-          { year: "2021", title: "核心期刊论文 3 篇", desc: "生成式设计与设计教育方向。" }
+          { year: "2024", title: "省级教学创新大赛二等奖", desc: "\u201CAIGC 进课堂\u201D课程改革实践" },
+          { year: "2023", title: "省级一流本科课程", desc: "《智能产品设计》课程负责人" },
+          { year: "2023", title: "校级优秀研究生导师", desc: "指导学生获国家级设计竞赛奖项 4 项" },
+          { year: "2022", title: "教育部产学合作协同育人项目", desc: "AI 设计工具教学平台建设，负责人" },
+          { year: "2021", title: "核心期刊论文 3 篇", desc: "生成式设计与设计教育方向" }
         ],
         teaching: [
           { title: "《人工智能与设计》", desc: "本科选修课，32 学时，AI 工具实战" },
           { title: "《VR/AR 设计基础》", desc: "本科方向课，Unity 原型开发" },
-          { title: "省级教研课题", desc: "生成式 AI 融入设计教学的路径研究，2023-2025" },
-          { title: "校企课程共建项目", desc: "与未岚智能科技联合开发 AIGC 课程模块" }
+          { title: "《智能产品设计》", desc: "研究生课程，聚焦智能技术应用" }
+        ],
+        teachingStats: [
+          { number: "3项", label: "主持省部级教研课题" },
+          { number: "10+", label: "发表核心论文十余篇" },
+          { number: "4项", label: "指导学生获国家级设计竞赛奖项" },
+          { number: "1门", label: "省级一流本科课程负责人" }
+        ],
+        academicRoles: [
+          "中国计算机学会（CCF）会员",
+          "中国图象图形学学会会员",
+          "省级教学创新大赛二等奖获得者",
+          "教育部产学合作协同育人项目负责人"
         ]
       },
       "3": {
@@ -361,6 +724,13 @@
           "他为政务、医疗、社区等领域提供过十余项服务设计咨询服务，主导的\u201C政务服务体验升级\u201D项目被多家媒体报道，出版服务设计译著 1 部。",
           "他倡导\u201C以系统视角解决复杂问题\u201D，负责工作室的方法课程与项目复盘机制建设，坚持每个项目都要\u201C从真实的人和真实的问题出发\u201D。"
         ],
+        education: [
+          { school: "同济大学", degree: "博士 · 设计学（服务设计方向）" }
+        ],
+        experience: [
+          { type: "现任", title: "智能体验与服务工程实验室", desc: "服务设计方向负责人" },
+          { type: "曾任", title: "国内头部设计咨询公司", desc: "资深服务设计师" }
+        ],
         research: [
           { title: "服务系统设计方法", desc: "服务蓝图、利益相关者地图与商业模式创新" },
           { title: "公共服务与社会创新", desc: "面向政府与社区的服务流程再造" },
@@ -368,17 +738,28 @@
           { title: "设计思维与共创方法", desc: "共创工作坊的组织与引导方法研究" }
         ],
         timeline: [
-          { year: "2024", title: "省哲学社会科学优秀成果奖", desc: "服务设计方法论研究成果。" },
-          { year: "2023", title: "\u201C挑战杯\u201D省赛二等奖", desc: "指导「绿洲」流浪动物救助服务系统团队。" },
-          { year: "2022", title: "横向课题 3 项", desc: "政务、医疗与社区服务设计咨询，负责人。" },
-          { year: "2021", title: "出版译著《服务设计与创新实践》", desc: "主要译者。" },
-          { year: "2020", title: "校级青年教师教学竞赛一等奖", desc: "《服务设计》课程教学。" }
+          { year: "2024", title: "省哲学社会科学优秀成果奖", desc: "服务设计方法论研究成果" },
+          { year: "2023", title: "\u201C挑战杯\u201D省赛二等奖", desc: "指导「绿洲」流浪动物救助服务系统团队" },
+          { year: "2022", title: "横向课题 3 项", desc: "政务、医疗与社区服务设计咨询，负责人" },
+          { year: "2021", title: "出版译著《服务设计与创新实践》", desc: "主要译者" },
+          { year: "2020", title: "校级青年教师教学竞赛一等奖", desc: "《服务设计》课程教学" }
         ],
         teaching: [
           { title: "《服务设计》", desc: "本科方向课，40 学时，真实项目驱动" },
           { title: "《设计调研方法》", desc: "本科核心课，32 学时" },
-          { title: "社区共创项目", desc: "与青禾社区合作的助老服务试点，2023 年至今" },
-          { title: "企业咨询课题", desc: "门诊就诊体验优化咨询，2023 年，负责人" }
+          { title: "《服务系统设计》", desc: "研究生课程，服务蓝图与商业模式" }
+        ],
+        teachingStats: [
+          { number: "10+", label: "提供服务设计咨询服务项目" },
+          { number: "1部", label: "出版服务设计译著" },
+          { number: "1项", label: "省哲学社会科学优秀成果奖" },
+          { number: "3项", label: "横向课题（政务/医疗/社区）" }
+        ],
+        academicRoles: [
+          "省哲学社会科学优秀成果奖获得者",
+          "服务设计十大优秀案例指导导师",
+          "校级青年教师教学竞赛一等奖",
+          "出版译著《服务设计与创新实践》"
         ]
       },
       "4": {
@@ -392,6 +773,13 @@
           "她主导过多个新消费品牌的从 0 到 1 全案，擅长品牌策略、视觉识别系统与整合营销传播，主张\u201C好作品也需要被看见\u201D。",
           "她负责工作室的竞赛申报辅导与对外传播，指导学生累计获省级以上竞赛奖项 20 余项，把商业思维与传播视角带入设计教学。"
         ],
+        education: [
+          { school: "中国美术学院", degree: "硕士 · 视觉传达设计" }
+        ],
+        experience: [
+          { type: "现任", title: "智能体验与服务工程实验室", desc: "品牌与营销方向导师" },
+          { type: "曾任", title: "知名品牌设计咨询公司", desc: "品牌设计师" }
+        ],
         research: [
           { title: "品牌策略与体验", desc: "品牌定位、识别系统与接触点体验设计" },
           { title: "数字营销与内容传播", desc: "社交媒体内容策略与用户增长方法" },
@@ -399,17 +787,28 @@
           { title: "设计竞赛策略", desc: "设计作品的叙事表达与申报方法" }
         ],
         timeline: [
-          { year: "2024", title: "全国大学生工业设计大赛一等奖", desc: "指导「药伴」智能用药管理系统团队。" },
-          { year: "2023", title: "省级设计竞赛优秀指导教师", desc: "指导学生获奖 6 项。" },
-          { year: "2022", title: "校级教学优秀奖", desc: "《品牌设计》课程改革。" },
-          { year: "2021", title: "新消费品牌全案项目", desc: "服务品牌客户 3 家，品牌负责人。" },
-          { year: "2020", title: "国际设计奖项入围", desc: "品牌视觉设计作品。" }
+          { year: "2024", title: "全国大学生工业设计大赛一等奖", desc: "指导「药伴」智能用药管理系统团队" },
+          { year: "2023", title: "省级设计竞赛优秀指导教师", desc: "指导学生获奖 6 项" },
+          { year: "2022", title: "校级教学优秀奖", desc: "《品牌设计》课程改革" },
+          { year: "2021", title: "新消费品牌全案项目", desc: "服务品牌客户 3 家，品牌负责人" },
+          { year: "2020", title: "国际设计奖项入围", desc: "品牌视觉设计作品" }
         ],
         teaching: [
           { title: "《品牌设计》", desc: "本科方向课，40 学时" },
           { title: "《设计表达与叙事》", desc: "本科选修课，32 学时" },
-          { title: "工作室品牌建设项目", desc: "Weave Lab 视觉识别与新媒体运营，负责人" },
-          { title: "竞赛申报辅导计划", desc: "工作室年度竞赛申报统筹，负责人" }
+          { title: "《数字营销与传播》", desc: "本科选修课，新媒体运营实战" }
+        ],
+        teachingStats: [
+          { number: "20+", label: "指导学生获省级以上竞赛奖项" },
+          { number: "3家", label: "新消费品牌从 0 到 1 全案" },
+          { number: "1项", label: "校级教学优秀奖" },
+          { number: "6项", label: "年度指导学生获奖数（2023）" }
+        ],
+        academicRoles: [
+          "省级设计竞赛优秀指导教师",
+          "校级教学优秀奖获得者",
+          "工作室品牌建设负责人",
+          "竞赛申报辅导计划统筹人"
         ]
       }
     };
@@ -426,10 +825,52 @@
       document.getElementById('mentorEmailTag').textContent = '📧 ' + data.email;
       document.getElementById('mentorOfficeTag').textContent = '📍 ' + data.office;
       document.getElementById('mentorTags').innerHTML = data.tags.map(t => '<span class="mentor-detail-tag">' + t + '</span>').join('');
+
+      // 个人简介 - 概况
       document.getElementById('mentorIntro').innerHTML = data.intro.map(p => '<p>' + p + '</p>').join('');
-      document.getElementById('mentorResearch').innerHTML = data.research.map(r => '<div class="detail-list-item"><strong>' + r.title + '</strong> — ' + r.desc + '</div>').join('');
-      document.getElementById('mentorTimeline').innerHTML = data.timeline.map(t => '<div class="timeline-item"><div class="timeline-year">' + t.year + '</div><div class="timeline-title">' + t.title + '</div><div class="timeline-desc">' + t.desc + '</div></div>').join('');
-      document.getElementById('mentorTeaching').innerHTML = data.teaching.map(t => '<div class="detail-list-item"><strong>' + t.title + '</strong> — ' + t.desc + '</div>').join('');
+
+      // 教育背景
+      if (data.education && data.education.length) {
+        document.getElementById('mentorEducation').innerHTML = data.education.map(e =>
+          '<div class="exp-item"><div class="exp-title">' + e.school + '</div><div class="exp-desc">' + e.degree + '</div></div>'
+        ).join('');
+      }
+
+      // 任职经历
+      if (data.experience && data.experience.length) {
+        document.getElementById('mentorExperience').innerHTML = data.experience.map(e =>
+          '<div class="exp-item"><span class="exp-type">' + e.type + '</span><div class="exp-title">' + e.title + '</div><div class="exp-desc">' + e.desc + '</div></div>'
+        ).join('');
+      }
+
+      // 讲授课程
+      document.getElementById('mentorTeaching').innerHTML = data.teaching.map(t =>
+        '<div class="detail-list-item"><strong>' + t.title + '</strong> — ' + t.desc + '</div>'
+      ).join('');
+
+      // 教学成果 - 统计卡片
+      if (data.teachingStats && data.teachingStats.length) {
+        document.getElementById('mentorTeachingStats').innerHTML = data.teachingStats.map(s =>
+          '<div class="teaching-stat-card"><div class="teaching-stat-number">' + s.number + '</div><div class="teaching-stat-label">' + s.label + '</div></div>'
+        ).join('');
+      }
+
+      // 研究方向
+      document.getElementById('mentorResearch').innerHTML = data.research.map(r =>
+        '<div class="detail-list-item"><strong>' + r.title + '</strong> — ' + r.desc + '</div>'
+      ).join('');
+
+      // 科研项目及成果 - 时间线
+      document.getElementById('mentorTimeline').innerHTML = data.timeline.map(t =>
+        '<div class="timeline-item"><div class="timeline-year">' + t.year + '</div><div class="timeline-title">' + t.title + '</div><div class="timeline-desc">' + t.desc + '</div></div>'
+      ).join('');
+
+      // 学术兼职与资质 - 标签云
+      if (data.academicRoles && data.academicRoles.length) {
+        document.getElementById('mentorAcademicRoles').innerHTML = data.academicRoles.map(r =>
+          '<span class="academic-tag">' + r + '</span>'
+        ).join('');
+      }
 
       // Render gallery (mentor-specific activity photos)
       const galleryEl = document.querySelector('.mentor-gallery');
@@ -438,8 +879,33 @@
       }
     }
 
+    // Tab 切换功能
+    function initMentorTabs() {
+      const tabBtns = document.querySelectorAll('.mentor-tab-btn');
+      const tabPanels = document.querySelectorAll('.mentor-tab-panel');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const targetTab = this.getAttribute('data-tab');
+
+          // 更新按钮状态
+          tabBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          // 更新面板显示
+          tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+            if (panel.id === 'tab-' + targetTab) {
+              panel.classList.add('active');
+            }
+          });
+        });
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       renderMentorDetail();
+      initMentorTabs();
       initScrollAnimations();
     });
   </script>
