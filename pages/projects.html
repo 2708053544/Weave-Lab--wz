@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -6,6 +6,115 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Graduation Works Showcase */
+    .graduation-section {
+      background: var(--bg-primary);
+    }
+    .graduation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 40px 32px;
+      margin-top: 48px;
+    }
+    .graduation-card {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .graduation-card:hover {
+      transform: translateY(-6px);
+    }
+    .graduation-board-carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+    }
+    .graduation-board-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .graduation-board-slide.active {
+      opacity: 1;
+    }
+    .graduation-board-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .graduation-carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .graduation-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .graduation-dot.active {
+      width: 20px;
+      border-radius: 3px;
+      background: #fff;
+    }
+    .graduation-card-info {
+      margin-top: 16px;
+      text-align: center;
+    }
+    .graduation-card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .graduation-card-author {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+    @media (max-width: 768px) {
+      .graduation-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+      }
+      .graduation-card-title {
+        font-size: 0.875rem;
+      }
+      .graduation-card-author {
+        font-size: 0.75rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .graduation-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 48px auto 0;
+      }
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -125,7 +234,7 @@
   </section>
 
   <!-- Graduation Works Section -->
-  <section id="works" class="section" style="background: var(--bg-secondary);">
+  <section id="works" class="section graduation-section">
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-label">Graduation Works</span>
@@ -133,74 +242,8 @@
         <p class="section-subtitle">毕业生毕业设计作品展示</p>
       </div>
 
-      <!-- Filter Tabs -->
-      <div class="filter-tabs fade-in">
-        <button class="filter-tab active" data-filter="all">全部毕设</button>
-        <button class="filter-tab" data-filter="graduation">毕设作品</button>
-        <button class="filter-tab" data-filter="excellent">优秀作品</button>
-      </div>
-
-      <!-- Project Grid -->
-      <div class="project-grid fade-in">
-        <!-- Graduation Project 01 -->
-        <div class="project-card" data-category="graduation" onclick="location.href='project-detail.html?id=1'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">毕设作品</div>
-            <h3 class="project-card-title">忆路 —— 认知辅助产品设计</h3>
-            <p class="project-card-desc">面向阿尔茨海默病患者的记忆辅助与安全监护产品，用克制的设计传递温度</p>
-          </div>
-        </div>
-
-        <!-- Graduation Project 02 -->
-        <div class="project-card" data-category="graduation" onclick="location.href='project-detail.html?id=2'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">毕设作品</div>
-            <h3 class="project-card-title">绿洲 —— 流浪动物救助服务系统</h3>
-            <p class="project-card-desc">连接救助站、志愿者与领养家庭的系统性服务设计，让善意形成闭环</p>
-          </div>
-        </div>
-
-        <!-- Excellent Project 01 -->
-        <div class="project-card" data-category="excellent" onclick="location.href='project-detail.html?id=3'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">优秀作品</div>
-            <h3 class="project-card-title">药伴 —— 智能用药管理系统</h3>
-            <p class="project-card-desc">面向慢病人群的用药提醒与依从性管理终端，关爱每一次按时服药</p>
-          </div>
-        </div>
-
-        <!-- Excellent Project 02 -->
-        <div class="project-card" data-category="excellent" onclick="location.href='project-detail.html?id=4'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">优秀作品</div>
-            <h3 class="project-card-title">视界同行 —— 无障碍浏览设备</h3>
-            <p class="project-card-desc">基于眼动交互的视障人群信息浏览设备，让科技照亮每一个角落</p>
-          </div>
-        </div>
-
-        <!-- Graduation Project 03 -->
-        <div class="project-card" data-category="graduation" onclick="location.href='project-detail.html?id=7'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">毕设作品</div>
-            <h3 class="project-card-title">格致 —— 模块化校园家具设计</h3>
-            <p class="project-card-desc">可持续理念下的模块化公共校园家具，适应多样化学习与休憩场景</p>
-          </div>
-        </div>
-
-        <!-- Excellent Project 03 -->
-        <div class="project-card" data-category="excellent" onclick="location.href='project-detail.html?id=8'">
-          <div class="project-card-image placeholder-pulse"></div>
-          <div class="project-card-content">
-            <div class="project-card-category">优秀作品</div>
-            <h3 class="project-card-title">声桥 —— 智能手语翻译终端</h3>
-            <p class="project-card-desc">面向听障人群的双向手语翻译设备，搭建无声世界的沟通之桥</p>
-          </div>
-        </div>
+      <div class="graduation-grid fade-in" id="graduationGrid">
+        <!-- 由JS动态生成 -->
       </div>
     </div>
   </section>
@@ -387,5 +430,169 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    // 11个毕设项目数据
+    const graduationProjects = [
+      {
+        id: 1,
+        title: "乡隅守望农村妇女在地增收服务设计",
+        author: "韩冰",
+        boards: ["project1_1.jpg", "project1_2.jpg", "project1_3.jpg", "project1_4.jpg"]
+      },
+      {
+        id: 2,
+        title: "数字生态视角下的观鸟数据价值转化服务系统设计",
+        author: "何靖馥琳",
+        boards: ["project2_1.jpg", "project2_2.jpg", "project2_3.jpg", "project2_4.jpg"]
+      },
+      {
+        id: 3,
+        title: "家用血钾监测仪多模态预警交互系统设计",
+        author: "侯江伟",
+        boards: ["project3_1.jpg", "project3_2.jpg"]
+      },
+      {
+        id: 4,
+        title: "面向农业育种的无人机交互系统设计",
+        author: "李潘",
+        boards: ["project4_1.jpg", "project4_2.jpg", "project4_3.jpg"]
+      },
+      {
+        id: 5,
+        title: "城乡技术迁移下MR赋能农户技能学习的熟人社交与涂鸦引流服务设计",
+        author: "孟拓",
+        boards: ["project5_1.jpg", "project5_2.jpg"]
+      },
+      {
+        id: 6,
+        title: "农知旅人-基于VR的农业技术体验设计",
+        author: "严行",
+        boards: ["project6_1.jpg", "project6_2.jpg"]
+      },
+      {
+        id: 7,
+        title: "基于服务设计思维的农用无人机多载荷模块化产品设计",
+        author: "杨雅雯",
+        boards: ["project7_1.jpg", "project7_2.jpg", "project7_3.jpg", "project7_4.jpg"]
+      },
+      {
+        id: 8,
+        title: "面向HTO骨科手术机器人的全流程VR系统设计",
+        author: "曹骞予",
+        boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"]
+      },
+      {
+        id: 9,
+        title: "面向名优茶机械化采摘的采茶机优化设计",
+        author: "刘思敏",
+        boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"]
+      },
+      {
+        id: 10,
+        title: "基于可适应性及模块化可穿戴外骨骼设计",
+        author: "邢贞获",
+        boards: ["project10_1.jpg", "project10_2.jpg"]
+      },
+      {
+        id: 11,
+        title: "激发乡村内生动力的服务设计",
+        author: "周小雨",
+        boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"]
+      }
+    ];
+
+    // 渲染毕设卡片
+    function renderGraduationCards() {
+      const grid = document.getElementById('graduationGrid');
+      if (!grid) return;
+
+      graduationProjects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'graduation-card fade-in';
+        card.onclick = function() {
+          location.href = 'project-detail.html?id=' + project.id;
+        };
+
+        // 轮播区域
+        let slidesHtml = '';
+        project.boards.forEach((board, idx) => {
+          slidesHtml += '<div class="graduation-board-slide' + (idx === 0 ? ' active' : '') + '">' +
+            '<img src="../images/graduation/' + board + '" alt="' + project.title + '" loading="lazy">' +
+            '</div>';
+        });
+
+        // 小圆点
+        let dotsHtml = '<div class="graduation-carousel-dots">';
+        project.boards.forEach((_, idx) => {
+          dotsHtml += '<span class="graduation-dot' + (idx === 0 ? ' active' : '') + '" data-index="' + idx + '"></span>';
+        });
+        dotsHtml += '</div>';
+
+        card.innerHTML = '<div class="graduation-board-carousel" data-project="' + project.id + '">' +
+          slidesHtml + dotsHtml + '</div>' +
+          '<div class="graduation-card-info">' +
+          '<h3 class="graduation-card-title">' + project.title + '</h3>' +
+          '<p class="graduation-card-author">' + project.author + '</p>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      // 启动每个卡片的轮播
+      startGraduationCarousels();
+    }
+
+    // 启动所有轮播
+    function startGraduationCarousels() {
+      const carousels = document.querySelectorAll('.graduation-board-carousel');
+      carousels.forEach(carousel => {
+        const slides = carousel.querySelectorAll('.graduation-board-slide');
+        const dots = carousel.querySelectorAll('.graduation-dot');
+        let current = 0;
+        let timer = null;
+
+        function goTo(index) {
+          slides[current].classList.remove('active');
+          dots[current].classList.remove('active');
+          current = index;
+          slides[current].classList.add('active');
+          dots[current].classList.add('active');
+        }
+
+        function next() {
+          goTo((current + 1) % slides.length);
+        }
+
+        // 自动播放
+        function startAuto() {
+          timer = setInterval(next, 3000);
+        }
+
+        function stopAuto() {
+          clearInterval(timer);
+        }
+
+        // 点击圆点切换
+        dots.forEach((dot, idx) => {
+          dot.addEventListener('click', function(e) {
+            e.stopPropagation();
+            goTo(idx);
+            stopAuto();
+            startAuto();
+          });
+        });
+
+        // hover暂停
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+
+        startAuto();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      renderGraduationCards();
+    });
+  </script>
 </body>
 </html>
