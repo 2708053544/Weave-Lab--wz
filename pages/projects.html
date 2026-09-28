@@ -67,15 +67,12 @@
       object-fit: cover;
       object-position: top center;
     }
-    /* 箭头入口卡片：固定在视口第4列（永远只外露3个毕设 + 1个查看全部） */
+    /* 箭头入口卡片：固定叠加在视口第4列，宽高由 JS 动态匹配毕设卡 */
     .graduation-arrow-card {
       position: absolute;
       top: 0;
       right: 0;
-      bottom: 0;
-      height: 100%;
       z-index: 5;
-      width: calc(25% - 27px);
       border-radius: 6px;
       background: #0a0a0a;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -242,17 +239,11 @@
       .graduation-grid {
         grid-template-columns: repeat(3, 1fr);
       }
-      .graduation-arrow-card {
-        width: calc(33.3333% - 24px);
-      }
     }
     @media (max-width: 768px) {
       .graduation-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px 14px;
-      }
-      .graduation-arrow-card {
-        width: calc(50% - 7px);
       }
       .graduation-card-title {
         font-size: 0.8125rem;
@@ -266,12 +257,6 @@
         grid-template-columns: 1fr;
         max-width: 260px;
         margin: 36px auto 0;
-      }
-      .graduation-arrow-card {
-        width: 260px;
-        right: auto;
-        left: 50%;
-        margin-left: -130px;
       }
     }
     /* ===== 项目成果页：黑底 + 彩色光斑整页分布（弹性可交互光斑，越往下越浅） ===== */
@@ -818,8 +803,20 @@
       arrowCard.addEventListener('click', function() {
         location.href = 'graduation-works.html';
       });
-      // 箭头卡固定在视口第4列（viewport 直接子元素，不随瀑布流平移）
+      // 箭头卡固定叠加在视口第4列，宽高与毕设卡完全一致
       viewport.appendChild(arrowCard);
+      var _firstCard = grid.querySelector('.graduation-card');
+      if (_firstCard) {
+        arrowCard.style.width = _firstCard.offsetWidth + 'px';
+        arrowCard.style.height = _firstCard.offsetHeight + 'px';
+      }
+      window.addEventListener('resize', function() {
+        var _fc = grid.querySelector('.graduation-card');
+        if (_fc) {
+          arrowCard.style.width = _fc.offsetWidth + 'px';
+          arrowCard.style.height = _fc.offsetHeight + 'px';
+        }
+      });
 
       // 绑定轮播交互
       bindGraduationCarousels();
