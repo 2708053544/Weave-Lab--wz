@@ -11,11 +11,19 @@
     .graduation-section {
       background: var(--bg-primary);
     }
+    .graduation-viewport {
+      overflow: hidden;
+      margin-top: 36px;
+      transition: max-height 0.6s ease;
+    }
+    .graduation-track {
+      transition: none;
+      will-change: transform;
+    }
     .graduation-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 48px 36px;
-      margin-top: 36px;
     }
     .graduation-card {
       cursor: pointer;
@@ -48,9 +56,6 @@
       height: 100%;
       opacity: 0;
       transition: opacity 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .graduation-board-slide.active {
       opacity: 1;
@@ -60,6 +65,66 @@
       height: 100%;
       object-fit: cover;
       object-position: top center;
+    }
+    /* 箭头入口卡片 */
+    .graduation-arrow-card {
+      aspect-ratio: 3/4;
+      border-radius: 6px;
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .graduation-arrow-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(79, 107, 255, 0.08), transparent 70%);
+      transition: opacity 0.3s ease;
+      opacity: 0.6;
+    }
+    .graduation-arrow-card:hover {
+      border-color: rgba(79, 107, 255, 0.5);
+      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.2);
+      transform: translateY(-6px);
+    }
+    .graduation-arrow-card:hover::before {
+      opacity: 1;
+    }
+    .graduation-arrow-icon {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+    .graduation-arrow-card:hover .graduation-arrow-icon {
+      border-color: #fff;
+      box-shadow: 0 0 16px rgba(79, 107, 255, 0.4);
+    }
+    .graduation-arrow-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff;
+      stroke-width: 2;
+      fill: none;
+    }
+    .graduation-arrow-text {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 0.1em;
+      z-index: 1;
     }
     /* 左右箭头按钮 */
     .graduation-arrow {
@@ -144,10 +209,8 @@
       padding: 16px 18px 14px;
       background: rgba(0, 0, 0, 0.78);
       backdrop-filter: blur(12px);
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
-      z-index: 2;
+      z-index: 4;
     }
     .graduation-card-title {
       font-size: 0.9375rem;
@@ -164,6 +227,11 @@
       font-size: 0.75rem;
       color: rgba(255, 255, 255, 0.75);
       margin: 0;
+    }
+    @media (max-width: 1200px) {
+      .graduation-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
     @media (max-width: 768px) {
       .graduation-grid {
@@ -318,8 +386,12 @@
         <button class="filter-tab" data-filter="excellent">优秀毕设</button>
       </div>
 
-      <div class="graduation-grid" id="graduationGrid">
-        <!-- 由JS动态生成 -->
+      <div class="graduation-viewport" id="graduationViewport">
+        <div class="graduation-track" id="graduationTrack">
+          <div class="graduation-grid" id="graduationGrid">
+            <!-- 由JS动态生成 -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -707,11 +779,139 @@
         grid.appendChild(card);
       });
 
+      // 添加箭头入口卡片（第12个位置，第3行最后一个）
+      const arrowCard = document.createElement('div');
+      arrowCard.className = 'graduation-arrow-card';
+      arrowCard.id = 'graduationArrowCard';
+      arrowCard.innerHTML = `
+        <div class="graduation-arrow-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+        <span class="graduation-arrow-text">查看全部</span>
+      `;
+      arrowCard.addEventListener('click', function() {
+        location.href = 'graduation-works.html';
+      });
+      grid.appendChild(arrowCard);
+
       // 绑定轮播交互
       bindGraduationCarousels();
       
       // 绑定筛选标签
       bindFilterTabs();
+
+      // 初始化自动滚动
+      setupGraduationAutoScroll();
+    }
+
+    // 自动向上滚动播放（丝滑连续滚动）
+    function setupGraduationAutoScroll() {
+      const viewport = document.getElementById('graduationViewport');
+      const track = document.getElementById('graduationTrack');
+      const grid = document.getElementById('graduationGrid');
+      if (!viewport || !track || !grid) return;
+
+      const cards = grid.children;
+      if (cards.length < 2) return;
+
+      function getRowHeight() {
+        const first = cards[0];
+        const second = cards[1];
+        const diff = second.offsetTop - first.offsetTop;
+        if (diff > 0) return diff;
+        return first.offsetHeight + 48;
+      }
+
+      function init() {
+        var rowHeight = getRowHeight();
+        viewport.style.maxHeight = rowHeight + 'px';
+
+        var cols = window.innerWidth > 1200 ? 4 : (window.innerWidth > 768 ? 3 : (window.innerWidth > 480 ? 2 : 1));
+        var totalRows = Math.ceil(cards.length / cols);
+        var maxScroll = (totalRows - 1) * rowHeight;
+
+        var currentY = 0;
+        var targetY = 0;
+        var animId = null;
+
+        function setTrack(y) {
+          track.style.transform = 'translateY(-' + y + 'px)';
+        }
+
+        function animate() {
+          var diff = targetY - currentY;
+          if (Math.abs(diff) < 0.5) {
+            currentY = targetY;
+            setTrack(currentY);
+            animId = null;
+            return;
+          }
+          currentY += diff * 0.025;
+          setTrack(currentY);
+          animId = requestAnimationFrame(animate);
+        }
+
+        function scrollTo(target) {
+          targetY = target;
+          if (!animId) animId = requestAnimationFrame(animate);
+        }
+
+        var step = 1;
+        function next() {
+          if (step < totalRows) {
+            scrollTo(step * rowHeight);
+            step++;
+            setTimeout(next, 2500);
+          }
+        }
+        setTimeout(next, 1500);
+
+        window.addEventListener('resize', function() {
+          var newRH = getRowHeight();
+          viewport.style.maxHeight = newRH + 'px';
+          maxScroll = (totalRows - 1) * newRH;
+          currentY = Math.min(currentY, maxScroll);
+          targetY = currentY;
+          setTrack(currentY);
+        });
+
+        // 暴露展开函数
+        window._expandGraduation = function() {
+          if (animId) { cancelAnimationFrame(animId); animId = null; }
+          targetY = 0;
+          
+          var lastCard = cards[cards.length - 1];
+          var fullHeight = lastCard.offsetTop + lastCard.offsetHeight;
+          viewport.style.maxHeight = fullHeight + 'px';
+          
+          // 反向丝滑滚回顶部
+          var startY = currentY;
+          var startTime = null;
+          function back(t) {
+            if (!startTime) startTime = t;
+            var p = Math.min((t - startTime) / 1000, 1);
+            var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+            currentY = startY * (1 - eased);
+            setTrack(currentY);
+            if (p < 1) {
+              requestAnimationFrame(back);
+            } else {
+              currentY = 0;
+              setTrack(0);
+            }
+          }
+          requestAnimationFrame(back);
+        };
+      }
+
+      requestAnimationFrame(function() {
+        requestAnimationFrame(init);
+      });
+    }
+
+    // 展开显示全部
+    function expandGraduationView() {
+      if (window._expandGraduation) window._expandGraduation();
     }
 
     // 筛选标签切换

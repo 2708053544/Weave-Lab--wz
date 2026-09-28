@@ -21,6 +21,7 @@ const TEACHERS = [
     major: '服务设计与互联网营销 / AI产品与智能交互',
     blog: 'https://blog.weavelab.com/zhangmoxuan',
     photo: '../images/teachers/teacher1.jpg',
+    photoPos: 'center top',
     link: 'mentor-detail.html?id=1'
   },
   {
@@ -32,6 +33,7 @@ const TEACHERS = [
     major: '人工智能教育 / 智能硬件 / AI工程化',
     blog: '#',
     photo: '../images/teachers/teacher2.png',
+    photoPos: 'center top',
     link: 'mentor-detail.html?id=2'
   },
   {
@@ -43,6 +45,7 @@ const TEACHERS = [
     major: '工业设计 / 微创手术机器人 / 人机交互',
     blog: '#',
     photo: '../images/teachers/teacher3.png',
+    photoPos: 'center top',
     link: 'mentor-detail.html?id=3'
   },
   {
@@ -54,6 +57,7 @@ const TEACHERS = [
     major: '用户体验 / 产品服务设计',
     blog: '#',
     photo: '../images/teachers/teacher4.png',
+    photoPos: 'center top',
     link: 'mentor-detail.html?id=4'
   }
 ];
@@ -105,6 +109,8 @@ const TEACHERS = [
     img.addEventListener('load', () => img.classList.add('loaded'));
     img.src = t.photo;
     img.addEventListener('error', () => img.remove());
+    /* 按苏老师为参考，其他三位头部往下移 */
+    if (t.photoPos) img.style.objectPosition = t.photoPos;
   });
 
   /* 生成导航点 */

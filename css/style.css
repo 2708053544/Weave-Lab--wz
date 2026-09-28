@@ -536,6 +536,33 @@ h4 {
 
 .nav-link.active {
   font-weight: 600;
+  position: relative;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, #4f6bff, #9b5cff);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(79, 107, 255, 0.5);
+}
+
+.nav-link:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--text-primary);
+  opacity: 0.4;
+  border-radius: 2px;
 }
 
 .nav-dropdown {
@@ -3236,7 +3263,7 @@ a.mentor-detail-tag:hover {
   right: 0;
   bottom: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 1;
 }
