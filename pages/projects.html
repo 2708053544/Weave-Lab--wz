@@ -728,6 +728,30 @@
         author: "周小雨",
         category: "graduation",
         boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"]
+      },
+      {
+        id: 12,
+        title: "HTO术前VR决策系统设计",
+        author: "曹骞予 · 张寞轩",
+        category: "graduation",
+        excellent: true,
+        boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"]
+      },
+      {
+        id: 13,
+        title: "禾火新生—农民断代背景下EcoCube生态农铺",
+        author: "黄玉冰",
+        category: "graduation",
+        excellent: true,
+        boards: ["project13_1.jpg", "project13_2.jpg"]
+      },
+      {
+        id: 14,
+        title: "基于心流理论的沉浸式乐器陪练系统",
+        author: "于渤",
+        category: "graduation",
+        excellent: true,
+        boards: ["project14_1.jpg"]
       }
     ];
 
@@ -750,6 +774,7 @@
         const card = document.createElement('div');
         card.className = 'graduation-card';
         card.setAttribute('data-category', project.category);
+        if (project.excellent) card.setAttribute('data-excellent', '1');
         card.onclick = function() {
           location.href = 'project-detail.html?id=' + project.id;
         };
@@ -973,10 +998,15 @@
           
           cards.forEach(card => {
             const cat = card.getAttribute('data-category');
-            if (filter === 'all' || cat === filter) {
+            const isExcellent = card.getAttribute('data-excellent') === '1';
+            if (filter === 'all') {
               card.style.display = '';
+            } else if (filter === 'graduation') {
+              card.style.display = cat === 'graduation' ? '' : 'none';
+            } else if (filter === 'excellent') {
+              card.style.display = isExcellent ? '' : 'none';
             } else {
-              card.style.display = 'none';
+              card.style.display = cat === filter ? '' : 'none';
             }
           });
         });
