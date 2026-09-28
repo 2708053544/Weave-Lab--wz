@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -47,7 +47,7 @@
           <span class="nav-link">活动与合作 ▾</span>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
-            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
@@ -75,15 +75,15 @@
   <section class="detail-hero">
     <div class="container">
       <div class="detail-hero-content">
-        <div class="detail-hero-image" id="studentAvatar"></div>
+        <div class="detail-hero-image" id="studentAvatar" style="background-image: url('../images/students/student1.jpg'); background-size: cover; background-position: center;"></div>
         <div class="detail-hero-text">
           <span class="section-label fade-in">Team Member</span>
-          <h1 class="fade-in" id="studentName">王梓轩</h1>
+          <h1 class="fade-in" id="studentName">郝康含</h1>
           <p class="fade-in" style="font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 16px;" id="studentRole">
-            研三 · 产品设计 · 工作室队长
+            数字传媒与设计艺术学院 · 产品设计3班 · 工作室负责人
           </p>
           <p class="fade-in" id="studentIntro">
-            工作室队长，主攻医疗产品与手术机器人方向。从本科起就在实验室参与腔镜手术机器人项目，三年间完成了从造型设计到人机交互验证的完整闭环。
+            工作室负责人，数字传媒与设计艺术学院产品设计3班。全面负责工作室的项目管理与团队运营，主导多个设计项目从概念到落地的全流程。
           </p>
           <div class="detail-meta fade-in">
             <div class="detail-meta-item">
@@ -101,6 +101,14 @@
             <div class="detail-meta-item">
               <span class="detail-meta-label">邮箱</span>
               <span class="detail-meta-value" id="metaEmail">wangzx@weavelab.com</span>
+            </div>
+            <div class="detail-meta-item detail-meta-blog" id="metaBlogItem" style="display: none;">
+              <span class="detail-meta-label">个人博客</span>
+              <a href="#" id="metaBlogLink" class="detail-meta-blog-link" target="_blank" rel="noopener">
+                <span class="blog-link-icon">✦</span>
+                <span class="blog-link-text">访问博客</span>
+                <span class="blog-link-arrow">→</span>
+              </a>
             </div>
           </div>
         </div>
@@ -141,15 +149,15 @@
           <h4>活动与合作</h4>
           <div class="footer-links">
             <a href="activities.html">活动</a>
-            <a href="cooperation.html">合作资源</a>
+            <a href="activities.html#partners">合作资源</a>
           </div>
         </div>
         <div class="footer-column">
           <h4>联系方式</h4>
           <div class="footer-links">
-            <a href="contact.html">创新设计大楼 502 室</a>
-            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
-            <a href="tel:+8651088886666">0510-8888 6666</a>
+            <a href="contact.html">五教二楼201</a>
+            <a href="mailto:1016520133@qq.com">1016520133@qq.com</a>
+            <a href="tel:18622027625">18622027625（张老师）</a>
           </div>
         </div>
       </div>
@@ -168,93 +176,108 @@
   <script>
     const studentData = {
       "1": {
-        name: "王梓轩",
-        role: "研三 · 产品设计 · 工作室队长",
-        grade: "研究生三年级",
-        major: "产品设计",
-        position: "工作室队长",
-        email: "wangzx@weavelab.com",
-        intro: "工作室队长，主攻医疗产品与手术机器人方向。从本科起就在实验室参与腔镜手术机器人项目，三年间完成了从造型设计到人机交互验证的完整闭环。相信“好的医疗设计是对生命的温柔”，习惯把每一次临床访谈都当作设计课。",
-        skills: ["产品设计", "人机交互设计", "Rhino / KeyShot", "Arduino 原型开发", "项目统筹"],
-        achievements: ["腔镜手术机器人系统 — 项目核心成员", "骨科手术导航机器人 — 交互设计", "省级工业设计大赛金奖 — 团队成员", "红点设计概念奖 — 团队成员", "校级优秀研究生干部"]
+        name: "郝康含",
+        avatar: "../images/students/student1.jpg",
+        role: "数字传媒与设计艺术学院 · 产品设计3班 · 工作室负责人 · 24级",
+        grade: "24级 · 数字传媒与设计艺术学院",
+        major: "产品设计3班",
+        position: "工作室负责人",
+        email: "haokh@weavelab.com",
+        intro: "工作室负责人，数字传媒与设计艺术学院产品设计3班。全面负责工作室的项目管理与团队运营，主导多个设计项目从概念到落地的全流程。善于协调跨方向合作，推动工作室在产品创新、服务设计与智能体验领域的持续探索。",
+        skills: ["项目管理", "产品设计", "团队统筹", "设计思维", "视觉表达"],
+        achievements: ["工作室负责人", "产品设计专业", "数字传媒与设计艺术学院"],
+        blog: "https://hkh168.github.io"
       },
       "2": {
         name: "贾静瑄",
         avatar: "../images/students/student2.jpg",
-        role: "产品设计四班 · 工作室副负责人",
-        grade: "数智传媒与设计艺术学院",
+        role: "产品设计四班 · 工作室副负责人 · 24级",
+        grade: "24级 · 数智传媒与设计艺术学院",
         major: "产品设计",
         position: "工作室副负责人",
         email: "jiajx@weavelab.com",
         intro: "工作室副负责人，数智传媒与设计艺术学院产品设计四班。专注于产品设计与数字媒体的交叉领域，善于将艺术审美与技术实现相结合。作为工作室副负责人，协助管理日常事务并推动项目进展，相信好的设计是技术与艺术的完美融合。",
         skills: ["产品设计", "数字媒体设计", "视觉传达", "3D建模", "项目管理"],
-        achievements: ["工作室副负责人", "产品设计专业", "数智传媒方向"]
+        achievements: ["工作室副负责人", "产品设计专业", "数智传媒方向"],
+        blog: "https://126013.github.io/xuan-boke/"
       },
       "3": {
-        name: "张若晨",
-        role: "研二 · 工业设计工程 · 硬件组长",
-        grade: "研究生二年级",
-        major: "工业设计工程",
-        position: "硬件组长",
-        email: "zhangrc@weavelab.com",
-        intro: "硬件组长，设计工程交叉背景，是工作室“让想法通电”的人。从电路设计、固件开发到低功耗调优都能独立完成，主导开发了力反馈操控器的控制模块。享受在示波器上看到波形正确跳动的那一刻。",
-        skills: ["嵌入式开发（STM32/ESP32）", "传感器应用", "PCB 设计", "Python 数据处理", "快速原型"],
-        achievements: ["手术器械力反馈装置 — 硬件开发负责人", "智能环境监测设备 — 项目负责人", "校企联合实验室项目 — 核心成员", "大学生创新创业训练计划 — 项目负责人", "校电子设计竞赛二等奖"]
+        name: "贾梦晴",
+        avatar: "../images/students/student3.jpg",
+        role: "数字传媒与设计艺术学院 · 智能交互1班 · 实验设备负责人 · 24级",
+        grade: "24级 · 数字传媒与设计艺术学院",
+        major: "智能交互1班",
+        position: "实验设备负责人",
+        email: "jiamq@weavelab.com",
+        intro: "实验设备负责人，数字传媒与设计艺术学院智能交互专业一班。负责工作室实验设备的日常管理、维护与调配，确保各类设备的正常运行和高效使用。细心负责，熟悉各类实验设备的操作与保养，是工作室硬件环境的可靠守护者。",
+        skills: ["设备管理与维护", "智能交互", "用户体验", "实验操作", "设备调试"],
+        achievements: ["实验设备负责人", "智能交互专业", "数字传媒与设计艺术学院"],
+        blog: "https://dear-dilraba-jmq.github.io/boke/"
       },
       "4": {
-        name: "刘一诺",
-        role: "研二 · 设计学 · 数据与AI应用",
-        grade: "研究生二年级",
-        major: "设计学",
-        position: "数据与AI应用",
-        email: "liyn@weavelab.com",
-        intro: "负责把“看不见的数据”变成“看得懂的体验”。搭建了工作室的行为识别分析流程，也是 AI 辅助设计工具的内测主理人。喜欢用可视化讲故事，认为“数据是新时代的画笔”。",
-        skills: ["机器学习基础", "数据可视化", "Python", "计算机视觉应用", "AIGC 工作流"],
-        achievements: ["AI辅助产品设计工具 — 内测负责人", "行为识别与分析平台 — 数据分析", "智能客服对话系统 — 对话设计", "校级研究生创新项目 — 主持人", "数据可视化作品入选省级展"]
+        name: "陈俞菲",
+        avatar: "../images/students/student4.jpg",
+        role: "数字传媒与设计艺术学院 · 产品设计4班 · 24级",
+        grade: "24级 · 数字传媒与设计艺术学院",
+        major: "产品设计4班",
+        position: "核心成员",
+        email: "chenyf@weavelab.com",
+        intro: "数字传媒与设计艺术学院产品设计专业，专注于用户体验设计与产品创新。对设计充满热情，善于从用户需求出发，用细腻的设计思维解决实际问题。相信好的设计是技术与艺术的平衡，致力于打造有温度、有灵魂的产品体验。",
+        skills: ["产品设计", "用户体验设计", "用户研究", "Rhino / KeyShot", "原型设计"],
+        achievements: ["工作室核心项目 — 参与设计", "产品设计课程作业 — 优秀奖", "校级创新创业大赛 — 团队成员"],
+        blog: ""
       },
       "5": {
-        name: "赵天宇",
-        role: "大四 · 产品设计 · 2024届",
-        grade: "本科四年级",
-        major: "产品设计",
-        position: "2024届毕业设计",
-        email: "zhaoty@weavelab.com",
-        intro: "VR/AR 方向，2024 届毕业设计主题是基于眼动交互的无障碍浏览设备。三年里从 Unity 零基础做到能独立开发可交互原型，坚信“虚拟世界的真实价值在于服务真实的人”。闲暇时间喜欢混迹于各种线下 VR 体验店做“田野调查”。",
-        skills: ["Unity 开发", "VR/AR 交互设计", "C# 基础", "3D 建模（Blender）", "可用性测试"],
-        achievements: ["视界同行·眼动交互无障碍设备 — 毕设作品", "华灿奖·两岸新锐设计竞赛二等奖", "元宇宙社交空间原型 — 开发者", "校级优秀毕业设计", "iF 设计新秀奖（团队）"]
+        name: "武思琪",
+        avatar: "../images/students/student5.jpg",
+        role: "数字传媒与设计艺术学院 · 产品设计4班 · 24级",
+        grade: "24级 · 数字传媒与设计艺术学院",
+        major: "产品设计4班",
+        position: "核心成员",
+        email: "wusq@weavelab.com",
+        intro: "数字传媒与设计艺术学院产品设计4班学生，专注于产品设计与视觉表达。对设计充满热情，善于将创意想法转化为精美的视觉作品。在产品造型与视觉呈现方面有独到见解，致力于用设计传递美好与温度。",
+        skills: ["产品设计", "视觉设计", "平面设计", "Rhino / KeyShot", "手绘表达"],
+        achievements: ["核心成员", "产品设计专业", "数字传媒与设计艺术学院"],
+        blog: ""
       },
       "6": {
-        name: "周诗涵",
-        role: "大四 · 产品设计 · 2024届",
-        grade: "本科四年级",
-        major: "产品设计",
-        position: "2024届毕业设计",
-        email: "zhoush@weavelab.com",
-        intro: "产品造型与 CMF 方向，2024 届毕业生，工作室“审美守门员”。毕设作品「忆路」聚焦阿尔茨海默病患者的认知辅助产品，用克制的形态语言表达医疗产品的温度。对材料和工艺有近乎执念的热爱，桌面上永远摆着 CMF 样品板。",
-        skills: ["产品造型设计", "CMF 设计", "油泥模型", "Rhino / KeyShot", "手绘表达"],
-        achievements: ["忆路·认知辅助产品设计 — 毕设作品", "红点设计概念奖 — 团队核心成员", "格致·模块化校园家具 — 造型设计", "校级优秀毕业设计", "省级工业设计大赛二等奖"]
+        name: "唐月淼",
+        avatar: "../images/students/student6.jpg",
+        role: "数智传媒与设计艺术学院 · 产品设计3班 · 24级",
+        grade: "24级 · 数智传媒与设计艺术学院",
+        major: "产品设计3班",
+        position: "核心成员",
+        email: "tangym@weavelab.com",
+        intro: "数智传媒与设计艺术学院产品设计专业3班学生，24级。热爱设计，善于从生活中汲取灵感，将创意想法转化为实实在在的产品。对产品造型与用户体验有浓厚兴趣，相信好的设计能让生活更美好，致力于在产品设计道路上不断探索成长。",
+        skills: ["产品设计", "创意设计", "手绘表达", "Rhino / KeyShot", "用户研究"],
+        achievements: ["核心成员", "产品设计专业", "数智传媒与设计艺术学院"],
+        blog: "https://2708053544.github.io/blog/"
       },
       "7": {
-        name: "吴沛霖",
-        role: "大三 · 产品设计 · 物联网方向",
-        grade: "本科三年级",
-        major: "产品设计",
-        position: "智能家居方向",
-        email: "wupl@weavelab.com",
-        intro: "智能家居与物联网方向，工作室最年轻的“全屋智能专家”。从智能环境监测设备起步，现在负责家庭健康场景的产品探索。喜欢拆解各种智能家居产品，梦想是“让家的每个角落都懂你，但又不打扰你”。",
-        skills: ["物联网原型（MQTT/HomeKit）", "智能家居场景设计", "Arduino / ESP32", "交互设计", "用户测试"],
-        achievements: ["智能环境监测设备 — 核心成员", "全屋智能中控系统 — 场景设计", "家庭陪伴机器人 — 概念设计", "校级大创项目在研 — 主持人", "新生工作坊助教"]
+        name: "吴婷婷",
+        avatar: "../images/students/student7.jpg",
+        role: "数智传媒与设计艺术学院 · 25级 · 智能交互设计1班",
+        grade: "25级 · 数智传媒与设计艺术学院",
+        major: "智能交互设计1班",
+        position: "核心成员",
+        email: "wutt@weavelab.com",
+        intro: "数智传媒与设计艺术学院智能交互设计专业一班，25级新生。热爱交互设计，对用户体验和智能产品有浓厚兴趣。善于观察生活中的交互细节，喜欢思考技术如何更好地服务于人。正在努力学习交互设计相关知识和技能，期待在工作室中不断成长。",
+        skills: ["交互设计", "用户研究", "智能交互", "原型设计", "设计思维"],
+        achievements: ["核心成员", "智能交互设计专业", "数智传媒与设计艺术学院"],
+        blog: "https://ayw79237-sys.github.io/portfolio/"
       },
       "8": {
-        name: "孙佳琪",
-        role: "大三 · 视觉传达设计 · 品牌方向",
-        grade: "本科三年级",
-        major: "视觉传达设计",
-        position: "品牌与新媒体",
-        email: "sunjq@weavelab.com",
-        intro: "视觉传达专业，负责工作室的品牌与内容输出，是社交媒体账号背后的“键盘手”。从招新海报到竞赛版面都经她手，擅长把复杂的项目故事讲得让人想点转发，目标是“让工作室被更多人看见”。",
-        skills: ["品牌视觉设计", "新媒体运营", "版式与信息设计", "Adobe Suite", "AIGC 视觉工具"],
-        achievements: ["工作室品牌形象升级 — 主设计", "全国大学生电子商务“三创赛”省赛二等奖 — 品牌策划", "拾光文创电商概念 — 视觉负责人", "校新媒体大赛一等奖", "工作室公众号运营 — 负责人"]
+        name: "郭一铭",
+        avatar: "../images/students/student8.jpg",
+        role: "数字传媒与设计艺术学院 · 25级 · 智能交互设计1班",
+        grade: "25级 · 数字传媒与设计艺术学院",
+        major: "智能交互设计1班",
+        position: "核心成员",
+        email: "guoym@weavelab.com",
+        intro: "数字传媒与设计艺术学院智能交互设计专业一班，25级新生。对智能交互与产品设计充满热情，喜欢探索技术与设计的交汇点。思维活跃，善于从用户角度思考问题，期待在工作室的学习实践中不断提升自己，用设计创造更好的智能体验。",
+        skills: ["智能交互设计", "产品设计", "用户体验", "原型设计", "设计思维"],
+        achievements: ["核心成员", "智能交互设计专业", "数字传媒与设计艺术学院"],
+        blog: "https://guoyiming.website"
       }
     };
 
@@ -281,6 +304,16 @@
         avatar.style.backgroundPosition = 'center';
       } else {
         avatar.classList.add('placeholder-pulse');
+      }
+
+      // 设置个人博客
+      const metaBlogItem = document.getElementById('metaBlogItem');
+      const metaBlogLink = document.getElementById('metaBlogLink');
+      if (data.blog && data.blog.trim() !== '') {
+        metaBlogItem.style.display = 'block';
+        metaBlogLink.href = data.blog;
+      } else {
+        metaBlogItem.style.display = 'none';
       }
     }
 

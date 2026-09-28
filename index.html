@@ -1,35 +1,374 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050510">
+  <meta name="description" content="Weave Lab智能体验与服务工程实验室。编织创意，智造体验。">
   <title>Weave Lab | 智能体验与服务工程实验室</title>
-  <meta name="description" content="Weave Lab 智能体验与服务工程实验室 - 高校产品设计专业双创工作室">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/entry-intro.css">
-  <link rel="stylesheet" href="css/hero-streak.css">
+  <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash === '#explore' || location.hash === '#top') history.replaceState(null, '', location.pathname + location.search);
+    window.addEventListener('pageshow', () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cg transform='rotate(-30 12 12)'%3E%3Ccircle cx='7.3' cy='3.2' r='1.45'/%3E%3Crect x='5.5' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Crect x='14.9' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Ccircle cx='16.7' cy='20.8' r='1.45'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html, body { background: var(--bg-primary, #0a0814); color: var(--text-primary, #f5f7ff); }
+    @font-face{font-family:Inter;src:url('inter.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+    @font-face{font-family:'Instrument Serif';src:url('instrument-serif-italic.woff2') format('woff2');font-style:italic;font-weight:400;font-display:swap}
+    :root{--logo:15.5px;--logo-mark:22px;--nav:14px;--nav-h:40px;--btn:13.5px;--btn-h:40px;--hero-btn-h:42px;--h1:48px;--lede:15.5px;--badge:12.5px;--stat-size:13.5px;--header-y:22px;--header-x:40px;--stats-x:72px;--stats-y:36px;--hero-gap:85px;--copy-max:860px;--lede-max:470px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent }
+    button:focus-visible,a:focus-visible{outline:2px solid #b9beff;outline-offset:4px}
+    .grain{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.115;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+    .hero-photo{position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate;background:radial-gradient(ellipse at 50% 34%,rgba(38,54,149,.4),transparent 40%),radial-gradient(ellipse at 62% 44%,rgba(109,58,176,.32),transparent 43%),#050510;opacity:1}
+    .hero-photo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}
+    .hero-photo:before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,#3978ff 0%,#6d69f2 46%,#a15bdf 100%);mix-blend-mode:color}
+    .hero-photo:after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(5,5,16,.28),rgba(5,5,16,.03) 34%,rgba(5,5,16,.25) 60%,rgba(5,5,16,.8) 100%)}
+    .hero-viewport{position:relative;z-index:1;display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;min-height:100dvh}
+    .header{position:relative;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--header-y) var(--header-x) 10px}
+    .logo{display:inline-flex;align-items:center;gap:9px;justify-self:start;font-size:var(--logo);font-weight:600;letter-spacing:-.03em;color:#fff}
+    .logo svg{width:var(--logo-mark);height:var(--logo-mark)}
+    .logo-suffix{font-weight:400}
+    .btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;height:var(--btn-h);padding:0 16px;border-radius:6px;font-size:var(--btn);font-weight:500;letter-spacing:-.02em;line-height:1;white-space:nowrap;cursor:pointer;transition:background .35s,border .35s,box-shadow .35s,color .35s,filter .35s}
+    .btn:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.45) 48%,transparent 76%);transform:translateX(-130%);transition:transform .65s}
+    .btn:hover:after{transform:translateX(130%)}
+    .btn-solid{background:linear-gradient(180deg,#f5f7ff,#e2e8ff 48%,#bfc7ee);color:#111225;border:1px solid #f8f8ff;box-shadow:inset 0 1px rgba(255,255,255,.95)}
+    .btn-solid:hover{background:linear-gradient(180deg,#fff,#edf1ff 42%,#ccd5ff);border-color:#f2f6ff;box-shadow:inset 0 1px #fff,0 0 26px rgba(170,188,255,.42),0 8px 18px rgba(169,161,255,.15)}
+    .btn-ghost{background:linear-gradient(135deg,rgba(150,170,255,.14),rgba(0,0,25,.5) 46%,rgba(120,95,200,.15));color:#fff;border:1px solid rgba(172,175,243,.58);box-shadow:inset 0 1px rgba(255,255,255,.12);backdrop-filter:blur(16px)}
+    .btn-ghost:hover{background:linear-gradient(135deg,rgba(180,200,255,.24),rgba(0,0,30,.4) 48%,rgba(173,125,255,.2));border-color:rgba(216,215,255,.85);box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 24px rgba(145,144,255,.3)}
+    .hero-main{display:flex;align-items:flex-end;justify-content:center;padding:8px 24px var(--hero-gap);min-height:0}
+    .hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:var(--copy-max);width:100%}
+    .badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:9px 15px;border:0;border-radius:5px;background:linear-gradient(90deg,#4d5296,#292354 52%,#100c27);color:#f2f2ff;font-size:var(--badge);font-weight:400;letter-spacing:-.01em;box-shadow:inset 0 1px rgba(200,208,255,.25),0 0 26px rgba(94,81,180,.13)}
+    .badge svg{width:18px;height:20px;fill:#fff;filter:drop-shadow(0 0 5px rgba(153,173,255,.6))}
+    .hero-main h1{font-size:var(--h1);font-weight:500;letter-spacing:-.045em;line-height:1.12;color:#fff}
+    .headline-line{display:block;overflow:hidden;padding:.06em .15em .14em}
+    .hero-main h1 em{font-family:'Instrument Serif','Times New Roman',Times,serif;font-weight:400;font-size:1.08em;letter-spacing:-.03em;color:#aaa0f9}
+    .lede{max-width:var(--lede-max);margin-top:18px;color:#aeb3e2;font-size:var(--lede);font-weight:400;line-height:1.55;letter-spacing:-.015em}
+    .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+    .hero-actions .btn{height:var(--hero-btn-h);padding:0 18px}
+    .stats{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--stats-x) var(--stats-y);padding-bottom:max(var(--stats-y),env(safe-area-inset-bottom));color:#dfe7ff}
+    .stat{display:inline-flex;align-items:center;gap:14px;font-size:var(--stat-size);letter-spacing:-.015em;white-space:nowrap}
+    .stat svg{width:20px;height:20px;flex:none}
+    .stat svg.wide{width:38px;height:21px}
+    .hero-photo video{transform:translate3d(var(--video-x,0px),var(--video-y,0px),0) scale(1.25);will-change:transform}
+    .appear{opacity:1;animation-duration:1.05s;animation-fill-mode:both;animation-timing-function:cubic-bezier(.16,1,.3,1);animation-delay:var(--d,.08s)}
+    .appear--scale{animation-name:in-scale}
+    .appear--soft{animation-name:in-soft}
+    .appear--mask{animation-name:in-mask}
+    .appear--pop{animation-name:in-pop}
+    .appear--btn{animation-name:in-btn}
+    .appear--side{animation-name:in-side}
+    .appear--stat{animation-name:in-stat}
+    .appear.is-in{animation:none;opacity:1;transform:none;clip-path:none;filter:none}
+    .badge-star{animation:in-star .9s both .28s}
+    .hero-main h1 em{animation:in-em 1.2s both .72s}
+    @keyframes in-scale{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:scale(1)}}
+    @keyframes in-soft{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    @keyframes in-mask{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
+    @keyframes in-pop{0%{opacity:0;transform:scale(.9)}70%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
+    @keyframes in-btn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+    @keyframes in-side{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+    @keyframes in-stat{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    @keyframes in-star{from{transform:scale(.2) rotate(-50deg)}65%{transform:scale(1.2) rotate(8deg)}to{transform:none}}
+    @keyframes in-em{from{opacity:.35;filter:blur(4px)}to{opacity:1;filter:none}}
+
+    /* 顶部导航栏 - 默认隐藏在上方，滚动后滑下来 */
+    .navbar {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(10, 8, 20, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(.16,1,.3,1), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .navbar.navbar-show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .navbar .nav-logo {
+      color: #fff !important;
+    }
+    .navbar .nav-link {
+      color: rgba(255,255,255,0.85) !important;
+    }
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: #fff !important;
+    }
+    .navbar .nav-dropdown {
+      background: rgba(15, 12, 30, 0.95) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      backdrop-filter: blur(20px);
+    }
+    .navbar .dropdown-item {
+      color: rgba(255,255,255,0.8) !important;
+    }
+    .navbar .dropdown-item:hover {
+      background: rgba(255,255,255,0.1) !important;
+      color: #fff !important;
+    }
+    .navbar .theme-toggle {
+      background: rgba(255,255,255,0.1) !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+    }
+    .navbar .theme-toggle-icon {
+      background: #fff !important;
+    }
+    .navbar .nav-toggle span {
+      background: #fff !important;
+    }
+
+    @media(min-width:1600px){:root{--logo:17px;--logo-mark:24px;--nav:15px;--nav-h:44px;--btn:15px;--btn-h:44px;--hero-btn-h:48px;--h1:64px;--lede:18px;--badge:13.5px;--stat-size:15px;--header-y:28px;--header-x:64px;--stats-x:96px;--stats-y:44px;--copy-max:980px;--lede-max:540px}}
+    @media(min-width:1920px){:root{--logo:18px;--logo-mark:26px;--nav:16px;--nav-h:48px;--btn:16px;--btn-h:48px;--hero-btn-h:52px;--h1:76px;--lede:20px;--badge:14.5px;--stat-size:16px;--header-y:32px;--header-x:80px;--stats-x:120px;--stats-y:52px;--copy-max:1120px;--lede-max:620px}}
+    @media(min-width:2560px){:root{--h1:88px;--lede:22px;--header-x:120px;--stats-x:160px;--copy-max:1280px;--lede-max:680px}}
+    @media(min-width:1280px) and (max-width:1599px){:root{--h1:54px;--lede:16px;--header-x:48px;--stats-x:80px;--copy-max:900px}}
+    @media(min-width:901px) and (max-width:1279px){:root{--logo:15px;--nav:13px;--nav-h:36px;--btn:13px;--btn-h:38px;--hero-btn-h:40px;--h1:42px;--lede:15px;--badge:12px;--stat-size:12.5px;--header-y:16px;--header-x:28px;--stats-x:36px;--stats-y:28px;--hero-gap:64px;--copy-max:760px;--lede-max:440px}}
+    @media(min-width:901px) and (max-height:850px){:root{--header-y:14px;--stats-y:24px;--hero-gap:48px;--h1:40px}.badge{margin-bottom:12px}.lede{margin-top:12px}.hero-actions{margin-top:16px}}
+    @media(min-width:901px) and (max-height:720px){:root{--h1:34px;--lede:14px;--hero-gap:32px;--stats-y:18px;--nav-h:30px;--btn-h:34px;--hero-btn-h:36px}.badge{margin-bottom:8px}}
+    @media(max-width:900px){:root{--logo:16px;--btn:15px;--btn-h:46px;--hero-btn-h:48px;--h1:36px;--lede:16.5px;--badge:13.5px;--stat-size:15px;--header-y:16px;--header-x:18px;--stats-x:20px;--stats-y:28px;--hero-gap:36px}.header{grid-template-columns:1fr auto auto;gap:8px;padding:calc(env(safe-area-inset-top) + var(--header-y)) var(--header-x) 10px}.logo,.header-cta,.burger{z-index:80}.hero-main{padding:20px 20px 64px}.stats{flex-direction:column;justify-content:center;gap:16px}.stat{white-space:normal}.hero-copy,.lede{max-width:100%}}
+    @media(max-width:900px){.hero-photo:after{background:linear-gradient(180deg,rgba(5,5,16,.35),rgba(5,5,16,.47) 30%,rgba(5,5,16,.58) 58%,rgba(5,5,16,.88) 100%)}}
+    @media(max-width:560px){:root{--h1:34px;--lede:16px;--header-x:16px}.hero-actions{width:100%;flex-direction:column}.hero-actions .btn{width:100%}.header-cta{font-size:12px;padding:0 11px;height:38px}.logo{gap:6px}}
+    @media(min-width:901px){.hero-photo{background:radial-gradient(ellipse at 76% 50%,rgba(72,53,175,.4),transparent 48%),radial-gradient(ellipse at 54% 83%,rgba(21,58,150,.2),transparent 50%),#050510}.hero-photo video{inset:auto;top:24%;left:10%;width:100%;height:100%;object-fit:cover;transform:translate3d(var(--video-x,0px),var(--video-y,0px),0) rotate(45deg) scale(1.24);-webkit-mask-image:radial-gradient(ellipse 50% 60% at 38% 50%,#000 35%,rgba(0,0,0,.9) 52%,transparent 94%);mask-image:radial-gradient(ellipse 50% 60% at 38% 50%,#000 35%,rgba(0,0,0,.9) 52%,transparent 94%)}.hero-photo:after{background:linear-gradient(90deg,rgba(5,5,16,.86),rgba(5,5,16,.36) 44%,transparent 68%),linear-gradient(180deg,rgba(5,5,16,.25),transparent 40%,rgba(5,5,16,.34) 74%,rgba(5,5,16,.8))}.hero-main{justify-content:flex-start;padding:8px clamp(48px,7vw,128px) clamp(60px,9vh,112px)}.hero-copy{align-items:flex-start;text-align:left;max-width:min(690px,49vw)}.headline-line{padding-left:0}.hero-actions{justify-content:flex-start}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}.appear,.hero-photo,.hero-main h1 em,.badge-star{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important}}
+    /* 内容区块层级 */
+    .section, .alt-bg, .cta-banner, .footer { position: relative; z-index: 2; }
+    /* 底部玻璃导航 - 横版居中 + 滚动时下移消失 */
+    .bottom-dock {
+      position: absolute !important;
+      bottom: 40px !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 10 !important;
+      display: flex !important;
+      flex-direction: row !important;
+      grid-template-columns: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+      min-height: auto !important;
+      gap: 0 !important;
+      transition: transform 0.6s cubic-bezier(.16,1,.3,1), opacity 0.4s ease !important;
+      will-change: transform, opacity;
+    }
+    .bottom-dock.nav-slide-up {
+      transform: translateY(120%) !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .bottom-dock::before {
+      display: none !important;
+    }
+    .dock-nav-slot {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: auto !important;
+      padding: 6px !important;
+      border-radius: 999px !important;
+      background: rgba(15, 12, 30, 0.6) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+    }
+    .dock-nav-slot .nav-glass {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      width: auto !important;
+      padding: 0 !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .dock-nav-slot .nav-glass .nav-link {
+      flex: none !important;
+      height: 36px !important;
+      padding: 0 18px !important;
+      border-radius: 999px !important;
+      color: rgba(255,255,255,0.75) !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transition: all 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      cursor: pointer !important;
+      transform: none !important;
+      text-shadow: none !important;
+    }
+    .dock-nav-slot .nav-glass .nav-link::before,
+    .dock-nav-slot .nav-glass .nav-link::after {
+      display: none !important;
+    }
+    .dock-nav-slot .nav-glass .nav-link:hover {
+      color: #fff !important;
+      background: rgba(255,255,255,0.1) !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .dock-nav-slot .nav-glass .nav-link[aria-current="page"] {
+      color: #fff !important;
+      background: rgba(255,255,255,0.15) !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .dock-nav-slot .nav-icon {
+      display: none;
+    }
+    .dock-nav-slot .nav-group .nav-dropdown {
+      bottom: 100%;
+      top: auto;
+      margin-bottom: 8px;
+    }
+    /* 向下滚动 - 在文字正下方 */
+    .hero-scroll-hint {
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .hero-scroll-hint:hover {
+      color: #fff;
+    }
+    .hero-scroll-hint-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+    .hero-scroll-hint-text small {
+      color: rgba(255,255,255,0.4);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+    }
+    .hero-scroll-hint-text strong {
+      font-size: 13px;
+      font-weight: 400;
+    }
+    .hero-scroll-hint-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .hero-scroll-hint:hover .hero-scroll-hint-icon {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(3px);
+    }
+    .hero-scroll-hint-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    /* Hero trail canvas - 只在首屏内显示 */
+    .hero-trail-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .hero-viewport {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      min-height: 0;
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: var(--copy-max);
+      width: 100%;
+    }
+    @media(min-width:901px) {
+      .hero-main {
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 clamp(48px,7vw,128px);
+      }
+      .hero-copy {
+        align-items: flex-start;
+        text-align: left;
+        max-width: min(690px, 49vw);
+      }
+      .hero-scroll-hint {
+        margin-top: 80px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/opening.css?v=8">
+  <link rel="stylesheet" href="assets/nav-glass.css">
+  <link rel="stylesheet" href="assets/liquid-home.css?v=7">
+  <link rel="stylesheet" href="assets/bottom-navigation.css?v=8">
 </head>
 <body>
-
-  <!-- Entry Intro (开场动画) -->
-  <div class="entry-intro" id="entryIntro" aria-label="Weave Lab 入场动画">
-    <canvas class="entry-intro__light" id="entryIntroLight" aria-hidden="true"></canvas>
-    <div class="entry-intro__content">
-      <span class="entry-intro__eyebrow">智能体验与服务工程实验室</span>
-      <div class="entry-intro__title" aria-label="Weave Lab">
-        <span aria-hidden="true" style="--i:0">W</span><span aria-hidden="true" style="--i:1">e</span><span aria-hidden="true" style="--i:2">a</span><span aria-hidden="true" style="--i:3">v</span><span aria-hidden="true" style="--i:4">e</span><span class="entry-intro__space" aria-hidden="true"></span><span aria-hidden="true" style="--i:5">L</span><span aria-hidden="true" style="--i:6">a</span><span aria-hidden="true" style="--i:7">b</span>
-      </div>
-      <p class="entry-intro__tagline">编织创意 · 智造体验</p>
+  <div class="opening" id="opening" aria-label="Weave Lab智能体验与服务工程实验室开场动画">
+    <canvas class="opening-canvas" id="opening-canvas" aria-hidden="true"></canvas>
+    <div class="opening-copy">
+      <span class="opening-kicker">智能体验与服务工程实验室</span>
+      <div class="opening-title" aria-label="Weave Lab"><span aria-hidden="true" style="--i:0">W</span><span aria-hidden="true" style="--i:1">e</span><span aria-hidden="true" style="--i:2">a</span><span aria-hidden="true" style="--i:3">v</span><span aria-hidden="true" style="--i:4">e</span><span class="opening-space" aria-hidden="true"></span><span class="opening-lab" aria-hidden="true" style="--i:5">L</span><span class="opening-lab" aria-hidden="true" style="--i:6">a</span><span class="opening-lab" aria-hidden="true" style="--i:7">b</span></div>
+      <p class="opening-tagline">编织创意 · 智造体验<span class="opening-tagline-en">Weaving Creativity, Engineering Experience</span></p>
     </div>
-    <button class="entry-intro__skip" id="entryIntroSkip" type="button">跳过开场 <span aria-hidden="true">↗</span></button>
-    <span class="entry-intro__index" aria-hidden="true">WEAVE LAB <span> / </span> 001</span>
+    <span class="opening-index" aria-hidden="true">Weave Lab <b>/</b> 001</span>
+    <button class="opening-skip" id="opening-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
   </div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <!-- Navigation -->
-  <nav class="navbar hidden-nav">
+  <!-- 顶部导航栏（滚动后显示，样式跟其他页面一致） -->
+  <nav class="navbar" id="mainNavbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <div class="nav-logo-mark">W</div>
@@ -41,22 +380,21 @@
           <div class="nav-dropdown">
             <a href="#hero" class="dropdown-item">首页首屏</a>
             <a href="#about" class="dropdown-item">工作室简介</a>
-            <a href="#research" class="dropdown-item">研究方向</a>
             <a href="#works" class="dropdown-item">精选项目</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">关于工作室 ▾</span>
+          <a href="pages/about.html" class="nav-link">关于工作室 ▾</a>
           <div class="nav-dropdown">
             <a href="pages/about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="pages/about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">项目成果 ▾</span>
+          <a href="pages/projects.html" class="nav-link">项目成果 ▾</a>
           <div class="nav-dropdown">
             <a href="pages/projects.html#studio" class="dropdown-item">工作室项目</a>
-            <a href="pages/projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="pages/graduation-works.html" class="dropdown-item">毕设作品</a>
             <a href="pages/projects.html#awards" class="dropdown-item">获奖荣誉</a>
           </div>
         </div>
@@ -64,7 +402,7 @@
           <span class="nav-link">活动与合作 ▾</span>
           <div class="nav-dropdown">
             <a href="pages/activities.html" class="dropdown-item">活动</a>
-            <a href="pages/cooperation.html" class="dropdown-item">合作资源</a>
+            <a href="pages/activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
@@ -75,47 +413,79 @@
           </div>
         </div>
       </div>
-      <button class="nav-mobile-toggle" id="navMobileToggle">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
+      <div class="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
-      </button>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section (光线乱窜 + 满天星) -->
-  <section id="hero" class="hero-immersive">
-    <canvas id="hero-streak-canvas"></canvas>
+  <!-- Hero Section -->
+  <div class="hero-viewport" id="top">
+    <div class="hero-photo" aria-hidden="true"><video autoplay muted loop playsinline preload="metadata" src="assets/wave-seamless.mp4?v=6"></video></div>
+    <canvas class="hero-trail-canvas" aria-hidden="true"></canvas>
+    <div class="menu-backdrop" aria-hidden="true"></div>
+    <header class="header">
+      <a href="index.html" class="logo appear appear--scale" style="--d:.08s" aria-label="Weave Lab智能体验与服务工程实验室"><span class="logo-symbol" aria-hidden="true"><img src="assets/weave-lab-mark.png" alt=""></span><span>Weave<span class="logo-suffix"> Lab</span></span></a>
+    </header>
 
-    <div class="hero-noise"></div>
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-orb orb-1"></div>
-      <div class="hero-orb orb-2"></div>
-    </div>
-
-    <div class="hero-content" id="heroContent">
-      <span class="hero-label">智能体验与服务工程实验室</span>
-      <h1 class="hero-title hero-title-wrapper" id="heroTitle">
-        <span class="line">Weave Lab</span>
+    <main class="hero-main"><div class="hero-copy">
+      <div class="badge appear appear--pop" style="--d:.22s"><svg class="badge-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6C12.55 2.6 12.88 3.15 13.08 4.7c.62 4.7 1.52 5.6 6.22 6.22 1.55.2 2.1.53 2.1 1.08s-.55.88-2.1 1.08c-4.7.62-5.6 1.52-6.22 6.22-.2 1.55-.53 2.1-1.08 2.1s-.88-.55-1.08-2.1c-.62-4.7-1.52-5.6-6.22-6.22C3.15 12.88 2.6 12.55 2.6 12s.55-.88 2.1-1.08c4.7-.62 5.6-1.52 6.22-6.22C11.12 3.15 11.45 2.6 12 2.6Z"/></svg>智能体验与服务工程实验室</div>
+      <h1 class="hero-title" aria-label="Weave Lab，编织创意 · 智造体验">
+        <span class="headline-line"><span class="appear appear--mask hero-word" style="--d:.42s;display:inline-block"><span class="hero-jump-letter" style="--i:0" aria-hidden="true">W</span><span class="hero-jump-letter" style="--i:1" aria-hidden="true">e</span><span class="hero-jump-letter" style="--i:2" aria-hidden="true">a</span><span class="hero-jump-letter" style="--i:3" aria-hidden="true">v</span><span class="hero-jump-letter" style="--i:4" aria-hidden="true">e</span><span class="hero-jump-space" aria-hidden="true">&nbsp;</span><em><span class="hero-jump-letter" style="--i:5" aria-hidden="true">L</span><span class="hero-jump-letter" style="--i:6" aria-hidden="true">a</span><span class="hero-jump-letter" style="--i:7" aria-hidden="true">b</span></em></span></span>
+        <span class="headline-line"><span class="appear appear--mask hero-cn" style="--d:.62s;display:inline-block"><span class="hero-jump-letter" style="--i:0" aria-hidden="true">编</span><span class="hero-jump-letter" style="--i:1" aria-hidden="true">织</span><span class="hero-jump-letter" style="--i:2" aria-hidden="true">创</span><span class="hero-jump-letter" style="--i:3" aria-hidden="true">意</span><span class="hero-jump-space" aria-hidden="true">&nbsp;</span><span class="hero-jump-letter" style="--i:4" aria-hidden="true">·</span><span class="hero-jump-space" aria-hidden="true">&nbsp;</span><span class="hero-jump-letter" style="--i:5" aria-hidden="true">智</span><span class="hero-jump-letter" style="--i:6" aria-hidden="true">造</span><span class="hero-jump-letter" style="--i:7" aria-hidden="true">体</span><span class="hero-jump-letter" style="--i:8" aria-hidden="true">验</span></span></span>
       </h1>
-      <p class="hero-subtitle">
-        编织创意 · 智造体验
-        <br>
-        Weaving Creativity, Engineering Experience
-      </p>
-      <div class="hero-cta">
-        <a href="#about" class="btn btn-primary">了解实验室</a>
+      <p class="lede appear appear--soft" style="--d:.82s;animation-duration:1.25s">Weaving Creativity, Engineering Experience</p>
+      <div class="hero-actions appear appear--btn" style="--d:1s">
+        <a href="#about" class="btn btn-solid">了解实验室</a>
+        <a href="#works" class="btn btn-ghost">浏览项目</a>
       </div>
-    </div>
+      <a class="hero-scroll-hint appear appear--soft" style="--d:1.2s" href="#about" aria-label="向下滚动，了解更多">
+        <div class="hero-scroll-hint-text">
+          <small>继续探索 / 02</small>
+          <strong>向下滚动了解更多</strong>
+        </div>
+        <span class="hero-scroll-hint-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>
+      </a>
+    </div></main>
+    <footer class="bottom-dock" aria-label="底部导航">
+      <div class="dock-nav-slot">
+    <nav class="nav nav-glass" id="site-nav" aria-label="主导航">
+        <a href="#top" class="nav-link appear appear--scale" style="--d:.16s" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v9.2a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3z"/><path d="M9.5 20.5v-6h5v6"/></svg></span><span>首页</span></a>
+        <div class="nav-group nav-link appear appear--soft" style="--d:.24s; cursor: pointer;">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="2.8"/><path d="M3.8 18.7c.3-3.1 2.3-5 5.2-5s4.9 1.9 5.2 5"/><path d="M15.3 5.5a2.8 2.8 0 0 1 0 5.2M16.6 13.9c2.1.4 3.4 2.1 3.6 4.8"/></svg></span>
+          <span>关于工作室</span><span class="nav-arrow">▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/about.html#mentors">指导老师</a>
+            <a href="pages/about.html#students">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-group nav-link appear appear--scale" style="--d:.32s; cursor: pointer;">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="m17 13.3.9 2.7 2.8.9-2.8.9-.9 2.8-.9-2.8-2.8-.9 2.8-.9z"/></svg></span>
+          <span>项目成果</span><span class="nav-arrow">▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/projects.html">全部项目</a>
+            <a href="pages/graduation-works.html">毕设作品</a>
+            <a href="pages/projects.html?filter=award">获奖作品</a>
+          </div>
+        </div>
+        <div class="nav-group nav-link appear appear--soft" style="--d:.4s; cursor: pointer;">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12.2c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="M3 17.6c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="m17.4 4.2.5 1.7 1.7.5-1.7.5-.5 1.7-.5-1.7-1.7-.5 1.7-.5z"/></svg></span>
+          <span>活动与合作</span><span class="nav-arrow">▾</span>
+          <div class="nav-dropdown">
+            <a href="pages/activities.html">活动</a>
+            <a href="pages/activities.html#partners">合作资源</a>
+          </div>
+        </div>
+        <a href="pages/contact.html" class="nav-link appear appear--scale" style="--d:.48s"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.1 5.2h15.8a1.6 1.6 0 0 1 1.6 1.6v9.7a1.6 1.6 0 0 1-1.6 1.6H9l-4.9 3v-3a1.6 1.6 0 0 1-1.6-1.6V6.8a1.6 1.6 0 0 1 1.6-1.6Z"/><path d="M7 10.8h10M7 14.2h6.5"/></svg></span><span>联系我们</span></a>
+    </nav>
+      </div>
+    </footer>
+  </div>
 
-    <div class="hero-scroll-bottom">
-      <span>向下滚动</span>
-      <div class="scroll-arrow-bottom">↓</div>
-    </div>
-  </section>
-
-  <!-- About + Research Section -->
+  <!-- About & Research Section -->
   <section id="about" class="section about-research-section">
     <div class="container">
       <div class="about-research-grid">
@@ -283,15 +653,15 @@
           <h4>活动与合作</h4>
           <div class="footer-links">
             <a href="pages/activities.html">活动</a>
-            <a href="pages/cooperation.html">合作资源</a>
+            <a href="pages/activities.html#partners">合作资源</a>
           </div>
         </div>
         <div class="footer-column">
           <h4>联系方式</h4>
           <div class="footer-links">
-            <a href="pages/contact.html">创新设计大楼 502 室</a>
-            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
-            <a href="tel:+8651088886666">0510-8888 6666</a>
+            <a href="pages/contact.html">五教二楼201</a>
+            <a href="mailto:1016520133@qq.com">1016520133@qq.com</a>
+            <a href="tel:18622027625">18622027625（张老师）</a>
           </div>
         </div>
       </div>
@@ -307,7 +677,96 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/hero-streak.js"></script>
-  <script src="js/entry-intro.js"></script>
+  <script>
+    (()=>{
+      // 滚动时顶部导航栏显示 + 底部导航栏上移
+      const navbar = document.getElementById('mainNavbar');
+      const heroSection = document.getElementById('top');
+      const bottomDock = document.querySelector('.bottom-dock');
+      if (navbar && heroSection) {
+        const checkScroll = () => {
+          const heroBottom = heroSection.getBoundingClientRect().bottom;
+          const scrollPercent = Math.min(1, Math.max(0, (window.innerHeight - heroBottom) / (window.innerHeight * 0.5)));
+          if (heroBottom <= 80) {
+            navbar.classList.add('navbar-show');
+          } else {
+            navbar.classList.remove('navbar-show');
+          }
+          if (bottomDock) {
+            if (scrollPercent > 0.3) {
+              bottomDock.classList.add('nav-slide-up');
+            } else {
+              bottomDock.classList.remove('nav-slide-up');
+            }
+          }
+        };
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
+      }
+
+      // 强制启动鼠标拖尾特效（确保开场动画结束后启动）
+      function startHeroTrail() {
+        if (window.heroTrailStarted) return;
+        window.heroTrailStarted = true;
+        const canvas = document.querySelector('.hero-trail-canvas');
+        if (canvas && canvas.getContext && typeof window.__heroTrailStart === 'function') {
+          window.__heroTrailStart();
+        }
+      }
+      // 如果开场动画不在了，立即启动
+      if (!document.getElementById('opening')) {
+        startHeroTrail();
+      } else {
+        // 监听开场动画结束
+        const observer = new MutationObserver(() => {
+          if (!document.getElementById('opening')) {
+            observer.disconnect();
+            setTimeout(startHeroTrail, 100);
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        // 兜底：3秒后强制启动
+        setTimeout(startHeroTrail, 4000);
+      }
+
+      const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+      const burger=$('.burger');
+      const closeMenu=()=>{document.body.classList.remove('menu-open');if(burger){burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label','Open menu')}};
+      if(burger){
+        burger.addEventListener('click',()=>{const open=!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',open);burger.setAttribute('aria-expanded',String(open));burger.setAttribute('aria-label',open?'Close menu':'Open menu')});
+      }
+      const backdrop=$('.menu-backdrop');
+      if(backdrop) backdrop.addEventListener('click',closeMenu);
+      matchMedia('(min-width: 901px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
+      if(matchMedia('(hover: hover) and (pointer: fine)').matches){
+        $$('.nav-glass .nav-link').forEach(el=>{
+          el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');el.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%')},{passive:true});
+          el.addEventListener('pointerleave',()=>{el.style.removeProperty('--mx');el.style.removeProperty('--my')});
+        });
+      }
+      $$('.appear').forEach(el=>el.addEventListener('animationend',()=>el.classList.add('is-in'),{once:true}));
+      const heroPhoto=$('.hero-photo');
+      if(heroPhoto){
+        const heroVideo=heroPhoto.querySelector('video');
+        if(heroVideo){
+          heroVideo.defaultPlaybackRate=.8;
+          heroVideo.playbackRate=.8;
+          heroVideo.addEventListener('loadedmetadata',()=>{heroVideo.playbackRate=.8});
+        }
+        if(matchMedia('(hover: hover) and (pointer: fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+          const current={x:0,y:0},target={x:0,y:0};let frame=0;
+          const animate=()=>{let moving=false;for(const key of Object.keys(current)){current[key]+=(target[key]-current[key])*.045;if(Math.abs(target[key]-current[key])>.08)moving=true;else current[key]=target[key]}heroPhoto.style.setProperty('--video-x',current.x.toFixed(2)+'px');heroPhoto.style.setProperty('--video-y',current.y.toFixed(2)+'px');frame=moving?requestAnimationFrame(animate):0};
+          const wake=()=>{if(!frame)frame=requestAnimationFrame(animate)};
+          window.addEventListener('pointermove',event=>{if(event.pointerType!=='mouse'||document.getElementById('opening'))return;const x=event.clientX/window.innerWidth*2-1,y=event.clientY/window.innerHeight*2-1;target.x=x*5;target.y=y*3;wake()},{passive:true});
+          const reset=()=>{target.x=0;target.y=0;wake()};
+          document.documentElement.addEventListener('mouseleave',reset);
+          window.addEventListener('blur',reset);
+        }
+      }
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{for(const el of $$('.appear,.hero-photo')){if(!el.getAnimations().some(a=>a.playState==='running'||a.playState==='paused'||a.playState==='finished'))el.classList.add('is-in')}}));
+    })();
+  </script>
+  <script src="assets/opening.js?v=10"></script>
+  <script src="assets/hero-trail.js?v=7"></script>
 </body>
 </html>

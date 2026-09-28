@@ -1,21 +1,26 @@
-/* Blue-violet cursor light, enabled only after the opening layer is gone. */
+/* Blue-violet cursor light, enabled only after the opening layer is gone.
+   只在首屏（.hero-viewport）范围内显示，滚过首屏后自动隐藏 */
 (function () {
   'use strict';
+  var hero = document.querySelector('.hero-viewport');
   var canvas = document.querySelector('.hero-trail-canvas');
-  if (!canvas || !window.matchMedia('(hover: hover) and (pointer: fine)').matches ||
+  if (!hero || !canvas || !window.matchMedia('(hover: hover) and (pointer: fine)').matches ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var ctx = canvas.getContext('2d');
   if (!ctx) return;
 
-  var w = 0, h = 0, frame = 0, started = false, active = false;
+  var w = 0, h = 0, frame = 0, started = false, active = false, visible = true;
   var lastMove = 0, lastBloom = 0, bloomX = 0, bloomY = 0;
   var head = { x: 0, y: 0 }, target = { x: 0, y: 0 }, trail = [], blooms = [];
 
   function resize() {
     var ratio = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth; h = window.innerHeight;
+    var rect = hero.getBoundingClientRect();
+    w = rect.width; h = rect.height;
     canvas.width = Math.round(w * ratio);
     canvas.height = Math.round(h * ratio);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     trail = [];
     blooms = [];
@@ -128,7 +133,7 @@
   function render(now) {
     frame = 0;
     ctx.clearRect(0, 0, w, h);
-    if (!active || document.hidden) return;
+    if (!active || document.hidden || !visible) return;
     var idle = now - lastMove;
     var fade = Math.min(1, Math.max(0, (2600 - idle) / 900));
     head.x += (target.x - head.x) * .16;
@@ -154,15 +159,21 @@
 
   function onMove(event) {
     if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
-    if (document.body.classList.contains('menu-open') || document.getElementById('overlay').classList.contains('open')) return;
+    if (!visible) return;
+    // 只在首屏范围内响应
+    var rect = hero.getBoundingClientRect();
+    var mx = event.clientX - rect.left;
+    var my = event.clientY - rect.top;
+    if (mx < 0 || mx > w || my < 0 || my > h) return;
+
     if (!active) {
-      head.x = event.clientX; head.y = event.clientY;
+      head.x = mx; head.y = my;
       trail = [];
       blooms = [];
-      bloomX = event.clientX; bloomY = event.clientY; lastBloom = performance.now();
+      bloomX = mx; bloomY = my; lastBloom = performance.now();
       active = true;
     }
-    target.x = event.clientX; target.y = event.clientY;
+    target.x = mx; target.y = my;
     lastMove = performance.now();
     if (lastMove - lastBloom > 55 && Math.hypot(target.x - bloomX, target.y - bloomY) > 48) {
       blooms.push({ x: head.x, y: head.y, time: lastMove });
@@ -172,21 +183,58 @@
     if (!frame) frame = requestAnimationFrame(render);
   }
 
+  function checkScroll() {
+    var rect = hero.getBoundingClientRect();
+    // 首屏滚出视野了就隐藏
+    if (rect.bottom < 0 || rect.top > window.innerHeight) {
+      if (visible) {
+        visible = false;
+        canvas.style.opacity = '0';
+        active = false;
+        trail = [];
+        blooms = [];
+        ctx.clearRect(0, 0, w, h);
+      }
+    } else {
+      if (!visible) {
+        visible = true;
+        canvas.style.opacity = '1';
+      }
+    }
+  }
+
   function start() {
     if (started) return;
     started = true;
     resize();
     window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('scroll', checkScroll, { passive: true });
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) { ctx.clearRect(0, 0, w, h); trail = []; blooms = []; active = false; }
     });
+    checkScroll();
   }
 
   var opening = document.getElementById('opening');
   if (!opening) { start(); return; }
+  var checked = 0;
+  var timer = setInterval(function () {
+    checked++;
+    if (!document.getElementById('opening')) {
+      clearInterval(timer);
+      start();
+    } else if (checked > 30) {
+      clearInterval(timer);
+      start();
+    }
+  }, 200);
   var observer = new MutationObserver(function () {
-    if (!opening.isConnected) { observer.disconnect(); start(); }
+    if (!document.getElementById('opening')) {
+      observer.disconnect();
+      clearInterval(timer);
+      start();
+    }
   });
-  observer.observe(document.body, { childList: true });
+  observer.observe(document.body, { childList: true, subtree: true });
 })();
