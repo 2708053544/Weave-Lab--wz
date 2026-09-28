@@ -18,15 +18,14 @@
       padding: 0 40px;
     }
     .graduation-masonry {
-      column-count: 4;
-      column-gap: 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
     }
     .gwork-card {
-      break-inside: avoid;
-      margin-bottom: 48px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -37,6 +36,7 @@
     .gwork-board {
       position: relative;
       width: 100%;
+      aspect-ratio: 3/4;
       overflow: hidden;
       border-radius: 6px;
       background: var(--bg-secondary);
@@ -61,8 +61,10 @@
     }
     .gwork-slide img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
       display: block;
-      height: auto;
     }
     .gwork-arrow {
       position: absolute;
@@ -160,16 +162,15 @@
       margin: 0;
     }
     @media (max-width: 1200px) {
-      .graduation-masonry { column-count: 3; }
+      .graduation-masonry { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
-      .graduation-masonry { column-count: 2; column-gap: 14px; }
-      .gwork-card { margin-bottom: 20px; }
+      .graduation-masonry { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
       .gwork-title { font-size: 0.8125rem; }
       .gwork-author { font-size: 0.6875rem; }
     }
     @media (max-width: 480px) {
-      .graduation-masonry { column-count: 1; max-width: 280px; }
+      .graduation-masonry { grid-template-columns: 1fr; max-width: 280px; }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,7 +275,10 @@
       { id: 8, title: "面向HTO骨科手术机器人的全流程VR系统设计", author: "曹骞予", boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"] },
       { id: 9, title: "面向名优茶机械化采摘的采茶机优化设计", author: "刘思敏", boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"] },
       { id: 10, title: "基于可适应性及模块化可穿戴外骨骼设计", author: "邢贞获", boards: ["project10_1.jpg", "project10_2.jpg"] },
-      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"] }
+      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"] },
+      { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
+      { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
+      { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] }
     ];
 
     function renderGraduationWorks() {

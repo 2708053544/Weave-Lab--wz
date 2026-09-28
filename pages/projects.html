@@ -944,6 +944,16 @@
           setTrack(currentY);
         });
 
+        // 暴露重置函数（筛选切换时调用：停止动画、轨道归位、停自动播放）
+        window._resetGraduationScroll = function() {
+          if (animId) { cancelAnimationFrame(animId); animId = null; }
+          currentY = 0;
+          targetY = 0;
+          setTrack(0);
+          step = totalRows + 1;
+          scrollAccum = 0;
+        };
+
         // 暴露展开函数
         window._expandGraduation = function() {
           if (animId) { cancelAnimationFrame(animId); animId = null; }
@@ -993,6 +1003,9 @@
           // 切换active状态
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
+
+          // 筛选变化：停止自动滚动并把轨道归位到顶部，避免卡片被移出视口
+          if (window._resetGraduationScroll) window._resetGraduationScroll();
           
           const filter = this.getAttribute('data-filter');
           
