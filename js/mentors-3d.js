@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    mentors-3d.js — 导师 3D 卡片展示逻辑
    零依赖。两种模式自动识别：
    - 独立整页（body.m3-page）：滚轮/键盘切换卡片
@@ -47,11 +47,11 @@ const TEACHERS = [
   },
   {
     id: '4',
-    name: '苏婉清',
+    name: '苏俊旭',
     short: '苏',
-    title: '讲师 / 设计实践导师',
-    email: 'suwq@weavelab.com',
-    major: '品牌设计 / 数字营销',
+    title: '助教 / 设计实践导师',
+    email: '#',
+    major: '用户体验 / 产品服务设计',
     blog: '#',
     photo: '../images/teachers/teacher4.png',
     link: 'mentor-detail.html?id=4'
