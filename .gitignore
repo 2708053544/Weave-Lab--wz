@@ -1,2 +1,9 @@
 .temp/
 毕设/
+工作室/
+.trae-html-share-packages/
+index.html.backup
+*.backup
+*.bak
+.DS_Store
+Thumbs.db

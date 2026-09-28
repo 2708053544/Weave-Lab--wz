@@ -266,11 +266,17 @@ section.m3-section .m3-counter { top: 96px; }
   text-underline-offset: 3px;
   text-decoration-color: rgba(255, 255, 255, 0.3);
   transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  display: inline-block;
+  padding: 4px 0;
+  margin: -4px 0;
 }
 .m3-info-link:hover {
   color: #fff;
   text-decoration-color: rgba(255, 255, 255, 0.8);
   opacity: 1;
+  text-shadow: 0 0 8px rgba(120, 140, 255, 0.5);
 }
 
 .m3-info-hint {

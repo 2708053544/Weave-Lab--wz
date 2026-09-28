@@ -31,7 +31,7 @@ const TEACHERS = [
     title: '副教授 / 人工智能教育专家',
     email: '#',
     major: '人工智能教育 / 智能硬件 / AI工程化',
-    blog: '#',
+    blog: 'https://lhbzx1984.github.io/personal-blog/',
     photo: '../images/teachers/teacher2.png',
     photoPos: 'center top',
     link: 'mentor-detail.html?id=2'
@@ -43,7 +43,7 @@ const TEACHERS = [
     title: '助教 / 智能交互设计专业教师',
     email: 'bianyuan0326@163.com',
     major: '工业设计 / 微创手术机器人 / 人机交互',
-    blog: '#',
+    blog: 'https://126013.github.io/bianyuan-buke/',
     photo: '../images/teachers/teacher3.png',
     photoPos: 'center top',
     link: 'mentor-detail.html?id=3'
@@ -55,7 +55,7 @@ const TEACHERS = [
     title: '助教 / 设计实践导师',
     email: '#',
     major: '用户体验 / 产品服务设计',
-    blog: '#',
+    blog: 'https://hkh168.github.io/sujunxu-homepage/',
     photo: '../images/teachers/teacher4.png',
     photoPos: 'center top',
     link: 'mentor-detail.html?id=4'
@@ -135,6 +135,17 @@ const TEACHERS = [
       else if (depth === 2) card.classList.add('pos-2');
       else if (depth === 3) card.classList.add('pos-3');
       else card.classList.add('pos-back');
+    });
+  }
+
+  /* 让博客整行都可以点击 */
+  const blogRow = blogEl.closest('.m3-info-row');
+  if (blogRow) {
+    blogRow.style.cursor = 'pointer';
+    blogRow.style.pointerEvents = 'auto';
+    blogRow.addEventListener('click', function (e) {
+      if (e.target === blogEl) return; /* 避免重复触发 */
+      window.open(blogEl.href, '_blank', 'noopener');
     });
   }
 

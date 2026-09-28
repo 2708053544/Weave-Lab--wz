@@ -1,0 +1,144 @@
+/* Quiet glass navigation that lets the blue-purple hero remain the focal point. */
+.nav-glass {
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.nav-glass .nav-link {
+  isolation: isolate;
+  gap: 8px;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid rgba(168, 175, 230, .3);
+  border-radius: 7px;
+  background: linear-gradient(115deg, rgba(12, 15, 43, .76), rgba(39, 36, 84, .57) 58%, rgba(63, 45, 104, .52));
+  box-shadow: inset 0 1px rgba(232, 236, 255, .1), 0 4px 16px rgba(3, 4, 22, .15);
+  -webkit-backdrop-filter: blur(11px) saturate(120%);
+  backdrop-filter: blur(11px) saturate(120%);
+  color: #f2f3ff;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-shadow: 0 1px 5px rgba(3, 5, 30, .42);
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform .28s cubic-bezier(.2, 1.1, .3, 1), border-radius .32s ease, border-color .24s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.nav-glass .nav-link::before {
+  z-index: -1;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(158, 186, 255, .33), rgba(131, 113, 225, .11) 32%, transparent 68%);
+  opacity: 0;
+  transform: none;
+  transition: opacity .28s ease;
+}
+
+.nav-glass .nav-link::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(236, 239, 255, .5), transparent);
+  opacity: .35;
+  pointer-events: none;
+  transition: opacity .28s ease;
+}
+
+.nav-glass .nav-link:hover,
+.nav-glass .nav-link:focus-visible {
+  transform: translateY(-1px);
+  border-radius: 9px 7px 10px 7px;
+  border-color: rgba(168, 186, 255, .6);
+  background: linear-gradient(115deg, rgba(28, 37, 79, .82), rgba(61, 63, 127, .66) 58%, rgba(84, 60, 135, .65));
+  box-shadow: inset 0 1px rgba(238, 240, 255, .2), 0 4px 18px rgba(71, 80, 173, .2);
+}
+
+.nav-glass .nav-link:hover::before,
+.nav-glass .nav-link:focus-visible::before { opacity: 1; }
+.nav-glass .nav-link:hover::after,
+.nav-glass .nav-link:focus-visible::after { opacity: .7; }
+
+.nav-glass .nav-link[aria-current="page"] {
+  border-color: rgba(185, 192, 241, .45);
+  background: linear-gradient(115deg, rgba(26, 31, 72, .8), rgba(58, 54, 117, .63) 62%, rgba(72, 51, 123, .62));
+}
+
+.nav-icon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #b9c6ff;
+  opacity: .85;
+  transition: color .25s ease, opacity .25s ease, transform .35s cubic-bezier(.2, 1.3, .3, 1);
+}
+
+.nav-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-link:hover .nav-icon,
+.nav-link:focus-visible .nav-icon {
+  color: #e3e9ff;
+  opacity: 1;
+  transform: translateY(-1px) rotate(-4deg);
+}
+
+@media (min-width: 901px) and (max-width: 1279px) {
+  .nav-glass { gap: 5px; }
+  .nav-glass .nav-link { gap: 6px; padding: 0 10px; }
+  .nav-icon, .nav-icon svg { width: 15px; height: 15px; }
+}
+
+@media (max-width: 900px) {
+  .nav-glass {
+    gap: 11px;
+    padding: max(96px, calc(env(safe-area-inset-top) + 88px)) 22px 32px;
+    background: rgba(5, 7, 26, .66);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+  }
+  .nav-glass .nav-link {
+    height: 56px;
+    padding: 0 18px;
+    justify-content: flex-start;
+    gap: 14px;
+    border-color: rgba(167, 178, 231, .31);
+    border-radius: 9px;
+    background: linear-gradient(115deg, rgba(18, 24, 61, .82), rgba(48, 42, 102, .69));
+    font-size: 18px;
+  }
+  .nav-icon, .nav-icon svg { width: 19px; height: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-glass .nav-link,
+  .nav-glass .nav-link::before,
+  .nav-glass .nav-link::after,
+  .nav-icon { transition: none !important; }
+  .nav-glass .nav-link:hover,
+  .nav-glass .nav-link:focus-visible,
+  .nav-link:hover .nav-icon,
+  .nav-link:focus-visible .nav-icon { transform: none; }
+}

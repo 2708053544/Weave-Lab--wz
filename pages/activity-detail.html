@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -47,7 +47,7 @@
           <span class="nav-link active">活动与合作 ▾</span>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
-            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
@@ -106,9 +106,7 @@
   <!-- Poster -->
   <section class="section" style="padding-top: 0;">
     <div class="container-narrow">
-      <div class="fade-in" style="aspect-ratio: 16/9; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-        <span style="color: var(--text-secondary); font-size: 0.9rem;">活动海报待补充</span>
-      </div>
+      <div class="fade-in" style="aspect-ratio: 16/9; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background-size: cover; background-position: center;" id="actPoster"></div>
     </div>
   </section>
 
@@ -138,18 +136,13 @@
   </section>
 
   <!-- Gallery -->
-  <section class="section">
+  <section class="section" id="gallerySection">
     <div class="container">
       <div class="container-narrow" style="margin-bottom: 48px;">
         <h2 class="fade-in">活动精彩瞬间</h2>
         <p class="text-secondary fade-in">活动现场照片回顾</p>
       </div>
-      <div class="detail-gallery fade-in">
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-        <div class="detail-gallery-item placeholder-pulse"></div>
-      </div>
+      <div class="detail-gallery fade-in" id="actGallery"></div>
     </div>
   </section>
 
@@ -186,15 +179,15 @@
           <h4>活动与合作</h4>
           <div class="footer-links">
             <a href="activities.html">活动</a>
-            <a href="cooperation.html">合作资源</a>
+            <a href="activities.html#partners">合作资源</a>
           </div>
         </div>
         <div class="footer-column">
           <h4>联系方式</h4>
           <div class="footer-links">
-            <a href="contact.html">创新设计大楼 502 室</a>
-            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
-            <a href="tel:+8651088886666">0510-8888 6666</a>
+            <a href="contact.html">五教二楼201</a>
+            <a href="mailto:1016520133@qq.com">1016520133@qq.com</a>
+            <a href="tel:18622027625">18622027625（张老师）</a>
           </div>
         </div>
       </div>
@@ -212,54 +205,42 @@
   <script src="../js/main.js"></script>
   <script>
     const activityData = {
-      "1": {
-        name: "生成式设计与未来创造力·主题讲座", date: "2024年11月15日", location: "创新设计大楼报告厅", type: "学术讲座",
-        intro: "特邀头部科技企业设计总监，分享 AIGC 时代设计师的角色转变、工具链变革与真实项目实战案例，探讨“当机器会画画，设计师画什么”。",
-        detail: "讲座分为主题分享与圆桌对话两个环节。嘉宾从“设计师会被 AI 取代吗”这一热议话题切入，结合真实项目展示了从需求洞察、概念发散到方案落地的完整 AIGC 工作流，并分享了对行业变化的判断。圆桌环节，工作室成员与嘉宾就“如何建立不可替代的设计能力”展开热烈讨论。",
-        review: "活动现场座无虚席，会后同学们围着嘉宾交流至散场。不少同学表示“第一次直观感受到 AI 不是威胁，而是放大器”。本次讲座也为工作室后续开展 AIGC 课程共建埋下伏笔。",
-        guests: ["主讲嘉宾：头部科技企业设计总监（从业 12 年，主导多款现象级产品体验设计）", "对谈主持：林雨薇（工作室 AI 方向负责人）", "特邀分享：刘一诺（工作室 AIGC 工具内测负责人）"]
+      "7": {
+        name: "北京\"淮扬春\"餐饮老字号活化项目", date: "2024年", location: "北京", type: "校企合作",
+        tag: "与贤服务设计",
+        poster: "../images/activities/activity-huaiyangchun.jpg",
+        intro: "与与贤服务设计实验室合作，围绕北京淮扬春餐饮老字号开展活化设计，通过服务设计方法重塑品牌体验与空间叙事。",
+        detail: "本次合作以北京淮扬春餐饮老字号为研究对象，团队深入调研品牌历史与经营现状，从服务设计视角全面梳理顾客旅程触点。通过实地走访、用户访谈、竞品分析等方法，挖掘品牌核心价值与活化机会点，在空间体验、服务流程、品牌视觉等多个维度提出系统性创新方案。",
+        review: "项目成果获得合作方高度认可，部分方案已进入落地实施阶段。工作室成员在项目中深度参与从调研到方案输出的全流程，积累了宝贵的服务设计实战经验，也为老字号品牌焕新贡献了青年设计力量。",
+        guests: ["合作机构：与贤服务设计实验室", "项目指导：张寞轩老师", "参与成员：工作室服务设计方向成员"],
+        gallery: []
       },
-      "2": {
-        name: "Arduino 互动装置工作坊", date: "2024年09月21日", location: "创新设计大楼 502 室", type: "设计工作坊",
-        intro: "面向新成员的入门级硬件工作坊，从零完成“会呼吸的灯”互动装置，在动手中体验软硬结合的乐趣。",
-        detail: "工作坊由硬件组长张若晨主讲，从电路基础讲到传感器原理，随后进入实操环节：每位参与者基于 Arduino 与光敏传感器，完成一盏能随环境光“呼吸”的互动灯装置。助教全程巡回辅导，确保零基础同学也能完整走通“接线—编程—调参”流程。",
-        review: "三个小时的工作坊气氛热烈，共 24 名新成员完成作品。不少装置被同学们带回宿舍继续魔改——有人加装了声音传感器，有人改成了 RGB 灯带。本次工作坊也成为新成员融入工作室的“破冰”第一步。",
-        guests: ["主讲人：张若晨（工作室硬件组长）", "助教：吴沛霖（物联网方向）", "助教：王梓轩（工作室队长）"]
+      "8": {
+        name: "2025全球服务设计共创节", date: "2025年", location: "线上+线下", type: "共创活动",
+        tag: "与贤服务设计",
+        poster: "../images/activities/activity-gsc.jpg",
+        intro: "联合与贤服务设计实验室共同举办，汇聚全球服务设计从业者，围绕服务创新主题开展共创工作坊与主题分享。",
+        detail: "2025全球服务设计共创节汇聚了来自海内外的服务设计从业者、学者与学生。活动设有主题演讲、工作坊、案例展示等多个板块，围绕服务创新的前沿趋势与实践方法展开深入交流。工作室成员深度参与活动筹备与执行，并在工作坊环节带领小组完成共创任务。",
+        review: "共创节期间产出了多项富有创意的服务设计方案，工作室成员通过与全球从业者的交流拓展了国际视野，也在实践中锻炼了组织协调与设计引导能力。活动的成功举办进一步提升了工作室在服务设计领域的影响力。",
+        guests: ["联合主办：与贤服务设计实验室", "参与嘉宾：全球服务设计领域专家学者", "参与方式：线上直播+线下工作坊"],
+        gallery: []
       },
-      "3": {
-        name: "2024届毕业设计作品展", date: "2024年06月08日", location: "大学城校区美术馆", type: "作品展览",
-        intro: "工作室 2024 届毕业生作品集中展出，涵盖医疗产品、无障碍设计、可持续设计等方向，向全校师生开放参观。",
-        detail: "本次展览共展出 2024 届毕业生的 6 件毕业设计作品，包括获红点设计概念奖的「忆路」认知辅助产品、获 iF 设计新秀奖的「声桥」手语翻译终端等。展览按“健康、无碍、可持续”三个主题分区布置，每件作品旁附有二维码，扫码可观看作者讲解视频。",
-        review: "为期一周的展览累计接待参观者逾千人次，多件作品收到校内外合作意向。展览闭幕当天，工作室举行了简单而温馨的毕业欢送会，学长学姐们将设计过程稿留给了工作室资料库。",
-        guests: ["策展人：陈明远（实验室主任）", "展览统筹：周诗涵、赵天宇（2024届毕业生）", "视觉设计：孙佳琪（工作室品牌方向）"]
-      },
-      "4": {
-        name: "医疗器械企业参访交流", date: "2024年04月13日", location: "云栖机器人研发中心", type: "企业参访",
-        intro: "走进云栖机器人研发中心，观摩手术机器人装配调试与临床测试流程，并与企业工程师面对面交流。",
-        detail: "参访团一行 18 人首先参观了手术机器人的装配产线与测试实验室，观摩了主从操控系统的联调过程；随后进入临床测试模拟室，工程师现场演示了模拟手术操作。在交流环节，企业研发负责人介绍了医疗器械设计从概念到注册取证的全流程，并就人因工程规范做了专题分享。",
-        review: "“课本上的‘设计约束’，在产线上变得具体而真实。”这是参访同学最集中的反馈。本次参访也促成工作室与企业在力反馈操控课题上的新一轮合作，两位工作室成员获得暑期实习机会。",
-        guests: ["企业接待：云栖机器人研发总监", "专题分享：企业人因工程负责人", "带队老师：陈明远"]
-      },
-      "5": {
-        name: "服务设计 48 小时共创营", date: "2023年11月18日", location: "青禾社区服务中心", type: "共创工作坊",
-        intro: "联合青禾社区，围绕居家养老主题完成用户调研、原型共创与方案汇报的全流程实战。",
-        detail: "共创营采用“48 小时不间断”模式：第一天上午完成社区实地走访与老人深度访谈，下午进行洞察提炼与机会点定义；第二天集中进行服务原型设计与快速验证，晚间向社区代表进行方案汇报。郑凯文老师全程引导服务设计方法的应用。",
-        review: "本次共创营产出 3 套社区助老服务方案，其中“时间银行”互助方案被社区采纳并进入试点筹备。参与同学第一次体会到“设计真的可以改变一个社区的日常”。",
-        guests: ["引导师：郑凯文（服务设计方向负责人）", "社区代表：青禾社区养老站站长", "观察员：李思彤（服务设计方向）"]
-      },
-      "6": {
-        name: "新学期纳新见面会", date: "2023年09月16日", location: "创新设计大楼报告厅", type: "招新宣讲",
-        intro: "工作室招新宣讲，四位导师介绍八大研究方向，60 余名同学现场交流互动，现场气氛热烈。",
-        detail: "见面会由工作室队长王梓轩主持。四位导师依次介绍了手术机器人、AI、服务设计、市场营销等八大研究方向的研究重点与培养方式；随后老成员分享了自己在工作室的成长故事。在自由交流环节，同学们围绕“零基础能否加入”“如何平衡课业与项目”等问题与导师、学长学姐展开讨论。",
-        review: "本次见面会共收到报名表 47 份，经过两轮面试后 21 名新成员加入工作室，为历年纳新规模之最。见面会现场展示的毕设作品与获奖证书也成为新生们讨论的焦点。",
-        guests: ["主持：王梓轩（工作室队长）", "导师团队：张寞轩、刘海斌、边元、苏俊旭", "老成员分享：李思彤、赵天宇"]
+      "9": {
+        name: "河北翼龙航空产教融合深度战略合作", date: "2025年", location: "河北", type: "产教融合",
+        tag: "翼龙航空",
+        poster: "../images/activities/activity-yilong.jpg",
+        intro: "与河北翼龙航空科技有限公司达成深度战略合作，共建无人机全资质教育基地，搭建无人机专项课程，孵化专业实践项目。",
+        detail: "根据战略合作协议，双方将在多个维度开展深度合作：共建无人机全资质教育基地，为学生提供专业的无人机操作培训与资质认证；联合开发无人机专项课程，将行业前沿技术融入教学体系；孵化专业实践项目，让学生在真实项目中锻炼无人机应用设计能力。",
+        review: "本次战略合作标志着工作室在无人机产教融合领域迈出重要一步。通过与行业领先企业的深度合作，学生将有机会接触最前沿的无人机技术与应用场景，在真实项目中提升实践能力，为未来职业发展奠定坚实基础。",
+        guests: ["合作企业：河北翼龙航空科技有限公司", "合作内容：无人机教育基地、专项课程、实践项目", "受益方向：工作室无人机与交互设计方向成员"],
+        gallery: []
       }
     };
 
     function renderActivityDetail() {
       const params = new URLSearchParams(window.location.search);
       let id = params.get('id');
-      if (!id || !activityData[id]) id = '1';
+      if (!id || !activityData[id]) id = '7';
       const data = activityData[id];
 
       document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
@@ -272,6 +253,22 @@
       document.getElementById('actDetail').textContent = data.detail;
       document.getElementById('actReview').textContent = data.review;
       document.getElementById('actGuests').innerHTML = data.guests.map(g => '<div class="detail-list-item">' + g + '</div>').join('');
+
+      // Poster
+      const posterEl = document.getElementById('actPoster');
+      if (data.poster) {
+        posterEl.style.backgroundImage = 'url(' + data.poster + ')';
+      }
+
+      // Gallery
+      const gallerySection = document.getElementById('gallerySection');
+      const galleryEl = document.getElementById('actGallery');
+      if (data.gallery && data.gallery.length > 0) {
+        gallerySection.style.display = 'block';
+        galleryEl.innerHTML = data.gallery.map(img => '<div class="detail-gallery-item" style="background-image: url(' + img + '); background-size: cover; background-position: center;"></div>').join('');
+      } else {
+        gallerySection.style.display = 'none';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', function () {

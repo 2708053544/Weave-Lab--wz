@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <title>关于工作室 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="了解 Weave Lab 智能体验与服务工程实验室的导师团队和学生成员">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/mentors-3d.css">
+  <link rel="stylesheet" href="../css/mentors-3d.css?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@
         <div class="nav-item">
           <span class="nav-link active">关于工作室 ▾</span>
           <div class="nav-dropdown">
-            <a href="mentors.html" class="dropdown-item">指导老师</a>
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <span class="nav-link">活动与合作 ▾</span>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
-            <a href="cooperation.html" class="dropdown-item">合作资源</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
@@ -116,7 +116,7 @@
           </div>
           <div class="m3-info-row">
             <span class="m3-info-key">个人博客</span>
-            <a class="m3-info-val m3-info-link" id="m3Blog" href="#">—</a>
+            <a class="m3-info-val m3-info-link" id="m3Blog" href="#" target="_blank" rel="noopener">—</a>
           </div>
         </div>
         <span class="m3-info-hint">滚动切换 · 点击卡片查看详情</span>
@@ -155,12 +155,12 @@
     <div class="student-3d-carousel fade-in" id="student3DCarousel">
       <div class="student-3d-stage" id="student3DStage">
         <div class="student-3d-card" data-index="0" onclick="location.href='student-detail.html?id=1'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student1.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
-            <span class="student-3d-role">队长</span>
-            <h3 class="student-3d-name">王梓轩</h3>
-            <p class="student-3d-info">研三 · 产品设计 · 工作室队长</p>
-            <div class="student-3d-tags"><span>手术机器人</span><span>智能硬件</span></div>
+            <span class="student-3d-role">工作室负责人</span>
+            <h3 class="student-3d-name">郝康含</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 产品设计3班</p>
+            <div class="student-3d-tags"><span>项目管理</span><span>产品设计</span></div>
           </div>
           <div class="student-3d-num">01</div>
         </div>
@@ -169,68 +169,68 @@
           <div class="student-3d-overlay">
             <span class="student-3d-role">工作室副负责人</span>
             <h3 class="student-3d-name">贾静瑄</h3>
-            <p class="student-3d-info">产品设计四班 · 工作室副负责人</p>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 产品设计4班</p>
             <div class="student-3d-tags"><span>产品设计</span><span>数智传媒</span></div>
           </div>
           <div class="student-3d-num">02</div>
         </div>
         <div class="student-3d-card" data-index="2" onclick="location.href='student-detail.html?id=3'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student3.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
-            <span class="student-3d-role">硬件组长</span>
-            <h3 class="student-3d-name">张若晨</h3>
-            <p class="student-3d-info">研二 · 工业设计工程 · 硬件组长</p>
-            <div class="student-3d-tags"><span>智能硬件</span><span>嵌入式开发</span></div>
+            <span class="student-3d-role">实验设备负责人</span>
+            <h3 class="student-3d-name">贾梦晴</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 智能交互1班</p>
+            <div class="student-3d-tags"><span>设备管理</span><span>智能交互</span></div>
           </div>
           <div class="student-3d-num">03</div>
         </div>
         <div class="student-3d-card" data-index="3" onclick="location.href='student-detail.html?id=4'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student4.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
-            <span class="student-3d-role">数据负责人</span>
-            <h3 class="student-3d-name">刘一诺</h3>
-            <p class="student-3d-info">研二 · 设计学 · 数据与AI应用</p>
-            <div class="student-3d-tags"><span>AI应用</span><span>数据可视化</span></div>
+            <span class="student-3d-role">核心成员</span>
+            <h3 class="student-3d-name">陈俞菲</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 产品设计4班</p>
+            <div class="student-3d-tags"><span>产品设计</span><span>用户体验</span></div>
           </div>
           <div class="student-3d-num">04</div>
         </div>
         <div class="student-3d-card" data-index="4" onclick="location.href='student-detail.html?id=5'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student5.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
             <span class="student-3d-role">核心成员</span>
-            <h3 class="student-3d-name">赵天宇</h3>
-            <p class="student-3d-info">大四 · 产品设计 · 2024届</p>
-            <div class="student-3d-tags"><span>VR/AR</span><span>空间交互</span></div>
+            <h3 class="student-3d-name">武思琪</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 产品设计4班</p>
+            <div class="student-3d-tags"><span>产品设计</span><span>视觉设计</span></div>
           </div>
           <div class="student-3d-num">05</div>
         </div>
         <div class="student-3d-card" data-index="5" onclick="location.href='student-detail.html?id=6'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student6.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
             <span class="student-3d-role">核心成员</span>
-            <h3 class="student-3d-name">周诗涵</h3>
-            <p class="student-3d-info">大四 · 产品设计 · 2024届</p>
-            <div class="student-3d-tags"><span>产品造型</span><span>CMF设计</span></div>
+            <h3 class="student-3d-name">唐月淼</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 24级 · 产品设计3班</p>
+            <div class="student-3d-tags"><span>产品设计</span><span>创意设计</span></div>
           </div>
           <div class="student-3d-num">06</div>
         </div>
         <div class="student-3d-card" data-index="6" onclick="location.href='student-detail.html?id=7'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student7.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
             <span class="student-3d-role">核心成员</span>
-            <h3 class="student-3d-name">吴沛霖</h3>
-            <p class="student-3d-info">大三 · 产品设计 · 物联网方向</p>
-            <div class="student-3d-tags"><span>智能家居</span><span>物联网</span></div>
+            <h3 class="student-3d-name">吴婷婷</h3>
+            <p class="student-3d-info">数智传媒与设计艺术学院 · 25级 · 智能交互设计1班</p>
+            <div class="student-3d-tags"><span>智能交互</span><span>交互设计</span></div>
           </div>
           <div class="student-3d-num">07</div>
         </div>
         <div class="student-3d-card" data-index="7" onclick="location.href='student-detail.html?id=8'">
-          <div class="student-3d-img placeholder-pulse"></div>
+          <div class="student-3d-img" style="background-image: url('../images/students/student8.jpg'); background-size: cover; background-position: center;"></div>
           <div class="student-3d-overlay">
             <span class="student-3d-role">核心成员</span>
-            <h3 class="student-3d-name">孙佳琪</h3>
-            <p class="student-3d-info">大三 · 视觉传达设计 · 品牌方向</p>
-            <div class="student-3d-tags"><span>品牌设计</span><span>新媒体运营</span></div>
+            <h3 class="student-3d-name">郭一铭</h3>
+            <p class="student-3d-info">数字传媒与设计艺术学院 · 25级 · 智能交互设计1班</p>
+            <div class="student-3d-tags"><span>智能交互</span><span>产品设计</span></div>
           </div>
           <div class="student-3d-num">08</div>
         </div>
@@ -283,15 +283,15 @@
           <h4>活动与合作</h4>
           <div class="footer-links">
             <a href="activities.html">活动</a>
-            <a href="cooperation.html">合作资源</a>
+            <a href="activities.html#partners">合作资源</a>
           </div>
         </div>
         <div class="footer-column">
           <h4>联系方式</h4>
           <div class="footer-links">
-            <a href="contact.html">创新设计大楼 502 室</a>
-            <a href="mailto:contact@weavelab.com">contact@weavelab.com</a>
-            <a href="tel:+8651088886666">0510-8888 6666</a>
+            <a href="contact.html">五教二楼201</a>
+            <a href="mailto:1016520133@qq.com">1016520133@qq.com</a>
+            <a href="tel:18622027625">18622027625（张老师）</a>
           </div>
         </div>
       </div>
@@ -407,7 +407,7 @@
       goToSlide(0);
     })();
   </script>
-  <script src="../js/mentors-3d.js"></script>
+  <script src="../js/mentors-3d.js?v=4"></script>
   <script>
     document.getElementById('m3Total').textContent = TEACHERS.length;
   </script>
