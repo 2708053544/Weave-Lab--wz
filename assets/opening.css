@@ -1,0 +1,180 @@
+/* This layer sits in front of the existing page and leaves its layout untouched. */
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #07060b;
+  color: #fff;
+  transition: background .95s cubic-bezier(.24,.7,.16,1), opacity .35s ease;
+}
+.opening::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 50% 36% at 52% 49%, rgba(111, 19, 41, .17), transparent 82%);
+  transition: opacity 1.3s;
+}
+.opening.is-cooling { background: #080715; }
+.opening.is-cooling::before { opacity: 0; }
+.opening.is-bursting { background: rgba(5,5,16,.04); }
+.opening.is-done { opacity: 0; pointer-events: none; }
+.opening-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.opening-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 24px;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity .22s, transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.opening-kicker {
+  display: block;
+  margin-bottom: clamp(22px, 4vh, 44px);
+  color: rgba(255,255,255,.53);
+  font-size: clamp(10px, .9vw, 13px);
+  font-weight: 500;
+  letter-spacing: .36em;
+  animation: opening-caption .8s .1s both;
+}
+.opening-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: clamp(66px, 17vw, 210px);
+  font-weight: 590;
+  line-height: 1;
+  letter-spacing: -.075em;
+}
+.opening-title > span {
+  display: inline-block;
+  transform-origin: 50% 75%;
+  animation: opening-letter .8s cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(.28s + var(--i) * .085s);
+}
+.opening-title .opening-space { width: .28em; animation: none; }
+.opening-title .opening-lab {
+  color: var(--opening-lab-color, #c66f81);
+  font-family: 'Instrument Serif', 'Times New Roman', Times, serif;
+  font-size: 1.08em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+.opening-tagline {
+  margin-top: clamp(22px, 4vh, 48px);
+  color: rgba(236,230,255,.72);
+  font-size: clamp(13px, 1.4vw, 18px);
+  font-weight: 300;
+  letter-spacing: .25em;
+  animation: opening-caption .8s 1.4s both;
+}
+.opening-tagline-en {
+  display: block;
+  margin-top: 10px;
+  color: rgba(236,230,255,.55);
+  font-size: .8em;
+  letter-spacing: .09em;
+}
+.opening-index, .opening-skip {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: .18em;
+  transition: opacity .16s;
+}
+.opening-index { left: clamp(22px, 5vw, 80px); color: rgba(255,255,255,.43); }
+.opening-index b { color: #c66f81; font-weight: 400; }
+.opening-skip {
+  right: clamp(22px, 5vw, 80px);
+  padding: 10px 0 10px 14px;
+  color: rgba(255,255,255,.72);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.opening-skip:hover, .opening-skip:focus-visible { color: #fff; }
+.opening-skip span { margin-left: 10px; color: #b9a5ff; }
+.opening.is-bursting .opening-copy { opacity: 0; transform: scale(1.07); }
+.opening.is-bursting .opening-index, .opening.is-bursting .opening-skip { opacity: 0; pointer-events: none; }
+body.opening-active { overflow: hidden !important; }
+body.opening-active .page .appear:not(.hero-word) { animation-play-state: paused; }
+body.opening-active.opening-burst .header .appear,
+body.opening-active.opening-burst .badge,
+body.opening-active.opening-burst .stats .appear { animation-play-state: running; }
+body.opening-active:not(.opening-burst) .badge-star { animation-play-state: paused; }
+body.opening-burst .hero-title.is-written .hero-cn { animation-delay: .1s; }
+body.opening-burst .lede { animation-delay: .18s; }
+body.opening-burst .hero-actions .appear:first-child { animation-delay: .28s; }
+body.opening-burst .hero-actions .appear:last-child { animation-delay: .38s; }
+.hero-photo .hero-trail-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.hero h1 .hero-cn { font-size: .64em; font-weight: 400; letter-spacing: .015em; }
+.hero-title .hero-jump-letter { display: inline-block; }
+.hero-title .hero-word .hero-jump-letter {
+  transition: text-shadow .25s ease, filter .25s ease;
+}
+.hero-title .hero-word .hero-jump-letter.is-traced {
+  text-shadow: 0 0 .12em rgba(255,255,255,.75), 0 0 .4em rgba(167,145,255,.9);
+  filter: brightness(1.2);
+}
+body.opening-active .hero-title .hero-jump-letter { opacity: 0; transform: none; }
+.hero-title.is-writing .hero-word .hero-jump-letter {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 calc(100% - var(--ink-progress, 0%)) 0 0);
+}
+.hero-title.is-writing.is-written .hero-word .hero-jump-letter { clip-path: none; }
+.hero-title.is-written .hero-cn .hero-jump-letter {
+  animation: hero-letter-jump .88s both;
+  animation-delay: calc(.1s + var(--i) * .072s);
+}
+.hero-title.is-jumping .hero-jump-letter {
+  animation: hero-letter-jump .88s both;
+  animation-delay: calc(.28s + var(--i) * .075s);
+}
+.hero-title.is-jumping .hero-cn .hero-jump-letter {
+  animation-delay: calc(.74s + var(--i) * .072s);
+}
+
+@keyframes hero-letter-jump {
+  0% { opacity: 0; transform: translateY(.65em) rotate(-5deg) scale(.88); }
+  57% { opacity: 1; transform: translateY(-.18em) rotate(2deg) scale(1.07); }
+  76% { transform: translateY(.06em) rotate(-1deg) scale(.98); }
+  100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+}
+
+@keyframes opening-letter {
+  from { opacity: 0; filter: blur(16px); transform: translateY(.55em) rotateX(-70deg); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0) rotateX(0); }
+}
+@keyframes opening-caption {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .opening-title { font-size: clamp(50px, 14.5vw, 82px); }
+  .opening-kicker { font-size: 9px; letter-spacing: .2em; }
+  .opening-tagline { letter-spacing: .14em; }
+  .opening-index, .opening-skip { bottom: max(20px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening { display: none; }
+  .opening *, .opening::before { animation: none !important; transition: none !important; }
+}
