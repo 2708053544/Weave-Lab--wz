@@ -862,12 +862,17 @@ h4 {
   cursor: grabbing;
 }
 
-.scroll-container {
-  scrollbar-width: none;
+.scroll-container::-webkit-scrollbar {
+  height: 4px;
 }
 
-.scroll-container::-webkit-scrollbar {
-  display: none;
+.scroll-container::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 2px;
 }
 
 .scroll-card {
@@ -895,7 +900,17 @@ h4 {
   overflow: hidden;
 }
 
-.scroll-card-image::before { display: none; }
+.scroll-card-image::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border: 2px dashed var(--border-color);
+  border-radius: 50%;
+}
 
 .scroll-card-content {
   padding: 24px;
