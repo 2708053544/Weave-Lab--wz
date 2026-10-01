@@ -112,8 +112,11 @@
     </div>
   </section>
 
+  <!-- UAV 专属内容注入区（仅 id=5 使用） -->
+  <div id="uavContent"></div>
+
   <!-- Design Background -->
-  <section class="detail-section">
+  <section class="detail-section" id="secBackground">
     <div class="container-narrow">
       <h2 class="fade-in">设计背景</h2>
       <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projBackground">
@@ -123,7 +126,7 @@
   </section>
 
   <!-- Design Concept -->
-  <section class="detail-section" style="background: var(--bg-secondary);">
+  <section class="detail-section" style="background: var(--bg-secondary);" id="secConcept">
     <div class="container-narrow">
       <h2 class="fade-in">设计思路</h2>
       <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projConcept">
@@ -133,7 +136,7 @@
   </section>
 
   <!-- More Images -->
-  <section class="section">
+  <section class="section" id="secMoreImages">
     <div class="container">
       <div class="detail-gallery fade-in">
         <div class="detail-gallery-item placeholder-pulse"></div>
@@ -145,7 +148,7 @@
   </section>
 
   <!-- Team & Results -->
-  <section class="detail-section" style="background: var(--bg-secondary);">
+  <section class="detail-section" style="background: var(--bg-secondary);" id="secResults">
     <div class="container-narrow">
       <h2 class="fade-in">设计成果与落地效果</h2>
       <div class="detail-list fade-in" id="projResults">
@@ -166,7 +169,7 @@
   </section>
 
   <!-- Video Placeholder -->
-  <section class="section">
+  <section class="section" id="secVideo">
     <div class="container-narrow">
       <h2 class="fade-in text-center">展示视频</h2>
       <div class="fade-in" style="aspect-ratio: 16/9; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; margin-top: 32px;">
@@ -267,20 +270,95 @@
         teamList: ["指导老师：林雨薇", "项目负责人：赵天宇", "算法支持：刘一诺", "人因测试：李思彤"]
       },
       "5": {
-        name: "腔镜手术机器人系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "王梓轩、张若晨",
-        intro: "面向腹腔微创手术的主从式机器人操作平台，聚焦医生操控端的力反馈体验与手术安全设计，是与云栖机器人联合研发的代表性成果。",
-        background: "微创手术对医生的操作精度与手感经验要求极高，传统腔镜器械存在“触觉缺失、操作疲劳、学习曲线长”三大痛点。与云栖机器人的联合实验室项目聚焦于操控端体验的人因优化。",
-        concept: "以“把手感还给医生”为设计目标，通过主端力反馈操控器还原组织触感，配合可调节的操控姿态与自适应操作系统降低长时间手术疲劳；整体设计遵循医疗器械的人因工程规范。",
-        results: ["完成主端操控器三代迭代", "完成 40 例模拟手术操作实验", "发表核心期刊论文 1 篇", "校企联合实验室年度重点项目"],
-        teamList: ["指导老师：陈明远", "项目负责人：王梓轩", "控制系统：张若晨", "造型设计：周诗涵"]
+        name: "无人机选种 AI 系统", category: "工作室项目", year: "", type: "", mentor: "", team: "",
+        intro: "无人机选种 AI 系统 —— 一套面向作物育种的智慧表型识别服务",
+        metaItems: [
+          { label: "项目类型", value: "服务设计 / 智慧农业" },
+          { label: "合作方", value: "十五堂（天津）文化科技有限公司" },
+          { label: "协作单位", value: "无人机选种 AI 系统 · 翼龙航空" },
+          { label: "服务形式", value: "农田数据采集方案 + AI 表型识别流程设计" }
+        ],
+        background: "传统作物育种，靠科研人员一块田一块田下地目测、逐株记录。一块试验田里往往有上万个育种材料，哪株高产、哪株抗病、哪株抗逆，过去全凭经验和肉眼。这种方式不仅慢，而且很多早期长势差异藏在叶片内部，人眼看着还绿，其实已经弱苗、带病。育种一个周期常常要八到十年，其中“选”这一步，最耗时、也最容易漏判。\n无人机技术已经从过去的喷药植保，走向智能化、多功能化；AI 也开始进入农业决策。我们想做的，就是把这两件事接在一起——让无人机当“空中巡田员”，让 AI 当“选种分析师”。",
+        problems: [
+          "大面积试验田人工巡查慢，覆盖不全，田间深处看不过来",
+          "高产、抗病等优良性状早期差异肉眼难辨，容易错过最佳筛选窗口",
+          "选种记录零散、缺时序数据，决策靠经验、难追溯",
+          "传统育种周期长，筛选环节是压缩周期的关键瓶颈"
+        ],
+        solution: "由无人机按预设航线自动巡航试验田，搭载可见光与多光谱传感器，采集作物影像与光谱数据；AI 模型对数据做实时处理，快速解析株高、叶色、长势、健康度等表型指标，自动标记具有优良性状（如高产、抗病）的候选单株，并为每一份育种材料生成全生育期的数据档案。\n简单说：人不用下田挨株看，飞一圈、算一遍，好苗子自己被标出来。",
+        flow: [
+          { step: "01", title: "航线规划", desc: "按试验田分区与育种材料排布，设计无人机巡航航线与采样频次" },
+          { step: "02", title: "空中采集", desc: "无人机搭载多光谱吊舱自动飞行，获取可见光影像与光谱数据" },
+          { step: "03", title: "AI 解析", desc: "模型计算植被指数、识别表型差异，自动圈出候选优良单株" },
+          { step: "04", title: "数据交付", desc: "输出长势热力图、异常点位清单与选种建议，形成可追溯的数据台账" }
+        ],
+        partners: [
+          { role: "服务设计与项目整合", org: "十五堂（天津）文化科技", duty: "需求梳理、服务流程设计、用户体验与落地推进" },
+          { role: "飞行平台与航测作业", org: "翼龙航空", duty: "无人机航线执行、田间数据采集、机载传感保障" },
+          { role: "算法与数据平台", org: "无人机选种 AI 系统", duty: "影像处理、表型解析、优良单株识别与数据建模" }
+        ],
+        value: [
+          "更快：连片试验田由“天级人工巡查”变为“小时级航测普查”",
+          "更准：多光谱捕捉肉眼不可见的生理信号，提前识别弱苗、病株",
+          "更可追溯：每一株候选材料都有全生育期时序数据，选种决策有据可依",
+          "更长线：数据不只用于选种，还能贯穿种植规划、田间管理到采后评估，沉淀成一块田的数字底座"
+        ],
+        industry: "无人机正从基础植保向智能化、多功能化跃迁，新一代机型深度融合环境感知、自主协同与高精度传感，推动“空—天—地”一体化的作物表型解析；AI 则在重塑农业决策方式——通过智能育种平台压缩传统育种周期，用数据贯穿从一粒种子到一片田的全链条。我们做的，正是这条链路里“用 AI 选好种”的那一环。",
+        coverImage: "../images/uav-cover.jpg",
+        solutionImage: "../images/uav-field.jpg",
+        flowImage: "../images/uav-drone.jpg"
       },
       "6": {
-        name: "AI辅助产品设计工具", category: "工作室项目", year: "2024年", type: "工作室自研项目", mentor: "林雨薇", team: "刘一诺、赵天宇",
-        intro: "基于生成式 AI 的概念草图与方案发散辅助系统，将 AI 融入设计前期工作流，帮助设计师更快地“想得更多、看得更远”。",
-        background: "生成式 AI 正在重塑设计工作流，但通用工具缺乏对产品设计场景的针对性：概念发散难以控制、风格难以延续、结果难以评估。工作室基于三年教学与项目经验，探索面向产品设计的 AI 辅助范式。",
-        concept: "以“设计师的灵感织机”为隐喻，构建“文字—草图—渲染”三级生成链路，内置产品造型语言约束与评估反馈模块；AI 不替代设计师决策，而是提供可控的发散与跳变，让灵感像织物一样在指尖流转。",
-        results: ["完成工具内测版并接入工作室教学", "覆盖 3 门课程、60 余名学生使用", "获省级教学创新成果", "形成 3 份设计范式研究报告"],
-        teamList: ["指导老师：林雨薇", "产品负责人：刘一诺", "交互开发：赵天宇", "内测组织：李思彤"]
+        name: "WonderWash 智能洗衣归集方案", category: "工作室项目", year: "", type: "", mentor: "", team: "",
+        intro: "面向 WonderWash 全系智能洗衣设备的归集与支付服务设计",
+        metaItems: [
+          { label: "项目类型", value: "服务设计 / 智能设备解决方案" },
+          { label: "客户", value: "WonderWash（新加坡规模最大的自助洗衣公司）" },
+          { label: "交付内容", value: "全系设备归集方案 · 三套技术路线对比 · 支付与账单流程设计" }
+        ],
+        background: "WonderWash 在新加坡运营大量自助洗衣门店，设备分散在社区、商圈、旅游区。早期设备各成一体：要投币、要换币、要看守店员，设备之间数据不通，钱和账单也对不齐。随着门店越开越多，老板真正头疼的不是“有没有人来洗衣服”，而是：\n每台机器收了多少钱，靠人工对账，慢且容易错；\n用户要带硬币、要等店员，体验差；\n门店 24 小时运营，却没人盯得住每台机器有没有正常启动、有没有漏单；\n不同批次、不同品牌的设备，想统一管理很难。\n我们做的，就是给 WonderWash 全系设备设计一套“归集方案”：把分散的机器、支付和账单，接到同一套系统里。",
+        problems: [
+          "支付归集难：现金、硬币、多种支付方式混杂，无法统一对账",
+          "设备不联网：机器是否启动、洗到哪一步、有没有故障，后台看不见",
+          "体验不顺畅：用户进店要换币、要排队、不知道衣服什么时候洗好",
+          "改造路径纠结：全换硬件成本太高，只改软件又怕不安全——需要一个可比较、可落地的方案选择"
+        ],
+        solutions: [
+          {
+            tag: "方案一：改 API", subtitle: "最轻量",
+            desc: "用户扫描洗衣机上的专属二维码，进入支付界面选好洗涤程序，支付成功后，系统按门店所在区域（社区、商圈、旅游地）匹配对应运营商的微信商户完成收款。后台自动跑账单管理：系统持续对授权用户设备做实时检测，一旦确认某台洗衣机已完成支付，就触发内部消息，向该机器的智能控制模块下发“启动哪一个洗涤程序”的指令，同时更新对应订单金额。控制模块校验数据后，启动电机、进水阀、排水泵等硬件，正式开始洗衣。",
+            feature: "特点：改动小、上线快，先把“扫码—支付—启动”跑通。",
+            image: "../images/wonder-route1.jpg"
+          },
+          {
+            tag: "方案二：改 API + 硬件 + 申请专利", subtitle: "均衡方案",
+            desc: "在方案一的基础上，用户扫同一台机器的二维码进入支付界面，但支付链路升级为 SSL/TLS 加密传输，资金通过银联清算通道完成结算，交易更安全、更合规。这一方案同时配套硬件改造，并形成可申请专利的技术组合。",
+            feature: "特点：在体验和安全性之间取平衡，适合长期主推的主力机型。",
+            image: "../images/wonder-route2.jpg"
+          },
+          {
+            tag: "方案三：入口终端机", subtitle: "完整体验",
+            desc: "在洗衣房入口处部署一台智能终端。用户进店先在终端上选洗衣套餐、刷卡支付，同时获得门禁权限，支付成功即可自由进入店内。洗完后，系统自动向用户银行卡预留手机号发送“洗涤完成”通知。终端侧的支付流程为：计费费用 → POS 验证 → 支付成功 → 生成动态凭证 → 用户入店。整套体系由终端硬件 + 自研软件 + 直连支付构成。",
+            feature: "特点：体验最完整，把“进店—选择—支付—门禁—取衣通知”全部收口到一台终端上。",
+            image: "../images/wonder-route3.jpg"
+          }
+        ],
+        journey: ["扫码选程序", "在线支付", "后台下发启动指令", "设备自动开始洗涤", "实时进度可查", "洗完推送完成通知", "后台自动记账、错峰调度"],
+        comparison: [
+          { row: "改动物体", c1: "软件 / 接口", c2: "软件 + 硬件", c3: "新增入口终端" },
+          { row: "支付方式", c1: "扫码支付、微信商户", c2: "加密传输、银联清算", c3: "终端刷卡、POS 结算" },
+          { row: "安全等级", c1: "基础 SSL/TLS 加密", c2: "SSL/TLS 加密 + 银联清算（更合规）", c3: "门禁 + 动态凭证" },
+          { row: "用户通知", c1: "后台自动账单", c2: "后台自动账单", c3: "完成后短信通知预留手机号" },
+          { row: "适用阶段", c1: "快速试点", c2: "主力机型长期运营", c3: "旗舰店 / 完整体验店" }
+        ],
+        value: [
+          "对 WonderWash：分散设备第一次被归到同一张账单上，每台机器收了多少钱、有没有正常工作，后台一目了然",
+          "对用户：不用换硬币，手机扫码或终端选套餐就能洗，洗完还能收到取衣通知",
+          "对 24 小时门店：靠门禁和动态凭证，没人值守也能安全开门营业",
+          "对后续扩张：三条路线让品牌可以先试点、再主力推广、最后做旗舰店，不用一步到位 all in"
+        ],
+        closing: "自助洗衣看着是个小生意，但它的本质是“无人值守的小型零售网点”。我们做的不是给洗衣机加一个扫码枪，而是把支付、设备、账单和用户通知，重新设计成一套能自己跑起来的系统——这也是 WonderWash 愿意和我们合作的原因：他们需要的不是一台机器，而是一整套可以复制到下一家门店的方法。",
+        coverImage: "../images/wonder-cover.jpg"
       },
       "7": {
         name: "格致 —— 模块化校园家具设计", category: "毕设作品", year: "2023年", type: "产品设计", mentor: "郑凯文", team: "周诗涵",
@@ -299,20 +377,364 @@
         teamList: ["指导老师：林雨薇", "项目负责人：刘一诺", "视觉算法：赵天宇", "用户共创：李思彤"]
       },
       "9": {
-        name: "全屋智能中控系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "吴沛霖、张若晨",
-        intro: "统一控制与多场景联动的家居中枢产品设计，让照明、温控、安防等子系统以“人”为中心协同运转。",
-        background: "全屋智能设备数量激增，但多品牌割裂、操作分散、场景联动僵硬，用户往往需要打开五六个 App 才能完成一次“回家模式”。合作企业希望以一台家庭中枢重新整合全屋体验。",
-        concept: "以“懂你而不打扰你”为设计原则：中控通过无感学习家庭作息自动生成场景建议，重要信息通过环境光与轻触反馈温和传递；同时保留物理旋钮与按键，让老人与孩子也能零门槛使用。",
-        results: ["完成产品定义与造型设计", "完成场景引擎与联调", "完成三代样机与家庭实测", "获企业年度创新产品提名"],
-        teamList: ["指导老师：陈明远", "项目负责人：吴沛霖", "系统架构：张若晨", "用户测试：周诗涵"]
+        name: "输尿管软镜手术机器人系统", category: "工作室项目", year: "", type: "", mentor: "", team: "",
+        intro: "输尿管软镜手术机器人系统 —— 主从遥操作与手术力反馈研究",
+        metaItems: [
+          { label: "项目类型", value: "医疗手术机器人 / 主从遥操作系统" },
+          { label: "项目编号", value: "Project No.1" },
+          { label: "研究内容", value: "三自由度主操作手设计 · 远程遥操作平台 · 肌电负荷对比实验" }
+        ],
+        background: "输尿管软镜是泌尿外科处理肾结石、上尿路病变的重要工具——细而软的内镜从尿道逆行进入，一直伸到肾脏集合系统。但这根“软管子”极考验医生手上功夫：要在体外用两根细导丝操控它弯、摆、前进，手稍微一抖，镜端就在体内晃。长时间操作下来，医生手腕和前臂肌肉高度紧张，疲劳会直接影响精细操作的稳定性。\n手术机器人的思路很直接：医生不再直接捏着镜体，而是坐在主控台后，用主操作手的动作去“映射”体内软镜的运动，机器人把人手的抖动滤掉、把动作缩小，让镜端更稳、更准，也让医生从“站着捏几小时”变成“坐着操作”。",
+        problems: [
+          "徒手操作软镜，镜端稳定性受人手抖动直接影响",
+          "长时间手术医生前臂肌群持续紧张，易疲劳",
+          "精细动作难以稳定缩放，远端到位精度受限",
+          "主操作手的人体工学不友好，长时间操作累手"
+        ],
+        systemSolution: "系统采用主从遥操作架构：医生在主控台侧操作主手，机械端复现对应动作；操作信号通过网络/无线链路传输，支持医生与患者不在同一位置的远程操作。",
+        designPoints: [
+          "集成三自由度主操作手，基于直线驱动实现人机自转与偏航运动",
+          "具备反向驱动自由度，保证医生操作时的力反馈与随手感",
+          "位置分辨率达到 0.2 mm，角度分辨率达到 0.5°",
+          "带独立高度调整机构，调整范围 ±50 mm，适配不同身高与坐姿"
+        ],
+        emgDesc: "项目专门设计了一组对照实验：分别测量医生在徒手操作（Manual）与机器人操作（Robotic）两种方式下，前臂相关肌群（伸腕肌、屈腕肌等）的表面肌电信号 EMG（单位 μV·s），量化比较两种操作方式下的肌肉负荷差异。实验链路包括：肌电传感器采集 —— 计算机处理 —— 操作员/医生端 —— 远端从操作端，验证机器人系统在降低医生操作负荷、提升操作平稳性上的效果。",
+        composition: [
+          { module: "主手侧", content: "三自由度主操作手、力反馈、高度可调座椅与主控台双显示屏" },
+          { module: "从手侧", content: "软镜驱动机构，复现镜体进退、偏转与摆动" },
+          { module: "链路", content: "有线/无线遥操作传输，支持远程手术场景" },
+          { module: "验证", content: "EMG 肌电对照实验，对比手动与机器人操作的肌肉负荷" }
+        ],
+        value: [
+          "更稳：主从映射滤除人手生理抖动，镜端动作更精细可控",
+          "更准：0.2 mm 位置分辨率、0.5° 角度分辨率，支持远端精细对位",
+          "更省力：坐姿操作 + 力反馈设计，配合 EMG 实验验证医生肌肉负荷下降",
+          "更远：遥操作架构为跨地点远程手术打下基础"
+        ],
+        closing: "输尿管软镜机器人不是把医生从手术室里拿走，而是把医生的手“延长”到更稳、更远、更不累的位置。这套系统做的事，是让手上那一点点本可以避免的抖和累，不再传递到患者体内。",
+        coverImage: "../images/uro-cover.jpg",
+        structureImage: "../images/uro-structure.jpg",
+        emgImage: "../images/uro-emg.jpg",
+        oproomImage: "../images/uro-oproom.jpg"
       }
     };
+
+    function renderUAVDetail(data) {
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('projName').textContent = data.name;
+      document.getElementById('projCategory').textContent = data.category;
+      document.getElementById('projIntro').textContent = data.intro;
+
+      // Hero 元信息换成项目类型 / 合作方 / 协作单位 / 服务形式
+      const meta = document.querySelector('.detail-meta');
+      meta.innerHTML = data.metaItems.map(m =>
+        '<div class="detail-meta-item"><span class="detail-meta-label">' + m.label + '</span>' +
+        '<span class="detail-meta-value">' + m.value + '</span></div>'
+      ).join('');
+
+      // 隐藏通用模板板块（背景/思路/更多图/成果团队/视频）
+      ['secBackground', 'secConcept', 'secMoreImages', 'secResults', 'secVideo'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      // Hero 封面图
+      const gallery = document.querySelector('.detail-gallery-item');
+      if (gallery) gallery.innerHTML = '<img src="' + data.coverImage + '" alt="' + data.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">';
+
+      // 注入专属板块
+      const container = document.getElementById('uavContent');
+      const stepCards = data.flow.map(f =>
+        '<div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:8px;padding:18px;">' +
+        '<div style="font-size:0.8125rem;color:rgba(159,178,255,0.95);font-weight:600;margin-bottom:8px;">' + f.step + '</div>' +
+        '<div style="font-size:1rem;font-weight:600;margin-bottom:6px;">' + f.title + '</div>' +
+        '<div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;">' + f.desc + '</div></div>'
+      ).join('');
+
+      const partnerRows = data.partners.map(p =>
+        '<tr style="border-bottom:1px solid var(--border-color);">' +
+        '<td style="padding:12px;font-weight:600;">' + p.role + '</td>' +
+        '<td style="padding:12px;">' + p.org + '</td>' +
+        '<td style="padding:12px;color:var(--text-secondary);">' + p.duty + '</td></tr>'
+      ).join('');
+
+      container.innerHTML =
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目背景</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.background + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">要解决的问题</h2>' +
+            '<div class="detail-list fade-in">' + data.problems.map(p => '<div class="detail-list-item">' + p + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">解决方案</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.solution + '</p>' +
+            '<img src="' + data.solutionImage + '" alt="育种试验田" style="width:100%;border-radius:8px;margin-top:24px;">' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">服务流程</h2>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;">' + stepCards + '</div>' +
+            '<img src="' + data.flowImage + '" alt="无人机巡田" style="width:100%;border-radius:8px;margin-top:24px;">' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">三方协作网络</h2>' +
+            '<div class="fade-in" style="overflow-x:auto;">' +
+              '<table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:0.875rem;">' +
+                '<tr style="border-bottom:1px solid var(--border-color);">' +
+                  '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">角色</th>' +
+                  '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">承担方</th>' +
+                  '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">职责</th>' +
+                '</tr>' + partnerRows +
+              '</table>' +
+            '</div>' +
+            '<p style="font-size:0.8125rem;color:rgba(255,255,255,0.45);margin-top:14px;">分工表按三方协作关系整理，正式上线前请按实际合作分工核对。</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目价值</h2>' +
+            '<div class="detail-list fade-in">' + data.value.map(v => '<div class="detail-list-item">' + v + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">行业视角</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.industry + '</p>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function renderWonderDetail(data) {
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('projName').textContent = data.name;
+      document.getElementById('projCategory').textContent = data.category;
+      document.getElementById('projIntro').textContent = data.intro;
+
+      const meta = document.querySelector('.detail-meta');
+      meta.innerHTML = data.metaItems.map(m =>
+        '<div class="detail-meta-item"><span class="detail-meta-label">' + m.label + '</span>' +
+        '<span class="detail-meta-value">' + m.value + '</span></div>'
+      ).join('');
+
+      ['secBackground', 'secConcept', 'secMoreImages', 'secResults', 'secVideo'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const gallery = document.querySelector('.detail-gallery-item');
+      if (gallery) gallery.innerHTML = '<img src="' + data.coverImage + '" alt="' + data.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">';
+
+      const container = document.getElementById('uavContent');
+
+      const solutionBlocks = data.solutions.map(s =>
+        '<div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:8px;padding:20px;margin-bottom:16px;">' +
+          '<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">' +
+            '<span style="font-size:1.05rem;font-weight:700;">' + s.tag + '</span>' +
+            '<span style="font-size:0.8125rem;color:rgba(159,178,255,0.95);">' + s.subtitle + '</span>' +
+          '</div>' +
+          '<p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.9;margin:0 0 10px;">' + s.desc + '</p>' +
+          '<p style="font-size:0.875rem;color:rgba(159,178,255,0.9);margin:0 0 16px;">' + s.feature + '</p>' +
+          '<img src="' + s.image + '" alt="' + s.tag + '" style="width:100%;border-radius:8px;border:1px solid var(--border-color);">' +
+        '</div>'
+      ).join('');
+
+      const journeySteps = data.journey.map((j, i) =>
+        '<div style="flex:1;min-width:120px;text-align:center;">' +
+          '<div style="width:32px;height:32px;border-radius:50%;background:rgba(79,107,255,0.15);border:1px solid rgba(79,107,255,0.4);color:rgba(159,178,255,0.95);display:flex;align-items:center;justify-content:center;font-size:0.8125rem;font-weight:600;margin:0 auto 8px;">' + (i + 1) + '</div>' +
+          '<div style="font-size:0.8125rem;line-height:1.5;">' + j + '</div>' +
+        '</div>'
+      ).join('');
+
+      const cmpHead = '<tr style="border-bottom:1px solid var(--border-color);">' +
+        '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">对比项</th>' +
+        '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">方案一：改 API</th>' +
+        '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">方案二：API+硬件+专利</th>' +
+        '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">方案三：入口终端机</th></tr>';
+      const cmpRows = data.comparison.map(c =>
+        '<tr style="border-bottom:1px solid var(--border-color);">' +
+        '<td style="padding:12px;font-weight:600;">' + c.row + '</td>' +
+        '<td style="padding:12px;">' + c.c1 + '</td>' +
+        '<td style="padding:12px;">' + c.c2 + '</td>' +
+        '<td style="padding:12px;">' + c.c3 + '</td></tr>'
+      ).join('');
+
+      container.innerHTML =
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目背景</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.background + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">要解决的问题</h2>' +
+            '<div class="detail-list fade-in">' + data.problems.map(p => '<div class="detail-list-item">' + p + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">解决方案：三条技术路线</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1rem;line-height:1.8;margin-bottom:20px;">没有直接给一个答案，而是把可行的改造路径拆成三个方案，从“改动最小”到“体验最完整”排列：</p>' +
+            '<div class="fade-in">' + solutionBlocks + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">用户一次洗衣的完整旅程</h2>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;">' + journeySteps + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">三套方案对比</h2>' +
+            '<div class="fade-in" style="overflow-x:auto;">' +
+              '<table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:0.875rem;">' +
+                cmpHead + cmpRows +
+              '</table>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目价值</h2>' +
+            '<div class="detail-list fade-in">' + data.value.map(v => '<div class="detail-list-item">' + v + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">结语</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.closing + '</p>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function renderUroDetail(data) {
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('projName').textContent = data.name;
+      document.getElementById('projCategory').textContent = data.category;
+      document.getElementById('projIntro').textContent = data.intro;
+
+      const meta = document.querySelector('.detail-meta');
+      meta.innerHTML = data.metaItems.map(m =>
+        '<div class="detail-meta-item"><span class="detail-meta-label">' + m.label + '</span>' +
+        '<span class="detail-meta-value">' + m.value + '</span></div>'
+      ).join('');
+
+      ['secBackground', 'secConcept', 'secMoreImages', 'secResults', 'secVideo'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const gallery = document.querySelector('.detail-gallery-item');
+      if (gallery) gallery.innerHTML = '<img src="' + data.coverImage + '" alt="' + data.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">';
+
+      const container = document.getElementById('uavContent');
+
+      const designPoints = data.designPoints.map(d =>
+        '<div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:8px;padding:14px 16px;margin-bottom:10px;">' +
+        '<div style="font-size:0.9375rem;line-height:1.7;color:var(--text-secondary);">' + d + '</div></div>'
+      ).join('');
+
+      const compRows = data.composition.map(c =>
+        '<tr style="border-bottom:1px solid var(--border-color);">' +
+        '<td style="padding:12px;font-weight:600;white-space:nowrap;">' + c.module + '</td>' +
+        '<td style="padding:12px;">' + c.content + '</td></tr>'
+      ).join('');
+
+      container.innerHTML =
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目背景</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.background + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">要解决的问题</h2>' +
+            '<div class="detail-list fade-in">' + data.problems.map(p => '<div class="detail-list-item">' + p + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">系统方案</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.systemSolution + '</p>' +
+            '<h3 class="fade-in" style="font-size:1.0625rem;margin-top:28px;margin-bottom:14px;">主操作手设计要点（来自结构设计图）</h3>' +
+            '<div class="fade-in">' + designPoints + '</div>' +
+            '<img src="' + data.structureImage + '" alt="系统结构设计图" style="width:100%;border-radius:8px;margin-top:20px;border:1px solid var(--border-color);">' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">肌电对比实验（EMG）</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.emgDesc + '</p>' +
+            '<img src="' + data.emgImage + '" alt="肌电对比实验" style="width:100%;border-radius:8px;margin-top:20px;border:1px solid var(--border-color);">' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">系统组成</h2>' +
+            '<div class="fade-in" style="overflow-x:auto;">' +
+              '<table style="width:100%;border-collapse:collapse;margin-top:8px;font-size:0.875rem;">' +
+                '<tr style="border-bottom:1px solid var(--border-color);">' +
+                  '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">模块</th>' +
+                  '<th style="text-align:left;padding:12px;color:rgba(255,255,255,0.85);">内容</th>' +
+                '</tr>' + compRows +
+              '</table>' +
+            '</div>' +
+            '<img src="' + data.oproomImage + '" alt="手术室应用场景" style="width:100%;border-radius:8px;margin-top:20px;border:1px solid var(--border-color);">' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目价值</h2>' +
+            '<div class="detail-list fade-in">' + data.value.map(v => '<div class="detail-list-item">' + v + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">结语</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.closing + '</p>' +
+          '</div>' +
+        '</section>';
+    }
 
     function renderProjectDetail() {
       const params = new URLSearchParams(window.location.search);
       let id = params.get('id');
       if (!id || !projectData[id]) id = '1';
       const data = projectData[id];
+
+      if (id === '5') { renderUAVDetail(data); return; }
+      if (id === '6') { renderWonderDetail(data); return; }
+      if (id === '9') { renderUroDetail(data); return; }
 
       document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
       document.getElementById('projName').textContent = data.name;
