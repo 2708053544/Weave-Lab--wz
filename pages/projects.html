@@ -1033,10 +1033,12 @@
         if (next < rows) {
           goTo(next, scheduleAuto);
         } else {
-          // 最后一排翻完 → 无缝回到第一排
+          // 最后一排翻完 → 翻到克隆排（=第一排画面），停留同等时间后再无缝跳回第一排
           goTo(rows, function () {
-            jumpTo(0);
-            scheduleAuto();
+            setTimeout(function () {
+              jumpTo(0);
+              scheduleAuto();
+            }, AUTO_INTERVAL);
           });
         }
       }
