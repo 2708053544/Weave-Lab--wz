@@ -1,4 +1,4 @@
-/* Opening typography, color-shifting light trail, and one firework reveal. */
+﻿/* Opening typography, color-shifting light trail, and one firework reveal. */
 (function () {
   'use strict';
   var layer = document.getElementById('opening');
@@ -6,6 +6,13 @@
   var skip = document.getElementById('opening-skip');
   var heroTitle = document.querySelector('.hero-title');
   if (!layer || !canvas || !skip) return;
+  // 仅“直接进入/登录（无锚点）”或“首屏锚点（#hero/#top/#explore）”播放开屏动画；
+  // 从其他页面跳转到首页的具体区块（#about/#works 等）不播放动画，直达目标区块。
+  var openingHash = location.hash || '';
+  if (openingHash && openingHash !== '#hero' && openingHash !== '#top' && openingHash !== '#explore') {
+    layer.remove();
+    return;
+  }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // Reduced motion: keep a brief static brand frame, then dismiss. The splash is never fully removed.
     layer.classList.add('is-static');
