@@ -920,8 +920,9 @@
       const CARD_ASPECT = 4 / 3;      // 卡片图片 3:4 → 高 = 宽 × 4/3
       const TRANSITION_MS = 480;      // 与 CSS transition 0.45s 匹配
       const AUTO_INTERVAL = 3500;     // 每排停留约 3.5s
+      const BASE_CARD_W = 250;        // 恢复原来卡片宽度
+      const BASE_GAP = 36;            // 原间距
       let gap = 36;
-      let cols = 3;                   // 每排作品卡数（桌面3 / 窄屏2 / 手机1）
       let cardWidth = 250;
       let cardHeight = 0;
       let rowHeight = 0;              // 一排高度（含行距）
@@ -931,20 +932,26 @@
       let autoTimer = null;
       let hoverPaused = false;
 
-      // ---- 尺寸 ----
+      // ---- 尺寸（恢复原来卡片大小：宽250px 固定，一排4列 = 3张作品 + 1个查看全部）----
       function measure() {
-        cols = window.innerWidth > 768 ? 3 : (window.innerWidth > 480 ? 2 : 1);
-        gap = window.innerWidth > 768 ? 36 : (window.innerWidth > 480 ? 14 : 10);
-        var vw = viewport.clientWidth;
-        cardWidth = Math.max(110, (vw - gap * cols) / (cols + 1)); // 每排 cols 张作品 + 1 列查看全部
+        // 窄屏等比缩小，桌面保持 250px 原尺寸
+        var avail = viewport.clientWidth;
+        var scale = Math.min(1, avail / (4 * BASE_CARD_W + 3 * BASE_GAP));
+        cardWidth = Math.round(BASE_CARD_W * scale);
+        gap = Math.round(BASE_GAP * scale);
         cardHeight = Math.round(cardWidth * CARD_ASPECT);
         rowHeight = cardHeight + gap;
-        grid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+        grid.style.gridTemplateColumns = 'repeat(3, ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
+        viewport.style.width = (4 * cardWidth + 3 * gap) + 'px';
+        viewport.style.marginLeft = 'auto';
+        viewport.style.marginRight = 'auto';
         viewport.style.maxHeight = rowHeight + 'px';
         if (arrowCard) {
           arrowCard.style.width = cardWidth + 'px';
           arrowCard.style.height = cardHeight + 'px';
+          arrowCard.style.left = (3 * (cardWidth + gap)) + 'px';
+          arrowCard.style.right = 'auto';
         }
       }
 
@@ -955,14 +962,14 @@
         });
       }
 
-      // 重建：全部可见卡按 cols 排布；末尾追加第一排克隆实现无缝回绕
+      // 重建：全部可见卡每 3 张一排；末尾追加第一排克隆实现无缝回绕
       function rebuild() {
         var vis = visibleCards();
-        rows = Math.max(1, Math.ceil(vis.length / cols));
+        rows = Math.max(1, Math.ceil(vis.length / 3));
         var clones = grid.querySelectorAll('.graduation-clone');
         Array.prototype.forEach.call(clones, function (c) { c.parentNode.removeChild(c); });
         if (vis.length > 0) {
-          var firstRow = vis.slice(0, cols);
+          var firstRow = vis.slice(0, 3);
           firstRow.forEach(function (card) {
             var clone = card.cloneNode(true);
             clone.classList.add('graduation-clone');
