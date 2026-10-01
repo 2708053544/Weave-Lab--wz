@@ -454,7 +454,7 @@
       <div class="dock-nav-slot">
     <nav class="nav nav-glass" id="site-nav" aria-label="主导航">
         <a href="#top" class="nav-link appear appear--scale" style="--d:.16s" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v9.2a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3z"/><path d="M9.5 20.5v-6h5v6"/></svg></span><span>首页</span></a>
-        <div class="nav-group nav-link appear appear--soft" style="--d:.24s; cursor: pointer;">
+        <div class="nav-group nav-link appear appear--soft" style="--d:.24s; cursor: pointer;" data-jump="pages/about.html">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="2.8"/><path d="M3.8 18.7c.3-3.1 2.3-5 5.2-5s4.9 1.9 5.2 5"/><path d="M15.3 5.5a2.8 2.8 0 0 1 0 5.2M16.6 13.9c2.1.4 3.4 2.1 3.6 4.8"/></svg></span>
           <span>关于工作室</span><span class="nav-arrow">▾</span>
           <div class="nav-dropdown">
@@ -462,7 +462,7 @@
             <a href="pages/about.html#students">学生团队</a>
           </div>
         </div>
-        <div class="nav-group nav-link appear appear--scale" style="--d:.32s; cursor: pointer;">
+        <div class="nav-group nav-link appear appear--scale" style="--d:.32s; cursor: pointer;" data-jump="pages/projects.html">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="m17 13.3.9 2.7 2.8.9-2.8.9-.9 2.8-.9-2.8-2.8-.9 2.8-.9z"/></svg></span>
           <span>项目成果</span><span class="nav-arrow">▾</span>
           <div class="nav-dropdown">
@@ -737,6 +737,14 @@
       }
       const backdrop=$('.menu-backdrop');
       if(backdrop) backdrop.addEventListener('click',closeMenu);
+      // 底部导航：点击“关于工作室/项目成果”主按钮直接跳转对应页面（保留悬停下拉，不影响下拉项）
+      $$('.nav-glass .nav-group[data-jump]').forEach(function (group) {
+        group.addEventListener('click', function (e) {
+          if (e.target.closest('.nav-dropdown')) return;
+          var href = group.getAttribute('data-jump');
+          if (href) location.href = href;
+        });
+      });
       matchMedia('(min-width: 901px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
       if(matchMedia('(hover: hover) and (pointer: fine)').matches){
         $$('.nav-glass .nav-link').forEach(el=>{
