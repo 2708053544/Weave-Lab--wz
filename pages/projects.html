@@ -18,19 +18,35 @@
       transition: max-height 0.6s ease;
     }
     .graduation-track {
-      transition: none;
+      display: flex;
       will-change: transform;
+      transition: transform 0.55s cubic-bezier(.22, 1, .36, 1);
+      touch-action: pan-y;
+    }
+    .graduation-track.no-anim {
+      transition: none !important;
+    }
+    .graduation-track.dragging {
+      cursor: grabbing;
     }
     .graduation-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 48px 36px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0 36px;
     }
     .graduation-card {
+      flex: none;
+      width: 250px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       opacity: 1 !important;
       transform: none !important;
+    }
+    .graduation-card.graduation-hidden {
+      display: none !important;
+    }
+    .graduation-card.graduation-clone {
+      cursor: pointer;
     }
     .graduation-card:hover {
       transform: translateY(-6px);
@@ -172,6 +188,50 @@
       stroke-width: 2;
       fill: none;
     }
+    /* 外层轮播左右箭头（整组卡片切换） */
+    .graduation-carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 7;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(10, 10, 18, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    .graduation-carousel-nav:hover {
+      background: rgba(79, 107, 255, 0.32);
+      border-color: rgba(79, 107, 255, 0.6);
+      transform: translateY(-50%) scale(1.06);
+    }
+    .graduation-carousel-nav.prev { left: 14px; }
+    .graduation-carousel-nav.next { right: 14px; }
+    .graduation-carousel-nav svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+    @media (max-width: 768px) {
+      .graduation-carousel-nav {
+        width: 32px;
+        height: 32px;
+      }
+      .graduation-carousel-nav svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
     .graduation-carousel-dots {
       position: absolute;
       bottom: 8px;
@@ -235,28 +295,12 @@
       color: rgba(255, 255, 255, 0.75);
       margin: 0;
     }
-    @media (max-width: 1200px) {
-      .graduation-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
     @media (max-width: 768px) {
-      .graduation-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 14px;
-      }
       .graduation-card-title {
         font-size: 0.8125rem;
       }
       .graduation-card-author {
         font-size: 0.6875rem;
-      }
-    }
-    @media (max-width: 480px) {
-      .graduation-grid {
-        grid-template-columns: 1fr;
-        max-width: 260px;
-        margin: 36px auto 0;
       }
     }
     /* ===== 项目成果页：黑底 + 彩色光斑整页分布（弹性可交互光斑，越往下越浅） ===== */
@@ -475,6 +519,12 @@
             <!-- 由JS动态生成 -->
           </div>
         </div>
+        <button class="graduation-carousel-nav prev" id="graduationPrevBtn" aria-label="上一组作品" type="button">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="graduation-carousel-nav next" id="graduationNextBtn" aria-label="下一组作品" type="button">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -828,20 +878,8 @@
       arrowCard.addEventListener('click', function() {
         location.href = 'graduation-works.html';
       });
-      // 箭头卡固定叠加在视口第4列，宽高与毕设卡完全一致
+      // 箭头卡固定叠加在视口末尾（右侧），宽高由轮播初始化按实际卡片尺寸设置
       viewport.appendChild(arrowCard);
-      var _firstCard = grid.querySelector('.graduation-card');
-      if (_firstCard) {
-        arrowCard.style.width = _firstCard.offsetWidth + 'px';
-        arrowCard.style.height = _firstCard.offsetHeight + 'px';
-      }
-      window.addEventListener('resize', function() {
-        var _fc = grid.querySelector('.graduation-card');
-        if (_fc) {
-          arrowCard.style.width = _fc.offsetWidth + 'px';
-          arrowCard.style.height = _fc.offsetHeight + 'px';
-        }
-      });
 
       // 绑定轮播交互
       bindGraduationCarousels();
@@ -849,148 +887,252 @@
       // 绑定筛选标签
       bindFilterTabs();
 
-      // 初始化自动滚动
-      setupGraduationAutoScroll();
+      // 初始化横向轮播
+      setupGraduationCarousel();
     }
 
-    // 自动向上滚动播放（丝滑连续滚动）
-    function setupGraduationAutoScroll() {
+    // 横向轮播：前 3 张作品卡自动循环（无缝回绕），"查看全部"卡固定末尾不参与
+    function setupGraduationCarousel() {
       const viewport = document.getElementById('graduationViewport');
       const track = document.getElementById('graduationTrack');
       const grid = document.getElementById('graduationGrid');
+      const prevBtn = document.getElementById('graduationPrevBtn');
+      const nextBtn = document.getElementById('graduationNextBtn');
+      const arrowCard = document.getElementById('graduationArrowCard');
       if (!viewport || !track || !grid) return;
 
-      const cards = grid.children;
-      if (cards.length < 2) return;
+      const CARD_ASPECT = 4 / 3;      // 卡片图片 3:4 → 高 = 宽 × 4/3
+      const TRANSITION_MS = 560;      // 与 CSS transition 0.55s 匹配
+      const AUTO_INTERVAL = 3600;     // 每张停留约 3.6s
+      let gap = 36;
+      let cardWidth = 250;
+      let step = 0;                   // 一次翻页的位移 = 卡宽 + 间距
+      let index = 0;                  // 当前在第几张（0..2）
+      let moving = false;             // 过渡动画进行中
+      let autoTimer = null;
+      let hoverPaused = false;
 
-      function getRowHeight() {
-        const first = cards[0];
-        const second = cards[1];
-        const diff = second.offsetTop - first.offsetTop;
-        if (diff > 0) return diff;
-        return first.offsetHeight + 48;
-      }
-
-      function init() {
-        var rowHeight = getRowHeight();
-        viewport.style.maxHeight = rowHeight + 'px';
-
-        var cols = window.innerWidth > 1200 ? 4 : (window.innerWidth > 768 ? 3 : (window.innerWidth > 480 ? 2 : 1));
-        var totalRows = Math.ceil(cards.length / cols);
-        var maxScroll = (totalRows - 1) * rowHeight;
-
-        var currentY = 0;
-        var targetY = 0;
-        var animId = null;
-
-        function setTrack(y) {
-          track.style.transform = 'translateY(-' + y + 'px)';
-        }
-
-        function animate() {
-          var diff = targetY - currentY;
-          if (Math.abs(diff) < 0.5) {
-            currentY = targetY;
-            setTrack(currentY);
-            animId = null;
-            return;
+      // ---- 尺寸 ----
+      function measure() {
+        gap = window.innerWidth > 768 ? 36 : (window.innerWidth > 480 ? 14 : 10);
+        var vw = viewport.clientWidth;
+        cardWidth = Math.max(120, (vw - gap * 3) / 4);   // 3 张作品卡 + 1 张"查看全部" = 4 列
+        step = cardWidth + gap;
+        grid.style.gap = '0 ' + gap + 'px';
+        Array.prototype.forEach.call(grid.children, function(c) {
+          if (!c.classList.contains('graduation-clone')) {
+            c.style.width = cardWidth + 'px';
           }
-          currentY += diff * 0.025;
-          setTrack(currentY);
-          animId = requestAnimationFrame(animate);
-        }
-
-        function scrollTo(target) {
-          targetY = target;
-          if (!animId) animId = requestAnimationFrame(animate);
-        }
-
-        var step = 1;
-        function next() {
-          if (step < totalRows) {
-            scrollTo(step * rowHeight);
-            step++;
-            setTimeout(next, 2500);
-          }
-        }
-        setTimeout(next, 1500);
-
-        // 用户滚轮控制（鼠标悬停在毕设卡片/查看全部框时调用）：停止自动播放，按行切换批次
-        window._stopGraduationAuto = function() {
-          step = totalRows + 1;
-        };
-        // 灵敏度：累积滚动距离达到阈值才切换一行（滚 2 格左右切一行，不会滚太快）
-        var scrollAccum = 0;
-        var SCROLL_THRESHOLD = 240;
-        window._scrollGraduationBy = function(delta) {
-          scrollAccum += delta;
-          while (Math.abs(scrollAccum) >= SCROLL_THRESHOLD) {
-            var dir = scrollAccum > 0 ? 1 : -1;
-            var curRow = Math.round(currentY / rowHeight);
-            var newRow = Math.max(0, Math.min(totalRows - 1, curRow + dir));
-            scrollAccum -= dir * SCROLL_THRESHOLD;
-            if (newRow === curRow) continue;
-            scrollTo(newRow * rowHeight);
-            if (newRow === 0 || newRow === totalRows - 1) { scrollAccum = 0; break; }
-          }
-        };
-
-        window.addEventListener('resize', function() {
-          var newRH = getRowHeight();
-          viewport.style.maxHeight = newRH + 'px';
-          maxScroll = (totalRows - 1) * newRH;
-          currentY = Math.min(currentY, maxScroll);
-          targetY = currentY;
-          setTrack(currentY);
         });
-
-        // 暴露重置函数（筛选切换时调用：停止动画、轨道归位、停自动播放）
-        window._resetGraduationScroll = function() {
-          if (animId) { cancelAnimationFrame(animId); animId = null; }
-          currentY = 0;
-          targetY = 0;
-          setTrack(0);
-          step = totalRows + 1;
-          scrollAccum = 0;
-        };
-
-        // 暴露展开函数
-        window._expandGraduation = function() {
-          if (animId) { cancelAnimationFrame(animId); animId = null; }
-          targetY = 0;
-          
-          var lastCard = cards[cards.length - 1];
-          var fullHeight = lastCard.offsetTop + lastCard.offsetHeight;
-          viewport.style.maxHeight = fullHeight + 'px';
-          
-          // 反向丝滑滚回顶部
-          var startY = currentY;
-          var startTime = null;
-          function back(t) {
-            if (!startTime) startTime = t;
-            var p = Math.min((t - startTime) / 1000, 1);
-            var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-            currentY = startY * (1 - eased);
-            setTrack(currentY);
-            if (p < 1) {
-              requestAnimationFrame(back);
-            } else {
-              currentY = 0;
-              setTrack(0);
-            }
-          }
-          requestAnimationFrame(back);
-        };
+        viewport.style.maxHeight = Math.round(cardWidth * CARD_ASPECT) + 'px';
+        if (arrowCard) {
+          arrowCard.style.width = cardWidth + 'px';
+          arrowCard.style.height = Math.round(cardWidth * CARD_ASPECT) + 'px';
+        }
       }
 
-      requestAnimationFrame(function() {
-        requestAnimationFrame(init);
-      });
-    }
+      // ---- 序列：可见原卡中取前 3 张 ----
+      function visibleCards() {
+        return Array.prototype.filter.call(grid.children, function(c) {
+          return !c.classList.contains('graduation-clone') && c.style.display !== 'none';
+        });
+      }
 
-    // 展开显示全部
-    function expandGraduationView() {
-      if (window._expandGraduation) window._expandGraduation();
+      // 重建序列：隐藏第 4 张起的卡片，追加无缝回绕用的克隆
+      function rebuild() {
+        var seq = visibleCards().slice(0, 3);
+        Array.prototype.forEach.call(grid.children, function(c) {
+          if (c.classList.contains('graduation-clone')) return;
+          c.classList.toggle('graduation-hidden', seq.indexOf(c) === -1);
+        });
+        var clones = grid.querySelectorAll('.graduation-clone');
+        Array.prototype.forEach.call(clones, function(c) { c.parentNode.removeChild(c); });
+        seq.forEach(function(card) {
+          var clone = card.cloneNode(true);
+          clone.classList.add('graduation-clone');
+          clone.style.width = cardWidth + 'px';
+          // 克隆复制了原卡的 data-bound 标记，需清除后重新绑定内部图片轮播
+          var inner = clone.querySelector('.graduation-board-carousel');
+          if (inner) delete inner.dataset.bound;
+          grid.appendChild(clone);
+        });
+        index = 0;
+        moving = false;
+        track.classList.add('no-anim');
+        track.style.transform = 'translateX(0px)';
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+        track.style.transition = '';
+        // 克隆卡上的内部图片轮播重新绑定（原卡已绑定，自动跳过）
+        bindGraduationCarousels();
+      }
+
+      // ---- 位移 ----
+      function setTransform(x) {
+        track.style.transform = 'translateX(' + x + 'px)';
+      }
+
+      function goTo(k, done) {
+        if (moving) return;
+        moving = true;
+        track.style.transition = '';
+        setTransform(-k * step);
+        setTimeout(function() {
+          moving = false;
+          index = k;
+          if (done) done();
+        }, TRANSITION_MS);
+      }
+
+      // 无动画跳回（无缝回绕：播完第 3 张回到第 1 张）
+      function jumpTo(k) {
+        moving = false;
+        track.classList.add('no-anim');
+        setTransform(-k * step);
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+        track.style.transition = '';
+        index = k;
+      }
+
+      // ---- 自动播放 ----
+      function scheduleAuto() {
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = setTimeout(autoTick, AUTO_INTERVAL);
+      }
+      function stopAuto() {
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+      function autoTick() {
+        if (hoverPaused || moving) return;
+        var next = index + 1;
+        if (next <= 2) {
+          goTo(next, scheduleAuto);
+        } else {
+          goTo(3, function() {
+            jumpTo(0);
+            scheduleAuto();
+          });
+        }
+      }
+
+      // ---- 手动操作（箭头 / 拖拽 / 滚轮），操作后自动播放继续 ----
+      function manualNext() {
+        if (moving) return;
+        if (index === 2) {
+          goTo(3, function() { jumpTo(0); });
+        } else {
+          goTo(index + 1);
+        }
+        scheduleAuto();
+      }
+      function manualPrev() {
+        if (moving) return;
+        goTo(index === 0 ? 2 : index - 1);
+        scheduleAuto();
+      }
+
+      // ---- 事件 ----
+      if (prevBtn) prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        manualPrev();
+      });
+      if (nextBtn) nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        manualNext();
+      });
+
+      // 悬停暂停 / 移开继续
+      viewport.addEventListener('mouseenter', function() {
+        hoverPaused = true;
+        stopAuto();
+      });
+      viewport.addEventListener('mouseleave', function() {
+        hoverPaused = false;
+        scheduleAuto();
+      });
+
+      // 拖拽 / 触摸滑动
+      let dragging = false;
+      let dragStartX = 0;
+      let dragFrom = 0;
+      let dragOffset = 0;
+      let lastDragEnd = 0;
+      track.addEventListener('pointerdown', function(e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        dragging = true;
+        dragStartX = e.clientX;
+        dragFrom = index;
+        dragOffset = 0;
+        track.classList.add('dragging');
+        if (track.setPointerCapture) {
+          try { track.setPointerCapture(e.pointerId); } catch (err) {}
+        }
+      });
+      track.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        dragOffset = e.clientX - dragStartX;
+        track.style.transition = 'none';
+        setTransform(-(dragFrom * step) + dragOffset);
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+        lastDragEnd = Date.now();
+        var threshold = step * 0.28;
+        if (dragOffset < -threshold) {
+          manualNext();
+        } else if (dragOffset > threshold) {
+          manualPrev();
+        } else {
+          goTo(index);
+        }
+        scheduleAuto();
+      }
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      // 防止拖拽后误触卡片跳转
+      track.addEventListener('click', function(e) {
+        if (Date.now() - lastDragEnd < 500 && Math.abs(dragOffset) > 8) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // 滚轮切卡（由 setupWheelRedirect 转发）；手动操作不停止自动播放
+      var scrollAccum = 0;
+      window._scrollGraduationBy = function(delta) {
+        scrollAccum += delta;
+        while (Math.abs(scrollAccum) >= 120) {
+          if (scrollAccum > 0) manualNext(); else manualPrev();
+          scrollAccum -= (scrollAccum > 0 ? 1 : -1) * 120;
+        }
+      };
+      window._stopGraduationAuto = function() { /* 兼容旧接口：手动操作不停自动 */ };
+
+      // 筛选切换后重建序列
+      window._rebuildGraduationCarousel = function() {
+        stopAuto();
+        rebuild();
+        scheduleAuto();
+      };
+
+      // 窗口尺寸变化：重算布局并保持当前位置
+      window.addEventListener('resize', function() {
+        measure();
+        track.classList.add('no-anim');
+        setTransform(-index * step);
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+        track.style.transition = '';
+      });
+
+      // ---- 初始化 ----
+      measure();
+      rebuild();
+      scheduleAuto();
     }
 
     // 筛选标签切换
@@ -1004,9 +1146,6 @@
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
 
-          // 筛选变化：停止自动滚动并把轨道归位到顶部，避免卡片被移出视口
-          if (window._resetGraduationScroll) window._resetGraduationScroll();
-          
           const filter = this.getAttribute('data-filter');
           
           cards.forEach(card => {
@@ -1022,6 +1161,9 @@
               card.style.display = cat === filter ? '' : 'none';
             }
           });
+
+          // 筛选变化：重建轮播序列（取前 3 张可见卡循环），其余卡片隐藏
+          if (window._rebuildGraduationCarousel) window._rebuildGraduationCarousel();
         });
       });
     }
@@ -1030,6 +1172,8 @@
     function bindGraduationCarousels() {
       const carousels = document.querySelectorAll('.graduation-board-carousel');
       carousels.forEach(carousel => {
+        if (carousel.dataset.bound) return;
+        carousel.dataset.bound = '1';
         const slides = carousel.querySelectorAll('.graduation-board-slide');
         const dots = carousel.querySelectorAll('.graduation-dot');
         const countBadge = carousel.querySelector('.graduation-board-count');
@@ -1082,15 +1226,14 @@
       });
     }
 
-    // 滚轮范围：鼠标在毕设作品区上时滚轮只滚动瀑布流作品，其他地方滚轮滚动整个页面
+    // 滚轮范围：鼠标在毕设卡片/查看全部框上时滚轮切换轮播卡片，其他地方滚轮滚动整个页面
     function setupWheelRedirect() {
       const worksSection = document.getElementById('works');
       if (!worksSection) return;
-      let userScrolling = false;
 
       window.addEventListener('wheel', function(e) {
         const el = document.elementFromPoint(e.clientX, e.clientY);
-        // 只有鼠标在毕设卡片或"查看全部"框上时，滚轮才切换毕设批次
+        // 只有鼠标在毕设卡片或"查看全部"框上时，滚轮才切换轮播卡片
         if (!el || typeof el.closest !== 'function') return;
         const card = el.closest('.graduation-card, .graduation-arrow-card');
         if (!card) return; // 4个框以外：放行页面滚动
@@ -1098,7 +1241,6 @@
         e.preventDefault();
         e.stopPropagation();
 
-        if (window._stopGraduationAuto) window._stopGraduationAuto();
         if (window._scrollGraduationBy) window._scrollGraduationBy(e.deltaY);
       }, { passive: false, capture: true });
     }
