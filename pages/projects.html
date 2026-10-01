@@ -892,7 +892,14 @@
         <span class="graduation-arrow-text">查看全部</span>
       `;
       arrowCard.addEventListener('click', function() {
-        location.href = 'graduation-works.html';
+        // 优秀毕设栏：查看全部 → 跳转到全部毕设（切回“毕设作品”筛选）
+        var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
+        if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
+          var allTab = document.querySelector('.filter-tabs .filter-tab[data-filter="graduation"]');
+          if (allTab) allTab.click();
+        } else {
+          location.href = 'graduation-works.html';
+        }
       });
       // 箭头卡固定叠加在视口末尾（右侧），宽高由轮播初始化按实际卡片尺寸设置
       viewport.appendChild(arrowCard);
