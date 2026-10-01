@@ -6,8 +6,13 @@
   var skip = document.getElementById('opening-skip');
   var heroTitle = document.querySelector('.hero-title');
   if (!layer || !canvas || !skip) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || location.hash) {
-    layer.remove();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Reduced motion: keep a brief static brand frame, then dismiss. The splash is never fully removed.
+    layer.classList.add('is-static');
+    setTimeout(function () {
+      layer.classList.add('is-done');
+      setTimeout(function () { layer.remove(); }, 450);
+    }, 1400);
     return;
   }
 
