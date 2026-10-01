@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>毕设展板 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="毕业设计作品展板详情">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* 毕设展板详情页专用样式 */
+    .board-hero {
+      padding: 96px 0 8px;
+      text-align: center;
+    }
+    .board-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.3;
+      margin: 8px 0 4px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.82) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .board-author {
+      color: var(--text-secondary, rgba(255,255,255,0.62));
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+    }
+    /* 展板大图轮播 */
+    .board-viewer {
+      max-width: 1080px;
+      margin: 32px auto 0;
+      padding: 0 20px;
+      position: relative;
+    }
+    .board-stage {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0c0d10;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      aspect-ratio: 4 / 3;
+    }
+    .board-stage img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #0c0d10;
+    }
+    .board-stage .board-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .board-stage .board-slide.active {
+      opacity: 1;
+    }
+    .board-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .board-arrow:hover {
+      background: rgba(255,255,255,0.16);
+      border-color: rgba(255,255,255,0.36);
+    }
+    .board-arrow.prev { left: -10px; }
+    .board-arrow.next { right: -10px; }
+    .board-arrow svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .board-viewer-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .board-count {
+      font-size: 0.875rem;
+      color: var(--text-secondary, rgba(255,255,255,0.62));
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+    }
+    .board-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .board-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      transition: background 0.25s ease, transform 0.25s ease;
+      cursor: pointer;
+    }
+    .board-dot.active {
+      background: #fff;
+      transform: scale(1.25);
+    }
+    .board-back-bottom {
+      text-align: center;
+      margin: 48px 0 80px;
+    }
+    @media (max-width: 768px) {
+      .board-arrow.prev { left: 2px; }
+      .board-arrow.next { right: 2px; }
+      .board-arrow {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">活动与合作 ▾</span>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 返回按钮 -->
+  <a href="projects.html#works" class="back-button">← 返回</a>
+
+  <!-- 展板详情 -->
+  <section class="board-hero">
+    <div class="container">
+      <span class="section-label fade-in">Graduation Board</span>
+      <h1 class="fade-in" id="boardTitle">毕设作品展板</h1>
+      <p class="board-author fade-in" id="boardAuthor">Weave Lab</p>
+    </div>
+  </section>
+
+  <div class="board-viewer fade-in">
+    <div class="board-stage" id="boardStage">
+      <!-- 展板大图由JS生成 -->
+    </div>
+    <button class="board-arrow prev" id="boardPrev" aria-label="上一张">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="board-arrow next" id="boardNext" aria-label="下一张">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="board-viewer-meta">
+      <span class="board-count" id="boardCount">1 / 1</span>
+      <div class="board-dots" id="boardDots"></div>
+    </div>
+  </div>
+
+  <div class="board-back-bottom">
+    <a href="projects.html#works" class="btn btn-outline">← 返回毕设作品</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Weave Lab</h4>
+          <p>智能体验与服务工程实验室</p>
+        </div>
+        <div class="footer-section">
+          <h4>导航</h4>
+          <a href="../index.html">首页</a>
+          <a href="about.html">关于工作室</a>
+          <a href="projects.html">项目成果</a>
+          <a href="activities.html">活动与合作</a>
+          <a href="contact.html">联系我们</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // 毕设项目数据（与 projects.html 保持一致）
+    const boardProjects = [
+      { id: 1, title: "乡隅守望农村妇女在地增收服务设计", author: "韩冰", boards: ["project1_1.jpg", "project1_2.jpg", "project1_3.jpg", "project1_4.jpg"] },
+      { id: 2, title: "数字生态视角下的观鸟数据价值转化服务系统设计", author: "何靖馥琳", boards: ["project2_1.jpg", "project2_2.jpg", "project2_3.jpg", "project2_4.jpg"] },
+      { id: 3, title: "家用血钾监测仪多模态预警交互系统设计", author: "侯江伟", boards: ["project3_1.jpg", "project3_2.jpg"] },
+      { id: 4, title: "面向农业育种的无人机交互系统设计", author: "李潘", boards: ["project4_1.jpg", "project4_2.jpg", "project4_3.jpg"] },
+      { id: 5, title: "城乡技术迁移下MR赋能农户技能学习的熟人社交与涂鸦引流服务设计", author: "孟拓", boards: ["project5_1.jpg", "project5_2.jpg"] },
+      { id: 6, title: "农知旅人-基于VR的农业技术体验设计", author: "严行", boards: ["project6_1.jpg", "project6_2.jpg"] },
+      { id: 7, title: "基于服务设计思维的农用无人机多载荷模块化产品设计", author: "杨雅雯", boards: ["project7_1.jpg", "project7_2.jpg", "project7_3.jpg", "project7_4.jpg"] },
+      { id: 8, title: "面向HTO骨科手术机器人的全流程VR系统设计", author: "曹骞予", boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"] },
+      { id: 9, title: "面向名优茶机械化采摘的采茶机优化设计", author: "刘思敏", boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"] },
+      { id: 10, title: "基于可适应性及模块化可穿戴外骨骼设计", author: "邢贞获", boards: ["project10_1.jpg", "project10_2.jpg"] },
+      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"] },
+      { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
+      { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
+      { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] }
+    ];
+
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const id = parseInt(params.get('id'), 10);
+      const project = boardProjects.find(p => p.id === id);
+
+      const titleEl = document.getElementById('boardTitle');
+      const authorEl = document.getElementById('boardAuthor');
+      const stage = document.getElementById('boardStage');
+      const countEl = document.getElementById('boardCount');
+      const dotsEl = document.getElementById('boardDots');
+      const prevBtn = document.getElementById('boardPrev');
+      const nextBtn = document.getElementById('boardNext');
+
+      if (!project || !project.boards || project.boards.length === 0) {
+        titleEl.textContent = '未找到该毕设作品';
+        authorEl.textContent = '';
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        return;
+      }
+
+      titleEl.textContent = project.title;
+      authorEl.textContent = project.author + ' · 毕业设计展板';
+
+      let current = 0;
+      const total = project.boards.length;
+
+      // 生成展板大图与圆点
+      project.boards.forEach((board, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'board-slide' + (idx === 0 ? ' active' : '');
+        const img = document.createElement('img');
+        img.src = '../images/graduation/' + board;
+        img.alt = project.title + ' 展板 ' + (idx + 1);
+        img.loading = 'lazy';
+        slide.appendChild(img);
+        stage.appendChild(slide);
+
+        const dot = document.createElement('span');
+        dot.className = 'board-dot' + (idx === 0 ? ' active' : '');
+        dot.addEventListener('click', function () { goTo(idx); });
+        dotsEl.appendChild(dot);
+      });
+
+      function goTo(index) {
+        stage.children[current].classList.remove('active');
+        dotsEl.children[current].classList.remove('active');
+        current = index;
+        stage.children[current].classList.add('active');
+        dotsEl.children[current].classList.add('active');
+        countEl.textContent = (current + 1) + ' / ' + total;
+      }
+
+      // 初始化页码显示
+      goTo(0);
+
+      function prev() { goTo((current - 1 + total) % total); }
+      function next() { goTo((current + 1) % total); }
+
+      prevBtn.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+      nextBtn.addEventListener('click', function (e) { e.stopPropagation(); next(); });
+
+      // 键盘左右键切换
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    })();
+  </script>
+</body>
+</html>
