@@ -892,11 +892,10 @@
         <span class="graduation-arrow-text">查看全部</span>
       `;
       arrowCard.addEventListener('click', function() {
-        // 优秀毕设栏：查看全部 → 跳转到全部毕设（切回“毕设作品”筛选）
+        // 优秀毕设栏：查看全部 → 跳转到优秀毕设专属页面（布局同全部毕设，只含优秀毕设内容）
         var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
         if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
-          var allTab = document.querySelector('.filter-tabs .filter-tab[data-filter="graduation"]');
-          if (allTab) allTab.click();
+          location.href = 'graduation-excellent.html';
         } else {
           location.href = 'graduation-works.html';
         }

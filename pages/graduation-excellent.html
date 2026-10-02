@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>优秀毕设 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="Weave Lab 毕业设计作品完整展示">
+  <link rel="stylesheet" href="../css/style.css?v=18">
+  <style>
+    .graduation-works-section {
+      padding: 100px 0 80px;
+      background: var(--bg-primary);
+      min-height: 100vh;
+    }
+    .graduation-works-header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding: 0 40px;
+    }
+    .graduation-masonry {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .gwork-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gwork-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.25);
+    }
+    .gwork-board {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 6px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      transition: border-color 0.3s ease;
+    }
+    .gwork-card:hover .gwork-board {
+      border-color: rgba(79, 107, 255, 0.4);
+    }
+    .gwork-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .gwork-slide.active {
+      position: relative;
+      opacity: 1;
+    }
+    .gwork-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .gwork-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+      z-index: 3;
+      backdrop-filter: blur(8px);
+    }
+    .gwork-board:hover .gwork-arrow {
+      opacity: 1;
+    }
+    .gwork-arrow:hover {
+      background: rgba(0, 0, 0, 0.6) !important;
+    }
+    .gwork-arrow.prev { left: 8px; }
+    .gwork-arrow.next { right: 8px; }
+    .gwork-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+    .gwork-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      z-index: 2;
+    }
+    .gwork-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .gwork-dot.active {
+      width: 16px;
+      border-radius: 3px;
+      background: #fff;
+    }
+    .gwork-count {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 8px;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      font-size: 0.6875rem;
+      border-radius: 10px;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+    }
+    .gwork-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 18px 14px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 4;
+    }
+    .gwork-title {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: #fff;
+      margin: 0 0 4px 0;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .gwork-author {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+    }
+    @media (max-width: 1200px) {
+      .graduation-masonry { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .graduation-masonry { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+      .gwork-title { font-size: 0.8125rem; }
+      .gwork-author { font-size: 0.6875rem; }
+    }
+    @media (max-width: 480px) {
+      .graduation-masonry { grid-template-columns: 1fr; max-width: 280px; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">Weave Lab</a>
+      <div class="nav-menu">
+        <div class="nav-item"><a href="../index.html" class="nav-link">首页</a></div>
+        <div class="nav-item">
+          <a href="about.html" class="nav-link">关于工作室 ▾</a>
+          <div class="nav-dropdown">
+            <a href="about.html" class="dropdown-item">工作室简介</a>
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+            <a href="about.html#directions" class="dropdown-item">研究方向</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="projects.html" class="nav-link active">项目成果 ▾</a>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- 返回按钮 -->
+  <a href="projects.html#works" class="back-button">← 返回</a>
+
+  <!-- 毕设作品完整展示 -->
+  <section class="graduation-works-section">
+    <div class="graduation-works-header">
+      <div class="section-header fade-in">
+        <span class="section-label">Graduation Works</span>
+        <h2 class="section-title">优秀毕设</h2>
+        <p class="section-subtitle">优秀毕业设计作品展示</p>
+      </div>
+    </div>
+
+    <div class="graduation-masonry" id="graduationMasonry">
+      <!-- 由JS动态生成 -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Weave Lab</h4>
+          <p>智能体验与服务工程实验室</p>
+        </div>
+        <div class="footer-section">
+          <h4>导航</h4>
+          <a href="../index.html">首页</a>
+          <a href="about.html">关于工作室</a>
+          <a href="projects.html">项目成果</a>
+          <a href="activities.html">活动与合作</a>
+          <a href="contact.html">联系我们</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const graduationProjects = [
+  { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
+  { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
+  { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] }
+];
+
+    function renderGraduationWorks() {
+      const masonry = document.getElementById('graduationMasonry');
+      if (!masonry) return;
+
+      graduationProjects.forEach(function(project) {
+        const card = document.createElement('div');
+        card.className = 'gwork-card';
+        card.onclick = function() {
+          location.href = 'graduation-detail.html?id=' + project.id;
+        };
+
+        let slidesHtml = '';
+        project.boards.forEach(function(board, idx) {
+          slidesHtml += '<div class="gwork-slide' + (idx === 0 ? ' active' : '') + '">' +
+            '<img src="../images/graduation/' + board + '" alt="' + project.title + '" loading="lazy">' +
+            '</div>';
+        });
+
+        const arrowLeft = '<button class="gwork-arrow prev" aria-label="上一张"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>';
+        const arrowRight = '<button class="gwork-arrow next" aria-label="下一张"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>';
+        const countBadge = '<div class="gwork-count">1 / ' + project.boards.length + '</div>';
+
+        let dotsHtml = '<div class="gwork-dots">';
+        project.boards.forEach(function(_, idx) {
+          dotsHtml += '<span class="gwork-dot' + (idx === 0 ? ' active' : '') + '" data-index="' + idx + '"></span>';
+        });
+        dotsHtml += '</div>';
+
+        card.innerHTML = '<div class="gwork-board" data-project="' + project.id + '">' +
+          countBadge + slidesHtml + arrowLeft + arrowRight + dotsHtml +
+          '<div class="gwork-info">' +
+          '<h3 class="gwork-title">' + project.title + '</h3>' +
+          '<p class="gwork-author">' + project.author + '</p>' +
+          '</div></div>';
+
+        masonry.appendChild(card);
+      });
+
+      bindCarousels();
+    }
+
+    function bindCarousels() {
+      const carousels = document.querySelectorAll('.gwork-board');
+      carousels.forEach(function(carousel) {
+        const slides = carousel.querySelectorAll('.gwork-slide');
+        const dots = carousel.querySelectorAll('.gwork-dot');
+        const countBadge = carousel.querySelector('.gwork-count');
+        const prevBtn = carousel.querySelector('.gwork-arrow.prev');
+        const nextBtn = carousel.querySelector('.gwork-arrow.next');
+        let current = 0;
+        const total = slides.length;
+
+        function goTo(index) {
+          slides[current].classList.remove('active');
+          slides[current].style.position = 'absolute';
+          dots[current].classList.remove('active');
+          current = index;
+          slides[current].classList.add('active');
+          slides[current].style.position = 'relative';
+          dots[current].classList.add('active');
+          if (countBadge) countBadge.textContent = (current + 1) + ' / ' + total;
+        }
+
+        prevBtn.addEventListener('click', function(e) { e.stopPropagation(); goTo((current - 1 + total) % total); });
+        nextBtn.addEventListener('click', function(e) { e.stopPropagation(); goTo((current + 1) % total); });
+        dots.forEach(function(dot, idx) {
+          dot.addEventListener('click', function(e) { e.stopPropagation(); goTo(idx); });
+        });
+        carousel.addEventListener('click', function(e) { e.stopPropagation(); });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderGraduationWorks);
+  </script>
+</body>
+</html>
