@@ -1253,10 +1253,7 @@
           });
         });
 
-        // 阻止点击轮播区域跳转（只有点击卡片信息区域才跳转）
-        carousel.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
+        // 点击卡片任意位置跳转详情（箭头/圆点切换在各自监听里已 stopPropagation）
       });
     }
 

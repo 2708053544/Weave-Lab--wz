@@ -339,7 +339,7 @@
         dots.forEach(function(dot, idx) {
           dot.addEventListener('click', function(e) { e.stopPropagation(); goTo(idx); });
         });
-        carousel.addEventListener('click', function(e) { e.stopPropagation(); });
+        // 点击卡片任意位置跳转详情（箭头/圆点切换在各自监听里已 stopPropagation）
       });
     }
 
