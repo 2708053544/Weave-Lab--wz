@@ -175,6 +175,6 @@ body.opening-active .hero-title .hero-jump-letter { opacity: 0; transform: none;
   .opening-index, .opening-skip { bottom: max(20px, env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .opening { display: none; }
   .opening *, .opening::before { animation: none !important; transition: none !important; }
 }
+.opening.is-static .opening-canvas { display: none; }
