@@ -982,6 +982,14 @@
             // 克隆复制了原卡的 data-bound 标记，需清除后重新绑定内部图片轮播
             var inner = clone.querySelector('.graduation-board-carousel');
             if (inner) delete inner.dataset.bound;
+            // cloneNode 不会复制 DOM 属性 onclick，需重新绑定卡片跳转详情（指向同一项目 id）
+            var pid = clone.querySelector('.graduation-board-carousel');
+            var projectId = pid ? pid.getAttribute('data-project') : null;
+            if (projectId) {
+              clone.onclick = function () {
+                location.href = 'graduation-detail.html?id=' + projectId;
+              };
+            }
             grid.appendChild(clone);
           });
         }
