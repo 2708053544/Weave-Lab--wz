@@ -364,6 +364,160 @@
       .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
       .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
     }
+    /* ===== 普通作品（学生课程/竞赛作品展板） ===== */
+    .normal-section { padding-top: 20px; }
+    .normal-masonry {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .nwork-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nwork-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.25);
+    }
+    .nwork-board {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #0c0d10;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: border-color 0.3s ease;
+    }
+    .nwork-card:hover .nwork-board {
+      border-color: rgba(79, 107, 255, 0.4);
+    }
+    .nwork-board img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .nwork-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 18px 14px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 2;
+    }
+    .nwork-title {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: #fff;
+      margin: 0 0 4px 0;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .nwork-author {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+    }
+    @media (max-width: 1200px) {
+      .normal-masonry { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .normal-masonry { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+      .nwork-title { font-size: 0.8125rem; }
+      .nwork-author { font-size: 0.6875rem; }
+    }
+    @media (max-width: 480px) {
+      .normal-masonry { grid-template-columns: 1fr; max-width: 280px; }
+    }
+    /* 普通作品大图查看 Lightbox */
+    .nwork-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      background: rgba(0, 0, 0, 0.93);
+      display: none;
+    }
+    .nwork-lightbox.open { display: block; }
+    .nwork-lightbox-scroll {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      padding: 72px 20px 96px;
+      text-align: center;
+    }
+    .nwork-lightbox-scroll img {
+      width: min(780px, 92vw);
+      height: auto;
+      display: inline-block;
+      vertical-align: top;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    }
+    .nwork-lightbox-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9995;
+      padding: 14px 20px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .nwork-lightbox-bar .lb-title {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .nwork-lightbox-bar .lb-author {
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.8rem;
+    }
+    .nwork-lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9996;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .nwork-lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+    .nwork-lightbox-hint {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9994;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -411,6 +565,7 @@
           <div class="nav-dropdown">
             <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
             <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#normal-works" class="dropdown-item">普通作品</a>
             <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
           </div>
         </div>
@@ -448,7 +603,7 @@
     <div class="container-narrow">
       <span class="section-label fade-in">Our Works</span>
       <h1 class="fade-in">项目成果</h1>
-      <p class="fade-in">工作室项目、毕业设计与获奖荣誉作品展示</p>
+      <p class="fade-in">工作室项目、毕业设计、学生作品与获奖荣誉展示</p>
     </div>
   </section>
 
@@ -545,6 +700,21 @@
         <button class="graduation-carousel-nav next" id="graduationNextBtn" aria-label="下一排" type="button">
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Normal Works Section -->
+  <section id="normal-works" class="section normal-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Student Works</span>
+        <h2 class="section-title">普通作品</h2>
+        <p class="section-subtitle">工作室学生在课程设计与各类设计竞赛中完成的作品展示</p>
+      </div>
+
+      <div class="normal-masonry" id="normalMasonry">
+        <!-- 由JS动态生成，点击卡片查看完整展板 -->
       </div>
     </div>
   </section>
@@ -1286,6 +1456,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       renderGraduationCards();
+      renderNormalWorks();
       setupWheelRedirect();
       setupAwardsScroll();
     });
@@ -1300,6 +1471,104 @@
       cards.forEach(function (card) {
         container.appendChild(card.cloneNode(true));
       });
+    }
+
+    /* ===== 普通作品（学生课程/竞赛作品，来源：优秀作品文件夹） ===== */
+    const normalWorks = [
+      { id: 1, title: "穹枝归所——全周期安宁社区服务设计", author: "郭心蕊", board: "normal1.jpg" },
+      { id: 2, title: "银发社区服务改善", author: "樊小钰", board: "normal2.jpg" },
+      { id: 3, title: "银铃——预防阿尔兹海默症老人走失系统", author: "刘惠月", board: "normal3.jpg" },
+      { id: 4, title: "银悦坊——银发商业空间服务设计", author: "董慧鑫", board: "normal4.jpg" },
+      { id: 5, title: "GoldenEra瑞购——老年购物软件设计", author: "周小雨", board: "normal5.jpg" },
+      { id: 6, title: "I-BLOOM以爱为智", author: "康歌", board: "normal6.jpg" },
+      { id: 7, title: "MM豆特装展位设计", author: "耿之郁", board: "normal7.jpg" },
+      { id: 8, title: "Water Dispenser智能校准饮水机设计", author: "曹骞予", board: "normal8.jpg" },
+      { id: 9, title: "“老友记”多元社交社区服务设计", author: "颜玉晗", board: "normal9.jpg" },
+      { id: 10, title: "乐龄同频计划——多元化社区服务设计", author: "徐玮琪", board: "normal10.jpg" },
+      { id: 11, title: "乡游——二线城镇文化体验社区服务设计", author: "吴美妮", board: "normal11.jpg" },
+      { id: 12, title: "会说话的大标志（基于视障老人的导视设计）", author: "吕津成", board: "normal12.jpg" },
+      { id: 13, title: "巡天计划——低空经济应急管理与城市设备巡查融合服务设计", author: "杨雅雯", board: "normal13.jpg" },
+      { id: 14, title: "共感银途EmpathSilvr体验馆服务设计", author: "臧莹", board: "normal14.jpg" },
+      { id: 15, title: "写生用旅行包", author: "菅桂琪", board: "normal15.jpg" },
+      { id: 16, title: "志愿伴行", author: "韩家帅", board: "normal16.jpg" },
+      { id: 17, title: "护小助——优化护工群体年龄结构的服务系统设计", author: "段淑惠", board: "normal17.jpg" },
+      { id: 18, title: "旅行盒子·文化体验旅游产品服务设计", author: "韩佳琪", board: "normal18.jpg" },
+      { id: 19, title: "晚恋——基于银发经济的老年交友相亲系统流程设计", author: "姜晓雅", board: "normal19.jpg" },
+      { id: 20, title: "智能医疗服务系统", author: "张达", board: "normal20.jpg" },
+      { id: 21, title: "梧桐汇", author: "赵思竣", board: "normal21.jpg" },
+      { id: 22, title: "沉默玩家——基于AIoT的聋哑社会共情云生态服务系统设计", author: "何靖馥琳", board: "normal22.jpg" },
+      { id: 23, title: "活力银龄——慧健康健身软件设计", author: "陈茜", board: "normal23.jpg" },
+      { id: 24, title: "焕发传统文化新活力视角下的非遗·陪伴体验馆服务设计", author: "耿之郁", board: "normal24.jpg" },
+      { id: 25, title: "疗愈花园", author: "王杨", board: "normal25.jpg" },
+      { id: 26, title: "禾火新生——农民断代背景下EcoCube生态农缩服务设计", author: "黄玉冰", board: "normal26.jpg" },
+      { id: 27, title: "科技赋能老年交互新系统——“舞是”以老年舞蹈教室为例", author: "黄玉冰", board: "normal27.jpg" },
+      { id: 28, title: "老年乌托邦——一体化喘息服务老年社区", author: "马伊玟", board: "normal28.jpg" },
+      { id: 29, title: "趣远方——定制旅游服务设计·定制化服务端", author: "赵蔓", board: "normal29.jpg" },
+      { id: 30, title: "通过优化子女联系方式解决老年人多种情绪问题", author: "蔡心悦", board: "normal30.jpg" },
+      { id: 31, title: "银发互助学堂", author: "何亚之", board: "normal31.jpg" },
+      { id: 32, title: "银发互助学堂", author: "林凇宇", board: "normal32.jpg" },
+      { id: 33, title: "银发共生设计", author: "杜益乐", board: "normal33.jpg" },
+      { id: 34, title: "银发经济服务系统设计", author: "吴娅萌", board: "normal34.jpg" },
+      { id: 35, title: "银龄心桥——社区愈动服务设计", author: "章慧俐", board: "normal35.jpg" },
+      { id: 36, title: "鸟类栖息地优化及环境吸引觅食装置的服务系统设计", author: "博佳", board: "normal36.jpg" }
+    ];
+
+    function renderNormalWorks() {
+      const masonry = document.getElementById('normalMasonry');
+      if (!masonry) return;
+      normalWorks.forEach(function (w) {
+        const card = document.createElement('div');
+        card.className = 'nwork-card';
+        card.innerHTML = '<div class="nwork-board">' +
+          '<img src="../images/normal-works/' + w.board + '" alt="' + w.title + '" loading="lazy">' +
+          '<div class="nwork-info">' +
+          '<h3 class="nwork-title">' + w.title + '</h3>' +
+          '<p class="nwork-author">' + w.author + '</p>' +
+          '</div></div>';
+        card.addEventListener('click', function () {
+          openNormalLightbox(w);
+        });
+        masonry.appendChild(card);
+      });
+    }
+
+    /* 普通作品大图查看：弹层内纵向滚动浏览完整展板 */
+    function openNormalLightbox(w) {
+      let lb = document.getElementById('normalLightbox');
+      if (!lb) {
+        lb = document.createElement('div');
+        lb.id = 'normalLightbox';
+        lb.className = 'nwork-lightbox';
+        lb.innerHTML =
+          '<div class="nwork-lightbox-hint">上下滑动查看完整展板</div>' +
+          '<button class="nwork-lightbox-close" aria-label="关闭">✕</button>' +
+          '<div class="nwork-lightbox-scroll"><img alt=""></div>' +
+          '<div class="nwork-lightbox-bar">' +
+          '<span class="lb-title"></span>' +
+          '<span class="lb-author"></span>' +
+          '</div>';
+        document.body.appendChild(lb);
+        lb.querySelector('.nwork-lightbox-close').addEventListener('click', closeNormalLightbox);
+        lb.addEventListener('click', function (e) {
+          if (e.target === lb || e.target.classList.contains('nwork-lightbox-scroll')) closeNormalLightbox();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeNormalLightbox();
+        });
+      }
+      lb.querySelector('img').src = '../images/normal-works/' + w.board;
+      lb.querySelector('img').alt = w.title + ' 作品展板';
+      lb.querySelector('.lb-title').textContent = w.title;
+      lb.querySelector('.lb-author').textContent = w.author;
+      lb.querySelector('.nwork-lightbox-scroll').scrollTop = 0;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNormalLightbox() {
+      const lb = document.getElementById('normalLightbox');
+      if (lb) lb.classList.remove('open');
+      document.body.style.overflow = '';
     }
   </script>
   <script>
