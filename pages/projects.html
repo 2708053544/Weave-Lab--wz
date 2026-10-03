@@ -37,7 +37,7 @@
     }
     .normal-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 36px 36px;
     }
     .normal-page-controls {
@@ -59,7 +59,7 @@
     }
     .graduation-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 36px 36px;
     }
     .graduation-card {
@@ -109,12 +109,8 @@
       object-fit: cover;
       object-position: top center;
     }
-    /* 箭头入口卡片：固定叠加在视口第4列，宽高由 JS 动态匹配毕设卡 */
-    .graduation-arrow-card {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 5;
+    /* 箭头入口卡片：作为网格最后一个元素，宽高由 JS 动态匹配 */
+    .graduation-arrow-card, .nwork-arrow-card {
       border-radius: 6px;
       background: #0a0a0a;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -125,8 +121,9 @@
       cursor: pointer;
       transition: all 0.3s ease;
       overflow: hidden;
+      aspect-ratio: 3/4;
     }
-    .graduation-arrow-card::before {
+    .graduation-arrow-card::before, .nwork-arrow-card::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -135,15 +132,15 @@
       opacity: 0.6;
       z-index: 0;
     }
-    .graduation-arrow-card:hover {
+    .graduation-arrow-card:hover, .nwork-arrow-card:hover {
       border-color: rgba(79, 107, 255, 0.5);
       box-shadow: 0 12px 32px rgba(79, 107, 255, 0.2);
       transform: translateY(-6px);
     }
-    .graduation-arrow-card:hover::before {
+    .graduation-arrow-card:hover::before, .nwork-arrow-card:hover::before {
       opacity: 1;
     }
-    .graduation-arrow-icon {
+    .graduation-arrow-icon, .nwork-arrow-icon {
       position: relative;
       z-index: 6;
       width: 40px;
@@ -157,18 +154,18 @@
       transition: all 0.3s ease;
       z-index: 1;
     }
-    .graduation-arrow-card:hover .graduation-arrow-icon {
+    .graduation-arrow-card:hover .graduation-arrow-icon, .nwork-arrow-card:hover .nwork-arrow-icon {
       border-color: #fff;
       box-shadow: 0 0 16px rgba(79, 107, 255, 0.4);
     }
-    .graduation-arrow-icon svg {
+    .graduation-arrow-icon svg, .nwork-arrow-icon svg {
       width: 18px;
       height: 18px;
       stroke: #fff;
       stroke-width: 2;
       fill: none;
     }
-    .graduation-arrow-text {
+    .graduation-arrow-text, .nwork-arrow-text {
       position: relative;
       font-size: 0.8125rem;
       color: rgba(255, 255, 255, 0.7);
@@ -1026,8 +1023,8 @@
           location.href = 'graduation-works.html';
         }
       });
-      // 箭头卡固定叠加在视口末尾（右侧），宽高由轮播初始化按实际卡片尺寸设置
-      viewport.appendChild(arrowCard);
+      // 箭头卡作为网格最后一个元素（不再绝对定位）
+      grid.appendChild(arrowCard);
 
       // 绑定轮播交互
       bindGraduationCarousels();
@@ -1052,9 +1049,10 @@
       const CARD_ASPECT = 4 / 3;      // 卡片图片 3:4 → 高 = 宽 × 4/3
       const TRANSITION_MS = 480;      // 与 CSS transition 0.45s 匹配
       const AUTO_INTERVAL = 2000;     // 每排停留约 2s
-      const BASE_CARD_W = 250;        // 恢复原来卡片宽度
-      const BASE_GAP = 36;            // 原间距
-      const VISIBLE_ROWS = 2;         // 毕设：可视2行瀑布流
+      const BASE_CARD_W = 250;        // 卡片宽度
+      const BASE_GAP = 36;            // 间距
+      const VISIBLE_ROWS = 1;         // 毕设：可视1行（4列）
+      const COLS = 4;                 // 每行4列
       let gap = 36;
       let cardWidth = 250;
       let cardHeight = 0;
@@ -1065,57 +1063,61 @@
       let autoTimer = null;
       let hoverPaused = false;
 
-      // ---- 尺寸（恢复原来卡片大小：宽250px 固定，一排4列 = 3张作品 + 1个查看全部）----
+      // ---- 尺寸（4列均匀分布，1行可视）----
       function measure() {
-        // 窄屏等比缩小，桌面保持 250px 原尺寸
         var avail = viewport.clientWidth;
-        var scale = Math.min(1, avail / (4 * BASE_CARD_W + 3 * BASE_GAP));
+        var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         cardWidth = Math.round(BASE_CARD_W * scale);
         gap = Math.round(BASE_GAP * scale);
         cardHeight = Math.round(cardWidth * CARD_ASPECT);
         rowHeight = cardHeight + gap;
-        grid.style.gridTemplateColumns = 'repeat(3, ' + cardWidth + 'px)';
+        grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
-        viewport.style.width = (4 * cardWidth + 3 * gap) + 'px';
+        viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        if (arrowCard) {
-          arrowCard.style.width = cardWidth + 'px';
-          arrowCard.style.height = cardHeight + 'px';
-          arrowCard.style.left = (3 * (cardWidth + gap)) + 'px';
-          arrowCard.style.right = 'auto';
-        }
+        viewport.style.maxHeight = rowHeight + 'px';
       }
 
-      // ---- 序列：可见原卡 ----
+      // ---- 序列：可见原卡（含箭头卡）----
       function visibleCards() {
         return Array.prototype.filter.call(grid.children, function (c) {
-          return c.classList.contains('graduation-card') && !c.classList.contains('graduation-clone') && c.style.display !== 'none';
+          return (c.classList.contains('graduation-card') || c.classList.contains('graduation-arrow-card')) && !c.classList.contains('graduation-clone') && c.style.display !== 'none';
         });
       }
 
-      // 重建：全部可见卡每 3 张一排；末尾追加第一排克隆实现无缝回绕
+      // 重建：全部可见卡每 4 张一排；末尾追加第一排克隆实现无缝回绕
       function rebuild() {
         var vis = visibleCards();
-        rows = Math.max(1, Math.ceil(vis.length / 3));
+        rows = Math.max(1, Math.ceil(vis.length / COLS));
         var clones = grid.querySelectorAll('.graduation-clone');
         Array.prototype.forEach.call(clones, function (c) { c.parentNode.removeChild(c); });
         if (vis.length > 0) {
-          var firstRows = vis.slice(0, VISIBLE_ROWS * 3);
-          firstRows.forEach(function (card) {
+          var firstRow = vis.slice(0, COLS);
+          firstRow.forEach(function (card) {
             var clone = card.cloneNode(true);
             clone.classList.add('graduation-clone');
-            // 克隆复制了原卡的 data-bound 标记，需清除后重新绑定内部图片轮播
-            var inner = clone.querySelector('.graduation-board-carousel');
-            if (inner) delete inner.dataset.bound;
-            // cloneNode 不会复制 DOM 属性 onclick，需重新绑定卡片跳转详情（指向同一项目 id）
-            var pid = clone.querySelector('.graduation-board-carousel');
-            var projectId = pid ? pid.getAttribute('data-project') : null;
-            if (projectId) {
-              clone.onclick = function () {
-                location.href = 'graduation-detail.html?id=' + projectId;
+            if (card.classList.contains('graduation-arrow-card')) {
+              // 克隆箭头卡：重新绑定点击
+              var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
+              clone.onclick = function() {
+                if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
+                  location.href = 'graduation-excellent.html';
+                } else {
+                  location.href = 'graduation-works.html';
+                }
               };
+            } else {
+              // 克隆复制了原卡的 data-bound 标记，需清除后重新绑定内部图片轮播
+              var inner = clone.querySelector('.graduation-board-carousel');
+              if (inner) delete inner.dataset.bound;
+              var pid = clone.querySelector('.graduation-board-carousel');
+              var projectId = pid ? pid.getAttribute('data-project') : null;
+              if (projectId) {
+                clone.onclick = function () {
+                  location.href = 'graduation-detail.html?id=' + projectId;
+                };
+              }
             }
             grid.appendChild(clone);
           });
@@ -1489,11 +1491,23 @@
           '</div></div>';
         grid.appendChild(card);
       });
-      // 初始化普通作品瀑布轮播（3行可视）
+      /* 末尾加“查看全部”箭头卡 */
+      var arrowCard = document.createElement('div');
+      arrowCard.className = 'nwork-arrow-card';
+      arrowCard.innerHTML =
+        '<div class="nwork-arrow-icon">' +
+        '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+        '</div>' +
+        '<span class="nwork-arrow-text">查看全部</span>';
+      arrowCard.addEventListener('click', function() {
+        location.href = 'graduation-works.html';
+      });
+      grid.appendChild(arrowCard);
+      /* 初始化普通作品轮播（4列1行可视） */
       setupNormalCarousel();
     }
 
-    /* 普通作品：垂直整排自动翻页轮播（3列网格，3行可视，循环无缝） */
+    /* 普通作品：4列网格，1行可视，循环无缝 */
     function setupNormalCarousel() {
       const viewport = document.getElementById('normalViewport');
       const track = document.getElementById('normalTrack');
@@ -1507,7 +1521,8 @@
       const AUTO_INTERVAL = 2500;
       const BASE_CARD_W = 250;
       const BASE_GAP = 36;
-      const VISIBLE_ROWS = 3;
+      const VISIBLE_ROWS = 1;
+      const COLS = 4;
       let gap = 36;
       let cardWidth = 250;
       let cardHeight = 0;
@@ -1520,40 +1535,46 @@
 
       function measure() {
         var avail = viewport.clientWidth;
-        var scale = Math.min(1, avail / (3 * BASE_CARD_W + 2 * BASE_GAP));
+        var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         cardWidth = Math.round(BASE_CARD_W * scale);
         gap = Math.round(BASE_GAP * scale);
         cardHeight = Math.round(cardWidth * CARD_ASPECT);
         rowHeight = cardHeight + gap;
-        grid.style.gridTemplateColumns = 'repeat(3, ' + cardWidth + 'px)';
+        grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
-        viewport.style.width = (3 * cardWidth + 2 * gap) + 'px';
+        viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
+        viewport.style.maxHeight = rowHeight + 'px';
       }
 
       function visibleCards() {
         return Array.prototype.filter.call(grid.children, function (c) {
-          return c.classList.contains('nwork-card') && !c.classList.contains('nwork-clone') && c.style.display !== 'none';
+          return (c.classList.contains('nwork-card') || c.classList.contains('nwork-arrow-card')) && !c.classList.contains('nwork-clone') && c.style.display !== 'none';
         });
       }
 
       function rebuild() {
         var vis = visibleCards();
-        rows = Math.max(1, Math.ceil(vis.length / 3));
+        rows = Math.max(1, Math.ceil(vis.length / COLS));
         var clones = grid.querySelectorAll('.nwork-clone');
         Array.prototype.forEach.call(clones, function (c) { c.parentNode.removeChild(c); });
         if (vis.length > 0) {
-          var firstRows = vis.slice(0, VISIBLE_ROWS * 3);
-          firstRows.forEach(function (card) {
+          var firstRow = vis.slice(0, COLS);
+          firstRow.forEach(function (card) {
             var clone = card.cloneNode(true);
             clone.classList.add('nwork-clone');
-            var pid = clone.getAttribute('data-id');
-            if (pid) {
+            if (card.classList.contains('nwork-arrow-card')) {
               clone.onclick = function () {
-                location.href = 'normal-detail.html?id=' + pid;
+                location.href = 'graduation-works.html';
               };
+            } else {
+              var pid = clone.getAttribute('data-id');
+              if (pid) {
+                clone.onclick = function () {
+                  location.href = 'normal-detail.html?id=' + pid;
+                };
+              }
             }
             grid.appendChild(clone);
           });
