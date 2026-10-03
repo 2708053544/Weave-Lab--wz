@@ -17,6 +17,35 @@
       margin-top: 36px;
       transition: max-height 0.6s ease;
     }
+    /* 普通作品瀑布流视口（与毕设相同结构） */
+    .normal-viewport {
+      position: relative;
+      overflow: hidden;
+      margin-top: 36px;
+      transition: max-height 0.6s ease;
+    }
+    .normal-track {
+      will-change: transform;
+      transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
+      touch-action: pan-y;
+    }
+    .normal-track.no-anim {
+      transition: none !important;
+    }
+    .normal-track.dragging {
+      cursor: grabbing;
+    }
+    .normal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px 36px;
+    }
+    .normal-page-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
     .graduation-track {
       will-change: transform;
       transition: transform 0.45s cubic-bezier(.22, 1, .36, 1);
@@ -366,17 +395,17 @@
     }
     /* ===== 普通作品（学生课程/竞赛作品展板） ===== */
     .normal-section { padding-top: 20px; }
-    .normal-masonry {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 36px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
     .nwork-card {
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .nwork-card.nwork-hidden {
+      display: none !important;
+    }
+    .nwork-card.nwork-clone {
+      cursor: pointer;
     }
     .nwork-card:hover {
       transform: translateY(-6px);
@@ -429,16 +458,9 @@
       color: rgba(255, 255, 255, 0.75);
       margin: 0;
     }
-    @media (max-width: 1200px) {
-      .normal-masonry { grid-template-columns: repeat(3, 1fr); }
-    }
     @media (max-width: 768px) {
-      .normal-masonry { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
       .nwork-title { font-size: 0.8125rem; }
       .nwork-author { font-size: 0.6875rem; }
-    }
-    @media (max-width: 480px) {
-      .normal-masonry { grid-template-columns: 1fr; max-width: 280px; }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -635,8 +657,20 @@
         <p class="section-subtitle">工作室学生在课程设计与各类设计竞赛中完成的作品展示</p>
       </div>
 
-      <div class="normal-masonry" id="normalMasonry">
-        <!-- 由JS动态生成，点击卡片查看完整展板 -->
+      <div class="normal-viewport" id="normalViewport">
+        <div class="normal-track" id="normalTrack">
+          <div class="normal-grid" id="normalGrid">
+            <!-- 由JS动态生成 -->
+          </div>
+        </div>
+      </div>
+      <div class="normal-page-controls">
+        <button class="graduation-carousel-nav prev" id="normalPrevBtn" aria-label="上一排" type="button">
+          <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"></polyline></svg>
+        </button>
+        <button class="graduation-carousel-nav next" id="normalNextBtn" aria-label="下一排" type="button">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -1020,6 +1054,7 @@
       const AUTO_INTERVAL = 2000;     // 每排停留约 2s
       const BASE_CARD_W = 250;        // 恢复原来卡片宽度
       const BASE_GAP = 36;            // 原间距
+      const VISIBLE_ROWS = 2;         // 毕设：可视2行瀑布流
       let gap = 36;
       let cardWidth = 250;
       let cardHeight = 0;
@@ -1044,7 +1079,7 @@
         viewport.style.width = (4 * cardWidth + 3 * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = rowHeight + 'px';
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
         if (arrowCard) {
           arrowCard.style.width = cardWidth + 'px';
           arrowCard.style.height = cardHeight + 'px';
@@ -1067,8 +1102,8 @@
         var clones = grid.querySelectorAll('.graduation-clone');
         Array.prototype.forEach.call(clones, function (c) { c.parentNode.removeChild(c); });
         if (vis.length > 0) {
-          var firstRow = vis.slice(0, 3);
-          firstRow.forEach(function (card) {
+          var firstRows = vis.slice(0, VISIBLE_ROWS * 3);
+          firstRows.forEach(function (card) {
             var clone = card.cloneNode(true);
             clone.classList.add('graduation-clone');
             // 克隆复制了原卡的 data-bound 标记，需清除后重新绑定内部图片轮播
@@ -1134,7 +1169,7 @@
         autoTimer = null;
       }
       function autoTick() {
-        if (hoverPaused || moving || rows <= 1) return;
+        if (hoverPaused || moving || rows <= VISIBLE_ROWS) return;
         var next = index + 1;
         if (next < rows) {
           goTo(next, scheduleAuto);
@@ -1151,7 +1186,7 @@
 
       // ---- 手动操作（上/下箭头、滚轮、纵向拖拽），操作后自动播放继续 ----
       function manualNext() {
-        if (moving || rows <= 1) return;
+        if (moving || rows <= VISIBLE_ROWS) return;
         if (index === rows - 1) {
           goTo(rows, function () { jumpTo(0); });
         } else {
@@ -1160,7 +1195,7 @@
         scheduleAuto();
       }
       function manualPrev() {
-        if (moving || rows <= 1) return;
+        if (moving || rows <= VISIBLE_ROWS) return;
         if (index === 0) {
           goTo(rows - 1);
         } else {
@@ -1380,6 +1415,7 @@
       renderGraduationCards();
       renderNormalWorks();
       setupWheelRedirect();
+      setupNormalWheelRedirect();
       setupAwardsScroll();
     });
 
@@ -1436,22 +1472,269 @@
     ];
 
     function renderNormalWorks() {
-      const masonry = document.getElementById('normalMasonry');
-      if (!masonry) return;
+      const grid = document.getElementById('normalGrid');
+      if (!grid) return;
       normalWorks.forEach(function (w) {
         const card = document.createElement('div');
         card.className = 'nwork-card';
+        card.setAttribute('data-id', w.id);
+        card.onclick = function() {
+          location.href = 'normal-detail.html?id=' + w.id;
+        };
         card.innerHTML = '<div class="nwork-board">' +
           '<img src="../images/normal-works/' + w.board + '" alt="' + w.title + '" loading="lazy">' +
           '<div class="nwork-info">' +
           '<h3 class="nwork-title">' + w.title + '</h3>' +
           '<p class="nwork-author">' + w.author + '</p>' +
           '</div></div>';
-        card.addEventListener('click', function () {
-          location.href = 'normal-detail.html?id=' + w.id;
-        });
-        masonry.appendChild(card);
+        grid.appendChild(card);
       });
+      // 初始化普通作品瀑布轮播（3行可视）
+      setupNormalCarousel();
+    }
+
+    /* 普通作品：垂直整排自动翻页轮播（3列网格，3行可视，循环无缝） */
+    function setupNormalCarousel() {
+      const viewport = document.getElementById('normalViewport');
+      const track = document.getElementById('normalTrack');
+      const grid = document.getElementById('normalGrid');
+      const prevBtn = document.getElementById('normalPrevBtn');
+      const nextBtn = document.getElementById('normalNextBtn');
+      if (!viewport || !track || !grid) return;
+
+      const CARD_ASPECT = 4 / 3;
+      const TRANSITION_MS = 480;
+      const AUTO_INTERVAL = 2500;
+      const BASE_CARD_W = 250;
+      const BASE_GAP = 36;
+      const VISIBLE_ROWS = 3;
+      let gap = 36;
+      let cardWidth = 250;
+      let cardHeight = 0;
+      let rowHeight = 0;
+      let rows = 1;
+      let index = 0;
+      let moving = false;
+      let autoTimer = null;
+      let hoverPaused = false;
+
+      function measure() {
+        var avail = viewport.clientWidth;
+        var scale = Math.min(1, avail / (3 * BASE_CARD_W + 2 * BASE_GAP));
+        cardWidth = Math.round(BASE_CARD_W * scale);
+        gap = Math.round(BASE_GAP * scale);
+        cardHeight = Math.round(cardWidth * CARD_ASPECT);
+        rowHeight = cardHeight + gap;
+        grid.style.gridTemplateColumns = 'repeat(3, ' + cardWidth + 'px)';
+        grid.style.gap = gap + 'px ' + gap + 'px';
+        viewport.style.width = (3 * cardWidth + 2 * gap) + 'px';
+        viewport.style.marginLeft = 'auto';
+        viewport.style.marginRight = 'auto';
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
+      }
+
+      function visibleCards() {
+        return Array.prototype.filter.call(grid.children, function (c) {
+          return c.classList.contains('nwork-card') && !c.classList.contains('nwork-clone') && c.style.display !== 'none';
+        });
+      }
+
+      function rebuild() {
+        var vis = visibleCards();
+        rows = Math.max(1, Math.ceil(vis.length / 3));
+        var clones = grid.querySelectorAll('.nwork-clone');
+        Array.prototype.forEach.call(clones, function (c) { c.parentNode.removeChild(c); });
+        if (vis.length > 0) {
+          var firstRows = vis.slice(0, VISIBLE_ROWS * 3);
+          firstRows.forEach(function (card) {
+            var clone = card.cloneNode(true);
+            clone.classList.add('nwork-clone');
+            var pid = clone.getAttribute('data-id');
+            if (pid) {
+              clone.onclick = function () {
+                location.href = 'normal-detail.html?id=' + pid;
+              };
+            }
+            grid.appendChild(clone);
+          });
+        }
+        index = 0;
+        moving = false;
+        track.classList.add('no-anim');
+        track.style.transform = 'translateY(0px)';
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+        track.style.transition = '';
+      }
+
+      function setTransform(y) {
+        track.style.transform = 'translateY(' + y + 'px)';
+      }
+
+      function goTo(k, done) {
+        if (moving) return;
+        moving = true;
+        track.style.transition = '';
+        setTransform(-k * rowHeight);
+        setTimeout(function () {
+          moving = false;
+          index = k;
+          if (done) done();
+        }, TRANSITION_MS);
+      }
+
+      function jumpTo(k) {
+        moving = false;
+        track.classList.add('no-anim');
+        setTransform(-k * rowHeight);
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+        track.style.transition = '';
+        index = k;
+      }
+
+      function scheduleAuto() {
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = setTimeout(autoTick, AUTO_INTERVAL);
+      }
+      function stopAuto() {
+        if (autoTimer) clearTimeout(autoTimer);
+        autoTimer = null;
+      }
+      function autoTick() {
+        if (hoverPaused || moving || rows <= VISIBLE_ROWS) return;
+        var next = index + 1;
+        if (next < rows) {
+          goTo(next, scheduleAuto);
+        } else {
+          goTo(rows, function () {
+            setTimeout(function () {
+              jumpTo(0);
+              scheduleAuto();
+            }, AUTO_INTERVAL);
+          });
+        }
+      }
+
+      function manualNext() {
+        if (moving || rows <= VISIBLE_ROWS) return;
+        if (index >= rows - 1) {
+          goTo(rows, function () { jumpTo(0); });
+        } else {
+          goTo(index + 1);
+        }
+        scheduleAuto();
+      }
+      function manualPrev() {
+        if (moving || rows <= VISIBLE_ROWS) return;
+        if (index === 0) {
+          goTo(rows - 1);
+        } else {
+          goTo(index - 1);
+        }
+        scheduleAuto();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        manualPrev();
+      });
+      if (nextBtn) nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        manualNext();
+      });
+
+      viewport.addEventListener('mouseenter', function () {
+        hoverPaused = true;
+        stopAuto();
+      });
+      viewport.addEventListener('mouseleave', function () {
+        hoverPaused = false;
+        scheduleAuto();
+      });
+
+      // 触摸/鼠标纵向拖拽
+      var dragging = false;
+      var dragStartY = 0;
+      var dragFrom = 0;
+      var dragOffset = 0;
+      var lastDragEnd = 0;
+      track.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        dragging = true;
+        dragStartY = e.clientY;
+        dragFrom = index;
+        dragOffset = 0;
+        track.classList.add('dragging');
+        if (track.setPointerCapture) {
+          try { track.setPointerCapture(e.pointerId); } catch (err) {}
+        }
+      });
+      track.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        dragOffset = e.clientY - dragStartY;
+        track.style.transition = 'none';
+        setTransform(-(dragFrom * rowHeight) + dragOffset);
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+        lastDragEnd = Date.now();
+        var threshold = rowHeight * 0.28;
+        if (dragOffset < -threshold) {
+          manualNext();
+        } else if (dragOffset > threshold) {
+          manualPrev();
+        } else {
+          goTo(index);
+        }
+        scheduleAuto();
+      }
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('click', function (e) {
+        if (Date.now() - lastDragEnd < 500 && Math.abs(dragOffset) > 8) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // 滚轮切排
+      var scrollAccum = 0;
+      window._scrollNormalBy = function (delta) {
+        scrollAccum += delta;
+        while (Math.abs(scrollAccum) >= 120) {
+          if (scrollAccum > 0) manualNext(); else manualPrev();
+          scrollAccum -= (scrollAccum > 0 ? 1 : -1) * 120;
+        }
+      };
+
+      window.addEventListener('resize', function () {
+        measure();
+        stopAuto();
+        rebuild();
+        scheduleAuto();
+      });
+
+      measure();
+      rebuild();
+      scheduleAuto();
+    }
+
+    /* 滚轮：鼠标在普通作品区时转发给普通作品轮播 */
+    function setupNormalWheelRedirect() {
+      const section = document.getElementById('normal-works');
+      if (!section) return;
+      window.addEventListener('wheel', function(e) {
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        if (!el || typeof el.closest !== 'function') return;
+        const card = el.closest('.nwork-card, .normal-viewport');
+        if (!card) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (window._scrollNormalBy) window._scrollNormalBy(e.deltaY);
+      }, { passive: false, capture: true });
     }
 
 
