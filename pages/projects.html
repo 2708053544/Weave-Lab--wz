@@ -101,11 +101,17 @@
       object-fit: cover;
       object-position: top center;
     }
-    /* 箭头入口卡片：作为网格最后一个元素，宽高由 JS 动态匹配 */
+    /* 查看全部按钮：绝对定位在视口右下角，缩小 */
     .graduation-arrow-card, .nwork-arrow-card {
-      border-radius: 6px;
-      background: #0a0a0a;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -113,21 +119,22 @@
       cursor: pointer;
       transition: all 0.3s ease;
       overflow: hidden;
-      aspect-ratio: 3/4;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .graduation-arrow-card::before, .nwork-arrow-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(79, 107, 255, 0.08), transparent 70%);
+      background: radial-gradient(circle at center, rgba(79, 107, 255, 0.12), transparent 70%);
       transition: opacity 0.3s ease;
       opacity: 0.6;
       z-index: 0;
     }
     .graduation-arrow-card:hover, .nwork-arrow-card:hover {
       border-color: rgba(79, 107, 255, 0.5);
-      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.2);
-      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(79, 107, 255, 0.25);
+      transform: scale(1.06);
     }
     .graduation-arrow-card:hover::before, .nwork-arrow-card:hover::before {
       opacity: 1;
@@ -135,34 +142,35 @@
     .graduation-arrow-icon, .nwork-arrow-icon {
       position: relative;
       z-index: 6;
-      width: 40px;
-      height: 40px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
+      width: 26px;
+      height: 26px;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 5px;
       transition: all 0.3s ease;
       z-index: 1;
     }
     .graduation-arrow-card:hover .graduation-arrow-icon, .nwork-arrow-card:hover .nwork-arrow-icon {
       border-color: #fff;
-      box-shadow: 0 0 16px rgba(79, 107, 255, 0.4);
+      box-shadow: 0 0 10px rgba(79, 107, 255, 0.4);
     }
     .graduation-arrow-icon svg, .nwork-arrow-icon svg {
-      width: 18px;
-      height: 18px;
+      width: 12px;
+      height: 12px;
       stroke: #fff;
       stroke-width: 2;
       fill: none;
     }
     .graduation-arrow-text, .nwork-arrow-text {
       position: relative;
-      font-size: 0.8125rem;
+      font-size: 0.6875rem;
       color: rgba(255, 255, 255, 0.7);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.06em;
       z-index: 6;
+      white-space: nowrap;
     }
     /* 左右箭头按钮 */
     .graduation-arrow {
@@ -980,7 +988,7 @@
         grid.appendChild(card);
       });
 
-      // 添加箭头入口卡片（第12个位置，第3行最后一个）
+      // 添加“查看全部”小按钮（绝对定位在视口右下角，不在网格中）
       const arrowCard = document.createElement('div');
       arrowCard.className = 'graduation-arrow-card';
       arrowCard.id = 'graduationArrowCard';
@@ -991,7 +999,6 @@
         <span class="graduation-arrow-text">查看全部</span>
       `;
       arrowCard.addEventListener('click', function() {
-        // 优秀毕设栏：查看全部 → 跳转到优秀毕设专属页面（布局同全部毕设，只含优秀毕设内容）
         var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
         if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
           location.href = 'graduation-excellent.html';
@@ -999,8 +1006,7 @@
           location.href = 'graduation-works.html';
         }
       });
-      // 箭头卡作为网格最后一个元素（不再绝对定位）
-      grid.appendChild(arrowCard);
+      document.getElementById('graduationViewport').appendChild(arrowCard);
 
       // 绑定轮播交互
       bindGraduationCarousels();
@@ -1039,7 +1045,7 @@
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
         viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        var items = grid.querySelectorAll(':scope > *:not(.graduation-clone)').length;
+        var items = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-clone)').length;
         var rows = Math.ceil(items / COLS);
         var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
         track.style.animationDuration = duration + 's';
@@ -1048,29 +1054,18 @@
       function duplicate() {
         var clones = grid.querySelectorAll('.graduation-clone');
         clones.forEach(function(c) { c.remove(); });
-        var originals = grid.querySelectorAll(':scope > *:not(.graduation-clone)');
+        var originals = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-clone)');
         originals.forEach(function(card) {
           var clone = card.cloneNode(true);
           clone.classList.add('graduation-clone');
-          if (card.classList.contains('graduation-arrow-card')) {
+          var inner = clone.querySelector('.graduation-board-carousel');
+          if (inner) delete inner.dataset.bound;
+          var pid = clone.querySelector('.graduation-board-carousel');
+          var projectId = pid ? pid.getAttribute('data-project') : null;
+          if (projectId) {
             clone.onclick = function() {
-              var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
-              if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
-                location.href = 'graduation-excellent.html';
-              } else {
-                location.href = 'graduation-works.html';
-              }
+              location.href = 'graduation-detail.html?id=' + projectId;
             };
-          } else {
-            var inner = clone.querySelector('.graduation-board-carousel');
-            if (inner) delete inner.dataset.bound;
-            var pid = clone.querySelector('.graduation-board-carousel');
-            var projectId = pid ? pid.getAttribute('data-project') : null;
-            if (projectId) {
-              clone.onclick = function() {
-                location.href = 'graduation-detail.html?id=' + projectId;
-              };
-            }
           }
           grid.appendChild(clone);
         });
@@ -1251,7 +1246,7 @@
           '</div></div>';
         grid.appendChild(card);
       });
-      /* 末尾加“查看全部”箭头卡 */
+      /* “查看全部”小按钮（绝对定位在视口右下角） */
       var arrowCard = document.createElement('div');
       arrowCard.className = 'nwork-arrow-card';
       arrowCard.innerHTML =
@@ -1262,7 +1257,7 @@
       arrowCard.addEventListener('click', function() {
         location.href = 'graduation-works.html';
       });
-      grid.appendChild(arrowCard);
+      document.getElementById('normalViewport').appendChild(arrowCard);
       /* 初始化普通作品匀速滚动 */
       setupNormalMarquee();
     }
@@ -1294,7 +1289,7 @@
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
         viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        var items = grid.querySelectorAll(':scope > *:not(.nwork-clone)').length;
+        var items = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-clone)').length;
         var rows = Math.ceil(items / COLS);
         var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
         track.style.animationDuration = duration + 's';
@@ -1303,21 +1298,15 @@
       function duplicate() {
         var clones = grid.querySelectorAll('.nwork-clone');
         clones.forEach(function(c) { c.remove(); });
-        var originals = grid.querySelectorAll(':scope > *:not(.nwork-clone)');
+        var originals = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-clone)');
         originals.forEach(function(card) {
           var clone = card.cloneNode(true);
           clone.classList.add('nwork-clone');
-          if (card.classList.contains('nwork-arrow-card')) {
+          var pid = clone.getAttribute('data-id');
+          if (pid) {
             clone.onclick = function() {
-              location.href = 'graduation-works.html';
+              location.href = 'normal-detail.html?id=' + pid;
             };
-          } else {
-            var pid = clone.getAttribute('data-id');
-            if (pid) {
-              clone.onclick = function() {
-                location.href = 'normal-detail.html?id=' + pid;
-              };
-            }
           }
           grid.appendChild(clone);
         });
