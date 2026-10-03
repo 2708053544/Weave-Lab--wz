@@ -64,6 +64,31 @@
       text-align: center;
       margin: 48px 0 80px;
     }
+    /* 设计说明区块 */
+    .board-statement {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+    .board-statement-inner {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid rgba(79,107,255,0.85);
+      border-radius: 10px;
+      padding: 22px 26px;
+    }
+    .board-statement-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary, rgba(255,255,255,0.55));
+      margin-bottom: 10px;
+    }
+    .board-statement-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.85);
+    }
   </style>
 </head>
 <body>
@@ -135,6 +160,14 @@
     </div>
   </section>
 
+  <!-- 设计说明 -->
+  <div class="board-statement fade-in" id="boardStatement" style="display:none;">
+    <div class="board-statement-inner">
+      <div class="board-statement-label">Design Statement · 设计说明</div>
+      <p class="board-statement-text" id="boardStatementText"></p>
+    </div>
+  </div>
+
   <!-- 展板纵向长图：从顶部一直往下滑到底部即可完整浏览 -->
   <div class="board-viewer fade-in">
     <div class="board-stage" id="boardStage">
@@ -173,20 +206,20 @@
   <script>
     // 毕设项目数据（与 projects.html 保持一致）
     const boardProjects = [
-      { id: 1, title: "乡隅守望农村妇女在地增收服务设计", author: "韩冰", boards: ["project1_1.jpg", "project1_2.jpg", "project1_3.jpg", "project1_4.jpg"] },
-      { id: 2, title: "数字生态视角下的观鸟数据价值转化服务系统设计", author: "何靖馥琳", boards: ["project2_1.jpg", "project2_2.jpg", "project2_3.jpg", "project2_4.jpg"] },
-      { id: 3, title: "家用血钾监测仪多模态预警交互系统设计", author: "侯江伟", boards: ["project3_1.jpg", "project3_2.jpg"] },
-      { id: 4, title: "面向农业育种的无人机交互系统设计", author: "李潘", boards: ["project4_1.jpg", "project4_2.jpg", "project4_3.jpg"] },
-      { id: 5, title: "城乡技术迁移下MR赋能农户技能学习的熟人社交与涂鸦引流服务设计", author: "孟拓", boards: ["project5_1.jpg", "project5_2.jpg"] },
-      { id: 6, title: "农知旅人-基于VR的农业技术体验设计", author: "严行", boards: ["project6_1.jpg", "project6_2.jpg"] },
-      { id: 7, title: "基于服务设计思维的农用无人机多载荷模块化产品设计", author: "杨雅雯", boards: ["project7_1.jpg", "project7_2.jpg", "project7_3.jpg", "project7_4.jpg"] },
-      { id: 8, title: "面向HTO骨科手术机器人的全流程VR系统设计", author: "曹骞予", boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"] },
-      { id: 9, title: "面向名优茶机械化采摘的采茶机优化设计", author: "刘思敏", boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"] },
-      { id: 10, title: "基于可适应性及模块化可穿戴外骨骼设计", author: "邢贞获", boards: ["project10_1.jpg", "project10_2.jpg"] },
-      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"] },
-      { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
-      { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
-      { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] }
+      { id: 1, title: "乡隅守望农村妇女在地增收服务设计", author: "韩冰", boards: ["project1_1.jpg", "project1_2.jpg", "project1_3.jpg", "project1_4.jpg"], description: "本设计聚焦农村妇女这一在地群体，以服务设计方法重构“居家生产—社区协作—市场对接”的增收链路。通过挖掘在村妇女的手工技艺与碎片化时间，搭建低门槛的在地就业平台，让“守望乡土”与“就近增收”得以兼得，为乡村振兴提供以人为中心的服务范本。" },
+      { id: 2, title: "数字生态视角下的观鸟数据价值转化服务系统设计", author: "何靖馥琳", boards: ["project2_1.jpg", "project2_2.jpg", "project2_3.jpg", "project2_4.jpg"], description: "以观鸟活动产生的海量观测数据为切入点，系统探索数据从采集、治理到价值变现的转化路径。设计将业余观鸟者的兴趣行为转化为可服务于生态监测与科学研究的有效数据，构建“人—数据—生态”的正向循环，让数字生态参与成为人人可及的可持续行动。" },
+      { id: 3, title: "家用血钾监测仪多模态预警交互系统设计", author: "侯江伟", boards: ["project3_1.jpg", "project3_2.jpg"], description: "面向慢性肾病患者的居家监测需求，本设计以多模态预警为核心，通过视觉、听觉与触觉的协同反馈降低高危指标的漏报风险。系统将复杂的生理数据转化为直观易懂的交互语言，帮助患者在家庭环境中安全、便捷地掌握自身健康状况，为慢病管理提供新的设备范式。" },
+      { id: 4, title: "面向农业育种的无人机交互系统设计", author: "李潘", boards: ["project4_1.jpg", "project4_2.jpg", "project4_3.jpg"], description: "针对传统人工田间选种效率低、记录难追溯的痛点，本设计构建了一套面向育种的无人机低空作业交互系统。通过航线规划、多光谱采集与表型数据的可视化呈现，让育种人员以“飞一圈、看一遍”的方式高效完成选种，让 AI 解析出的优良单株信息在田间真正可用、可操作。" },
+      { id: 5, title: "城乡技术迁移下MR赋能农户技能学习的熟人社交与涂鸦引流服务设计", author: "孟拓", boards: ["project5_1.jpg", "project5_2.jpg"], description: "本设计将 MR 技术引入农户技能学习场景，针对城乡技术迁移中农户“学不会、不敢用”的困境，借助熟人社交的信任机制与涂鸦引流的情感化入口降低学习门槛。通过虚实结合的直观演示与同伴互助的学习社群，让新技术以“接地气”的方式扎根乡土。" },
+      { id: 6, title: "农知旅人-基于VR的农业技术体验设计", author: "严行", boards: ["project6_1.jpg", "project6_2.jpg"], description: "以“农知 + 文旅”为创新结合点，利用 VR 技术打造沉浸式的农业技术体验空间。通过场景化、可交互的虚拟农事体验，让城市用户直观理解农业生产知识，同时为农业技术推广开辟生动有趣的传播载体，实现知识普及与文旅体验的双重价值。" },
+      { id: 7, title: "基于服务设计思维的农用无人机多载荷模块化产品设计", author: "杨雅雯", boards: ["project7_1.jpg", "project7_2.jpg", "project7_3.jpg", "project7_4.jpg"], description: "以服务设计思维统筹农用无人机的作业全流程，提出“一机多载荷”的模块化产品方案。通过可快速更换的载荷模块与统一的作业服务流程，让植保、播撒、航测等多种农事需求在一套设备上灵活切换，降低农户使用与维护成本，提升农业装备的整体服务效能。" },
+      { id: 8, title: "面向HTO骨科手术机器人的全流程VR系统设计", author: "曹骞予", boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"], description: "面向胫骨高位截骨（HTO）骨科手术机器人，设计覆盖术前规划、术中导航与术后评估的全流程 VR 系统。通过术前三维虚拟仿真与术中虚实融合导航，帮助医生更直观地规划截骨方案、预判手术效果，提升手术的精准性与安全性，是数字孪生技术在骨科临床的深度实践。" },
+      { id: 9, title: "面向名优茶机械化采摘的采茶机优化设计", author: "刘思敏", boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"], description: "聚焦名优茶“嫩芽细采”与机械化“求快伤芽”的矛盾，本设计在现有采茶机基础上进行针对性优化。通过改进采摘执行机构与芽叶识别技术，平衡采摘效率与嫩芽完整度，让机械化采摘真正适用于高品质名优茶生产，缓解采茶用工荒难题。" },
+      { id: 10, title: "基于可适应性及模块化可穿戴外骨骼设计", author: "邢贞获", boards: ["project10_1.jpg", "project10_2.jpg"], description: "针对不同用户体型与使用场景的差异，设计了一款具备可适应性与模块化特征的可穿戴外骨骼。通过可调节的关节结构、可更换的功能模块与自适应的人机贴合，兼顾助力效果与穿戴舒适度，为康复训练与体力辅助提供灵活、普适的装备方案。" },
+      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"], description: "以激发乡村内生发展动力为目标，运用服务设计方法梳理乡村资源、村民能力与外部市场的连接点。通过搭建村民参与、利益共享的服务机制，让本地文化、物产与人力真正成为乡村可持续增长的引擎，探索“输血”转向“造血”的乡村振兴新路径。" },
+      { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"], description: "面向胫骨高位截骨手术的术前决策环节，设计了一套 VR 辅助决策系统。医生可在虚拟空间中直观比对不同截骨方案的影像与力学结果，并结合患者个体数据评估疗效与风险，让术前规划从二维影像走向三维沉浸，为个性化手术决策提供科学支撑。" },
+      { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"], description: "针对农民断代、传统农耕技艺流失的背景，以“生态农铺”为载体重构乡村生产与消费关系。通过模块化的生态种植单元与可感知的绿色消费体验，让城市消费者以参与式的方式支持有机农业，同时为年轻一代开辟返乡创业的轻量化入口，唤醒土地与人的新生机。" },
+      { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"], description: "以心流理论为设计依据，构建了一套沉浸式乐器陪练系统。通过任务难度与技能水平的动态匹配、即时可感的演奏反馈与沉浸式的陪伴场景，帮助学习者进入专注忘我的练习状态，提升练琴的趣味性与持续性，让音乐学习更自然、更愉悦。" }
     ];
 
     (function () {
@@ -206,6 +239,14 @@
 
       titleEl.textContent = project.title;
       authorEl.textContent = project.author + ' · 毕业设计展板';
+
+      // 设计说明
+      const stmtEl = document.getElementById('boardStatement');
+      const stmtText = document.getElementById('boardStatementText');
+      if (project.description && stmtEl && stmtText) {
+        stmtText.textContent = project.description;
+        stmtEl.style.display = 'block';
+      }
 
       // 纵向长图：按顺序一张接一张往下排，页面上下滑动即可完整阅读
       project.boards.forEach((board, idx) => {
