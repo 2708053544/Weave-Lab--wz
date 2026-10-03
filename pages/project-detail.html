@@ -420,6 +420,51 @@
         structureImage: "../images/uro-structure.jpg",
         emgImage: "../images/uro-emg.jpg",
         oproomImage: "../images/uro-oproom.jpg"
+      },
+      "10": {
+        name: "面向HTO骨科手术机器人的全流程VR系统设计", category: "工作室项目", year: "2025年", type: "", mentor: "", team: "",
+        intro: "面向高位胫骨截骨术（HTO）术前规划的全流程 VR 决策支持系统，通过沉浸式三维可视化与多方案并行预演，帮助骨科医生直观对比截骨方案、提升术前决策科学性。",
+        metaItems: [
+          { label: "项目类型", value: "医疗VR / 手术决策支持系统" },
+          { label: "开发平台", value: "Unity + VR 头显 + CT/MRI 三维重建" },
+          { label: "研究方向", value: "智能交互设计 / 数字医疗" },
+          { label: "指导教师", value: "张寞轩、边元" },
+          { label: "设计作者", value: "曹骞予" }
+        ],
+        background: "高位胫骨截骨术（HTO）是矫正膝内翻、延缓关节退变的重要手术。传统术前规划依赖二维影像与经验判断，医生难以直观对比多种截骨方案的空间效果，术中存在不可预测性，术后结果也难以提前评估。现有软件交互弱、沉浸感差，无法支持实时手术预演。",
+        problems: [
+          "二维影像存在空间局限性，截骨角度与力线校正难以直观感知",
+          "多种截骨方案无法并行对比，方案选择依赖经验",
+          "缺乏术前预演机制，术中可能出现未预料情况",
+          "术后力线校正效果无法在术前提前评估"
+        ],
+        solution: "基于 Unity 平台开发沉浸式 VR 手术决策系统 PREVIZ，将 CT/MRI 数据重建为三维骨骼模型，医生在虚拟环境中交互式预演多种截骨方案，实时验证力线校正与内固定位置，锁定最优方案后导出手术报告，覆盖术前规划→术中模拟→术后总结全流程。",
+        flow: [
+          { step: "01", title: "三维重建", desc: "基于患者 CT/MRI 数据重建 3D 骨骼模型" },
+          { step: "02", title: "方案生成", desc: "设计截骨角度与内固定方案，生成多套并行方案" },
+          { step: "03", title: "VR 预演", desc: "沉浸式预演各方案，实时验证力线与植入物位置" },
+          { step: "04", title: "对比决策", desc: "多方案并行对比，锁定最优方案并导出手术报告" }
+        ],
+        keyFeatures: [
+          "CT/MRI 三维骨骼重建，从二维影像走向三维沉浸",
+          "多方案并行预演与实时对比，支持方案一/二/三切换",
+          "实时力线验证（HKA°、WBL%）与植入物位置匹配",
+          "覆盖术前规划→术中模拟→术后总结全流程闭环"
+        ],
+        testResults: "邀请 6 位骨科医生进行术前规划效率与决策信心对比测试（1-10 分量表），结果显示使用 VR 预演系统后，所有医生的规划时间均下降、决策信心均提升，验证了系统在提升术前效率和手术方案优化方面的有效性。",
+        userFeedback: [
+          { quote: "VR 预演系统让我能直观对比多种截骨方案，术前决策效率非常高。", from: "受访医生 C" },
+          { quote: "多方案并行预演功能很棒，尤其实时力线验证让我选择最优方案更有信心。", from: "受访医生 F" }
+        ],
+        rehabDevice: "系统配套设计了基于 Arduino + MPU6050 的膝关节康复监测设备，通过蓝牙实时采集膝关节角度数据（屈曲/伸展），为术后康复提供量化追踪。",
+        value: [
+          "更直观：从二维影像到三维沉浸，截骨方案空间效果一目了然",
+          "更科学：多方案并行预演与实时力线验证，决策有据可依",
+          "更高效：术前规划时间显著下降，医生决策信心提升",
+          "更完整：覆盖术前→术中→术后全流程，配套康复监测设备"
+        ],
+        closing: "PREVIZ 不是替代医生的判断，而是把二维影像里看不见的空间关系、靠经验感知不到的方案差异，变成可以沉浸其中、可以并排比较、可以实时验证的三维体验——让术前规划从「看图想象」走向「预演决策」。",
+        coverImage: "../images/hto-vr-cover.jpg"
       }
     };
 
@@ -730,6 +775,110 @@
         '</section>';
     }
 
+    function renderHTOVRDetail(data) {
+      document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
+      document.getElementById('projName').textContent = data.name;
+      document.getElementById('projCategory').textContent = data.category;
+      document.getElementById('projIntro').textContent = data.intro;
+
+      const meta = document.querySelector('.detail-meta');
+      meta.innerHTML = data.metaItems.map(m =>
+        '<div class="detail-meta-item"><span class="detail-meta-label">' + m.label + '</span>' +
+        '<span class="detail-meta-value">' + m.value + '</span></div>'
+      ).join('');
+
+      ['secBackground', 'secConcept', 'secMoreImages', 'secResults', 'secVideo'].forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const gallery = document.querySelector('.detail-gallery-item');
+      if (gallery) gallery.innerHTML = '<img src="' + data.coverImage + '" alt="' + data.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">';
+
+      const container = document.getElementById('uavContent');
+      const stepCards = data.flow.map(f =>
+        '<div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:8px;padding:18px;">' +
+        '<div style="font-size:0.8125rem;color:rgba(159,178,255,0.95);font-weight:600;margin-bottom:8px;">' + f.step + '</div>' +
+        '<div style="font-size:1rem;font-weight:600;margin-bottom:6px;">' + f.title + '</div>' +
+        '<div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;">' + f.desc + '</div></div>'
+      ).join('');
+
+      const featureList = data.keyFeatures.map(f =>
+        '<div class="detail-list-item">' + f + '</div>'
+      ).join('');
+
+      const feedbackHtml = data.userFeedback.map(f =>
+        '<div style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:8px;padding:18px 20px;margin-bottom:14px;">' +
+        '<p style="font-size:1rem;line-height:1.8;color:rgba(255,255,255,0.9);margin:0 0 10px;">"' + f.quote + '"</p>' +
+        '<p style="font-size:0.8125rem;color:var(--text-secondary);margin:0;">— ' + f.from + '</p></div>'
+      ).join('');
+
+      container.innerHTML =
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目背景</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.background + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">要解决的问题</h2>' +
+            '<div class="detail-list fade-in">' + data.problems.map(p => '<div class="detail-list-item">' + p + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">解决方案</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;white-space:pre-line;">' + data.solution + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">核心功能</h2>' +
+            '<div class="detail-list fade-in">' + featureList + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">系统流程</h2>' +
+            '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;">' + stepCards + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">用户测试</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.testResults + '</p>' +
+            '<div style="margin-top:24px;">' + feedbackHtml + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">配套康复设备</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.rehabDevice + '</p>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section" style="background:var(--bg-secondary);">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">项目价值</h2>' +
+            '<div class="detail-list fade-in">' + data.value.map(v => '<div class="detail-list-item">' + v + '</div>').join('') + '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '<section class="detail-section">' +
+          '<div class="container-narrow">' +
+            '<h2 class="fade-in">结语</h2>' +
+            '<p class="text-secondary fade-in" style="font-size:1.05rem;line-height:1.9;">' + data.closing + '</p>' +
+          '</div>' +
+        '</section>';
+    }
+
     function renderProjectDetail() {
       const params = new URLSearchParams(window.location.search);
       let id = params.get('id');
@@ -739,6 +888,7 @@
       if (id === '5') { renderUAVDetail(data); return; }
       if (id === '6') { renderWonderDetail(data); return; }
       if (id === '9') { renderUroDetail(data); return; }
+      if (id === '10') { renderHTOVRDetail(data); return; }
 
       document.title = data.name + ' | Weave Lab 智能体验与服务工程实验室';
       document.getElementById('projName').textContent = data.name;
