@@ -440,84 +440,6 @@
     @media (max-width: 480px) {
       .normal-masonry { grid-template-columns: 1fr; max-width: 280px; }
     }
-    /* 普通作品大图查看 Lightbox */
-    .nwork-lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 9990;
-      background: rgba(0, 0, 0, 0.93);
-      display: none;
-    }
-    .nwork-lightbox.open { display: block; }
-    .nwork-lightbox-scroll {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      padding: 72px 20px 96px;
-      text-align: center;
-    }
-    .nwork-lightbox-scroll img {
-      width: min(780px, 92vw);
-      height: auto;
-      display: inline-block;
-      vertical-align: top;
-      border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-    }
-    .nwork-lightbox-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 9995;
-      padding: 14px 20px;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .nwork-lightbox-bar .lb-title {
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.4;
-    }
-    .nwork-lightbox-bar .lb-author {
-      color: rgba(255, 255, 255, 0.62);
-      font-size: 0.8rem;
-    }
-    .nwork-lightbox-close {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      z-index: 9996;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      font-size: 1.15rem;
-      line-height: 1;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .nwork-lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
-    .nwork-lightbox-hint {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9994;
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1526,50 +1448,13 @@
           '<p class="nwork-author">' + w.author + '</p>' +
           '</div></div>';
         card.addEventListener('click', function () {
-          openNormalLightbox(w);
+          location.href = 'normal-detail.html?id=' + w.id;
         });
         masonry.appendChild(card);
       });
     }
 
-    /* 普通作品大图查看：弹层内纵向滚动浏览完整展板 */
-    function openNormalLightbox(w) {
-      let lb = document.getElementById('normalLightbox');
-      if (!lb) {
-        lb = document.createElement('div');
-        lb.id = 'normalLightbox';
-        lb.className = 'nwork-lightbox';
-        lb.innerHTML =
-          '<div class="nwork-lightbox-hint">上下滑动查看完整展板</div>' +
-          '<button class="nwork-lightbox-close" aria-label="关闭">✕</button>' +
-          '<div class="nwork-lightbox-scroll"><img alt=""></div>' +
-          '<div class="nwork-lightbox-bar">' +
-          '<span class="lb-title"></span>' +
-          '<span class="lb-author"></span>' +
-          '</div>';
-        document.body.appendChild(lb);
-        lb.querySelector('.nwork-lightbox-close').addEventListener('click', closeNormalLightbox);
-        lb.addEventListener('click', function (e) {
-          if (e.target === lb || e.target.classList.contains('nwork-lightbox-scroll')) closeNormalLightbox();
-        });
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') closeNormalLightbox();
-        });
-      }
-      lb.querySelector('img').src = '../images/normal-works/' + w.board;
-      lb.querySelector('img').alt = w.title + ' 作品展板';
-      lb.querySelector('.lb-title').textContent = w.title;
-      lb.querySelector('.lb-author').textContent = w.author;
-      lb.querySelector('.nwork-lightbox-scroll').scrollTop = 0;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
 
-    function closeNormalLightbox() {
-      const lb = document.getElementById('normalLightbox');
-      if (lb) lb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
   </script>
   <script>
     /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */

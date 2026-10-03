@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品展板 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="学生课程与竞赛作品展板详情">
+  <link rel="stylesheet" href="../css/style.css?v=18">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* 作品展板详情页专用样式 */
+    .board-hero {
+      padding: 96px 0 8px;
+      text-align: center;
+    }
+    .board-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.3;
+      margin: 8px 0 4px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.82) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .board-author {
+      color: var(--text-secondary, rgba(255,255,255,0.62));
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+    }
+    /* 展板纵向长图浏览：一张接一张往下排，整页上下滑动阅读 */
+    .board-viewer {
+      max-width: 900px;
+      margin: 32px auto 0;
+      padding: 0 20px;
+      position: relative;
+    }
+    .board-stage {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0c0d10;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      padding: 18px;
+    }
+    .board-stage .board-slide {
+      margin: 0 0 24px 0;
+      background: #0c0d10;
+    }
+    .board-stage .board-slide:last-child {
+      margin-bottom: 0;
+    }
+    .board-stage .board-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #0c0d10;
+      border-radius: 8px;
+    }
+    .board-stage .board-slide img:hover {
+      box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    }
+    .board-back-bottom {
+      text-align: center;
+      margin: 48px 0 80px;
+    }
+    /* 设计说明区块 */
+    .board-statement {
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+    .board-statement-inner {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid rgba(79,107,255,0.85);
+      border-radius: 10px;
+      padding: 22px 26px;
+    }
+    .board-statement-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary, rgba(255,255,255,0.55));
+      margin-bottom: 10px;
+    }
+    .board-statement-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.85);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-mark">W</div>
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item">
+          <span class="nav-link">首页 ▾</span>
+          <div class="nav-dropdown">
+            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#about" class="dropdown-item">工作室简介</a>
+            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">关于工作室 ▾</span>
+          <div class="nav-dropdown">
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link active">项目成果 ▾</span>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#normal-works" class="dropdown-item">普通作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-link">联系我们 ▾</span>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
+      <div class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 返回按钮 -->
+  <a href="projects.html#normal-works" class="back-button">← 返回</a>
+
+  <!-- 展板详情 -->
+  <section class="board-hero">
+    <div class="container">
+      <span class="section-label fade-in">Student Work</span>
+      <h1 class="fade-in" id="boardTitle">作品展板</h1>
+      <p class="board-author fade-in" id="boardAuthor">Weave Lab</p>
+    </div>
+  </section>
+
+  <!-- 作品说明 -->
+  <div class="board-statement fade-in" id="boardStatement" style="display:none;">
+    <div class="board-statement-inner">
+      <div class="board-statement-label">Design Statement · 作品说明</div>
+      <p class="board-statement-text" id="boardStatementText"></p>
+    </div>
+  </div>
+
+  <!-- 展板纵向长图：从顶部一直往下滑到底部即可完整浏览 -->
+  <div class="board-viewer fade-in">
+    <div class="board-stage" id="boardStage">
+      <!-- 展板大图由JS按顺序纵向生成 -->
+    </div>
+  </div>
+
+  <div class="board-back-bottom">
+    <a href="projects.html#normal-works" class="btn btn-outline">← 返回普通作品</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Weave Lab</h4>
+          <p>智能体验与服务工程实验室</p>
+        </div>
+        <div class="footer-section">
+          <h4>导航</h4>
+          <a href="../index.html">首页</a>
+          <a href="about.html">关于工作室</a>
+          <a href="projects.html">项目成果</a>
+          <a href="activities.html">活动与合作</a>
+          <a href="contact.html">联系我们</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // 普通作品数据（与 projects.html 保持一致）
+    const boardProjects = [
+      { id: 1, title: "穹枝归所——全周期安宁社区服务设计", author: "郭心蕊", board: "normal1.jpg", description: "聚焦临终关怀与殡葬行业需求被忽视的现状，面向临终老人及其家庭，设计覆盖临终关怀到殡葬的全周期社区安宁服务。通过分龄适配与个性化定制方案，融入生态殡葬理念，为生命终末期提供有温度的服务支撑。" },
+      { id: 2, title: "银发社区服务改善", author: "樊小钰", board: "normal2.jpg", description: "针对社区老年服务供给不足、老人精神生活需求被忽视的问题，以社区论坛为核心枢纽，整合上门服务、兴趣匹配、活动报名等功能，打通管理人员、居民、志愿者三方链路，实现需求精准匹配，让社区成为银发生活的重要支撑。" },
+      { id: 3, title: "银铃——预防阿尔兹海默症老人走失系统", author: "刘惠月", board: "normal3.jpg", description: "面向阿尔兹海默症老人易走失、寻回效率低的痛点，设计智能定位手环与配套服务系统。联动家属、社区、志愿者三方，提供异常识别、电子围栏、轨迹回溯等全流程防走失保障，守护认知障碍老人的出行安全。" },
+      { id: 4, title: "银悦坊——银发商业空间服务设计", author: "董慧鑫", board: "normal4.jpg", description: "聚焦老年群体线下购物体验不佳的问题，从有形空间配置与无形服务体验两个维度同步优化银发商业空间。通过适老化环境营造、动线优化、服务流程改造，让老年消费者在商业空间中获得更舒适便捷的体验。" },
+      { id: 5, title: "GoldenEra瑞购——老年购物软件设计", author: "周小雨", board: "normal5.jpg", description: "针对现有购物 APP 不适配老年人、老年网购不便的痛点，设计适老化购物 APP。通过简洁界面、一键操作与语音助手降低学习成本，帮助老年人轻松跨越数字鸿沟，享受便捷的线上购物体验。" },
+      { id: 6, title: "I-BLOOM 以爱为智", author: "康歌", board: "normal6.jpg", description: "面向室内绿植爱好者因疏忽养不好植物的困扰，设计智能花盆与配套 APP 联动的养护方案。通过自动监测植物状态、提供个性化养护指引，软硬件协同适配多场景种植需求，让「以爱为智」的养护理念落地日常。" },
+      { id: 7, title: "MM豆特装展位设计", author: "耿之郁", board: "normal7.jpg", description: "为拓展 M&M 豆线下传播、落地会展场景，设计沉浸式品牌体验展位。以散点布局融合 IP 元素，设置互动、展示、售卖等模块，通过滑轨设计强化视觉吸引力，面向全年龄段爱好者打造亲子友好的品牌互动空间。" },
+      { id: 8, title: "Water Dispenser 智能校准饮水机设计", author: "曹骞予", board: "normal8.jpg", description: "针对传统饮水机接水溢漏、易烫伤、费水等问题，面向学校、医院、办公等公共场景，设计可自动定位杯口的智能饮水机。通过快速对位适配多种杯型，实现防烫防溢、节水增效，提升公共饮水安全与便捷性。" },
+      { id: 9, title: "「老友记」多元社交社区服务设计", author: "颜玉晗", board: "normal9.jpg", description: "针对城市独居老人普遍存在社交孤独的问题，设计线上线下、社区内、户外结合的多元社区社交服务。通过分场景适配老人需求、全流程优化社交体验，帮助独居老人重建邻里联结，让「老友记」成为银发社交的温暖入口。" },
+      { id: 10, title: "乐龄同频计划——多元化社区服务设计", author: "徐玮琪", board: "normal10.jpg", description: "面向空巢老人社会参与度低、幸福感不足的问题，设计多元化社区服务方案。通过参与活动获取「乐龄币」激励机制，提升老人参与感与价值认同，让社区活动从被动参与转向主动融入，激发银发生活的内生动力。" },
+      { id: 11, title: "乡游——二线城镇文化体验社区服务设计", author: "吴美妮", board: "normal11.jpg", description: "针对二线城镇文旅资源待整合、文化传播弱、一线文旅压力大的问题，结合地域文化与废弃场地打造乡村文化体验社区。通过文旅融合同步缓解城市文旅压力、为乡镇提供就业，激活地方文旅经济，让二线城镇焕发文化活力。" },
+      { id: 12, title: "会说话的大标志（基于视障老人的导视设计）", author: "吕津成", board: "normal12.jpg", description: "针对视障老人难以识别常规导视、景区寻路困难的问题，设计适配视障老人的景区导视系统。结合语音提示与老人友好视觉设计，降低寻路难度，让视障老年群体也能独立、安全地完成游览。" },
+      { id: 13, title: "巡天计划——低空经济应急管理与城市设备巡查融合服务设计", author: "杨雅雯", board: "normal13.jpg", description: "面向传统城市巡检与应急系统效率低、低空经济发展需求，设计空天地协同网络，提供无人机巡检与应急服务。打通多主体资源，覆盖从巡检到应急处置的全链路，让低空技术真正赋能城市安全治理。" },
+      { id: 14, title: "共感银途 EmpathSilvr 体验馆服务设计", author: "臧莹", board: "normal14.jpg", description: "针对人口老龄化下子女对老人衰老处境共情不足的问题，面向中青年子女设计线下衰老体验馆。以剧本杀、体感模拟等沉浸式方式让用户体验老人身体与心理状态，沉浸式具象化衰老困境，降低代际理解成本，促进家庭共情。" },
+      { id: 15, title: "写生用旅行包", author: "菅桂琪", board: "normal15.jpg", description: "针对传统画包无法满足写生者出行特殊需求的问题，面向户外写生人群设计专用写生拉杆旅行包。通过合理分区储物与可爬楼三式轮设计，适配写生场景，让画材收纳有序、出行省力便携，为户外创作提供专业装备支撑。" },
+      { id: 16, title: "志愿伴行", author: "韩家帅", board: "normal16.jpg", description: "针对老年旅行中家属担忧、导游承压、老人出行障碍等问题，联动旅行社与志愿者提供透明化老年行程服务，搭建信息共享平台。通过行程可视化追踪、志愿者一对一适配、多方协作保障，让老年出行更安心，家属更放心。" },
+      { id: 17, title: "护小助——优化护工群体年龄结构的服务系统设计", author: "段淑惠", board: "normal17.jpg", description: "针对养老护工缺口大、年龄结构偏老、招工难的问题，设计「护小助」APP，拆分优化护工任务。降低入行门槛吸引年轻从业者，优化护工年龄结构，同时为失能老人匹配更专业、更可持续的照护服务。" },
+      { id: 18, title: "旅行盒子·文化体验旅游产品服务设计", author: "韩佳琪", board: "normal18.jpg", description: "针对城市旅游网红化、人与城市情感联结缺失、留客难的问题，面向游客、旅游从业者、本地居民，推出多主题「旅行盒子」文化体验游服务及配套 APP。通过场景化强化文旅情感连接，覆盖旅游全流程，让旅行更有温度。" },
+      { id: 19, title: "晚恋——基于银发经济的老年交友相亲系统流程设计", author: "姜晓雅", board: "normal19.jpg", description: "针对人口老龄化下老年相亲服务市场空白的问题，面向单身老年人设计交友相亲系统。通过适配老年需求的细化相亲流程，提升相亲成功率与安全性，补足银发情感服务供给缺口，让老年情感生活不再被忽视。" },
+      { id: 20, title: "智能医疗服务系统", author: "张达", board: "normal20.jpg", description: "针对老龄化下老年人就医存在挂号、寻路、复诊等痛点、体验差的问题，面向老年就医群体搭建适老化智能医疗系统。通过多端联动覆盖就医全流程、优化医疗资源配置，提升老年人就医效率与体验，让医疗服务真正适老。" },
+      { id: 21, title: "梧桐汇", author: "赵思竣", board: "normal21.jpg", description: "针对老龄化下老年人情感孤岛、社交屏障、精神社交需求待满足的问题，设计「梧桐汇」垂直老年社交 APP。聚焦情感需求，打造适配老年人的温感智慧社交平台，重构老年社交生态，让银发生活有陪伴、有联结。" },
+      { id: 22, title: "沉默玩家——基于 AIoT 的聋哑社会共情云生态服务系统设计", author: "何靖馥琳", board: "normal22.jpg", description: "针对听障群体社会融入难、社会共情不足的问题，面向听障人群与健听公众，搭建线上线下结合的聋健共融生态服务系统。以沉浸式交互打通聋健沟通壁垒，促进双向共情，让「沉默玩家」被看见、被理解。" },
+      { id: 23, title: "活力银龄——慧健康健身软件设计", author: "陈茜", board: "normal23.jpg", description: "针对中老年缺适配的健身、运动社交及健康监测渠道的问题，面向中老年人设计健身 APP。提供健身指导、社交、监测、激励服务，打通线上线下健身全场景，适配老年需求，让银发群体也能享受科学、有趣的运动生活。" },
+      { id: 24, title: "焕发传统文化新活力视角下的非遗·陪伴体验馆服务设计", author: "耿之郁", board: "normal24.jpg", description: "针对非遗文旅活化不足、游客体验浅层单一的问题，面向外来游客配套非遗体验场地，提供全流程文化游览服务。将非遗嵌入游线全环节，打造沉浸式互动体验，让传统文化在陪伴式游览中焕发新活力。" },
+      { id: 25, title: "疗愈花园", author: "王杨", board: "normal25.jpg", description: "针对老龄化下现有养老空间康养功能不足的问题，面向老年群体打造自然融合的疗愈花园。配套步道、园艺、轻康养设施，借助自然元素实现康养效用，辅助慢病调理，优化养老体验，让自然成为银发健康的温柔伙伴。" },
+      { id: 26, title: "禾火新生——农民断代背景下 EcoCube 生态农缩服务设计", author: "黄玉冰", board: "normal26.jpg", description: "针对农民断代制约农业现代化发展的问题，面向返乡青年、农户、城市群体，打造 EcoCube 生态农缩农业示范园并配套线上服务。融合实体业态与数字工具，联动多方参与农业生产，让农业在数字时代焕发新生机。" },
+      { id: 27, title: "科技赋能老年交互新系统——「舞是」以老年舞蹈教室为例", author: "黄玉冰", board: "normal27.jpg", description: "响应国家文化养老政策、解决老年学习门槛高的问题，面向老年人设计以舞蹈空间为载体的科技赋能学习服务。结合 AI 与移动端，提供低门槛互动学习，打造老年文化学习新场景，让科技助力银发生活更精彩。" },
+      { id: 28, title: "老年乌托邦——一体化喘息服务老年社区", author: "马伊玟", board: "normal28.jpg", description: "针对老龄化加剧、老人难融数字社会缺陪伴、年轻人养老就业压力大、社区养老供给不足的问题，面向老年人与有养老压力的中青年，落地社区一体化喘息养老服务并配套人员设施。兼顾老人需求与子女压力缓解，同时可吸纳年轻人就业。" },
+      { id: 29, title: "趣远方——定制旅游服务设计·定制化服务端", author: "赵蔓", board: "normal29.jpg", description: "针对银发旅游需求上涨、现有服务适配性不足的问题，面向老年出游群体提供适配老人的定制化旅游服务。联动子女及多方资源，兼顾标准化与人文增值，让老年旅行更省心、更安心、更有温度。" },
+      { id: 30, title: "通过优化子女联系方式解决老年人多种情绪问题", author: "蔡心悦", board: "normal30.jpg", description: "针对独居老人孤独、不善用智能设备、与子女情感联系弱的问题，面向独居老年人设计智能相册。支持照片展示与一键语音通话，操作极简，兼顾相册功能与情感陪护价值，让亲情联结不再受技术门槛阻隔。" },
+      { id: 31, title: "银发互助学堂", author: "何亚之", board: "normal31.jpg", description: "针对老龄化下老人需求难被满足、孤独缺娱乐的问题，面向老年群体设计线上线下结合的智能软件教学服务。通过趣味化科技教学满足社交、怀旧需求，助力老人实现自我价值，适配银发娱乐与学习需求，让银发生活有学有乐。" },
+      { id: 32, title: "银发互助学堂", author: "林凇宇", board: "normal32.jpg", description: "针对老龄化下老人数字技能匮乏、社交与关爱需求未被满足的问题，面向有数字学习与社交需求的老年群体，由大学生提供智能使用、创意社交类定制教学服务。兼顾技能提升与社交陪伴，打通代际沟通渠道，让银发学习成为温暖的代际桥梁。" },
+      { id: 33, title: "银发共生设计", author: "杜益乐", board: "normal33.jpg", description: "针对老龄化加剧、老旧小区适老配套缺失、改造需求迫切的问题，面向老旧小区老年群体设计分场景适老化微改造方案。通过微改造撬动银发经济，多方协同适配老人需求，让老旧社区成为银发友好生活的载体。" },
+      { id: 34, title: "银发经济服务系统设计", author: "吴娅萌", board: "normal34.jpg", description: "针对老年人出游易遇诈骗、行程不适、突发疾病无保障等痛点，面向有出行需求的老年群体设计定制专属银发旅游套餐。配套医疗、接送、陪同、预约等适老服务，让银发出行更安全、更省心、更有保障。" },
+      { id: 35, title: "银龄心桥——社区愈动服务设计", author: "章慧俐", board: "normal35.jpg", description: "针对老龄化加剧、老年心理健康服务供给不足、覆盖率低的问题，以社区为场景开展多元活动纾解老人心理压力。构建「生理—心理—社交」全链条养老支持体系，让社区成为银发心理健康的温柔支撑。" },
+      { id: 36, title: "鸟类栖息地优化及环境吸引觅食装置的服务系统设计", author: "博佳", board: "normal36.jpg", description: "针对鸟类栖息地受损、觅食资源匮乏、生物多样性下降的问题，面向野生鸟类、鸟类保护者、观鸟爱好者，优化栖息地并设适配型觅食装置，配套服务小程序。通过生境改造、装置与数字系统联动，适配不同鸟类取食需求，守护城市飞羽。" }
+    ];
+
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const id = parseInt(params.get('id'), 10);
+      const project = boardProjects.find(p => p.id === id);
+
+      const titleEl = document.getElementById('boardTitle');
+      const authorEl = document.getElementById('boardAuthor');
+      const stage = document.getElementById('boardStage');
+
+      if (!project) {
+        titleEl.textContent = '未找到该作品';
+        authorEl.textContent = '';
+        return;
+      }
+
+      titleEl.textContent = project.title;
+      authorEl.textContent = project.author + ' · 学生作品展板';
+
+      // 作品说明
+      const stmtEl = document.getElementById('boardStatement');
+      const stmtText = document.getElementById('boardStatementText');
+      if (project.description && stmtEl && stmtText) {
+        stmtText.textContent = project.description;
+        stmtEl.style.display = 'block';
+      }
+
+      // 展板大图（单张长图，纵向滚动浏览）
+      const slide = document.createElement('div');
+      slide.className = 'board-slide';
+      const img = document.createElement('img');
+      img.src = '../images/normal-works/' + project.board;
+      img.alt = project.title + ' 展板';
+      img.loading = 'lazy';
+      slide.appendChild(img);
+      stage.appendChild(slide);
+    })();
+  </script>
+</body>
+</html>
