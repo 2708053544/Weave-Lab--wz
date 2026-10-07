@@ -7,3 +7,11 @@ index.html.backup
 *.bak
 .DS_Store
 Thumbs.db
+# 开发用 Python 脚本
+download_*.py
+fix_footer.py
+# 临时 HTML 文件
+graduation-works_online.html
+projects_online.html
+# 临时 Python 脚本
+search_pdf.py

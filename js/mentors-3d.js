@@ -29,7 +29,7 @@ const TEACHERS = [
     name: '刘海斌',
     short: '刘',
     title: '副教授 / 人工智能教育专家',
-    email: '#',
+    email: 'tjracx2018@163.com',
     major: '人工智能教育 / 智能硬件 / AI工程化',
     blog: 'https://lhbzx1984.github.io/personal-blog/',
     photo: '../images/teachers/teacher2.png',
@@ -53,7 +53,7 @@ const TEACHERS = [
     name: '苏俊旭',
     short: '苏',
     title: '助教 / 设计实践导师',
-    email: '#',
+    email: '739672050@qq.com',
     major: '用户体验 / 产品服务设计',
     blog: 'https://hkh168.github.io/sujunxu-homepage/',
     photo: '../images/teachers/teacher4.png',
@@ -138,17 +138,6 @@ const TEACHERS = [
     });
   }
 
-  /* 让博客整行都可以点击 */
-  const blogRow = blogEl.closest('.m3-info-row');
-  if (blogRow) {
-    blogRow.style.cursor = 'pointer';
-    blogRow.style.pointerEvents = 'auto';
-    blogRow.addEventListener('click', function (e) {
-      if (e.target === blogEl) return; /* 避免重复触发 */
-      window.open(blogEl.href, '_blank', 'noopener');
-    });
-  }
-
   function renderText() {
     const t = TEACHERS[current];
     curEl.textContent = '0' + (current + 1);
@@ -163,6 +152,7 @@ const TEACHERS = [
     majorEl.textContent = t.major;
     blogEl.textContent = t.blog;
     blogEl.href = t.blog;
+    blogEl.target = '_blank';
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
 
@@ -280,16 +270,20 @@ const TEACHERS = [
 
       /* 所有弹出物收回后，解除隐藏并让文字/控件逐个浮现 */
       root.classList.remove('m3-booting');
+      const infoRows = root.querySelectorAll('.m3-info-row');
       const seq = [
-        ['.m3-sec-header', 0.15],
-        ['.m3-info-label', 0.35],
-        ['#m3Name', 0.6],
-        ['#m3Title', 0.85],
-        ['.m3-info-hint', 1.1],
-        ['.m3-counter', 0.6],
-        ['#m3Dots', 0.85],
-        ['.m3-arrow.prev', 1.1],
-        ['.m3-arrow.next', 1.2]
+        ['.m3-sec-header', 0.05],
+        ['.m3-info-label', 0.15],
+        ['#m3Name', 0.3],
+        ['#m3Title', 0.45],
+        ['.m3-info-row:nth-child(1)', 0.6],
+        ['.m3-info-row:nth-child(2)', 0.72],
+        ['.m3-info-row:nth-child(3)', 0.84],
+        ['.m3-info-hint', 0.96],
+        ['.m3-counter', 0.3],
+        ['#m3Dots', 0.45],
+        ['.m3-arrow.prev', 0.6],
+        ['.m3-arrow.next', 0.66]
       ];
       seq.forEach(([sel, delay]) => {
         const el = root.querySelector(sel);
@@ -303,7 +297,7 @@ const TEACHERS = [
             { opacity: 0, transform: 'translateY(14px)' },
             { opacity: 1, transform: 'translateY(0)' }
           ],
-          { duration: 1000, delay: delay * 1000, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'both' }
+          { duration: 600, delay: delay * 1000, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'both' }
         );
       });
     }, 4200);
@@ -312,18 +306,21 @@ const TEACHERS = [
   if (standalone) {
     playEntrance();
   } else {
-    /* 滚到板块首次占住视口时播放；另设兜底定时器，
-       避免 IO 因渲染暂停等原因不触发导致文字永久隐藏 */
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting && en.intersectionRatio >= 0.45) {
-          io.disconnect();
-          playEntrance();
-        }
-      });
-    }, { threshold: [0.45] });
-    io.observe(section);
-    setTimeout(() => playEntrance(), 3000);
+    /* 滚到板块顶部进入视口下方 300px 范围内时播放展开动画 */
+    let scrollHandler = function () {
+      if (entranceStarted) {
+        window.removeEventListener('scroll', scrollHandler);
+        return;
+      }
+      var r = section.getBoundingClientRect();
+      var triggerLine = window.innerHeight - 300;
+      if (r.top < triggerLine) {
+        window.removeEventListener('scroll', scrollHandler);
+        playEntrance();
+      }
+    };
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    scrollHandler();
   }
 
   /* ============================================================

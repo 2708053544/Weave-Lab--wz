@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -9,19 +9,87 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* 背景装饰光斑层 */
+    .glow-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.3, 1), opacity 0.28s ease;
+    }
+    .glow-blob.pressed {
+      transform: scale(0.82, 0.86);
+      opacity: 0.88;
+    }
+    .glow-blob.bounce {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+    .blob-1 { width: 1092px; height: 858px; left: calc(100% - 546px); top: -429px; background: radial-gradient(ellipse at center, rgba(170, 80, 255, 0.35) 0%, rgba(170, 80, 255, 0) 65%); }
+    .blob-2 { width: 420px; height: 330px; left: calc(12% - 210px); top: calc(10% - 165px); background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 65%); }
+    .blob-3 { width: 420px; height: 330px; left: calc(88% - 210px); top: calc(26% - 165px); background: radial-gradient(ellipse at center, rgba(255, 110, 220, 0.36) 0%, rgba(255, 110, 220, 0) 65%); }
+    .blob-4 { width: 520px; height: 400px; left: calc(30% - 260px); top: calc(40% - 200px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.40) 0%, rgba(140, 90, 255, 0) 65%); }
+    .blob-5 { width: 340px; height: 260px; left: calc(70% - 170px); top: calc(62% - 130px); background: radial-gradient(ellipse at center, rgba(120, 80, 255, 0.15) 0%, rgba(120, 80, 255, 0) 60%); }
+    .blob-6 { width: 210px; height: 160px; left: calc(74% - 105px); top: calc(76% - 80px); background: radial-gradient(ellipse at center, rgba(0, 220, 255, 0.16) 0%, rgba(0, 220, 255, 0) 60%); }
+    .blob-7 { width: 340px; height: 260px; left: calc(16% - 170px); top: calc(88% - 130px); background: radial-gradient(ellipse at center, rgba(255, 90, 200, 0.14) 0%, rgba(255, 90, 200, 0) 60%); }
+    .blob-8 { width: 210px; height: 160px; left: calc(60% - 105px); top: calc(95% - 80px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.10) 0%, rgba(140, 90, 255, 0) 60%); }
+    @media (max-width: 768px) {
+      .blob-1 { width: 624px; height: 490px; left: calc(100% - 312px); top: -245px; }
+      .blob-2 { width: 240px; height: 190px; left: calc(12% - 120px); top: calc(10% - 95px); }
+      .blob-3 { width: 240px; height: 190px; left: calc(88% - 120px); top: calc(26% - 95px); }
+      .blob-4 { width: 300px; height: 230px; left: calc(30% - 150px); top: calc(40% - 115px); }
+      .blob-5 { width: 200px; height: 150px; left: calc(70% - 100px); top: calc(62% - 75px); }
+      .blob-6 { width: 130px; height: 100px; left: calc(74% - 65px); top: calc(76% - 50px); }
+      .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
+      .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
+    }
+    /* 让内容在光斑之上 */
+    section, footer, .page-header, .back-button, .detail-hero, .detail-content, .detail-info { position: relative; z-index: 1; }
+    .navbar { z-index: 100; }
+    /* 返回按钮绝对定位，不占文档流 */
+    .back-button {
+      position: absolute;
+      top: calc(var(--nav-height) + 30px);
+      left: 40px;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- 装饰光斑层（弹性可交互） -->
+  <div class="glow-layer" aria-hidden="true">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+    <div class="glow-blob blob-4"></div>
+    <div class="glow-blob blob-5"></div>
+    <div class="glow-blob blob-6"></div>
+    <div class="glow-blob blob-7"></div>
+    <div class="glow-blob blob-8"></div>
+  </div>
 
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <div class="nav-logo-mark">W</div>
+        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <span class="nav-link">首页 ▾</span>
+          <a href="../index.html" class="nav-link">首页 ▾</a>
           <div class="nav-dropdown">
             <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
@@ -29,14 +97,14 @@
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link active">关于工作室 ▾</span>
+          <a href="about.html" class="nav-link active">关于工作室 ▾</a>
           <div class="nav-dropdown">
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">项目成果 ▾</span>
+          <a href="projects.html" class="nav-link">项目成果 ▾</a>
           <div class="nav-dropdown">
             <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
             <a href="projects.html#works" class="dropdown-item">毕设作品</a>
@@ -44,14 +112,14 @@
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">活动与合作 ▾</span>
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
             <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">联系我们 ▾</span>
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
           <div class="nav-dropdown">
             <a href="contact.html" class="dropdown-item">联系方式</a>
             <a href="contact.html" class="dropdown-item">留言咨询</a>
@@ -67,7 +135,7 @@
     </div>
   </nav>
 
-  <a href="about.html" class="back-button">
+  <a href="about.html#students" class="back-button">
     ← 返回
   </a>
 
@@ -118,7 +186,7 @@
 
   <!-- Back -->
   <section class="section text-center" style="padding: 60px 0;">
-    <a href="about.html" class="btn btn-outline">← 返回团队页面</a>
+    <a href="about.html#students" class="btn btn-outline">← 返回团队页面</a>
   </section>
 
   <!-- Footer -->
@@ -127,7 +195,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <div class="footer-logo-mark">W</div>
+            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -172,7 +240,7 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=20261007"></script>
   <script>
     const studentData = {
       "1": {
@@ -182,7 +250,7 @@
         grade: "24级 · 数字传媒与设计艺术学院",
         major: "产品设计3班",
         position: "工作室负责人",
-        email: "haokh@weavelab.com",
+        email: "c168_0611@qq.com",
         intro: "工作室负责人，数字传媒与设计艺术学院产品设计3班。全面负责工作室的项目管理与团队运营，主导多个设计项目从概念到落地的全流程。善于协调跨方向合作，推动工作室在产品创新、服务设计与智能体验领域的持续探索。",
         skills: ["项目管理", "产品设计", "团队统筹", "设计思维", "视觉表达"],
         achievements: ["工作室负责人", "产品设计专业", "数字传媒与设计艺术学院"],
@@ -195,7 +263,7 @@
         grade: "24级 · 数智传媒与设计艺术学院",
         major: "产品设计",
         position: "工作室副负责人",
-        email: "jiajx@weavelab.com",
+        email: "j.jx1612_1076@qq.com",
         intro: "工作室副负责人，数智传媒与设计艺术学院产品设计四班。专注于产品设计与数字媒体的交叉领域，善于将艺术审美与技术实现相结合。作为工作室副负责人，协助管理日常事务并推动项目进展，相信好的设计是技术与艺术的完美融合。",
         skills: ["产品设计", "数字媒体设计", "视觉传达", "3D建模", "项目管理"],
         achievements: ["工作室副负责人", "产品设计专业", "数智传媒方向"],
@@ -208,50 +276,50 @@
         grade: "24级 · 数字传媒与设计艺术学院",
         major: "智能交互1班",
         position: "实验设备负责人",
-        email: "jiamq@weavelab.com",
+        email: "1345904289@qq.com",
         intro: "实验设备负责人，数字传媒与设计艺术学院智能交互专业一班。负责工作室实验设备的日常管理、维护与调配，确保各类设备的正常运行和高效使用。细心负责，熟悉各类实验设备的操作与保养，是工作室硬件环境的可靠守护者。",
         skills: ["设备管理与维护", "智能交互", "用户体验", "实验操作", "设备调试"],
         achievements: ["实验设备负责人", "智能交互专业", "数字传媒与设计艺术学院"],
         blog: "https://dear-dilraba-jmq.github.io/boke/"
       },
       "4": {
+        name: "唐月淼",
+        avatar: "../images/students/student6.jpg",
+        role: "数智传媒与设计艺术学院 · 产品设计3班 · 工作室竞赛负责人 · 24级",
+        grade: "24级 · 数智传媒与设计艺术学院",
+        major: "产品设计3班",
+        position: "工作室竞赛负责人",
+        email: "2708053544@qq.com",
+        intro: "工作室竞赛负责人，数智传媒与设计艺术学院产品设计专业3班学生，24级。热爱设计，善于从生活中汲取灵感，将创意想法转化为实实在在的产品。对产品造型与用户体验有浓厚兴趣，相信好的设计能让生活更美好，致力于在产品设计道路上不断探索成长。",
+        skills: ["产品设计", "创意设计", "手绘表达", "Rhino / KeyShot", "用户研究"],
+        achievements: ["工作室竞赛负责人", "产品设计专业", "数智传媒与设计艺术学院"],
+        blog: "https://2708053544.github.io/blog/"
+      },
+      "5": {
         name: "陈俞菲",
         avatar: "../images/students/student4.jpg",
         role: "数字传媒与设计艺术学院 · 产品设计4班 · 24级",
         grade: "24级 · 数字传媒与设计艺术学院",
         major: "产品设计4班",
         position: "核心成员",
-        email: "chenyf@weavelab.com",
+        email: "2968203788@qq.com",
         intro: "数字传媒与设计艺术学院产品设计专业，专注于用户体验设计与产品创新。对设计充满热情，善于从用户需求出发，用细腻的设计思维解决实际问题。相信好的设计是技术与艺术的平衡，致力于打造有温度、有灵魂的产品体验。",
         skills: ["产品设计", "用户体验设计", "用户研究", "Rhino / KeyShot", "原型设计"],
         achievements: ["工作室核心项目 — 参与设计", "产品设计课程作业 — 优秀奖", "校级创新创业大赛 — 团队成员"],
         blog: ""
       },
-      "5": {
+      "6": {
         name: "武思琪",
         avatar: "../images/students/student5.jpg",
         role: "数字传媒与设计艺术学院 · 产品设计4班 · 24级",
         grade: "24级 · 数字传媒与设计艺术学院",
         major: "产品设计4班",
         position: "核心成员",
-        email: "wusq@weavelab.com",
+        email: "570929670@qq.com",
         intro: "数字传媒与设计艺术学院产品设计4班学生，专注于产品设计与视觉表达。对设计充满热情，善于将创意想法转化为精美的视觉作品。在产品造型与视觉呈现方面有独到见解，致力于用设计传递美好与温度。",
         skills: ["产品设计", "视觉设计", "平面设计", "Rhino / KeyShot", "手绘表达"],
         achievements: ["核心成员", "产品设计专业", "数字传媒与设计艺术学院"],
         blog: ""
-      },
-      "6": {
-        name: "唐月淼",
-        avatar: "../images/students/student6.jpg",
-        role: "数智传媒与设计艺术学院 · 产品设计3班 · 24级",
-        grade: "24级 · 数智传媒与设计艺术学院",
-        major: "产品设计3班",
-        position: "核心成员",
-        email: "tangym@weavelab.com",
-        intro: "数智传媒与设计艺术学院产品设计专业3班学生，24级。热爱设计，善于从生活中汲取灵感，将创意想法转化为实实在在的产品。对产品造型与用户体验有浓厚兴趣，相信好的设计能让生活更美好，致力于在产品设计道路上不断探索成长。",
-        skills: ["产品设计", "创意设计", "手绘表达", "Rhino / KeyShot", "用户研究"],
-        achievements: ["核心成员", "产品设计专业", "数智传媒与设计艺术学院"],
-        blog: "https://2708053544.github.io/blog/"
       },
       "7": {
         name: "吴婷婷",
@@ -260,7 +328,7 @@
         grade: "25级 · 数智传媒与设计艺术学院",
         major: "智能交互设计1班",
         position: "核心成员",
-        email: "wutt@weavelab.com",
+        email: "3598564576@qq.com",
         intro: "数智传媒与设计艺术学院智能交互设计专业一班，25级新生。热爱交互设计，对用户体验和智能产品有浓厚兴趣。善于观察生活中的交互细节，喜欢思考技术如何更好地服务于人。正在努力学习交互设计相关知识和技能，期待在工作室中不断成长。",
         skills: ["交互设计", "用户研究", "智能交互", "原型设计", "设计思维"],
         achievements: ["核心成员", "智能交互设计专业", "数智传媒与设计艺术学院"],
@@ -273,7 +341,7 @@
         grade: "25级 · 数字传媒与设计艺术学院",
         major: "智能交互设计1班",
         position: "核心成员",
-        email: "guoym@weavelab.com",
+        email: "3168432265@qq.com",
         intro: "数字传媒与设计艺术学院智能交互设计专业一班，25级新生。对智能交互与产品设计充满热情，喜欢探索技术与设计的交汇点。思维活跃，善于从用户角度思考问题，期待在工作室的学习实践中不断提升自己，用设计创造更好的智能体验。",
         skills: ["智能交互设计", "产品设计", "用户体验", "原型设计", "设计思维"],
         achievements: ["核心成员", "智能交互设计专业", "数字传媒与设计艺术学院"],
@@ -312,6 +380,7 @@
       if (data.blog && data.blog.trim() !== '') {
         metaBlogItem.style.display = 'block';
         metaBlogLink.href = data.blog;
+        metaBlogLink.target = '_blank';
       } else {
         metaBlogItem.style.display = 'none';
       }
@@ -321,6 +390,40 @@
       renderStudentDetail();
       initScrollAnimations();
     });
+  </script>
+
+  <script>
+    /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */
+    (function () {
+      var blobs = Array.prototype.slice.call(document.querySelectorAll('.glow-blob'));
+      var lastHover = null;
+      function isInside(rect, x, y) {
+        var cx = rect.left + window.pageXOffset + rect.width / 2;
+        var cy = rect.top + window.pageYOffset + rect.height / 2;
+        var dx = (x - cx) / (rect.width / 2);
+        var dy = (y - cy) / (rect.height / 2);
+        return dx * dx + dy * dy <= 1;
+      }
+      document.addEventListener('mousemove', function (e) {
+        var x = e.pageX, y = e.pageY, found = null;
+        for (var i = 0; i < blobs.length; i++) {
+          if (isInside(blobs[i].getBoundingClientRect(), x, y)) { found = blobs[i]; break; }
+        }
+        if (found === lastHover) return;
+        if (lastHover) {
+          lastHover.classList.remove('pressed');
+          lastHover.classList.add('bounce');
+        }
+        if (found) {
+          found.classList.remove('bounce');
+          found.classList.add('pressed');
+        }
+        lastHover = found;
+      });
+      document.addEventListener('transitionend', function (e) {
+        if (e.target && e.target.classList) e.target.classList.remove('bounce');
+      });
+    })();
   </script>
 </body>
 </html>

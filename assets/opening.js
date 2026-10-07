@@ -10,6 +10,12 @@
     layer.remove();
     return;
   }
+  // 同一次会话内从导航点回首页不播动画，刷新或重新打开网页才播
+  if (sessionStorage.getItem('weave_opening_seen')) {
+    layer.remove();
+    return;
+  }
+  sessionStorage.setItem('weave_opening_seen', '1');
 
   var ctx = canvas.getContext('2d');
   if (!ctx) { layer.remove(); return; }

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>毕设作品详情 | Weave Lab 智能体验与服务工程实验室</title>
+  <meta name="description" content="毕设作品详情展示">
+  <link rel="stylesheet" href="../css/style.css?v=18">
+  <style>
+    /* 背景装饰光斑层 */
+    .glow-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.3, 1), opacity 0.28s ease;
+    }
+    .glow-blob.pressed {
+      transform: scale(0.82, 0.86);
+      opacity: 0.88;
+    }
+    .glow-blob.bounce {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+    .blob-1 { width: 1092px; height: 858px; left: calc(100% - 546px); top: -429px; background: radial-gradient(ellipse at center, rgba(170, 80, 255, 0.35) 0%, rgba(170, 80, 255, 0) 65%); }
+    .blob-2 { width: 420px; height: 330px; left: calc(12% - 210px); top: calc(10% - 165px); background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 65%); }
+    .blob-3 { width: 420px; height: 330px; left: calc(88% - 210px); top: calc(26% - 165px); background: radial-gradient(ellipse at center, rgba(255, 110, 220, 0.36) 0%, rgba(255, 110, 220, 0) 65%); }
+    .blob-4 { width: 520px; height: 400px; left: calc(30% - 260px); top: calc(40% - 200px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.40) 0%, rgba(140, 90, 255, 0) 65%); }
+    .blob-5 { width: 340px; height: 260px; left: calc(70% - 170px); top: calc(62% - 130px); background: radial-gradient(ellipse at center, rgba(120, 80, 255, 0.15) 0%, rgba(120, 80, 255, 0) 60%); }
+    .blob-6 { width: 210px; height: 160px; left: calc(74% - 105px); top: calc(76% - 80px); background: radial-gradient(ellipse at center, rgba(0, 220, 255, 0.16) 0%, rgba(0, 220, 255, 0) 60%); }
+    .blob-7 { width: 340px; height: 260px; left: calc(16% - 170px); top: calc(88% - 130px); background: radial-gradient(ellipse at center, rgba(255, 90, 200, 0.14) 0%, rgba(255, 90, 200, 0) 60%); }
+    .blob-8 { width: 210px; height: 160px; left: calc(60% - 105px); top: calc(95% - 80px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.10) 0%, rgba(140, 90, 255, 0) 60%); }
+    @media (max-width: 768px) {
+      .blob-1 { width: 624px; height: 490px; left: calc(100% - 312px); top: -245px; }
+      .blob-2 { width: 240px; height: 190px; left: calc(12% - 120px); top: calc(10% - 95px); }
+      .blob-3 { width: 240px; height: 190px; left: calc(88% - 120px); top: calc(26% - 95px); }
+      .blob-4 { width: 300px; height: 230px; left: calc(30% - 150px); top: calc(40% - 115px); }
+      .blob-5 { width: 200px; height: 150px; left: calc(70% - 100px); top: calc(62% - 75px); }
+      .blob-6 { width: 130px; height: 100px; left: calc(74% - 65px); top: calc(76% - 50px); }
+      .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
+      .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
+    }
+    /* 让内容在光斑之上 */
+    section, footer, .back-button, .grad-detail-hero, .grad-detail-gallery, .grad-detail-info { position: relative; z-index: 1; }
+    .navbar { z-index: 100; }
+    /* 返回按钮绝对定位 */
+    .back-button {
+      position: absolute;
+      top: calc(var(--nav-height) + 30px);
+      left: 40px;
+      z-index: 10;
+    }
+
+    /* 毕设详情页样式 */
+    .grad-detail-hero {
+      padding: 100px 0 40px;
+      text-align: center;
+    }
+    .grad-detail-hero .section-label { margin-bottom: 16px; }
+    .grad-detail-title {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 12px 0;
+      padding: 0 24px;
+      line-height: 1.3;
+    }
+    .grad-detail-author {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .grad-detail-author span {
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .grad-detail-gallery {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .grad-gallery-main {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .grad-gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      transition: opacity 0.15s ease;
+    }
+    .grad-gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      z-index: 5;
+      font-size: 20px;
+    }
+    .grad-gallery-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .grad-gallery-arrow.prev { left: 16px; }
+    .grad-gallery-arrow.next { right: 16px; }
+    .grad-gallery-count {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      z-index: 5;
+    }
+
+    .grad-gallery-thumbs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+    .grad-gallery-thumb {
+      flex-shrink: 0;
+      width: 90px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+    }
+    .grad-gallery-thumb:hover { opacity: 1; }
+    .grad-gallery-thumb.active {
+      border-color: var(--accent-blue);
+      opacity: 1;
+    }
+    .grad-gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .grad-detail-hero { padding: 80px 0 30px; }
+      .grad-detail-gallery { padding: 20px 16px 40px; }
+      .grad-gallery-main { aspect-ratio: 4/3; }
+      .grad-gallery-thumb { width: 70px; height: 48px; }
+      .back-button { left: 20px; top: calc(var(--nav-height) + 20px); }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 装饰光斑层（弹性可交互） -->
+  <div class="glow-layer" aria-hidden="true">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+    <div class="glow-blob blob-4"></div>
+    <div class="glow-blob blob-5"></div>
+    <div class="glow-blob blob-6"></div>
+    <div class="glow-blob blob-7"></div>
+    <div class="glow-blob blob-8"></div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <span>Weave Lab</span>
+      </a>
+      <div class="nav-menu">
+        <div class="nav-item"><a href="../index.html" class="nav-link">首页</a></div>
+        <div class="nav-item">
+          <a href="about.html" class="nav-link">关于工作室 ▾</a>
+          <div class="nav-dropdown">
+            <a href="about.html" class="dropdown-item">工作室简介</a>
+            <a href="about.html#mentors" class="dropdown-item">指导老师</a>
+            <a href="about.html#students" class="dropdown-item">学生团队</a>
+            <a href="about.html#directions" class="dropdown-item">研究方向</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="projects.html" class="nav-link active">项目成果 ▾</a>
+          <div class="nav-dropdown">
+            <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
+            <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#normal-works" class="dropdown-item">普通作品</a>
+            <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
+          <div class="nav-dropdown">
+            <a href="activities.html" class="dropdown-item">活动</a>
+            <a href="activities.html#partners" class="dropdown-item">合作资源</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
+          <div class="nav-dropdown">
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- 返回按钮 -->
+  <a href="projects.html#works" class="back-button">← 返回</a>
+
+  <!-- 标题区 -->
+  <section class="grad-detail-hero">
+    <span class="section-label fade-in">Graduation Work</span>
+    <h1 class="grad-detail-title fade-in" id="workTitle">毕设作品</h1>
+    <p class="grad-detail-author fade-in">作者：<span id="workAuthor">-</span></p>
+  </section>
+
+  <!-- 大图展示 -->
+  <section class="grad-detail-gallery">
+    <div class="grad-gallery-main fade-in">
+      <img id="mainImage" src="" alt="作品展示">
+      <button class="grad-gallery-arrow prev" id="prevBtn" aria-label="上一张">‹</button>
+      <button class="grad-gallery-arrow next" id="nextBtn" aria-label="下一张">›</button>
+      <div class="grad-gallery-count" id="imgCount">1 / 1</div>
+    </div>
+    <div class="grad-gallery-thumbs fade-in" id="thumbsContainer">
+      <!-- 缩略图由JS生成 -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Weave Lab</h4>
+          <p>智能体验与服务工程实验室</p>
+        </div>
+        <div class="footer-section">
+          <h4>导航</h4>
+          <a href="../index.html">首页</a>
+          <a href="about.html">关于工作室</a>
+          <a href="projects.html">项目成果</a>
+          <a href="activities.html">活动与合作</a>
+          <a href="contact.html">联系我们</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* 光斑弹性互动 */
+    (function () {
+      var blobs = Array.prototype.slice.call(document.querySelectorAll('.glow-blob'));
+      var lastHover = null;
+      function isInside(rect, x, y) {
+        var cx = rect.left + window.pageXOffset + rect.width / 2;
+        var cy = rect.top + window.pageYOffset + rect.height / 2;
+        var dx = (x - cx) / (rect.width / 2);
+        var dy = (y - cy) / (rect.height / 2);
+        return dx * dx + dy * dy <= 1;
+      }
+      document.addEventListener('mousemove', function (e) {
+        var x = e.pageX, y = e.pageY, found = null;
+        for (var i = 0; i < blobs.length; i++) {
+          if (isInside(blobs[i].getBoundingClientRect(), x, y)) { found = blobs[i]; break; }
+        }
+        if (found === lastHover) return;
+        if (lastHover) {
+          lastHover.classList.remove('pressed');
+          lastHover.classList.add('bounce');
+        }
+        if (found) {
+          found.classList.remove('bounce');
+          found.classList.add('pressed');
+        }
+        lastHover = found;
+      });
+      document.addEventListener('transitionend', function (e) {
+        if (e.target && e.target.classList) e.target.classList.remove('bounce');
+      });
+    })();
+  </script>
+  <script src="../js/main.js?v=20261007"></script>
+  <script>
+    // 毕设作品数据（和 projects.html 保持一致）
+    const graduationProjects = [
+      { id: 1, title: "乡隅守望农村妇女在地增收服务设计", author: "韩冰", boards: ["project1_1.jpg", "project1_2.jpg", "project1_3.jpg", "project1_4.jpg"] },
+      { id: 2, title: "数字生态视角下的观鸟数据价值转化服务系统设计", author: "何靖馥琳", boards: ["project2_1.jpg", "project2_2.jpg", "project2_3.jpg", "project2_4.jpg"] },
+      { id: 3, title: "家用血钾监测仪多模态预警交互系统设计", author: "侯江伟", boards: ["project3_1.jpg", "project3_2.jpg"] },
+      { id: 4, title: "面向农业育种的无人机交互系统设计", author: "李潘", boards: ["project4_1.jpg", "project4_2.jpg", "project4_3.jpg"] },
+      { id: 5, title: "城乡技术迁移下MR赋能农户技能学习的熟人社交与涂鸦引流服务设计", author: "孟拓", boards: ["project5_1.jpg", "project5_2.jpg"] },
+      { id: 6, title: "农知旅人-基于VR的农业技术体验设计", author: "严行", boards: ["project6_1.jpg", "project6_2.jpg"] },
+      { id: 7, title: "基于服务设计思维的农用无人机多载荷模块化产品设计", author: "杨雅雯", boards: ["project7_1.jpg", "project7_2.jpg", "project7_3.jpg", "project7_4.jpg"] },
+      { id: 8, title: "面向HTO骨科手术机器人的全流程VR系统设计", author: "曹骞予", boards: ["project8_1.jpg", "project8_2.jpg", "project8_3.jpg", "project8_4.jpg"] },
+      { id: 9, title: "面向名优茶机械化采摘的采茶机优化设计", author: "刘思敏", boards: ["project9_1.jpg", "project9_2.jpg", "project9_3.jpg", "project9_4.jpg"] },
+      { id: 10, title: "基于可适应性及模块化可穿戴外骨骼设计", author: "邢贞获", boards: ["project10_1.jpg", "project10_2.jpg"] },
+      { id: 11, title: "激发乡村内生动力的服务设计", author: "周小雨", boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"] },
+      { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
+      { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
+      { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] },
+      { id: 15, title: "三轨滑轨沙发", author: "尹欣 · 苏俊旭", boards: ["project15_1.jpg"] },
+      { id: 16, title: "中医治未病理念下家庭健康自检设备设计", author: "马伊玟 · 苏俊旭", boards: ["project16_1.jpg"] },
+      { id: 17, title: "叙事化团泊镇文化IP及衍生品设计", author: "申琰硕 · 苏俊旭", boards: ["project17_1.jpg"] },
+      { id: 18, title: "情绪亚健康青年自我庇护家居设计", author: "苏小铭 · 苏俊旭", boards: ["project18_1.jpg"] }
+    ];
+
+    // 获取URL参数
+    function getParam(name) {
+      var params = new URLSearchParams(location.search);
+      return params.get(name);
+    }
+
+    var currentIndex = 0;
+    var project = null;
+
+    function initDetail() {
+      var id = parseInt(getParam('id')) || 1;
+      project = graduationProjects.find(function(p) { return p.id === id; });
+      if (!project) project = graduationProjects[0];
+
+      // 填充标题和作者
+      document.getElementById('workTitle').textContent = project.title;
+      document.getElementById('workAuthor').textContent = project.author;
+      document.title = project.title + ' | Weave Lab';
+
+      // 设置主图
+      var mainImg = document.getElementById('mainImage');
+      mainImg.src = '../images/graduation/' + project.boards[0];
+      mainImg.alt = project.title;
+
+      // 生成缩略图
+      var thumbsContainer = document.getElementById('thumbsContainer');
+      thumbsContainer.innerHTML = '';
+      project.boards.forEach(function(board, idx) {
+        var thumb = document.createElement('div');
+        thumb.className = 'grad-gallery-thumb' + (idx === 0 ? ' active' : '');
+        thumb.innerHTML = '<img src="../images/graduation/' + board + '" alt="第' + (idx + 1) + '张">';
+        thumb.addEventListener('click', function() { goTo(idx); });
+        thumbsContainer.appendChild(thumb);
+      });
+
+      updateCount();
+
+      // 只有1张图就隐藏箭头和计数
+      if (project.boards.length <= 1) {
+        document.getElementById('prevBtn').style.display = 'none';
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('imgCount').style.display = 'none';
+        thumbsContainer.style.display = 'none';
+      }
+    }
+
+    function goTo(idx) {
+      if (!project || project.boards.length <= 1) return;
+      currentIndex = (idx + project.boards.length) % project.boards.length;
+
+      var mainImg = document.getElementById('mainImage');
+      mainImg.style.opacity = '0';
+      setTimeout(function() {
+        mainImg.src = '../images/graduation/' + project.boards[currentIndex];
+        mainImg.style.opacity = '1';
+      }, 150);
+
+      // 更新缩略图高亮
+      var thumbs = document.querySelectorAll('.grad-gallery-thumb');
+      thumbs.forEach(function(t, i) {
+        t.classList.toggle('active', i === currentIndex);
+      });
+
+      updateCount();
+    }
+
+    function updateCount() {
+      document.getElementById('imgCount').textContent = (currentIndex + 1) + ' / ' + (project ? project.boards.length : 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initDetail();
+
+      document.getElementById('prevBtn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        goTo(currentIndex - 1);
+      });
+      document.getElementById('nextBtn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        goTo(currentIndex + 1);
+      });
+
+      // 键盘左右切换
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
+        if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -325,24 +325,28 @@ function initProjectFilter() {
   });
 }
 
-/* ---------- Smooth Scroll for Anchor Links ---------- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (href === '#') return;
+/* ---------- Smooth Scroll for Anchor Links (事件委托) ---------- */
+/* 用事件委托而非页面加载时批量绑定，避免博客链接初始 href="#" 被绑定后
+   被 JS 改成外链时仍触发 querySelector 报错并阻止跳转 */
+document.addEventListener('click', function (e) {
+  const anchor = e.target.closest('a');
+  if (!anchor) return;
+  const href = anchor.getAttribute('href');
+  /* 只处理真正的页内锚点（#xxx），空锚点和外部 URL 一律放行 */
+  if (!href || href === '#' || href.length < 2 || !href.startsWith('#')) return;
 
+  try {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
       const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
       const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
     }
-  });
+  } catch (err) {
+    /* querySelector 遇到非法选择器会抛 SyntaxError，吞掉避免阻止默认跳转 */
+    console.warn('Smooth scroll skipped for selector:', href);
+  }
 });
 
 /* ---------- Parallax Effect for Hero ---------- */

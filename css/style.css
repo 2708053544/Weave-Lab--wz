@@ -385,15 +385,16 @@ h4 {
 
 .section-header {
   margin-bottom: 80px;
+  text-align: left;
 }
 
 .section-label {
   display: inline-block;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.3em;
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   color: var(--text-secondary);
 }
 
@@ -476,6 +477,37 @@ h4 {
   border-bottom: 1px solid transparent;
 }
 
+.navbar.navbar-hide {
+  transform: translateY(-100%);
+  opacity: 0;
+  border-bottom: 1px solid transparent;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s ease;
+}
+
+.navbar.navbar-show {
+  transform: translateY(0);
+  opacity: 1;
+  border-bottom: 1px solid var(--border-color);
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease 0.05s;
+  animation: navbarDropIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes navbarDropIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+    box-shadow: none;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+}
+
 .navbar.scrolled {
   height: 70px;
 }
@@ -493,8 +525,8 @@ h4 {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.25rem;
+  gap: 10px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -508,6 +540,20 @@ h4 {
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 800;
+}
+
+.nav-logo-img {
+  height: 32px;
+  width: auto;
+  max-width: 280px;
+  display: block;
+  object-fit: contain;
+}
+
+.nav-logo-mark-img {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .nav-menu {
@@ -898,18 +944,6 @@ h4 {
   border-bottom: 1px solid var(--card-border);
   position: relative;
   overflow: hidden;
-}
-
-.scroll-card-image::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
-  border: 2px dashed var(--border-color);
-  border-radius: 50%;
 }
 
 .scroll-card-content {
@@ -1488,8 +1522,18 @@ h4 {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 120px;
-  align-items: start;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+  min-height: 500px;
+}
+
+.contact-info {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact-info h2 {
@@ -1499,13 +1543,15 @@ h4 {
 .contact-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
+  align-items: flex-start;
 }
 
 .contact-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  text-align: left;
 }
 
 .contact-label {
@@ -1521,9 +1567,27 @@ h4 {
   font-weight: 500;
 }
 
+.contact-info .section-label + h2 + .contact-list {
+  margin-top: 0;
+}
+
+.contact-image-wrapper {
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact-workspace-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .contact-form-wrapper {
   border: 1px solid var(--border-color);
   padding: 48px;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .contact-form-wrapper h3 {
@@ -2544,6 +2608,19 @@ h4 {
   font-weight: 800;
 }
 
+.footer-logo-mark-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* 导航栏logo缩小到2/3 */
+.nav-logo-mark-img {
+  height: 19px;
+  width: auto;
+  display: block;
+}
+
 .footer-tagline {
   color: var(--text-secondary);
   font-size: 0.9rem;
@@ -2672,7 +2749,7 @@ h4 {
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 40px;
   }
 
   .detail-hero-content {
@@ -2743,6 +2820,10 @@ h4 {
 
   .detail-gallery {
     grid-template-columns: 1fr;
+  }
+
+  .contact-image-wrapper {
+    aspect-ratio: 16/9;
   }
 
   .contact-form-wrapper {
@@ -4505,17 +4586,6 @@ body.theme-dark * {
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-
-/* Section Label */
-.section-label {
-  display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 20px;
-  font-weight: 500;
 }
 
 /* About V2 Section */

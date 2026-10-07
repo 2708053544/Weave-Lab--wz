@@ -32,13 +32,10 @@ body.m3-page {
 /* ---------- 嵌入 section 模式 ---------- */
 section.m3-section {
   position: relative;
-  height: 100vh;
-  min-height: 620px;
+  height: 55vh;
+  min-height: 380px;
   overflow: visible;
   background: var(--m3-bg);
-  color: var(--m3-ink);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 /* 底部光晕延伸 — 让导师区紫蓝光晕完整过渡到下方学生区 */
@@ -149,10 +146,9 @@ section.m3-section .m3-sec-header {
   left: 6vw;
   z-index: 25;
 }
-section.m3-section .m3-sec-header .section-label { color: var(--m3-ink-dim); opacity: 0.45; font-size: 12px; letter-spacing: 0.3em; }
-section.m3-section .m3-sec-header .section-title { color: var(--m3-ink); opacity: 0.35; font-size: 22px; font-weight: 500; letter-spacing: 0.1em; }
-section.m3-section .m3-sec-header .section-subtitle { color: var(--m3-ink-dim); opacity: 0.3; font-size: 14px; font-weight: 300; }
-section.m3-section .m3-sec-header .section-title { margin: 0 0 6px; }
+section.m3-section .m3-sec-header .section-label { color: var(--text-secondary); opacity: 1; font-size: 0.75rem; letter-spacing: 0.3em; font-weight: 500; margin-bottom: 20px; }
+section.m3-section .m3-sec-header .section-title { color: var(--text-primary); opacity: 1; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 16px; letter-spacing: normal; }
+section.m3-section .m3-sec-header .section-subtitle { color: var(--text-secondary); opacity: 1; font-size: 1.125rem; font-weight: 400; max-width: 600px; }
 
 /* ---------- 顶部返回 / 计数 ---------- */
 .m3-back {
@@ -228,11 +224,15 @@ section.m3-section .m3-counter { top: 96px; }
 }
 
 .m3-info-title {
-  font-size: 14px;
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 600;
   color: var(--m3-ink-dim);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   margin: 0 0 20px;
   min-height: 1.4em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 详情字段 */
@@ -327,20 +327,16 @@ section.m3-section .m3-counter { top: 96px; }
 .m3-stage {
   position: absolute;
   right: 8vw;
-  top: 50%;
+  top: 38%;
   transform: translateY(-50%);
   z-index: 10;
   width: min(30vw, 420px);
   aspect-ratio: 3 / 3.8;
-  perspective: 1400px;
 }
 
 .m3-stack {
   position: absolute;
   inset: 0;
-  transform-style: preserve-3d;
-  /* 鼠标视差倾斜（JS 写 CSS 变量） */
-  transform: rotateX(calc(var(--my, 0) * -6deg)) rotateY(calc(var(--mx, 0) * 8deg));
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 

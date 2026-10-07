@@ -31,7 +31,7 @@
     for (var i = 0; i < blooms.length; i++) {
       var bloom = blooms[i], progress = (now - bloom.time) / 1450;
       var radius = 16 + progress * 100;
-      var alpha = Math.pow(1 - progress, 1.6) * .34;
+      var alpha = Math.pow(1 - progress, 1.6) * .17;
       var diffusion = ctx.createRadialGradient(bloom.x, bloom.y, 0, bloom.x, bloom.y, radius);
       diffusion.addColorStop(0, 'rgba(197,221,255,' + alpha + ')');
       diffusion.addColorStop(.45, 'rgba(145,155,255,' + (alpha * .48) + ')');
@@ -52,7 +52,7 @@
   }
 
   function shortenTrail() {
-    var maxLength = Math.min(160, Math.max(100, w * .13));
+    var maxLength = Math.min(260, Math.max(160, w * .21));
     var distance = 0;
     for (var i = trail.length - 1; i > 0; i--) {
       var current = trail[i], previous = trail[i - 1];
@@ -75,56 +75,71 @@
     if (trail.length < 2) return;
     ctx.save();
     ctx.beginPath();
-    ctx.arc(head.x, head.y, 170, 0, Math.PI * 2);
+    ctx.arc(head.x, head.y, 300, 0, Math.PI * 2);
     ctx.clip();
-    var first = trail[0], last = trail[trail.length - 1];
-    var gradient = ctx.createLinearGradient(first.x, first.y, last.x + .01, last.y + .01);
-    gradient.addColorStop(0, 'rgba(112,103,219,0)');
-    gradient.addColorStop(.4, 'rgba(130,153,243,' + (.32 * fade) + ')');
-    gradient.addColorStop(.82, 'rgba(174,167,255,' + (.63 * fade) + ')');
-    gradient.addColorStop(1, 'rgba(222,232,255,' + (.85 * fade) + ')');
 
-    ctx.beginPath();
-    for (var i = 0; i < trail.length; i++) {
-      var before = trail[Math.max(0, i - 1)], after = trail[Math.min(trail.length - 1, i + 1)];
-      var dx = after.x - before.x, dy = after.y - before.y;
-      var length = Math.hypot(dx, dy) || 1;
-      var width = .4 + 6.5 * Math.pow(i / (trail.length - 1), 2);
-      var x = trail[i].x - dy / length * width;
-      var y = trail[i].y + dx / length * width;
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    // 先做插值：确保相邻点之间距离不超过3px，快速移动也不断
+    var dense = [];
+    for (var s = 0; s < trail.length - 1; s++) {
+      var p1 = trail[s], p2 = trail[s + 1];
+      var dx = p2.x - p1.x, dy = p2.y - p1.y;
+      var dist = Math.hypot(dx, dy);
+      dense.push({ x: p1.x, y: p1.y, t: s / (trail.length - 1) });
+      if (dist > 3) {
+        var steps = Math.ceil(dist / 3);
+        for (var k = 1; k < steps; k++) {
+          var ratio = k / steps;
+          dense.push({
+            x: p1.x + dx * ratio,
+            y: p1.y + dy * ratio,
+            t: (s + ratio) / (trail.length - 1)
+          });
+        }
+      }
     }
-    for (var j = trail.length - 1; j >= 0; j--) {
-      var prev = trail[Math.max(0, j - 1)], next = trail[Math.min(trail.length - 1, j + 1)];
-      var tx = next.x - prev.x, ty = next.y - prev.y;
-      var distance = Math.hypot(tx, ty) || 1;
-      var half = .4 + 6.5 * Math.pow(j / (trail.length - 1), 2);
-      ctx.lineTo(trail[j].x + ty / distance * half, trail[j].y - tx / distance * half);
-    }
-    ctx.closePath();
-    ctx.fillStyle = gradient;
-    ctx.shadowColor = 'rgba(147,135,255,' + (.6 * fade) + ')';
-    ctx.shadowBlur = 18;
-    ctx.fill();
+    dense.push({ x: trail[trail.length - 1].x, y: trail[trail.length - 1].y, t: 1 });
 
-    tracePath();
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = gradient;
-    ctx.shadowColor = 'rgba(177,193,255,' + (.9 * fade) + ')';
-    ctx.shadowBlur = 19;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
+    // 外层：柔和光晕 - 原来的粗细
+    for (var i = 0; i < dense.length; i++) {
+      var point = dense[i];
+      var t = point.t;
+      var radius = 4 + 14 * Math.pow(t, 1.6);
+      var alpha = 0.05 + 0.09 * Math.pow(t, 1.3);
+      var glow = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius);
+      glow.addColorStop(0, 'rgba(180,190,255,' + (alpha * fade) + ')');
+      glow.addColorStop(.5, 'rgba(150,140,235,' + (alpha * 0.5 * fade) + ')');
+      glow.addColorStop(1, 'rgba(127,112,249,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 内层：稍亮核心 - 原来的粗细
+    for (var j = 0; j < dense.length; j++) {
+      var pt = dense[j];
+      var t2 = pt.t;
+      var r2 = 1.5 + 6 * Math.pow(t2, 1.8);
+      var a2 = 0.06 + 0.1 * Math.pow(t2, 1.5);
+      var glow2 = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, r2);
+      glow2.addColorStop(0, 'rgba(210,220,255,' + (a2 * fade) + ')');
+      glow2.addColorStop(.6, 'rgba(170,160,245,' + (a2 * 0.4 * fade) + ')');
+      glow2.addColorStop(1, 'rgba(127,112,249,0)');
+      ctx.fillStyle = glow2;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, r2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
     ctx.restore();
   }
 
   function drawHead(now, fade) {
     var radius = 31 * (1 + .08 * Math.sin(now / 135));
     var glow = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, radius);
-    glow.addColorStop(0, 'rgba(255,255,255,' + fade + ')');
-    glow.addColorStop(.09, 'rgba(216,235,255,' + (.9 * fade) + ')');
-    glow.addColorStop(.3, 'rgba(162,177,255,' + (.36 * fade) + ')');
+    glow.addColorStop(0, 'rgba(255,255,255,' + (.5 * fade) + ')');
+    glow.addColorStop(.09, 'rgba(216,235,255,' + (.45 * fade) + ')');
+    glow.addColorStop(.3, 'rgba(162,177,255,' + (.18 * fade) + ')');
     glow.addColorStop(1, 'rgba(127,112,249,0)');
     ctx.fillStyle = glow;
     ctx.beginPath(); ctx.arc(head.x, head.y, radius, 0, Math.PI * 2); ctx.fill();

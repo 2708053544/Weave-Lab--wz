@@ -1,27 +1,195 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>活动 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的活动动态与新闻">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css?v=18">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* 入场动画 */
+    .page-header {
+      position: relative;
+      overflow: hidden;
+      transition: min-height 1s cubic-bezier(0.77, 0, 0.175, 1), padding 1s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .page-header.intro-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .page-header.intro-hero .container-narrow {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .page-header.intro-hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      opacity: 0;
+      animation: titleReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+    }
+    .page-header.intro-hero .section-label {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.05s forwards;
+    }
+    .page-header.intro-hero p {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    @keyframes titleReveal {
+      0% { opacity: 0; transform: scale(0.85); filter: blur(20px); }
+      60% { opacity: 1; filter: blur(0); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .intro-glow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.3);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(120, 140, 255, 0.55) 0%, rgba(170, 80, 255, 0.25) 35%, rgba(0, 200, 255, 0.1) 55%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+    .intro-hero .intro-glow {
+      animation: glowBurst 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
+    }
+    @keyframes glowBurst {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); filter: blur(40px); }
+      30% { opacity: 1; filter: blur(20px); }
+      70% { opacity: 0.7; filter: blur(10px); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); filter: blur(30px); }
+    }
+    .intro-rays {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+    }
+    .intro-hero .intro-rays {
+      animation: raysFlash 1.2s ease-out 0.1s forwards;
+    }
+    .intro-rays::before,
+    .intro-rays::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 140%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(150, 170, 255, 0.6), transparent);
+    }
+    .intro-rays::after {
+      width: 2px;
+      height: 140%;
+      background: linear-gradient(180deg, transparent, rgba(150, 170, 255, 0.6), transparent);
+    }
+    @keyframes raysFlash {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      40% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
+    }
+    @media (max-width: 768px) {
+      .intro-glow { width: 400px; height: 400px; }
+    }
+    /* 背景装饰光斑层 */
+    .glow-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.3, 1), opacity 0.28s ease;
+    }
+    .glow-blob.pressed {
+      transform: scale(0.82, 0.86);
+      opacity: 0.88;
+    }
+    .glow-blob.bounce {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+    .blob-1 { width: 1092px; height: 858px; left: calc(100% - 546px); top: -429px; background: radial-gradient(ellipse at center, rgba(170, 80, 255, 0.35) 0%, rgba(170, 80, 255, 0) 65%); }
+    .blob-2 { width: 420px; height: 330px; left: calc(12% - 210px); top: calc(10% - 165px); background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 65%); }
+    .blob-3 { width: 420px; height: 330px; left: calc(88% - 210px); top: calc(26% - 165px); background: radial-gradient(ellipse at center, rgba(255, 110, 220, 0.36) 0%, rgba(255, 110, 220, 0) 65%); }
+    .blob-4 { width: 520px; height: 400px; left: calc(30% - 260px); top: calc(40% - 200px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.40) 0%, rgba(140, 90, 255, 0) 65%); }
+    .blob-5 { width: 340px; height: 260px; left: calc(70% - 170px); top: calc(62% - 130px); background: radial-gradient(ellipse at center, rgba(120, 80, 255, 0.15) 0%, rgba(120, 80, 255, 0) 60%); }
+    .blob-6 { width: 210px; height: 160px; left: calc(74% - 105px); top: calc(76% - 80px); background: radial-gradient(ellipse at center, rgba(0, 220, 255, 0.16) 0%, rgba(0, 220, 255, 0) 60%); }
+    .blob-7 { width: 340px; height: 260px; left: calc(16% - 170px); top: calc(88% - 130px); background: radial-gradient(ellipse at center, rgba(255, 90, 200, 0.14) 0%, rgba(255, 90, 200, 0) 60%); }
+    .blob-8 { width: 210px; height: 160px; left: calc(60% - 105px); top: calc(95% - 80px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.10) 0%, rgba(140, 90, 255, 0) 60%); }
+    @media (max-width: 768px) {
+      .blob-1 { width: 624px; height: 490px; left: calc(100% - 312px); top: -245px; }
+      .blob-2 { width: 240px; height: 190px; left: calc(12% - 120px); top: calc(10% - 95px); }
+      .blob-3 { width: 240px; height: 190px; left: calc(88% - 120px); top: calc(26% - 95px); }
+      .blob-4 { width: 300px; height: 230px; left: calc(30% - 150px); top: calc(40% - 115px); }
+      .blob-5 { width: 200px; height: 150px; left: calc(70% - 100px); top: calc(62% - 75px); }
+      .blob-6 { width: 130px; height: 100px; left: calc(74% - 65px); top: calc(76% - 50px); }
+      .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
+      .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
+    }
+    /* 让section内容在光斑之上 */
+    section, footer, .page-header, .back-button { position: relative; z-index: 1; }
+    .navbar { z-index: 100; }
+    /* 返回按钮绝对定位，不占文档流 */
+    .back-button {
+      position: absolute;
+      top: calc(var(--nav-height) + 30px);
+      left: 40px;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- 装饰光斑层（弹性可交互） -->
+  <div class="glow-layer" aria-hidden="true">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+    <div class="glow-blob blob-4"></div>
+    <div class="glow-blob blob-5"></div>
+    <div class="glow-blob blob-6"></div>
+    <div class="glow-blob blob-7"></div>
+    <div class="glow-blob blob-8"></div>
+  </div>
 
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <div class="nav-logo-mark">W</div>
+        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <span class="nav-link">首页 ▾</span>
+          <a href="../index.html" class="nav-link">首页 ▾</a>
           <div class="nav-dropdown">
             <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
@@ -29,29 +197,30 @@
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">关于工作室 ▾</span>
+          <a href="about.html" class="nav-link">关于工作室 ▾</a>
           <div class="nav-dropdown">
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">项目成果 ▾</span>
+          <a href="projects.html" class="nav-link">项目成果 ▾</a>
           <div class="nav-dropdown">
             <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
             <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#normal-works" class="dropdown-item">普通作品</a>
             <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link active">活动与合作 ▾</span>
+          <a href="activities.html" class="nav-link active">活动与合作 ▾</a>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
             <a href="#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">联系我们 ▾</span>
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
           <div class="nav-dropdown">
             <a href="contact.html" class="dropdown-item">联系方式</a>
             <a href="contact.html" class="dropdown-item">留言咨询</a>
@@ -73,17 +242,24 @@
   </a>
 
   <!-- Page Header -->
-  <section class="page-header">
+  <section class="page-header intro-hero" id="pageHeader">
+    <div class="intro-glow"></div>
+    <div class="intro-rays"></div>
     <div class="container-narrow">
-      <span class="section-label fade-in">Activities</span>
-      <h1 class="fade-in">工作室活动</h1>
-      <p class="fade-in">学术讲座、设计工作坊、展览交流等活动动态</p>
+      <span class="section-label fade-in">Activities & Cooperation</span>
+      <h1 class="fade-in">活动与合作</h1>
+      <p class="fade-in">学术讲座、设计工作坊、展览交流及合作伙伴资源</p>
     </div>
   </section>
 
   <!-- Activities Grid -->
-  <section class="section">
+  <section id="activities" class="section">
     <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Activities</span>
+        <h2 class="section-title">活动</h2>
+        <p class="section-subtitle">学术讲座、设计工作坊、展览交流等活动动态</p>
+      </div>
       <div class="activity-grid fade-in">
         <!-- Activity 01: 淮扬春老字号活化 -->
         <div class="activity-card" onclick="location.href='activity-detail.html?id=7'">
@@ -202,7 +378,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <div class="footer-logo-mark">W</div>
+            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -247,6 +423,62 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script>
+    /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */
+    (function () {
+      var blobs = Array.prototype.slice.call(document.querySelectorAll('.glow-blob'));
+      var lastHover = null;
+      function isInside(rect, x, y) {
+        var cx = rect.left + window.pageXOffset + rect.width / 2;
+        var cy = rect.top + window.pageYOffset + rect.height / 2;
+        var dx = (x - cx) / (rect.width / 2);
+        var dy = (y - cy) / (rect.height / 2);
+        return dx * dx + dy * dy <= 1;
+      }
+      document.addEventListener('mousemove', function (e) {
+        var x = e.pageX, y = e.pageY, found = null;
+        for (var i = 0; i < blobs.length; i++) {
+          if (isInside(blobs[i].getBoundingClientRect(), x, y)) { found = blobs[i]; break; }
+        }
+        if (found === lastHover) return;
+        if (lastHover) {
+          lastHover.classList.remove('pressed');
+          lastHover.classList.add('bounce');
+        }
+        if (found) {
+          found.classList.remove('bounce');
+          found.classList.add('pressed');
+        }
+        lastHover = found;
+      });
+      document.addEventListener('transitionend', function (e) {
+        if (e.target && e.target.classList) e.target.classList.remove('bounce');
+      });
+    })();
+  </script>
+  <script src="../js/main.js?v=20261007"></script>
+  <script>
+    (function() {
+      var header = document.getElementById('pageHeader');
+      var target = document.getElementById('activities');
+      if (!header) return;
+      var INTRO_DURATION = 1500;
+      function scrollToContent() {
+        header.classList.remove('intro-hero');
+        setTimeout(function() {
+          if (target) {
+            var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+            var scrollTo = targetTop - window.innerHeight + 80;
+            window.scrollTo({ top: Math.max(0, scrollTo), behavior: 'smooth' });
+          }
+        }, 200);
+      }
+      if (location.hash && location.hash !== '#top') {
+        header.classList.remove('intro-hero');
+        return;
+      }
+      setTimeout(scrollToContent, INTRO_DURATION);
+    })();
+  </script>
 </body>
 </html>

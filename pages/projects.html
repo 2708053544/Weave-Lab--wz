@@ -1,35 +1,70 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css?v=18">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
       background: var(--bg-primary);
     }
     .graduation-viewport {
+      position: relative;
       overflow: hidden;
       margin-top: 36px;
-      transition: max-height 0.6s ease;
+    }
+    /* 普通作品瀑布流视口（与毕设相同结构） */
+    .normal-viewport {
+      position: relative;
+      overflow: hidden;
+      margin-top: 36px;
+    }
+    .normal-track {
+      will-change: transform;
+      animation: normal-marquee 50s linear infinite;
+    }
+    .normal-viewport:hover .normal-track {
+      animation-play-state: paused;
+    }
+    .normal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 36px 36px;
     }
     .graduation-track {
-      transition: none;
       will-change: transform;
+      animation: graduation-marquee 20s linear infinite;
+    }
+    .graduation-viewport:hover .graduation-track {
+      animation-play-state: paused;
     }
     .graduation-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 48px 36px;
+      gap: 36px 36px;
+    }
+    @keyframes graduation-marquee {
+      from { transform: translateY(0); }
+      to { transform: translateY(-50%); }
+    }
+    @keyframes normal-marquee {
+      from { transform: translateY(0); }
+      to { transform: translateY(-50%); }
     }
     .graduation-card {
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       opacity: 1 !important;
       transform: none !important;
+    }
+    .graduation-card.graduation-hidden {
+      display: none !important;
+    }
+    .graduation-card.graduation-clone {
+      cursor: pointer;
     }
     .graduation-card:hover {
       transform: translateY(-6px);
@@ -66,65 +101,76 @@
       object-fit: cover;
       object-position: top center;
     }
-    /* 箭头入口卡片 */
-    .graduation-arrow-card {
-      aspect-ratio: 3/4;
-      border-radius: 6px;
-      background: #0a0a0a;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    /* 查看全部按钮：绝对定位在视口右下角，缩小 */
+    .graduation-arrow-card, .nwork-arrow-card {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .graduation-arrow-card::before {
+    .graduation-arrow-card::before, .nwork-arrow-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(79, 107, 255, 0.08), transparent 70%);
+      background: radial-gradient(circle at center, rgba(79, 107, 255, 0.12), transparent 70%);
       transition: opacity 0.3s ease;
       opacity: 0.6;
+      z-index: 0;
     }
-    .graduation-arrow-card:hover {
+    .graduation-arrow-card:hover, .nwork-arrow-card:hover {
       border-color: rgba(79, 107, 255, 0.5);
-      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.2);
-      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(79, 107, 255, 0.25);
+      transform: scale(1.06);
     }
-    .graduation-arrow-card:hover::before {
+    .graduation-arrow-card:hover::before, .nwork-arrow-card:hover::before {
       opacity: 1;
     }
-    .graduation-arrow-icon {
-      width: 40px;
-      height: 40px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
+    .graduation-arrow-icon, .nwork-arrow-icon {
+      position: relative;
+      z-index: 6;
+      width: 26px;
+      height: 26px;
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 5px;
       transition: all 0.3s ease;
       z-index: 1;
     }
-    .graduation-arrow-card:hover .graduation-arrow-icon {
+    .graduation-arrow-card:hover .graduation-arrow-icon, .nwork-arrow-card:hover .nwork-arrow-icon {
       border-color: #fff;
-      box-shadow: 0 0 16px rgba(79, 107, 255, 0.4);
+      box-shadow: 0 0 10px rgba(79, 107, 255, 0.4);
     }
-    .graduation-arrow-icon svg {
-      width: 18px;
-      height: 18px;
+    .graduation-arrow-icon svg, .nwork-arrow-icon svg {
+      width: 12px;
+      height: 12px;
       stroke: #fff;
       stroke-width: 2;
       fill: none;
     }
-    .graduation-arrow-text {
-      font-size: 0.8125rem;
+    .graduation-arrow-text, .nwork-arrow-text {
+      position: relative;
+      font-size: 0.6875rem;
       color: rgba(255, 255, 255, 0.7);
-      letter-spacing: 0.1em;
-      z-index: 1;
+      letter-spacing: 0.06em;
+      z-index: 6;
+      white-space: nowrap;
     }
     /* 左右箭头按钮 */
     .graduation-arrow {
@@ -164,6 +210,71 @@
       stroke: currentColor;
       stroke-width: 2;
       fill: none;
+    }
+    /* 外层上下翻页按钮（整排切换） */
+    .graduation-page-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .graduation-carousel-nav {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(10, 10, 18, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    .graduation-carousel-nav:hover {
+      background: rgba(79, 107, 255, 0.32);
+      border-color: rgba(79, 107, 255, 0.6);
+      transform: scale(1.06);
+    }
+    .graduation-carousel-nav svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+    @media (max-width: 768px) {
+      .graduation-carousel-nav {
+        width: 32px;
+        height: 32px;
+      }
+      .graduation-carousel-nav svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+    /* 获奖荣誉：横向匀速无缝跑马灯 */
+    #awards .scroll-container {
+      overflow: hidden;
+      scroll-behavior: auto;
+      scroll-snap-type: none;
+      display: flex;
+      gap: 0;
+      width: max-content;
+      will-change: transform;
+      animation: awards-marquee 30s linear infinite;
+    }
+    #awards .scroll-card {
+      margin-right: 24px;
+    }
+    #awards .scroll-container:hover {
+      animation-play-state: paused;
+    }
+    @keyframes awards-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
     .graduation-carousel-dots {
       position: absolute;
@@ -228,16 +339,7 @@
       color: rgba(255, 255, 255, 0.75);
       margin: 0;
     }
-    @media (max-width: 1200px) {
-      .graduation-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
     @media (max-width: 768px) {
-      .graduation-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px 14px;
-      }
       .graduation-card-title {
         font-size: 0.8125rem;
       }
@@ -245,12 +347,218 @@
         font-size: 0.6875rem;
       }
     }
-    @media (max-width: 480px) {
-      .graduation-grid {
-        grid-template-columns: 1fr;
-        max-width: 260px;
-        margin: 36px auto 0;
-      }
+    /* ===== 项目成果页：黑底 + 彩色光斑整页分布（弹性可交互光斑，越往下越浅） ===== */
+    /* 入场动画 */
+    .page-header {
+      position: relative;
+      overflow: hidden;
+      transition: min-height 1s cubic-bezier(0.77, 0, 0.175, 1), padding 1s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .page-header.intro-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .page-header.intro-hero .container-narrow {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .page-header.intro-hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      opacity: 0;
+      animation: titleReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+    }
+    .page-header.intro-hero .section-label {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.05s forwards;
+    }
+    .page-header.intro-hero p {
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    @keyframes titleReveal {
+      0% { opacity: 0; transform: scale(0.85); filter: blur(20px); }
+      60% { opacity: 1; filter: blur(0); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .intro-glow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.3);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(120, 140, 255, 0.55) 0%, rgba(170, 80, 255, 0.25) 35%, rgba(0, 200, 255, 0.1) 55%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+    .intro-hero .intro-glow {
+      animation: glowBurst 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
+    }
+    @keyframes glowBurst {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); filter: blur(40px); }
+      30% { opacity: 1; filter: blur(20px); }
+      70% { opacity: 0.7; filter: blur(10px); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); filter: blur(30px); }
+    }
+    .intro-rays {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+    }
+    .intro-hero .intro-rays {
+      animation: raysFlash 1.2s ease-out 0.1s forwards;
+    }
+    .intro-rays::before,
+    .intro-rays::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 140%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(150, 170, 255, 0.6), transparent);
+    }
+    .intro-rays::after {
+      width: 2px;
+      height: 140%;
+      background: linear-gradient(180deg, transparent, rgba(150, 170, 255, 0.6), transparent);
+    }
+    @keyframes raysFlash {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      40% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
+    }
+    @media (max-width: 768px) {
+      .intro-glow { width: 400px; height: 400px; }
+    }
+    .glow-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.3, 1), opacity 0.28s ease;
+    }
+    .glow-blob.pressed {
+      transform: scale(0.82, 0.86);
+      opacity: 0.88;
+    }
+    .glow-blob.bounce {
+      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+    .blob-1 { width: 1092px; height: 858px; left: calc(100% - 546px); top: -429px; background: radial-gradient(ellipse at center, rgba(170, 80, 255, 0.35) 0%, rgba(170, 80, 255, 0) 65%); }
+    .blob-2 { width: 420px; height: 330px; left: calc(12% - 210px); top: calc(10% - 165px); background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 65%); }
+    .blob-3 { width: 420px; height: 330px; left: calc(88% - 210px); top: calc(26% - 165px); background: radial-gradient(ellipse at center, rgba(255, 110, 220, 0.36) 0%, rgba(255, 110, 220, 0) 65%); }
+    .blob-4 { width: 520px; height: 400px; left: calc(30% - 260px); top: calc(40% - 200px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.40) 0%, rgba(140, 90, 255, 0) 65%); }
+    .blob-5 { width: 340px; height: 260px; left: calc(70% - 170px); top: calc(62% - 130px); background: radial-gradient(ellipse at center, rgba(120, 80, 255, 0.15) 0%, rgba(120, 80, 255, 0) 60%); }
+    .blob-6 { width: 210px; height: 160px; left: calc(74% - 105px); top: calc(76% - 80px); background: radial-gradient(ellipse at center, rgba(0, 220, 255, 0.16) 0%, rgba(0, 220, 255, 0) 60%); }
+    .blob-7 { width: 340px; height: 260px; left: calc(16% - 170px); top: calc(88% - 130px); background: radial-gradient(ellipse at center, rgba(255, 90, 200, 0.14) 0%, rgba(255, 90, 200, 0) 60%); }
+    .blob-8 { width: 210px; height: 160px; left: calc(60% - 105px); top: calc(95% - 80px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.10) 0%, rgba(140, 90, 255, 0) 60%); }
+    @media (max-width: 768px) {
+      .blob-1 { width: 624px; height: 490px; left: calc(100% - 312px); top: -245px; }
+      .blob-2 { width: 240px; height: 190px; left: calc(12% - 120px); top: calc(10% - 95px); }
+      .blob-3 { width: 240px; height: 190px; left: calc(88% - 120px); top: calc(26% - 95px); }
+      .blob-4 { width: 300px; height: 230px; left: calc(30% - 150px); top: calc(40% - 115px); }
+      .blob-5 { width: 200px; height: 150px; left: calc(70% - 100px); top: calc(62% - 75px); }
+      .blob-6 { width: 130px; height: 100px; left: calc(74% - 65px); top: calc(76% - 50px); }
+      .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
+      .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
+    }
+    /* ===== 普通作品（学生课程/竞赛作品展板） ===== */
+    .normal-section { padding-top: 20px; }
+    .nwork-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .nwork-card.nwork-hidden {
+      display: none !important;
+    }
+    .nwork-card.nwork-clone {
+      cursor: pointer;
+    }
+    .nwork-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(79, 107, 255, 0.25);
+    }
+    .nwork-board {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #0c0d10;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: border-color 0.3s ease;
+    }
+    .nwork-card:hover .nwork-board {
+      border-color: rgba(79, 107, 255, 0.4);
+    }
+    .nwork-board img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .nwork-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 18px 14px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 2;
+    }
+    .nwork-title {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: #fff;
+      margin: 0 0 4px 0;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .nwork-author {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .nwork-title { font-size: 0.8125rem; }
+      .nwork-author { font-size: 0.6875rem; }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -259,16 +567,28 @@
 </head>
 <body>
 
+  <!-- 装饰光斑层（弹性可交互） -->
+  <div class="glow-layer" aria-hidden="true">
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+    <div class="glow-blob blob-4"></div>
+    <div class="glow-blob blob-5"></div>
+    <div class="glow-blob blob-6"></div>
+    <div class="glow-blob blob-7"></div>
+    <div class="glow-blob blob-8"></div>
+  </div>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <div class="nav-logo-mark">W</div>
+        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <span class="nav-link">首页 ▾</span>
+          <a href="../index.html" class="nav-link">首页 ▾</a>
           <div class="nav-dropdown">
             <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
@@ -276,29 +596,30 @@
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">关于工作室 ▾</span>
+          <a href="about.html" class="nav-link">关于工作室 ▾</a>
           <div class="nav-dropdown">
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link active">项目成果 ▾</span>
+          <a href="projects.html" class="nav-link active">项目成果 ▾</a>
           <div class="nav-dropdown">
             <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
             <a href="projects.html#works" class="dropdown-item">毕设作品</a>
+            <a href="projects.html#normal-works" class="dropdown-item">普通作品</a>
             <a href="projects.html#awards" class="dropdown-item">获奖荣誉</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">活动与合作 ▾</span>
+          <a href="activities.html" class="nav-link">活动与合作 ▾</a>
           <div class="nav-dropdown">
             <a href="activities.html" class="dropdown-item">活动</a>
             <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
-          <span class="nav-link">联系我们 ▾</span>
+          <a href="contact.html" class="nav-link">联系我们 ▾</a>
           <div class="nav-dropdown">
             <a href="contact.html" class="dropdown-item">联系方式</a>
             <a href="contact.html" class="dropdown-item">留言咨询</a>
@@ -320,11 +641,13 @@
   </a>
 
   <!-- Page Header -->
-  <section class="page-header">
+  <section class="page-header intro-hero" id="pageHeader">
+    <div class="intro-glow"></div>
+    <div class="intro-rays"></div>
     <div class="container-narrow">
       <span class="section-label fade-in">Our Works</span>
       <h1 class="fade-in">项目成果</h1>
-      <p class="fade-in">工作室项目、毕业设计与获奖荣誉作品展示</p>
+      <p class="fade-in">工作室项目、毕业设计、学生作品与获奖荣誉展示</p>
     </div>
   </section>
 
@@ -340,38 +663,74 @@
       <div class="project-grid fade-in">
         <!-- Studio Project 01 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=5'">
-          <div class="project-card-image placeholder-pulse"></div>
+          <div class="project-card-image"><img src="../images/uav-cover.jpg" alt="无人机选种 AI 系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
-            <h3 class="project-card-title">腔镜手术机器人系统</h3>
-            <p class="project-card-desc">面向腹腔微创手术的主从式机器人操作平台，聚焦力反馈操控与手术安全体验</p>
+            <h3 class="project-card-title">无人机选种 AI 系统</h3>
+            <p class="project-card-desc">用无人机低空遥感 + AI 表型识别，帮育种团队更快、更准地从大田里挑出好苗子。</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">服务设计</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">智慧农业</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">无人机遥感</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">AI 育种</span>
+            </div>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:10px;">十五堂（天津）文化科技有限公司 · 翼龙航空</p>
           </div>
         </div>
 
         <!-- Studio Project 02 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=6'">
-          <div class="project-card-image placeholder-pulse"></div>
+          <div class="project-card-image"><img src="../images/wonder-cover.jpg" alt="WonderWash 智能洗衣归集方案" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
-            <h3 class="project-card-title">AI辅助产品设计工具</h3>
-            <p class="project-card-desc">基于生成式 AI 的概念草图与方案发散辅助系统，重塑设计前期工作流</p>
+            <h3 class="project-card-title">WonderWash 智能洗衣归集方案</h3>
+            <p class="project-card-desc">为新加坡最大自助洗衣公司，设计一套"扫码即洗、自动结算"的设备归集与支付方案。</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">服务设计</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">IoT 设备</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">支付系统</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">自助零售</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">海外项目</span>
+            </div>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:10px;">WonderWash（新加坡最大自助洗衣公司）</p>
           </div>
         </div>
 
         <!-- Studio Project 03 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=9'">
-          <div class="project-card-image placeholder-pulse"></div>
+          <div class="project-card-image"><img src="../images/uro-cover.jpg" alt="输尿管软镜手术机器人系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
+          <div class="project-card-content">
+            <div class="project-card-category">工作室项目 · Project No.1</div>
+            <h3 class="project-card-title">输尿管软镜手术机器人系统</h3>
+            <p class="project-card-desc">让泌尿外科医生坐在主控台前，用一双更稳、更准的手，完成软镜操作。</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">医疗机器人</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">主从遥操作</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">手术自动化</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">肌电实验</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Project 04 -->
+        <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=10'">
+          <div class="project-card-image"><img src="../images/hto-vr-cover.png?v=3" alt="面向HTO骨科手术机器人的全流程VR系统设计" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
-            <h3 class="project-card-title">全屋智能中控系统</h3>
-            <p class="project-card-desc">统一控制与多场景联动的家居中枢产品设计，让家“懂你而不打扰你”</p>
+            <h3 class="project-card-title">面向HTO骨科手术机器人的全流程VR系统设计</h3>
+            <p class="project-card-desc">用 VR 沉浸式三维可视化与多方案并行预演，帮骨科医生在术前直观对比截骨方案、科学决策。</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">医疗VR</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">手术决策</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">Unity开发</span>
+              <span style="font-size:0.6875rem;padding:3px 10px;border-radius:20px;background:rgba(79,107,255,0.12);border:1px solid rgba(79,107,255,0.25);color:rgba(159,178,255,0.95);">三维重建</span>
+            </div>
+            <p style="font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:10px;">指导：张寞轩、边元 · 设计：曹骞予</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Graduation Works Section -->
   <section id="works" class="section graduation-section">
     <div class="container">
       <div class="section-header fade-in">
@@ -396,6 +755,25 @@
     </div>
   </section>
 
+  <!-- Normal Works Section -->
+  <section id="normal-works" class="section normal-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Student Works</span>
+        <h2 class="section-title">普通作品</h2>
+        <p class="section-subtitle">工作室学生在课程设计与各类设计竞赛中完成的作品展示</p>
+      </div>
+
+      <div class="normal-viewport" id="normalViewport">
+        <div class="normal-track" id="normalTrack">
+          <div class="normal-grid" id="normalGrid">
+            <!-- 由JS动态生成 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Awards Section -->
   <section id="awards" class="horizontal-scroll-section">
     <div class="container">
@@ -408,190 +786,104 @@
 
     <div class="scroll-container-wrapper">
       <div class="scroll-container fade-in">
-        <!-- Award 01 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=1'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">全国大学生工业设计大赛一等奖</h3>
-            <p class="scroll-card-desc">「药伴」智能用药管理系统，2024 年全国大学生工业设计大赛全国总决赛</p>
-            <div class="scroll-card-meta">
-              <span>2024年</span>
-              <span>周诗涵、吴沛霖</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 02 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=2'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">华灿奖·两岸新锐设计竞赛二等奖</h3>
-            <p class="scroll-card-desc">「视界同行」眼动交互无障碍设备，2024 年两岸高校设计竞赛</p>
-            <div class="scroll-card-meta">
-              <span>2024年</span>
-              <span>赵天宇、刘一诺</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 03 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=3'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">红点设计概念奖</h3>
-            <p class="scroll-card-desc">「忆路」认知辅助产品设计，入选 2023 年红点设计概念奖</p>
-            <div class="scroll-card-meta">
-              <span>2023年</span>
-              <span>李思彤、周诗涵</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 04 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=4'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">“挑战杯”省级二等奖</h3>
-            <p class="scroll-card-desc">「绿洲」流浪动物救助服务系统，2023 年“挑战杯”省级决赛</p>
-            <div class="scroll-card-meta">
-              <span>2023年</span>
-              <span>李思彤、孙佳琪</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 05 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=5'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">省工业设计大赛金奖</h3>
-            <p class="scroll-card-desc">「格致」模块化校园家具设计，2023 年省级工业设计大赛</p>
-            <div class="scroll-card-meta">
-              <span>2023年</span>
-              <span>王梓轩、周诗涵</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 06 -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=6'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">iF 设计新秀奖</h3>
-            <p class="scroll-card-desc">「声桥」智能手语翻译终端，获 2022 年 iF 设计新秀奖</p>
-            <div class="scroll-card-meta">
-              <span>2022年</span>
-              <span>刘一诺、赵天宇</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Duplicate for scroll effect -->
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=7'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">校级创新创业训练计划优秀结题</h3>
-            <p class="scroll-card-desc">腔镜手术机器人人机交互研究项目获评优秀结题</p>
-            <div class="scroll-card-meta">
-              <span>2024年</span>
-              <span>王梓轩、张若晨</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="scroll-card" onclick="location.href='award-detail.html?id=8'">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">全国大学生电子商务“三创赛”省赛二等奖</h3>
-            <p class="scroll-card-desc">「拾光」文创电商概念平台，2024 年省级选拔赛</p>
-            <div class="scroll-card-meta">
-              <span>2024年</span>
-              <span>孙佳琪、吴沛霖</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 09 -->
+        <!-- 奖状 01 -->
         <div class="scroll-card">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">未来设计师NCDA大赛天津赛区一等奖</h3>
-            <p class="scroll-card-desc">第13届全国高校数字艺术设计大赛，2025 年</p>
-            <div class="scroll-card-meta">
-              <span>2025年</span>
-              <span>指导：苏俊旭</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 10 -->
-        <div class="scroll-card">
-          <div class="scroll-card-image placeholder-pulse"></div>
+          <div class="scroll-card-image"><img src="../images/award-nuke1.jpg" alt="天津市大学生工业与艺术设计竞赛一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛一等奖</h3>
-            <p class="scroll-card-desc">第17届天津市高校设计类重要赛事，2024 年</p>
+            <p class="scroll-card-desc">第十七届天津市大学生工业与艺术设计竞赛 · 《基于核污染防治公共空间服务设计》获本科组一等奖</p>
             <div class="scroll-card-meta">
               <span>2024年</span>
-              <span>指导：苏俊旭</span>
+              <span>常雅婷、魏嘉悦、何靖馥琳 · 指导：张寔轩</span>
             </div>
           </div>
         </div>
 
-        <!-- Award 11 -->
+        <!-- 奖状 02 -->
         <div class="scroll-card">
-          <div class="scroll-card-image placeholder-pulse"></div>
+          <div class="scroll-card-image"><img src="../images/award-bus2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛二等奖</h3>
-            <p class="scroll-card-desc">第17届天津市高校设计类竞赛，2024 年</p>
+            <p class="scroll-card-desc">第十七届天津市大学生工业与艺术设计竞赛 · 《公共交通系统优化的服务设计》获本科组二等奖</p>
             <div class="scroll-card-meta">
               <span>2024年</span>
-              <span>指导：苏俊旭</span>
+              <span>刘春睿、周小雨、刘思敏 · 指导：张窦轩</span>
             </div>
           </div>
         </div>
 
-        <!-- Award 12 -->
+        <!-- 奖状 03 -->
         <div class="scroll-card">
-          <div class="scroll-card-image placeholder-pulse"></div>
-          <div class="scroll-card-content">
-            <span class="scroll-card-tag">获奖荣誉</span>
-            <h3 class="scroll-card-title">中国国际大学生创新大赛天津赛区铜奖</h3>
-            <p class="scroll-card-desc">原"互联网+"大赛高教主赛道，2024 年</p>
-            <div class="scroll-card-meta">
-              <span>2024年</span>
-              <span>指导：苏俊旭</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Award 13 -->
-        <div class="scroll-card">
-          <div class="scroll-card-image placeholder-pulse"></div>
+          <div class="scroll-card-image"><img src="../images/award-dream2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛二等奖</h3>
-            <p class="scroll-card-desc">第16届天津市高校设计类竞赛，2023 年</p>
+            <p class="scroll-card-desc">第十七届天津市大学生工业与艺术设计竞赛 · 《梦境·系列化适老化家居助眠产品》获本科组二等奖</p>
             <div class="scroll-card-meta">
-              <span>2023年</span>
-              <span>指导：苏俊旭</span>
+              <span>2024年</span>
+              <span>郎家乐、田帅、于灏 · 指导：张寞轩</span>
             </div>
           </div>
         </div>
-      </div>
-      <div class="scroll-controls">
-        <button class="scroll-btn prev" aria-label="上一个">←</button>
-        <button class="scroll-btn next" aria-label="下一个">→</button>
+
+        <!-- 奖状 04 -->
+        <div class="scroll-card">
+          <div class="scroll-card-image"><img src="../images/award-flow3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-content">
+            <span class="scroll-card-tag">获奖荣誉</span>
+            <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛三等奖</h3>
+            <p class="scroll-card-desc">第十七届天津市大学生工业与艺术设计竞赛 · 《基于心流理念的咖啡厅服务系统设计研究》获本科组三等奖</p>
+            <div class="scroll-card-meta">
+              <span>2024年</span>
+              <span>安洵毅、曹骞予、王睿思 · 指导：张寞轩</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 奖状 05 -->
+        <div class="scroll-card">
+          <div class="scroll-card-image"><img src="../images/award-smart3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-content">
+            <span class="scroll-card-tag">获奖荣誉</span>
+            <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛三等奖</h3>
+            <p class="scroll-card-desc">第十七届天津市大学生工业与艺术设计竞赛 · 《智护——适老化居家智能园丁》获本科组三等奖</p>
+            <div class="scroll-card-meta">
+              <span>2024年</span>
+              <span>陈阳、曹子锐 · 指导：张寰轩</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 奖状 06 -->
+        <div class="scroll-card">
+          <div class="scroll-card-image"><img src="../images/award-ncda1.jpg" alt="未来设计师NCDA大赛天津赛区一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-content">
+            <span class="scroll-card-tag">获奖荣誉</span>
+            <h3 class="scroll-card-title">未来设计师NCDA大赛天津赛区一等奖</h3>
+            <p class="scroll-card-desc">第13届全国高校数字艺术设计大赛 · 《基于心流理念的咖啡厅服务系统设计研究》获天津赛区一等奖（本科组 · 艺术疗愈）</p>
+            <div class="scroll-card-meta">
+              <span>2025年</span>
+              <span>王睿思、曹菁予、周小雨 · 指导：张寅轩、苏俊旭 · 天津仁爱学院</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 奖状 07 -->
+        <div class="scroll-card">
+          <div class="scroll-card-image"><img src="../images/award-ncda2.jpg" alt="未来设计师NCDA大赛天津赛区二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-content">
+            <span class="scroll-card-tag">获奖荣誉</span>
+            <h3 class="scroll-card-title">未来设计师NCDA大赛天津赛区二等奖</h3>
+            <p class="scroll-card-desc">第13届全国高校数字艺术设计大赛 · 《禾火新生-EcoCube生态农棚服务设计》获天津赛区二等奖（本科组 · 乡村设计）</p>
+            <div class="scroll-card-meta">
+              <span>2025年</span>
+              <span>黄玉冰、耿之榕 · 指导：张夏轩 · 天津仁爱学院</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -602,7 +894,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <div class="footer-logo-mark">W</div>
+            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -647,7 +939,35 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=20261007"></script>
+  <script>
+    // 页面入场动画：标题光晕爆发 → 自动下滑到内容区
+    (function() {
+      var header = document.getElementById('pageHeader');
+      var target = document.getElementById('studio');
+      if (!header) return;
+
+      var INTRO_DURATION = 1500;
+
+      function scrollToContent() {
+        header.classList.remove('intro-hero');
+        setTimeout(function() {
+          if (target) {
+            var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+            var scrollTo = targetTop - window.innerHeight + 80;
+            window.scrollTo({ top: Math.max(0, scrollTo), behavior: 'smooth' });
+          }
+        }, 200);
+      }
+
+      if (location.hash && location.hash !== '#top') {
+        header.classList.remove('intro-hero');
+        return;
+      }
+
+      setTimeout(scrollToContent, INTRO_DURATION);
+    })();
+  </script>
   <script>
     // 11个毕设项目数据
     const graduationProjects = [
@@ -727,20 +1047,83 @@
         author: "周小雨",
         category: "graduation",
         boards: ["project11_1.jpg", "project11_2.jpg", "project11_3.jpg"]
+      },
+      {
+        id: 12,
+        title: "HTO术前VR决策系统设计",
+        author: "曹骞予 · 张寞轩",
+        category: "graduation",
+        excellent: true,
+        boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"]
+      },
+      {
+        id: 13,
+        title: "禾火新生—农民断代背景下EcoCube生态农铺",
+        author: "黄玉冰",
+        category: "graduation",
+        excellent: true,
+        boards: ["project13_1.jpg", "project13_2.jpg"]
+      },
+      {
+        id: 14,
+        title: "基于心流理论的沉浸式乐器陪练系统",
+        author: "于渤",
+        category: "graduation",
+        excellent: true,
+        boards: ["project14_1.jpg"]
+      },
+      {
+        id: 15,
+        title: "三轨滑轨沙发",
+        author: "尹欣 · 苏俊旭",
+        category: "graduation",
+        boards: ["project15_1.jpg"]
+      },
+      {
+        id: 16,
+        title: "中医治未病理念下家庭健康自检设备设计",
+        author: "马伊玟 · 苏俊旭",
+        category: "graduation",
+        boards: ["project16_1.jpg"]
+      },
+      {
+        id: 17,
+        title: "叙事化团泊镇文化IP及衍生品设计",
+        author: "申琰硕 · 苏俊旭",
+        category: "graduation",
+        boards: ["project17_1.jpg"]
+      },
+      {
+        id: 18,
+        title: "情绪亚健康青年自我庇护家居设计",
+        author: "苏小铭 · 苏俊旭",
+        category: "graduation",
+        boards: ["project18_1.jpg"]
       }
     ];
 
     // 渲染毕设卡片
     function renderGraduationCards() {
       const grid = document.getElementById('graduationGrid');
-      if (!grid) return;
+      const viewport = document.getElementById('graduationViewport');
+      if (!grid || !viewport) return;
+
+      // 黄色条幅照片扫描结果：顶部带黄色横幅的项目（4,5,6,7,8,9,10,11）统一沉底，
+      // 无条幅的项目（1,2,3）往上顶
+      const bannerProjects = new Set([4, 5, 6, 7, 8, 9, 10, 11]);
+      graduationProjects.sort(function(a, b) {
+        var ab = bannerProjects.has(a.id) ? 1 : 0;
+        var bb = bannerProjects.has(b.id) ? 1 : 0;
+        return ab - bb;
+      });
 
       graduationProjects.forEach(project => {
         const card = document.createElement('div');
         card.className = 'graduation-card';
         card.setAttribute('data-category', project.category);
+        if (project.excellent) card.setAttribute('data-excellent', '1');
         card.onclick = function() {
-          location.href = 'project-detail.html?id=' + project.id;
+          location.href = 'graduation-detail.html?id=' + project.id;
         };
 
         // 轮播区域
@@ -779,7 +1162,7 @@
         grid.appendChild(card);
       });
 
-      // 添加箭头入口卡片（第12个位置，第3行最后一个）
+      // 添加“查看全部”小按钮（绝对定位在视口右下角，不在网格中）
       const arrowCard = document.createElement('div');
       arrowCard.className = 'graduation-arrow-card';
       arrowCard.id = 'graduationArrowCard';
@@ -790,9 +1173,14 @@
         <span class="graduation-arrow-text">查看全部</span>
       `;
       arrowCard.addEventListener('click', function() {
-        location.href = 'graduation-works.html';
+        var activeTab = document.querySelector('.filter-tabs .filter-tab.active');
+        if (activeTab && activeTab.getAttribute('data-filter') === 'excellent') {
+          location.href = 'graduation-excellent.html';
+        } else {
+          location.href = 'graduation-works.html';
+        }
       });
-      grid.appendChild(arrowCard);
+      document.getElementById('graduationViewport').appendChild(arrowCard);
 
       // 绑定轮播交互
       bindGraduationCarousels();
@@ -800,118 +1188,162 @@
       // 绑定筛选标签
       bindFilterTabs();
 
-      // 初始化自动滚动
-      setupGraduationAutoScroll();
+      // 初始化匀速纵向滚动
+      setupGraduationMarquee();
     }
 
-    // 自动向上滚动播放（丝滑连续滚动）
-    function setupGraduationAutoScroll() {
+    // 毕设作品：匀速纵向滚动（CSS animation + 内容复制一份实现无缝循环）
+    function setupGraduationMarquee() {
       const viewport = document.getElementById('graduationViewport');
       const track = document.getElementById('graduationTrack');
       const grid = document.getElementById('graduationGrid');
       if (!viewport || !track || !grid) return;
 
-      const cards = grid.children;
-      if (cards.length < 2) return;
+      const CARD_ASPECT = 4 / 3;
+      const BASE_CARD_W = 250;
+      const BASE_GAP = 36;
+      const COLS = 4;
+      const VISIBLE_ROWS = 2;
+      const PX_PER_SEC = 50;
 
-      function getRowHeight() {
-        const first = cards[0];
-        const second = cards[1];
-        const diff = second.offsetTop - first.offsetTop;
-        if (diff > 0) return diff;
-        return first.offsetHeight + 48;
+      function measure() {
+        var avail = viewport.clientWidth;
+        var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
+        var cardWidth = Math.round(BASE_CARD_W * scale);
+        var gap = Math.round(BASE_GAP * scale);
+        var cardHeight = Math.round(cardWidth * CARD_ASPECT);
+        var rowHeight = cardHeight + gap;
+        grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
+        grid.style.gap = gap + 'px ' + gap + 'px';
+        viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
+        viewport.style.marginLeft = 'auto';
+        viewport.style.marginRight = 'auto';
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
+        var items = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-clone)').length;
+        var rows = Math.ceil(items / COLS);
+        var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
+        track.style.animationDuration = duration + 's';
       }
 
-      function init() {
-        var rowHeight = getRowHeight();
-        viewport.style.maxHeight = rowHeight + 'px';
-
-        var cols = window.innerWidth > 1200 ? 4 : (window.innerWidth > 768 ? 3 : (window.innerWidth > 480 ? 2 : 1));
-        var totalRows = Math.ceil(cards.length / cols);
-        var maxScroll = (totalRows - 1) * rowHeight;
-
-        var currentY = 0;
-        var targetY = 0;
-        var animId = null;
-
-        function setTrack(y) {
-          track.style.transform = 'translateY(-' + y + 'px)';
-        }
-
-        function animate() {
-          var diff = targetY - currentY;
-          if (Math.abs(diff) < 0.5) {
-            currentY = targetY;
-            setTrack(currentY);
-            animId = null;
-            return;
+      function duplicate() {
+        var clones = grid.querySelectorAll('.graduation-clone');
+        clones.forEach(function(c) { c.remove(); });
+        var originals = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-clone)');
+        originals.forEach(function(card) {
+          var clone = card.cloneNode(true);
+          clone.classList.add('graduation-clone');
+          var inner = clone.querySelector('.graduation-board-carousel');
+          if (inner) delete inner.dataset.bound;
+          var pid = clone.querySelector('.graduation-board-carousel');
+          var projectId = pid ? pid.getAttribute('data-project') : null;
+          if (projectId) {
+            clone.onclick = function() {
+              location.href = 'graduation-detail.html?id=' + projectId;
+            };
           }
-          currentY += diff * 0.025;
-          setTrack(currentY);
-          animId = requestAnimationFrame(animate);
-        }
-
-        function scrollTo(target) {
-          targetY = target;
-          if (!animId) animId = requestAnimationFrame(animate);
-        }
-
-        var step = 1;
-        function next() {
-          if (step < totalRows) {
-            scrollTo(step * rowHeight);
-            step++;
-            setTimeout(next, 2500);
-          }
-        }
-        setTimeout(next, 1500);
-
-        window.addEventListener('resize', function() {
-          var newRH = getRowHeight();
-          viewport.style.maxHeight = newRH + 'px';
-          maxScroll = (totalRows - 1) * newRH;
-          currentY = Math.min(currentY, maxScroll);
-          targetY = currentY;
-          setTrack(currentY);
+          grid.appendChild(clone);
         });
-
-        // 暴露展开函数
-        window._expandGraduation = function() {
-          if (animId) { cancelAnimationFrame(animId); animId = null; }
-          targetY = 0;
-          
-          var lastCard = cards[cards.length - 1];
-          var fullHeight = lastCard.offsetTop + lastCard.offsetHeight;
-          viewport.style.maxHeight = fullHeight + 'px';
-          
-          // 反向丝滑滚回顶部
-          var startY = currentY;
-          var startTime = null;
-          function back(t) {
-            if (!startTime) startTime = t;
-            var p = Math.min((t - startTime) / 1000, 1);
-            var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-            currentY = startY * (1 - eased);
-            setTrack(currentY);
-            if (p < 1) {
-              requestAnimationFrame(back);
-            } else {
-              currentY = 0;
-              setTrack(0);
-            }
-          }
-          requestAnimationFrame(back);
-        };
+        bindGraduationCarousels();
       }
 
-      requestAnimationFrame(function() {
-        requestAnimationFrame(init);
-      });
-    }
+      window._rebuildGraduationMarquee = function() {
+        measure();
+        duplicate();
+        initJSMarquee();
+      };
 
-    // 展开显示全部
-    function expandGraduationView() {
-      if (window._expandGraduation) window._expandGraduation();
+      window.addEventListener('resize', measure);
+      measure();
+      duplicate();
+
+      // 纯JS跑马灯 + 鼠标滚轮控制
+      var currentY = 0;
+      var halfHeight = 0;
+      var autoSpeed = 0.8;
+      var wheelSpeed = 1.5;
+      var hoverPause = false;
+      var marqueeAnimId = null;
+
+      function updateHalfHeight() {
+        halfHeight = grid.offsetHeight / 2;
+      }
+
+      function wrapY(y) {
+        if (halfHeight <= 0) return y;
+        while (y > 0) y -= halfHeight;
+        while (y < -halfHeight) y += halfHeight;
+        return y;
+      }
+
+      function marqueeLoop() {
+        if (!hoverPause) {
+          currentY = wrapY(currentY - autoSpeed);
+          track.style.transform = 'translateY(' + currentY + 'px)';
+        }
+        marqueeAnimId = requestAnimationFrame(marqueeLoop);
+      }
+
+      function initJSMarquee() {
+        // 禁用CSS动画
+        track.style.animation = 'none';
+        track.style.animationPlayState = '';
+        track.style.transform = 'translateY(0px)';
+        currentY = 0;
+        updateHalfHeight();
+        if (marqueeAnimId) cancelAnimationFrame(marqueeAnimId);
+        marqueeAnimId = requestAnimationFrame(marqueeLoop);
+      }
+
+      // 鼠标滚轮控制
+      viewport.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateHalfHeight();
+        currentY = wrapY(currentY + e.deltaY * wheelSpeed);
+        track.style.transform = 'translateY(' + currentY + 'px)';
+      }, { passive: false, capture: true });
+
+      // 悬停时暂停自动滚动
+      viewport.addEventListener('mouseenter', function() {
+        hoverPause = true;
+      });
+      viewport.addEventListener('mouseleave', function() {
+        hoverPause = false;
+      });
+
+      // 等图片加载完再启动JS跑马灯
+      if (document.readyState === 'complete') {
+        setTimeout(initJSMarquee, 200);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(initJSMarquee, 200);
+        });
+      }
+
+      // 优秀毕设模式：暂停滚动、移除克隆、静止展示全部
+      window._pauseGraduationMarquee = function() {
+        hoverPause = true;
+        if (marqueeAnimId) {
+          cancelAnimationFrame(marqueeAnimId);
+          marqueeAnimId = null;
+        }
+        var clones = grid.querySelectorAll('.graduation-clone');
+        clones.forEach(function(c) { c.remove(); });
+        track.style.transform = 'translateY(0px)';
+        track.style.animation = 'none';
+        currentY = 0;
+        viewport.style.maxHeight = 'none';
+        // 重新测量布局
+        measure();
+      };
+
+      // 恢复自动滚动
+      window._resumeGraduationMarquee = function() {
+        hoverPause = false;
+        measure();
+        duplicate();
+        initJSMarquee();
+      };
     }
 
     // 筛选标签切换
@@ -924,17 +1356,30 @@
           // 切换active状态
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
-          
+
           const filter = this.getAttribute('data-filter');
           
           cards.forEach(card => {
             const cat = card.getAttribute('data-category');
-            if (filter === 'all' || cat === filter) {
+            const isExcellent = card.getAttribute('data-excellent') === '1';
+            if (filter === 'all') {
               card.style.display = '';
+            } else if (filter === 'graduation') {
+              card.style.display = cat === 'graduation' ? '' : 'none';
+            } else if (filter === 'excellent') {
+              card.style.display = isExcellent ? '' : 'none';
             } else {
-              card.style.display = 'none';
+              card.style.display = cat === filter ? '' : 'none';
             }
           });
+
+          // 优秀毕设：停止自动滚动，移除克隆，静止展示
+          if (filter === 'excellent') {
+            if (window._pauseGraduationMarquee) window._pauseGraduationMarquee();
+          } else {
+            // 恢复自动滚动
+            if (window._resumeGraduationMarquee) window._resumeGraduationMarquee();
+          }
         });
       });
     }
@@ -943,6 +1388,8 @@
     function bindGraduationCarousels() {
       const carousels = document.querySelectorAll('.graduation-board-carousel');
       carousels.forEach(carousel => {
+        if (carousel.dataset.bound) return;
+        carousel.dataset.bound = '1';
         const slides = carousel.querySelectorAll('.graduation-board-slide');
         const dots = carousel.querySelectorAll('.graduation-dot');
         const countBadge = carousel.querySelector('.graduation-board-count');
@@ -988,16 +1435,250 @@
           });
         });
 
-        // 阻止点击轮播区域跳转（只有点击卡片信息区域才跳转）
-        carousel.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
+        // 点击卡片任意位置跳转详情（箭头/圆点切换在各自监听里已 stopPropagation）
       });
     }
 
     document.addEventListener('DOMContentLoaded', function() {
       renderGraduationCards();
+      renderNormalWorks();
+      setupAwardsScroll();
     });
+
+    /* 获奖荣誉：横向匀速无缝跑马灯（列表复制一份接在后面，位移 -50% 即一份宽度；悬停暂停；无箭头无分页） */
+    function setupAwardsScroll() {
+      var container = document.querySelector('#awards .scroll-container');
+      if (!container) return;
+      var cards = Array.prototype.slice.call(container.querySelectorAll('.scroll-card'));
+      if (!cards.length) return;
+      // 复制一份实现无缝循环
+      cards.forEach(function (card) {
+        container.appendChild(card.cloneNode(true));
+      });
+    }
+
+    /* ===== 普通作品（学生课程/竞赛作品，来源：优秀作品文件夹） ===== */
+    const normalWorks = [
+      { id: 1, title: "穹枝归所——全周期安宁社区服务设计", author: "郭心蕊", board: "normal1.jpg" },
+      { id: 2, title: "银发社区服务改善", author: "樊小钰", board: "normal2.jpg" },
+      { id: 3, title: "银铃——预防阿尔兹海默症老人走失系统", author: "刘惠月", board: "normal3.jpg" },
+      { id: 4, title: "银悦坊——银发商业空间服务设计", author: "董慧鑫", board: "normal4.jpg" },
+      { id: 5, title: "GoldenEra瑞购——老年购物软件设计", author: "周小雨", board: "normal5.jpg" },
+      { id: 6, title: "I-BLOOM以爱为智", author: "康歌", board: "normal6.jpg" },
+      { id: 7, title: "MM豆特装展位设计", author: "耿之郁", board: "normal7.jpg" },
+      { id: 8, title: "Water Dispenser智能校准饮水机设计", author: "曹骞予", board: "normal8.jpg" },
+      { id: 9, title: "“老友记”多元社交社区服务设计", author: "颜玉晗", board: "normal9.jpg" },
+      { id: 10, title: "乐龄同频计划——多元化社区服务设计", author: "徐玮琪", board: "normal10.jpg" },
+      { id: 11, title: "乡游——二线城镇文化体验社区服务设计", author: "吴美妮", board: "normal11.jpg" },
+      { id: 12, title: "会说话的大标志（基于视障老人的导视设计）", author: "吕津成", board: "normal12.jpg" },
+      { id: 13, title: "巡天计划——低空经济应急管理与城市设备巡查融合服务设计", author: "杨雅雯", board: "normal13.jpg" },
+      { id: 14, title: "共感银途EmpathSilvr体验馆服务设计", author: "臧莹", board: "normal14.jpg" },
+      { id: 15, title: "写生用旅行包", author: "菅桂琪", board: "normal15.jpg" },
+      { id: 16, title: "志愿伴行", author: "韩家帅", board: "normal16.jpg" },
+      { id: 17, title: "护小助——优化护工群体年龄结构的服务系统设计", author: "段淑惠", board: "normal17.jpg" },
+      { id: 18, title: "旅行盒子·文化体验旅游产品服务设计", author: "韩佳琪", board: "normal18.jpg" },
+      { id: 19, title: "晚恋——基于银发经济的老年交友相亲系统流程设计", author: "姜晓雅", board: "normal19.jpg" },
+      { id: 20, title: "智能医疗服务系统", author: "张达", board: "normal20.jpg" },
+      { id: 21, title: "梧桐汇", author: "赵思竣", board: "normal21.jpg" },
+      { id: 22, title: "沉默玩家——基于AIoT的聋哑社会共情云生态服务系统设计", author: "何靖馥琳", board: "normal22.jpg" },
+      { id: 23, title: "活力银龄——慧健康健身软件设计", author: "陈茜", board: "normal23.jpg" },
+      { id: 24, title: "焕发传统文化新活力视角下的非遗·陪伴体验馆服务设计", author: "耿之郁", board: "normal24.jpg" },
+      { id: 25, title: "疗愈花园", author: "王杨", board: "normal25.jpg" },
+      { id: 26, title: "禾火新生——农民断代背景下EcoCube生态农缩服务设计", author: "黄玉冰", board: "normal26.jpg" },
+      { id: 27, title: "科技赋能老年交互新系统——“舞是”以老年舞蹈教室为例", author: "黄玉冰", board: "normal27.jpg" },
+      { id: 28, title: "老年乌托邦——一体化喘息服务老年社区", author: "马伊玟", board: "normal28.jpg" },
+      { id: 29, title: "趣远方——定制旅游服务设计·定制化服务端", author: "赵蔓", board: "normal29.jpg" },
+      { id: 30, title: "通过优化子女联系方式解决老年人多种情绪问题", author: "蔡心悦", board: "normal30.jpg" },
+      { id: 31, title: "银发互助学堂", author: "何亚之", board: "normal31.jpg" },
+      { id: 32, title: "银发互助学堂", author: "林凇宇", board: "normal32.jpg" },
+      { id: 33, title: "银发共生设计", author: "杜益乐", board: "normal33.jpg" },
+      { id: 34, title: "银发经济服务系统设计", author: "吴娅萌", board: "normal34.jpg" },
+      { id: 35, title: "银龄心桥——社区愈动服务设计", author: "章慧俐", board: "normal35.jpg" },
+      { id: 36, title: "鸟类栖息地优化及环境吸引觅食装置的服务系统设计", author: "博佳", board: "normal36.jpg" }
+    ];
+
+    function renderNormalWorks() {
+      const grid = document.getElementById('normalGrid');
+      if (!grid) return;
+      normalWorks.forEach(function (w) {
+        const card = document.createElement('div');
+        card.className = 'nwork-card';
+        card.setAttribute('data-id', w.id);
+        card.onclick = function() {
+          location.href = 'normal-detail.html?id=' + w.id;
+        };
+        card.innerHTML = '<div class="nwork-board">' +
+          '<img src="../images/normal-works/' + w.board + '" alt="' + w.title + '" loading="lazy">' +
+          '<div class="nwork-info">' +
+          '<h3 class="nwork-title">' + w.title + '</h3>' +
+          '<p class="nwork-author">' + w.author + '</p>' +
+          '</div></div>';
+        grid.appendChild(card);
+      });
+      /* “查看全部”小按钮（绝对定位在视口右下角） */
+      var arrowCard = document.createElement('div');
+      arrowCard.className = 'nwork-arrow-card';
+      arrowCard.innerHTML =
+        '<div class="nwork-arrow-icon">' +
+        '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+        '</div>' +
+        '<span class="nwork-arrow-text">查看全部</span>';
+      arrowCard.addEventListener('click', function() {
+        location.href = 'normal-works.html';
+      });
+      document.getElementById('normalViewport').appendChild(arrowCard);
+      /* 初始化普通作品匀速滚动 */
+      setupNormalMarquee();
+    }
+
+    /* 普通作品：4列网格，匀速纵向滚动（CSS animation + 内容复制） */
+    function setupNormalMarquee() {
+      const viewport = document.getElementById('normalViewport');
+      const track = document.getElementById('normalTrack');
+      const grid = document.getElementById('normalGrid');
+      if (!viewport || !track || !grid) return;
+
+      const CARD_ASPECT = 4 / 3;
+      const BASE_CARD_W = 250;
+      const BASE_GAP = 36;
+      const COLS = 4;
+      const VISIBLE_ROWS = 2;
+      const PX_PER_SEC = 50;
+
+      function measure() {
+        var avail = viewport.clientWidth;
+        var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
+        var cardWidth = Math.round(BASE_CARD_W * scale);
+        var gap = Math.round(BASE_GAP * scale);
+        var cardHeight = Math.round(cardWidth * CARD_ASPECT);
+        var rowHeight = cardHeight + gap;
+        grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
+        grid.style.gap = gap + 'px ' + gap + 'px';
+        viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
+        viewport.style.marginLeft = 'auto';
+        viewport.style.marginRight = 'auto';
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
+        var items = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-clone)').length;
+        var rows = Math.ceil(items / COLS);
+        var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
+        track.style.animationDuration = duration + 's';
+      }
+
+      function duplicate() {
+        var clones = grid.querySelectorAll('.nwork-clone');
+        clones.forEach(function(c) { c.remove(); });
+        var originals = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-clone)');
+        originals.forEach(function(card) {
+          var clone = card.cloneNode(true);
+          clone.classList.add('nwork-clone');
+          var pid = clone.getAttribute('data-id');
+          if (pid) {
+            clone.onclick = function() {
+              location.href = 'normal-detail.html?id=' + pid;
+            };
+          }
+          grid.appendChild(clone);
+        });
+      }
+
+      window.addEventListener('resize', measure);
+      measure();
+      duplicate();
+
+      // 纯JS跑马灯 + 鼠标滚轮控制
+      var nCurrentY = 0;
+      var nHalfHeight = 0;
+      var nAutoSpeed = 0.8;
+      var nWheelSpeed = 1.5;
+      var nHoverPause = false;
+      var nMarqueeAnimId = null;
+
+      function nUpdateHalfHeight() {
+        nHalfHeight = grid.offsetHeight / 2;
+      }
+
+      function nWrapY(y) {
+        if (nHalfHeight <= 0) return y;
+        while (y > 0) y -= nHalfHeight;
+        while (y < -nHalfHeight) y += nHalfHeight;
+        return y;
+      }
+
+      function nMarqueeLoop() {
+        if (!nHoverPause) {
+          nCurrentY = nWrapY(nCurrentY - nAutoSpeed);
+          track.style.transform = 'translateY(' + nCurrentY + 'px)';
+        }
+        nMarqueeAnimId = requestAnimationFrame(nMarqueeLoop);
+      }
+
+      function nInitJSMarquee() {
+        track.style.animation = 'none';
+        track.style.animationPlayState = '';
+        track.style.transform = 'translateY(0px)';
+        nCurrentY = 0;
+        nUpdateHalfHeight();
+        if (nMarqueeAnimId) cancelAnimationFrame(nMarqueeAnimId);
+        nMarqueeAnimId = requestAnimationFrame(nMarqueeLoop);
+      }
+
+      viewport.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        nUpdateHalfHeight();
+        nCurrentY = nWrapY(nCurrentY + e.deltaY * nWheelSpeed);
+        track.style.transform = 'translateY(' + nCurrentY + 'px)';
+      }, { passive: false, capture: true });
+
+      viewport.addEventListener('mouseenter', function() {
+        nHoverPause = true;
+      });
+      viewport.addEventListener('mouseleave', function() {
+        nHoverPause = false;
+      });
+
+      if (document.readyState === 'complete') {
+        setTimeout(nInitJSMarquee, 200);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(nInitJSMarquee, 200);
+        });
+      }
+    }
+
+  </script>
+  <script>
+    /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */
+    (function () {
+      var blobs = Array.prototype.slice.call(document.querySelectorAll('.glow-blob'));
+      var lastHover = null;
+      function isInside(rect, x, y) {
+        var cx = rect.left + window.pageXOffset + rect.width / 2;
+        var cy = rect.top + window.pageYOffset + rect.height / 2;
+        var dx = (x - cx) / (rect.width / 2);
+        var dy = (y - cy) / (rect.height / 2);
+        return dx * dx + dy * dy <= 1;
+      }
+      document.addEventListener('mousemove', function (e) {
+        var x = e.pageX, y = e.pageY, found = null;
+        for (var i = 0; i < blobs.length; i++) {
+          if (isInside(blobs[i].getBoundingClientRect(), x, y)) { found = blobs[i]; break; }
+        }
+        if (found === lastHover) return;
+        if (lastHover) {
+          lastHover.classList.remove('pressed');
+          lastHover.classList.add('bounce');
+        }
+        if (found) {
+          found.classList.remove('bounce');
+          found.classList.add('pressed');
+        }
+        lastHover = found;
+      });
+      document.addEventListener('transitionend', function (e) {
+        if (e.target && e.target.classList) e.target.classList.remove('bounce');
+      });
+    })();
   </script>
 </body>
 </html>
