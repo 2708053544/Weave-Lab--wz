@@ -1198,7 +1198,7 @@ h4 {
   transform: translate(-50%, -50%);
   width: 64px;
   height: 48px;
-  border: 2px dashed var(--border-color);
+  display: none;
 }
 
 .project-card-content {
