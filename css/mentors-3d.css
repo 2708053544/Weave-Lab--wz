@@ -34,7 +34,8 @@ section.m3-section {
   position: relative;
   height: 55vh;
   min-height: 380px;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   background: var(--m3-bg);
 }
 
@@ -215,9 +216,9 @@ section.m3-section .m3-counter { top: 96px; }
 .m3-info-name {
   font-family: 'Cormorant Garamond', 'Noto Sans SC', serif;
   font-weight: 600;
-  font-size: clamp(42px, 5.2vw, 76px);
-  line-height: 1.05;
-  margin: 0 0 16px;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1.1;
+  margin: 0 0 14px;
   min-height: 1.1em;
   letter-spacing: 0.04em;
   text-shadow: 0 0 30px rgba(79, 107, 255, 0.15), 0 0 60px rgba(155, 92, 255, 0.08);
@@ -225,8 +226,8 @@ section.m3-section .m3-counter { top: 96px; }
 
 .m3-info-title {
   font-size: clamp(14px, 1.5vw, 20px);
-  font-weight: 600;
-  color: var(--m3-ink-dim);
+  font-weight: 500;
+  color: var(--m3-ink);
   letter-spacing: 0.05em;
   margin: 0 0 20px;
   min-height: 1.4em;
@@ -556,6 +557,9 @@ section.m3-section .m3-counter { top: 96px; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 900px) {
+  /* 移动端裁剪光晕溢出，避免水平滚动条 */
+  section.m3-section { overflow: hidden; }
+
   .m3-info {
     left: 50%;
     top: auto;
