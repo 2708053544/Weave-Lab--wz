@@ -325,9 +325,7 @@ function initProjectFilter() {
   });
 }
 
-/* ---------- Smooth Scroll for Anchor Links (事件委托) ---------- */
-/* 用事件委托而非页面加载时批量绑定，避免博客链接初始 href="#" 被绑定后
-   被 JS 改成外链时仍触发 querySelector 报错并阻止跳转 */
+/* ---------- Anchor Links (直接跳转，无平滑滚动) ---------- */
 document.addEventListener('click', function (e) {
   const anchor = e.target.closest('a');
   if (!anchor) return;
@@ -341,11 +339,10 @@ document.addEventListener('click', function (e) {
       e.preventDefault();
       const navHeight = document.querySelector('.navbar')?.offsetHeight || 80;
       const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      window.scrollTo({ top: targetPosition, behavior: 'auto' });
     }
   } catch (err) {
-    /* querySelector 遇到非法选择器会抛 SyntaxError，吞掉避免阻止默认跳转 */
-    console.warn('Smooth scroll skipped for selector:', href);
+    console.warn('Scroll skipped for selector:', href);
   }
 });
 
