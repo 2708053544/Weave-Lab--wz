@@ -1507,10 +1507,12 @@ h4 {
 }
 
 .contact-info {
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding-left: 10%;
 }
 
 .contact-info h2 {
@@ -1521,14 +1523,14 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .contact-item {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  text-align: left;
+  text-align: center;
 }
 
 .contact-label {
