@@ -18,8 +18,6 @@
   <link rel="stylesheet" href="css/style.css?v=18">
   <style>
     html, body { background: var(--bg-primary, #0a0814); color: var(--text-primary, #f5f7ff); }
-    @font-face{font-family:Inter;src:url('inter.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
-    @font-face{font-family:'Instrument Serif';src:url('instrument-serif-italic.woff2') format('woff2');font-style:italic;font-weight:400;font-display:swap}
     :root{--logo:15.5px;--logo-mark:22px;--nav:14px;--nav-h:40px;--btn:13.5px;--btn-h:40px;--hero-btn-h:42px;--h1:48px;--lede:15.5px;--badge:12.5px;--stat-size:13.5px;--header-y:22px;--header-x:40px;--stats-x:72px;--stats-y:36px;--hero-gap:85px;--copy-max:860px;--lede-max:470px}
     *{box-sizing:border-box;margin:0;padding:0}
     a{color:inherit;text-decoration:none}
@@ -990,7 +988,6 @@
         }
       }
       requestAnimationFrame(()=>requestAnimationFrame(()=>{for(const el of $$('.appear,.hero-photo')){if(!el.getAnimations().some(a=>a.playState==='running'||a.playState==='paused'||a.playState==='finished'))el.classList.add('is-in')}}));
-    })();
   </script>
   <script>
     /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */
