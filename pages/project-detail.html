@@ -151,22 +151,26 @@
           <p class="fade-in" id="projIntro">
             面向阿尔茨海默病患者的记忆辅助与安全监护产品，通过环境提示、用药提醒与定位监护三大功能模块，用克制而温暖的形态语言降低患者与家属的日常负担。
           </p>
-          <div class="detail-meta fade-in" style="max-width: 600px; margin: 32px auto 0;">
-            <div class="detail-meta-item">
+          <div class="detail-meta fade-in" style="max-width: 600px; margin: 32px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 40px;">
+            <div class="detail-meta-item" id="metaYear">
               <span class="detail-meta-label">时间</span>
               <span class="detail-meta-value" id="projYear">2024年</span>
             </div>
-            <div class="detail-meta-item">
+            <div class="detail-meta-item" id="metaType">
               <span class="detail-meta-label">类型</span>
               <span class="detail-meta-value" id="projType">毕业设计</span>
             </div>
-            <div class="detail-meta-item">
+            <div class="detail-meta-item" id="metaMentor">
               <span class="detail-meta-label">指导老师</span>
               <span class="detail-meta-value" id="projMentor">陈明远</span>
             </div>
-            <div class="detail-meta-item">
+            <div class="detail-meta-item" id="metaTeam">
               <span class="detail-meta-label">团队成员</span>
               <span class="detail-meta-value" id="projTeam">周诗涵</span>
+            </div>
+            <div class="detail-meta-item" id="metaPartner" style="display: none;">
+              <span class="detail-meta-label">合作方</span>
+              <span class="detail-meta-value" id="projPartner"></span>
             </div>
           </div>
         </div>
@@ -175,7 +179,7 @@
   </section>
 
   <!-- Gallery -->
-  <section class="section" style="padding-top: 0;">
+  <section class="section" style="padding-top: 0;" id="sectionGallery">
     <div class="container">
       <div class="detail-gallery fade-in" style="grid-template-columns: 1fr;">
         <div class="detail-gallery-item placeholder-pulse" style="aspect-ratio: 16/9;"></div>
@@ -184,7 +188,7 @@
   </section>
 
   <!-- Design Background -->
-  <section class="detail-section">
+  <section class="detail-section" id="sectionBackground">
     <div class="container-narrow">
       <h2 class="fade-in">设计背景</h2>
       <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projBackground">
@@ -194,7 +198,7 @@
   </section>
 
   <!-- Design Concept -->
-  <section class="detail-section" style="background: var(--bg-secondary);">
+  <section class="detail-section" style="background: var(--bg-secondary);" id="sectionConcept">
     <div class="container-narrow">
       <h2 class="fade-in">设计思路</h2>
       <p class="text-secondary fade-in" style="font-size: 1.05rem; line-height: 1.9;" id="projConcept">
@@ -203,8 +207,16 @@
     </div>
   </section>
 
+  <!-- Features (新增板块) -->
+  <section class="detail-section" id="sectionFeatures" style="display: none;">
+    <div class="container-narrow">
+      <h2 class="fade-in">功能特点</h2>
+      <div class="detail-list fade-in" id="projFeatures"></div>
+    </div>
+  </section>
+
   <!-- More Images -->
-  <section class="section">
+  <section class="section" id="sectionMoreImages">
     <div class="container">
       <div class="detail-gallery fade-in">
         <div class="detail-gallery-item placeholder-pulse"></div>
@@ -216,9 +228,9 @@
   </section>
 
   <!-- Team & Results -->
-  <section class="detail-section" style="background: var(--bg-secondary);">
+  <section class="detail-section" style="background: var(--bg-secondary);" id="sectionResults">
     <div class="container-narrow">
-      <h2 class="fade-in">设计成果与落地效果</h2>
+      <h2 class="fade-in" id="resultsTitle">设计成果与落地效果</h2>
       <div class="detail-list fade-in" id="projResults">
         <div class="detail-list-item">完成产品定义、造型设计与交互原型</div>
         <div class="detail-list-item">完成三轮家庭场景用户测试并迭代</div>
@@ -226,7 +238,7 @@
         <div class="detail-list-item">获 2023 年红点设计概念奖</div>
       </div>
 
-      <h2 class="fade-in" style="margin-top: 60px;">团队成员</h2>
+      <h2 class="fade-in" style="margin-top: 60px;" id="teamTitle">团队成员</h2>
       <div class="detail-list fade-in" id="projTeamList">
         <div class="detail-list-item">指导老师：陈明远</div>
         <div class="detail-list-item">设计成员：周诗涵</div>
@@ -237,7 +249,7 @@
   </section>
 
   <!-- Video Placeholder -->
-  <section class="section">
+  <section class="section" id="sectionVideo" style="display: none;">
     <div class="container-narrow">
       <h2 class="fade-in text-center">展示视频</h2>
       <div class="fade-in" style="aspect-ratio: 16/9; background: var(--bg-secondary); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; margin-top: 32px;">
@@ -338,20 +350,17 @@
         teamList: ["指导老师：林雨薇", "项目负责人：赵天宇", "算法支持：刘一诺", "人因测试：李思彤"]
       },
       "5": {
-        name: "腔镜手术机器人系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "王梓轩、张若晨",
-        intro: "面向腹腔微创手术的主从式机器人操作平台，聚焦医生操控端的力反馈体验与手术安全设计，是与云栖机器人联合研发的代表性成果。",
-        background: "微创手术对医生的操作精度与手感经验要求极高，传统腔镜器械存在“触觉缺失、操作疲劳、学习曲线长”三大痛点。与云栖机器人的联合实验室项目聚焦于操控端体验的人因优化。",
-        concept: "以“把手感还给医生”为设计目标，通过主端力反馈操控器还原组织触感，配合可调节的操控姿态与自适应操作系统降低长时间手术疲劳；整体设计遵循医疗器械的人因工程规范。",
-        results: ["完成主端操控器三代迭代", "完成 40 例模拟手术操作实验", "发表核心期刊论文 1 篇", "校企联合实验室年度重点项目"],
-        teamList: ["指导老师：陈明远", "项目负责人：王梓轩", "控制系统：张若晨", "造型设计：周诗涵"]
+        name: "无人机选种 AI 系统", category: "工作室项目", year: "2024年", type: "智慧农业 / 服务设计",
+        intro: "利用无人机低空遥感采集农田作物数据，通过 AI 表型识别快速筛选具有优良性状（高产、抗病等）的植株，帮助育种团队大幅提升选种效率与精准度。",
+        background: "无人机技术正从基础植保向智能化、多功能化跃迁，新一代机型深度融合环境感知、自主协同与高精度传感能力，实现空天地一体化的作物表型解析；AI 技术则推动农业决策范式变革，通过智能育种平台压缩传统育种周期，并依托大模型构建数字底座，贯穿种植规划、资源管理到采后履约全链条，重塑农业生产逻辑。",
+        results: ["与河北翼龙航空科技有限公司达成产教融合深度战略合作", "建设天津仁爱学院无人机全资质教育基地", "提供 CAAC 无人机驾驶执照认证，扩大学生就业池", "项目经验与真实案例融入《硬件交互设计》《服务设计》等课程"],
+        partner: "河北翼龙航空科技有限公司 · 天津仁爱学院"
       },
       "6": {
-        name: "AI辅助产品设计工具", category: "工作室项目", year: "2024年", type: "工作室自研项目", mentor: "林雨薇", team: "刘一诺、赵天宇",
-        intro: "基于生成式 AI 的概念草图与方案发散辅助系统，将 AI 融入设计前期工作流，帮助设计师更快地“想得更多、看得更远”。",
-        background: "生成式 AI 正在重塑设计工作流，但通用工具缺乏对产品设计场景的针对性：概念发散难以控制、风格难以延续、结果难以评估。工作室基于三年教学与项目经验，探索面向产品设计的 AI 辅助范式。",
-        concept: "以“设计师的灵感织机”为隐喻，构建“文字—草图—渲染”三级生成链路，内置产品造型语言约束与评估反馈模块；AI 不替代设计师决策，而是提供可控的发散与跳变，让灵感像织物一样在指尖流转。",
-        results: ["完成工具内测版并接入工作室教学", "覆盖 3 门课程、60 余名学生使用", "获省级教学创新成果", "形成 3 份设计范式研究报告"],
-        teamList: ["指导老师：林雨薇", "产品负责人：刘一诺", "交互开发：赵天宇", "内测组织：李思彤"]
+        name: "WonderWash 智能洗衣归集方案", category: "工作室项目", year: "2024年", type: "服务设计",
+        intro: "为新加坡最大自助洗衣公司 WonderWash 设计的全系智能洗衣设备归集与支付方案，实现“扫码即洗、自动结算”的便捷体验。",
+        results: ["与新加坡 WonderWash 达成合作意向", "为全系智能洗衣设备定制归集方案", "长期稳定合作，持续为门店及其加盟商提供低成本改造方案", "学生设计方案直接商业转化"],
+        partner: "新加坡 WonderWash"
       },
       "7": {
         name: "格致 —— 模块化校园家具设计", category: "毕设作品", year: "2023年", type: "产品设计", mentor: "郑凯文", team: "周诗涵",
@@ -370,12 +379,15 @@
         teamList: ["指导老师：林雨薇", "项目负责人：刘一诺", "视觉算法：赵天宇", "用户共创：李思彤"]
       },
       "9": {
-        name: "全屋智能中控系统", category: "工作室项目", year: "2024年", type: "产学研合作项目", mentor: "陈明远", team: "吴沛霖、张若晨",
-        intro: "统一控制与多场景联动的家居中枢产品设计，让照明、温控、安防等子系统以“人”为中心协同运转。",
-        background: "全屋智能设备数量激增，但多品牌割裂、操作分散、场景联动僵硬，用户往往需要打开五六个 App 才能完成一次“回家模式”。合作企业希望以一台家庭中枢重新整合全屋体验。",
-        concept: "以“懂你而不打扰你”为设计原则：中控通过无感学习家庭作息自动生成场景建议，重要信息通过环境光与轻触反馈温和传递；同时保留物理旋钮与按键，让老人与孩子也能零门槛使用。",
-        results: ["完成产品定义与造型设计", "完成场景引擎与联调", "完成三代样机与家庭实测", "获企业年度创新产品提名"],
-        teamList: ["指导老师：陈明远", "项目负责人：吴沛霖", "系统架构：张若晨", "用户测试：周诗涵"]
+        name: "输尿管软镜手术机器人系统", category: "工作室项目", year: "2024年", type: "医疗机器人",
+        intro: "面向泌尿外科的输尿管软镜手术机器人系统，让医生坐在主控台前，用一双更稳、更准的手完成软镜操作。",
+        results: ["获 2024 手术机器人挑战赛最佳设计类冠军（妙手）", "参与国家重点研发计划《多孔腔镜手术机器人检测方法与安全性评价》项目（编号 2017YFC0110404）", "获中国好设计华北赛区一等奖"],
+        related: "后装-放射治疗系统相关研究"
+      },
+      "10": {
+        name: "面向HTO骨科手术机器人的全流程VR系统设计", category: "工作室项目", year: "2024年", type: "医疗VR",
+        intro: "基于 ICIDO 与 HoloLens 虚拟现实技术的 HTO 骨科手术机器人虚拟手术培训平台，用 VR 沉浸式三维可视化与多方案并行预演，帮骨科医生在术前直观对比截骨方案、科学决策。",
+        features: ["端机械臂干涉碰撞警示", "截骨手术术前规划", "骨医学影像三维重建", "截骨手术术中操作仿真", "斥力引力的力反馈", "实时捕捉操作者数字人姿态信息", "人机舒适性分析研究"]
       }
     };
 
@@ -389,14 +401,86 @@
       document.getElementById('projName').textContent = data.name;
       document.getElementById('projCategory').textContent = data.category;
       document.getElementById('projIntro').textContent = data.intro;
-      document.getElementById('projYear').textContent = data.year;
-      document.getElementById('projType').textContent = data.type;
-      document.getElementById('projMentor').textContent = data.mentor;
-      document.getElementById('projTeam').textContent = data.team;
-      document.getElementById('projBackground').textContent = data.background;
-      document.getElementById('projConcept').textContent = data.concept;
-      document.getElementById('projResults').innerHTML = data.results.map(r => '<div class="detail-list-item">' + r + '</div>').join('');
-      document.getElementById('projTeamList').innerHTML = data.teamList.map(t => '<div class="detail-list-item">' + t + '</div>').join('');
+
+      // Meta 信息：有就显示，没有就隐藏
+      toggleMeta('metaYear', 'projYear', data.year);
+      toggleMeta('metaType', 'projType', data.type);
+      toggleMeta('metaMentor', 'projMentor', data.mentor);
+      toggleMeta('metaTeam', 'projTeam', data.team);
+      toggleMeta('metaPartner', 'projPartner', data.partner);
+
+      // 设计背景
+      toggleSection('sectionBackground', data.background, function() {
+        document.getElementById('projBackground').textContent = data.background;
+      });
+
+      // 设计思路
+      toggleSection('sectionConcept', data.concept, function() {
+        document.getElementById('projConcept').textContent = data.concept;
+      });
+
+      // 功能特点
+      toggleSection('sectionFeatures', data.features && data.features.length, function() {
+        document.getElementById('projFeatures').innerHTML = data.features.map(function(f) {
+          return '<div class="detail-list-item">' + f + '</div>';
+        }).join('');
+      });
+
+      // 图片占位（没有真实图片就隐藏）
+      document.getElementById('sectionGallery').style.display = 'none';
+      document.getElementById('sectionMoreImages').style.display = 'none';
+
+      // 成果与团队
+      var hasResults = data.results && data.results.length;
+      var hasTeam = data.teamList && data.teamList.length;
+      if (hasResults || hasTeam) {
+        document.getElementById('sectionResults').style.display = 'block';
+        if (hasResults) {
+          document.getElementById('resultsTitle').style.display = 'block';
+          document.getElementById('projResults').style.display = 'block';
+          document.getElementById('projResults').innerHTML = data.results.map(function(r) {
+            return '<div class="detail-list-item">' + r + '</div>';
+          }).join('');
+        } else {
+          document.getElementById('resultsTitle').style.display = 'none';
+          document.getElementById('projResults').style.display = 'none';
+        }
+        if (hasTeam) {
+          document.getElementById('teamTitle').style.display = 'block';
+          document.getElementById('projTeamList').style.display = 'block';
+          document.getElementById('projTeamList').innerHTML = data.teamList.map(function(t) {
+            return '<div class="detail-list-item">' + t + '</div>';
+          }).join('');
+        } else {
+          document.getElementById('teamTitle').style.display = 'none';
+          document.getElementById('projTeamList').style.display = 'none';
+        }
+      } else {
+        document.getElementById('sectionResults').style.display = 'none';
+      }
+
+      // 视频（默认隐藏）
+      document.getElementById('sectionVideo').style.display = 'none';
+    }
+
+    function toggleMeta(containerId, valueId, value) {
+      var container = document.getElementById(containerId);
+      if (value) {
+        container.style.display = 'block';
+        document.getElementById(valueId).textContent = value;
+      } else {
+        container.style.display = 'none';
+      }
+    }
+
+    function toggleSection(sectionId, condition, fillCallback) {
+      var section = document.getElementById(sectionId);
+      if (condition) {
+        section.style.display = 'block';
+        if (fillCallback) fillCallback();
+      } else {
+        section.style.display = 'none';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', function () {
