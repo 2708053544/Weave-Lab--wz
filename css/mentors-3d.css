@@ -186,7 +186,7 @@ section.m3-section .m3-counter { top: 96px; }
 .m3-info {
   position: absolute;
   left: 6vw;
-  top: 50%;
+  top: 38%;
   transform: translateY(-50%);
   z-index: 20;
   max-width: 34vw;
@@ -504,7 +504,7 @@ section.m3-section .m3-counter { top: 96px; }
 /* ---------- 底部提示 ---------- */
 .m3-scroll-hint {
   position: absolute;
-  bottom: 26px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
