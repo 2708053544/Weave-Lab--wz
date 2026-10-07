@@ -556,6 +556,229 @@
     }
     .content-glow-wrap .section,
     .content-glow-wrap .footer { position: relative; z-index: 1; }
+
+    /* ========== 移动端适配修复 ========== */
+    @media (max-width: 900px) {
+      /* --- Hero 区域移动端优化 --- */
+      .hero-viewport {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      .hero-main {
+        padding: 20px 16px 100px;
+        justify-content: center;
+      }
+      .hero-copy {
+        max-width: 100%;
+      }
+      .badge {
+        margin-bottom: 16px;
+        padding: 7px 12px;
+        font-size: 11px;
+      }
+      .badge svg {
+        width: 14px;
+        height: 16px;
+      }
+      .hero-main h1 {
+        line-height: 1.15;
+      }
+      .lede {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .hero-actions {
+        margin-top: 20px;
+        gap: 8px;
+      }
+      .hero-actions .btn {
+        height: 44px;
+        padding: 0 16px;
+        font-size: 13px;
+      }
+      .hero-scroll-hint {
+        display: none;
+      }
+
+      /* --- 底部导航移动端优化 --- */
+      .bottom-dock {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding: 0 12px calc(12px + env(safe-area-inset-bottom)) !important;
+        width: 100% !important;
+        min-height: auto !important;
+      }
+      .dock-nav-slot {
+        width: 100% !important;
+        padding: 4px !important;
+        border-radius: 14px !important;
+      }
+      .dock-nav-slot .nav-glass {
+        width: 100% !important;
+        justify-content: space-around !important;
+        gap: 2px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .dock-nav-slot .nav-glass .nav-link {
+        flex: 1 1 auto !important;
+        min-width: auto !important;
+        height: 40px !important;
+        padding: 0 10px !important;
+        font-size: 12px !important;
+        border-radius: 10px !important;
+      }
+      .dock-nav-slot .nav-glass .nav-link .nav-icon {
+        display: none !important;
+      }
+      .dock-nav-slot .nav-arrow {
+        display: none !important;
+      }
+
+      /* --- 顶部导航栏移动端优化 --- */
+      .navbar .nav-menu {
+        display: none !important;
+      }
+      .navbar .nav-toggle {
+        display: flex !important;
+      }
+
+      /* --- 关于/研究方向移动端优化 --- */
+      .about-research-section {
+        padding: 60px 0 !important;
+      }
+      .about-research-grid {
+        gap: 40px !important;
+      }
+      .about-research-title {
+        font-size: 2rem !important;
+        margin: 16px 0 20px !important;
+      }
+      .about-research-text {
+        font-size: 14px !important;
+        line-height: 1.7 !important;
+        margin-bottom: 14px !important;
+      }
+      .section-label {
+        font-size: 11px !important;
+        letter-spacing: 0.2em !important;
+        margin-bottom: 12px !important;
+      }
+      .research-list-item {
+        gap: 16px !important;
+        padding: 16px 0 !important;
+      }
+      .research-list-num {
+        min-width: 28px !important;
+        font-size: 12px !important;
+      }
+      .research-list-name {
+        font-size: 15px !important;
+      }
+      .research-list-desc {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+      }
+      .research-list-arrow {
+        font-size: 14px !important;
+      }
+
+      /* --- CTA 区域移动端优化 --- */
+      .cta-banner {
+        padding: 60px 0 !important;
+      }
+      .cta-content {
+        text-align: center !important;
+      }
+      .cta-content h2 {
+        font-size: 1.75rem !important;
+        margin-bottom: 16px !important;
+        line-height: 1.3 !important;
+      }
+      .cta-content p {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 24px !important;
+      }
+      .cta-content .btn {
+        width: 100% !important;
+        max-width: 280px !important;
+      }
+
+      /* --- Footer 移动端优化 --- */
+      .footer {
+        padding: 50px 0 30px !important;
+      }
+      .footer-grid {
+        gap: 32px !important;
+        margin-bottom: 40px !important;
+      }
+      .footer-logo {
+        font-size: 1.1rem !important;
+      }
+      .footer-logo-mark-img {
+        height: 24px !important;
+      }
+      .footer-tagline {
+        font-size: 13px !important;
+      }
+      .footer-column h4 {
+        font-size: 11px !important;
+        margin-bottom: 16px !important;
+      }
+      .footer-links {
+        gap: 10px !important;
+      }
+      .footer-links a {
+        font-size: 13px !important;
+      }
+      .footer-bottom {
+        flex-direction: column !important;
+        gap: 16px !important;
+        text-align: center !important;
+        padding-top: 24px !important;
+        font-size: 12px !important;
+      }
+
+      /* --- 容器内边距移动端优化 --- */
+      .container {
+        padding: 0 20px !important;
+      }
+    }
+
+    /* --- 小屏幕（480px以下）额外优化 --- */
+    @media (max-width: 480px) {
+      .hero-main h1 {
+        font-size: 30px !important;
+      }
+      .badge {
+        font-size: 10px;
+        padding: 6px 10px;
+      }
+      .dock-nav-slot .nav-glass .nav-link {
+        font-size: 11px !important;
+        padding: 0 6px !important;
+        height: 38px !important;
+      }
+      .about-research-section {
+        padding: 48px 0 !important;
+      }
+      .about-research-title {
+        font-size: 1.75rem !important;
+      }
+      .cta-banner {
+        padding: 48px 0 !important;
+      }
+      .cta-content h2 {
+        font-size: 1.5rem !important;
+      }
+      .container {
+        padding: 0 16px !important;
+      }
+    }
   </style>
   <link rel="stylesheet" href="assets/opening.css?v=9">
   <link rel="stylesheet" href="assets/nav-glass.css">

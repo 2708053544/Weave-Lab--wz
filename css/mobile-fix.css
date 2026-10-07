@@ -1,0 +1,591 @@
+/* ============================================
+   Weave Lab - 移动端适配修复
+   仅在 900px 以下生效，不影响电脑端
+   ============================================ */
+
+/* ---------- 全局移动端调整 ---------- */
+@media (max-width: 900px) {
+  :root {
+    --section-padding: 60px 0 !important;
+    --section-padding-mobile: 48px 0 !important;
+    --nav-height: 60px !important;
+  }
+
+  html {
+    font-size: 15px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .container,
+  .container-narrow,
+  .nav-container {
+    padding: 0 20px !important;
+  }
+
+  .section {
+    padding: var(--section-padding-mobile) !important;
+  }
+
+  .section-header {
+    margin-bottom: 40px !important;
+  }
+
+  .section-title {
+    font-size: 1.75rem !important;
+  }
+
+  .section-label {
+    font-size: 11px !important;
+    letter-spacing: 0.2em !important;
+    margin-bottom: 12px !important;
+  }
+
+  .section-subtitle {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* 按钮移动端优化 */
+  .btn {
+    padding: 12px 24px !important;
+    font-size: 13px !important;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  .container-narrow,
+  .nav-container {
+    padding: 0 16px !important;
+  }
+
+  .section {
+    padding: 40px 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ---------- 导航栏移动端优化 ---------- */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 !important;
+  }
+
+  .navbar .nav-menu {
+    display: none !important;
+  }
+
+  .navbar .nav-toggle {
+    display: flex !important;
+  }
+
+  .navbar .theme-toggle {
+    margin-right: 8px !important;
+  }
+
+  .nav-logo span {
+    font-size: 15px !important;
+  }
+
+  .nav-logo-mark-img {
+    height: 18px !important;
+  }
+}
+
+/* ---------- 页面头部 Hero 移动端优化 ---------- */
+@media (max-width: 900px) {
+  .page-header.intro-hero {
+    min-height: 80vh !important;
+    min-height: 80dvh !important;
+  }
+
+  .page-header h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .page-header p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header.intro-hero {
+    min-height: 70vh !important;
+    min-height: 70dvh !important;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* ---------- 关于页面移动端优化 ---------- */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .about-text-block {
+    position: static !important;
+  }
+
+  .about-text h2 {
+    font-size: 1.75rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .about-text p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .stat-item {
+    padding: 20px !important;
+  }
+
+  .stat-number {
+    font-size: 2rem !important;
+  }
+
+  .stat-label {
+    font-size: 12px !important;
+  }
+
+  /* 研究领域 */
+  .research-areas {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .research-card {
+    padding: 20px !important;
+  }
+
+  .research-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .research-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* 导师团队 */
+  .mentor-section {
+    padding: 60px 0 !important;
+  }
+
+  .mentor-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .mentor-card {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+
+  .mentor-card-image {
+    width: 100% !important;
+    aspect-ratio: 1 !important;
+  }
+
+  .mentor-card-content {
+    padding: 20px !important;
+    text-align: center !important;
+  }
+
+  .mentor-card-name {
+    font-size: 1.25rem !important;
+  }
+
+  .mentor-card-title {
+    font-size: 13px !important;
+  }
+
+  .mentor-card-desc {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* 学生团队 */
+  .student-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .student-card {
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  .student-card-info {
+    padding: 12px !important;
+  }
+
+  .student-card-name {
+    font-size: 14px !important;
+  }
+
+  .student-card-role {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---------- 项目/作品页面移动端优化 ---------- */
+@media (max-width: 900px) {
+  .project-filter {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .filter-btn {
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .project-card {
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .project-card-content {
+    padding: 16px !important;
+  }
+
+  .project-card-title {
+    font-size: 15px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .project-card-category {
+    font-size: 11px !important;
+  }
+
+  /* 项目详情页 */
+  .detail-hero {
+    padding: 80px 0 40px !important;
+  }
+
+  .detail-hero h1 {
+    font-size: 1.75rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .detail-hero p {
+    font-size: 14px !important;
+  }
+
+  .detail-hero-content {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .detail-meta {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .detail-section {
+    padding: 40px 0 !important;
+  }
+
+  .detail-section h2 {
+    font-size: 1.4rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .detail-section p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .detail-gallery {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* ---------- 活动页面移动端优化 ---------- */
+@media (max-width: 900px) {
+  .activity-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .activity-card {
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .activity-card-content {
+    padding: 16px !important;
+  }
+
+  .activity-card-title {
+    font-size: 15px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .activity-card-date {
+    font-size: 12px !important;
+  }
+
+  /* 合作伙伴 */
+  .partner-section {
+    padding: 60px 0 !important;
+  }
+
+  .partner-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .partner-card {
+    padding: 20px !important;
+    aspect-ratio: 3 / 2 !important;
+  }
+
+  .partner-logo {
+    max-width: 80px !important;
+    max-height: 40px !important;
+  }
+
+  .partner-name {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---------- 联系页面移动端优化 ---------- */
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 60px 0 !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .contact-info {
+    padding: 24px !important;
+  }
+
+  .contact-info h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .contact-item {
+    gap: 12px !important;
+    padding: 12px 0 !important;
+  }
+
+  .contact-item-icon {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 14px !important;
+  }
+
+  .contact-item-label {
+    font-size: 11px !important;
+  }
+
+  .contact-item-value {
+    font-size: 14px !important;
+  }
+
+  .contact-form-wrapper {
+    padding: 24px !important;
+  }
+
+  .contact-form h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .form-group {
+    margin-bottom: 16px !important;
+  }
+
+  .form-label {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+
+  .form-submit {
+    width: 100% !important;
+  }
+}
+
+/* ---------- Footer 移动端优化 ---------- */
+@media (max-width: 900px) {
+  .footer {
+    padding: 50px 0 30px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    margin-bottom: 40px !important;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem !important;
+    gap: 10px !important;
+  }
+
+  .footer-logo-mark-img {
+    height: 24px !important;
+  }
+
+  .footer-tagline {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+  }
+
+  .footer-column h4 {
+    font-size: 11px !important;
+    margin-bottom: 16px !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .footer-links {
+    gap: 10px !important;
+  }
+
+  .footer-links a {
+    font-size: 13px !important;
+  }
+
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 16px !important;
+    text-align: center !important;
+    padding-top: 24px !important;
+    font-size: 12px !important;
+  }
+
+  .footer-social {
+    gap: 20px !important;
+    justify-content: center !important;
+  }
+}
+
+/* ---------- 获奖展示移动端优化 ---------- */
+@media (max-width: 900px) {
+  .awards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .award-card {
+    padding: 20px !important;
+  }
+
+  .award-card h3 {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .award-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* ---------- 滚动卡片组件移动端优化 ---------- */
+@media (max-width: 900px) {
+  .scroll-container-wrapper {
+    margin: 0 -20px !important;
+    padding: 0 20px !important;
+  }
+
+  .scroll-card {
+    width: 260px !important;
+    flex: 0 0 260px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-container-wrapper {
+    margin: 0 -16px !important;
+    padding: 0 16px !important;
+  }
+
+  .scroll-card {
+    width: 240px !important;
+    flex: 0 0 240px !important;
+  }
+}
+
+/* ---------- 入场动画移动端优化（减少位移） ---------- */
+@media (max-width: 900px) {
+  .fade-in {
+    transform: translateY(20px) !important;
+  }
+
+  .fade-in.visible {
+    transform: translateY(0) !important;
+  }
+}
+
+/* ---------- 防止移动端横向滚动 ---------- */
+@media (max-width: 900px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
