@@ -10,12 +10,18 @@
     layer.remove();
     return;
   }
-  // 同一次会话内从导航点回首页不播动画，刷新或重新打开网页才播
-  if (sessionStorage.getItem('weave_opening_seen')) {
-    layer.remove();
-    return;
+  // 从本站其他页面点击导航回首页 → 不播动画
+  // 直接打开 / 刷新首页 → 播动画
+  var referrer = document.referrer;
+  if (referrer) {
+    try {
+      var refHost = new URL(referrer).hostname;
+      if (refHost === location.hostname) {
+        layer.remove();
+        return;
+      }
+    } catch (e) {}
   }
-  sessionStorage.setItem('weave_opening_seen', '1');
 
   var ctx = canvas.getContext('2d');
   if (!ctx) { layer.remove(); return; }
