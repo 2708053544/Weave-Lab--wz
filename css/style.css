@@ -274,43 +274,20 @@ button {
 
 .theme-toggle-icon {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /* Dark mode: show crescent moon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
 }
 
-.theme-toggle-icon::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  transition: all 0.4s ease;
-}
-
-/* Dark mode (default): show crescent moon = currently dark */
-.theme-toggle-icon::after {
-  content: '';
-  position: absolute;
-  top: -1px; left: 5px;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: var(--bg-primary);
-  transition: all 0.4s ease;
-}
-
-/* Light mode: show full sun = currently light */
-body.theme-light .theme-toggle-icon::after {
-  left: 16px;
-  width: 0;
-  height: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-body.theme-light .theme-toggle-icon::before {
-  background: var(--text-primary);
+/* Light mode: show full sun */
+body.theme-light .theme-toggle-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='1' x2='12' y2='3'/%3E%3Cline x1='12' y1='21' x2='12' y2='23'/%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'/%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'/%3E%3Cline x1='1' y1='12' x2='3' y2='12'/%3E%3Cline x1='21' y1='12' x2='23' y2='12'/%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'/%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'/%3E%3C/svg%3E");
 }
 
 /* ---------- Typography ---------- */
