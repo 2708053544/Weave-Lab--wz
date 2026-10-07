@@ -408,8 +408,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: rgba(255,255,255,0.6);
-      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
       text-decoration: none;
       transition: color 0.3s ease;
     }
@@ -420,38 +420,38 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 2px;
+      gap: 4px;
     }
     .hero-scroll-hint-text small {
-      color: rgba(255,255,255,0.4);
-      font-size: 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
       letter-spacing: 0.15em;
     }
     .hero-scroll-hint-text strong {
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 15px;
+      font-weight: 500;
     }
     .hero-scroll-hint-icon {
-      width: 34px;
-      height: 34px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1.5px solid rgba(255,255,255,0.5);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
     }
     .hero-scroll-hint:hover .hero-scroll-hint-icon {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.8);
       transform: translateY(3px);
     }
     .hero-scroll-hint-icon svg {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       stroke: currentColor;
       fill: none;
-      stroke-width: 1.5;
+      stroke-width: 2;
     }
     /* Hero trail canvas - 只在首屏内显示 */
     .hero-trail-canvas {
@@ -983,7 +983,6 @@
       <p class="lede appear appear--soft" style="--d:.82s;animation-duration:1.25s">Weaving Creativity, Engineering Experience</p>
       <div class="hero-actions appear appear--btn" style="--d:1s">
         <a href="#about" class="btn btn-solid">了解实验室</a>
-        <a href="#works" class="btn btn-ghost">浏览项目</a>
       </div>
       <a class="hero-scroll-hint appear appear--soft" style="--d:1.2s" href="#about" aria-label="向下滚动，了解更多">
         <div class="hero-scroll-hint-text">
