@@ -10,12 +10,20 @@
     layer.remove();
     return;
   }
-  // 从本站其他页面点击导航回首页 → 不播动画
-  // 直接打开 / 刷新首页 → 播动画
-  var referrer = document.referrer;
-  if (referrer) {
+  // 逻辑：
+  //   刷新首页 → 播动画
+  //   从本站其他页面点回首页 → 不播动画
+  //   直接打开 / 从外部链接进来 → 播动画
+  var navType = 'navigate';
+  try {
+    var navEntry = performance.getEntriesByType('navigation')[0];
+    if (navEntry) navType = navEntry.type; // 'navigate' | 'reload' | 'back_forward' | 'prerender'
+  } catch (e) {}
+
+  // 只有正常导航（非刷新）且来源是本站其他页面时，才跳过动画
+  if (navType === 'navigate' && document.referrer) {
     try {
-      var refHost = new URL(referrer).hostname;
+      var refHost = new URL(document.referrer).hostname;
       if (refHost === location.hostname) {
         layer.remove();
         return;
