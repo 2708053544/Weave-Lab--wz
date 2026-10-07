@@ -565,15 +565,16 @@
         min-height: 100dvh;
       }
       .hero-main {
-        padding: 20px 16px 100px;
+        padding: 20px 16px 120px !important;
         justify-content: center;
       }
       .hero-copy {
         max-width: 100%;
+        padding-bottom: 0;
       }
       .badge {
-        margin-bottom: 16px;
-        padding: 7px 12px;
+        margin-bottom: 14px;
+        padding: 6px 12px;
         font-size: 11px;
       }
       .badge svg {
@@ -584,37 +585,39 @@
         line-height: 1.15;
       }
       .lede {
-        margin-top: 14px;
+        margin-top: 12px;
         font-size: 14px;
         line-height: 1.6;
       }
       .hero-actions {
-        margin-top: 20px;
+        margin-top: 18px;
         gap: 8px;
       }
       .hero-actions .btn {
-        height: 44px;
-        padding: 0 16px;
+        height: 42px;
+        padding: 0 14px;
         font-size: 13px;
       }
       .hero-scroll-hint {
-        display: none;
+        display: none !important;
       }
 
-      /* --- 底部导航移动端优化 --- */
+      /* --- 底部导航移动端优化（防止与内容重叠）--- */
       .bottom-dock {
         position: absolute !important;
         bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
-        padding: 0 12px calc(12px + env(safe-area-inset-bottom)) !important;
+        padding: 6px 10px calc(10px + env(safe-area-inset-bottom)) !important;
         width: 100% !important;
         min-height: auto !important;
+        z-index: 10 !important;
       }
       .dock-nav-slot {
         width: 100% !important;
         padding: 4px !important;
-        border-radius: 14px !important;
+        border-radius: 12px !important;
+        min-height: auto !important;
       }
       .dock-nav-slot .nav-glass {
         width: 100% !important;
@@ -622,14 +625,15 @@
         gap: 2px !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
+        min-height: auto !important;
       }
       .dock-nav-slot .nav-glass .nav-link {
         flex: 1 1 auto !important;
         min-width: auto !important;
-        height: 40px !important;
-        padding: 0 10px !important;
+        height: 38px !important;
+        padding: 0 8px !important;
         font-size: 12px !important;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
       }
       .dock-nav-slot .nav-glass .nav-link .nav-icon {
         display: none !important;
@@ -639,11 +643,19 @@
       }
 
       /* --- 顶部导航栏移动端优化 --- */
+      .navbar {
+        height: var(--nav-height, 56px) !important;
+        min-height: var(--nav-height, 56px) !important;
+      }
       .navbar .nav-menu {
         display: none !important;
       }
       .navbar .nav-toggle {
         display: flex !important;
+      }
+      /* 内容区域增加顶部内边距，防止被固定导航栏遮住 */
+      .about-research-section {
+        padding-top: 70px !important;
       }
 
       /* --- 关于/研究方向移动端优化 --- */
@@ -651,29 +663,29 @@
         padding: 60px 0 !important;
       }
       .about-research-grid {
-        gap: 40px !important;
+        gap: 36px !important;
       }
       .about-research-title {
-        font-size: 2rem !important;
-        margin: 16px 0 20px !important;
+        font-size: 1.75rem !important;
+        margin: 12px 0 16px !important;
       }
       .about-research-text {
         font-size: 14px !important;
         line-height: 1.7 !important;
-        margin-bottom: 14px !important;
+        margin-bottom: 12px !important;
       }
       .section-label {
         font-size: 11px !important;
         letter-spacing: 0.2em !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 10px !important;
       }
       .research-list-item {
-        gap: 16px !important;
-        padding: 16px 0 !important;
+        gap: 14px !important;
+        padding: 14px 0 !important;
       }
       .research-list-num {
-        min-width: 28px !important;
-        font-size: 12px !important;
+        min-width: 26px !important;
+        font-size: 11px !important;
       }
       .research-list-name {
         font-size: 15px !important;
@@ -688,59 +700,63 @@
 
       /* --- CTA 区域移动端优化 --- */
       .cta-banner {
-        padding: 60px 0 !important;
+        padding: 50px 0 !important;
       }
       .cta-content {
         text-align: center !important;
       }
       .cta-content h2 {
-        font-size: 1.75rem !important;
-        margin-bottom: 16px !important;
+        font-size: 1.5rem !important;
+        margin-bottom: 14px !important;
         line-height: 1.3 !important;
       }
       .cta-content p {
         font-size: 14px !important;
         line-height: 1.6 !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 22px !important;
       }
       .cta-content .btn {
         width: 100% !important;
-        max-width: 280px !important;
+        max-width: 260px !important;
+        height: 44px !important;
       }
 
       /* --- Footer 移动端优化 --- */
       .footer {
-        padding: 50px 0 30px !important;
+        padding: 40px 0 24px !important;
       }
       .footer-grid {
-        gap: 32px !important;
-        margin-bottom: 40px !important;
+        gap: 28px !important;
+        margin-bottom: 32px !important;
       }
       .footer-logo {
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
+        gap: 8px !important;
       }
       .footer-logo-mark-img {
-        height: 24px !important;
+        height: 22px !important;
       }
       .footer-tagline {
         font-size: 13px !important;
+        line-height: 1.6 !important;
       }
       .footer-column h4 {
         font-size: 11px !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 14px !important;
+        letter-spacing: 0.12em !important;
       }
       .footer-links {
-        gap: 10px !important;
+        gap: 8px !important;
       }
       .footer-links a {
         font-size: 13px !important;
       }
       .footer-bottom {
         flex-direction: column !important;
-        gap: 16px !important;
+        gap: 12px !important;
         text-align: center !important;
-        padding-top: 24px !important;
-        font-size: 12px !important;
+        padding-top: 20px !important;
+        font-size: 11px !important;
       }
 
       /* --- 容器内边距移动端优化 --- */
@@ -751,32 +767,67 @@
 
     /* --- 小屏幕（480px以下）额外优化 --- */
     @media (max-width: 480px) {
+      .hero-main {
+        padding: 16px 14px 110px !important;
+      }
       .hero-main h1 {
-        font-size: 30px !important;
+        font-size: 28px !important;
       }
       .badge {
         font-size: 10px;
-        padding: 6px 10px;
+        padding: 5px 10px;
+        margin-bottom: 12px;
+      }
+      .lede {
+        font-size: 13px !important;
+        margin-top: 10px !important;
+      }
+      .hero-actions {
+        margin-top: 16px !important;
+      }
+      .hero-actions .btn {
+        height: 40px !important;
+        font-size: 12px !important;
+        padding: 0 12px !important;
       }
       .dock-nav-slot .nav-glass .nav-link {
         font-size: 11px !important;
         padding: 0 6px !important;
-        height: 38px !important;
+        height: 36px !important;
+      }
+      .bottom-dock {
+        padding: 4px 8px calc(8px + env(safe-area-inset-bottom)) !important;
       }
       .about-research-section {
         padding: 48px 0 !important;
       }
       .about-research-title {
-        font-size: 1.75rem !important;
+        font-size: 1.5rem !important;
+      }
+      .about-research-text {
+        font-size: 13px !important;
       }
       .cta-banner {
-        padding: 48px 0 !important;
+        padding: 40px 0 !important;
       }
       .cta-content h2 {
-        font-size: 1.5rem !important;
+        font-size: 1.35rem !important;
+      }
+      .cta-content p {
+        font-size: 13px !important;
       }
       .container {
         padding: 0 16px !important;
+      }
+      .research-list-item {
+        padding: 12px 0 !important;
+        gap: 12px !important;
+      }
+      .research-list-name {
+        font-size: 14px !important;
+      }
+      .research-list-desc {
+        font-size: 11px !important;
       }
     }
   </style>
