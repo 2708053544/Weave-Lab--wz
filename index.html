@@ -405,17 +405,24 @@
     /* 向下滚动 - 在文字正下方 */
     .hero-scroll-hint {
       margin-top: 60px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
+      padding: 10px 18px 10px 22px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 50px;
       color: #ffffff;
       font-size: 15px;
       text-decoration: none;
-      transition: transform 0.3s ease;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, background 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .hero-scroll-hint:hover {
       transform: translateY(3px);
+      background: rgba(0, 0, 0, 0.7);
     }
     .hero-scroll-hint-text {
       display: flex;
@@ -424,35 +431,31 @@
       gap: 4px;
     }
     .hero-scroll-hint-text small {
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       font-size: 12px;
       letter-spacing: 0.15em;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }
     .hero-scroll-hint-text strong {
       font-size: 16px;
       font-weight: 600;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      color: #fff;
     }
     .hero-scroll-hint-icon {
-      width: 44px;
-      height: 44px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.9);
-      background: rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .hero-scroll-hint:hover .hero-scroll-hint-icon {
-      background: rgba(255,255,255,0.2);
-      border-color: #fff;
+      background: rgba(255,255,255,0.25);
     }
     .hero-scroll-hint-icon svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       stroke: #fff;
       fill: none;
       stroke-width: 2.5;
