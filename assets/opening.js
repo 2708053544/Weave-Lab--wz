@@ -14,14 +14,23 @@
   //   刷新首页 → 播动画
   //   从本站其他页面点回首页 → 不播动画
   //   直接打开 / 从外部链接进来 → 播动画
-  var navType = 'navigate';
+  var isReload = false;
   try {
+    // 优先用新 API
     var navEntry = performance.getEntriesByType('navigation')[0];
-    if (navEntry) navType = navEntry.type; // 'navigate' | 'reload' | 'back_forward' | 'prerender'
+    if (navEntry) {
+      isReload = navEntry.type === 'reload' || navEntry.type === 'back_forward';
+    } else if (performance.navigation) {
+      // 兼容旧 API
+      isReload = performance.navigation.type === 1 || performance.navigation.type === 2;
+    }
   } catch (e) {}
 
-  // 只有正常导航（非刷新）且来源是本站其他页面时，才跳过动画
-  if (navType === 'navigate' && document.referrer) {
+  // 刷新/前进后退 → 一定播动画，跳过后续判断
+  if (isReload) {
+    // 继续往下执行，播放动画
+  } else if (document.referrer) {
+    // 正常导航 + 来源是本站其他页面 → 不播动画
     try {
       var refHost = new URL(document.referrer).hostname;
       if (refHost === location.hostname) {
