@@ -1512,13 +1512,6 @@ h4 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-left: 10%;
-}
-
-.contact-info .section-header {
-  align-self: flex-start;
-  text-align: left;
-  margin-bottom: 36px;
 }
 
 .contact-info h2 {
