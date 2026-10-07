@@ -35,16 +35,17 @@
       content:'';
       position:absolute;
       left:0;right:0;bottom:-1px;
-      height:50vh;
+      height:70vh;
       z-index:5;
       pointer-events:none;
       background:linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(5, 5, 16, 0.3) 30%,
-        rgba(7, 5, 17, 0.6) 55%,
-        rgba(9, 7, 19, 0.85) 75%,
-        #0a0814 100%
+        rgba(5, 5, 16, 0.18) 25%,
+        rgba(7, 5, 17, 0.42) 50%,
+        rgba(9, 7, 19, 0.7) 75%,
+        rgba(10, 8, 18, 0.9) 90%,
+        #0a0812 100%
       );
     }
     /* 内容区顶部柔和衔接 — 从深到浅自然过渡 */
@@ -52,16 +53,16 @@
       content:'';
       position:absolute;
       left:0;right:0;top:0;
-      height:60vh;
+      height:80vh;
       z-index:0;
       pointer-events:none;
       background:linear-gradient(
         to bottom,
-        #0a0814 0%,
-        #0a0814 20%,
-        rgba(10, 8, 20, 0.92) 38%,
-        rgba(10, 8, 20, 0.7) 55%,
-        rgba(10, 8, 20, 0.3) 75%,
+        #0a0812 0%,
+        #0a0812 15%,
+        rgba(10, 8, 18, 0.9) 30%,
+        rgba(10, 8, 20, 0.7) 50%,
+        rgba(10, 8, 20, 0.35) 72%,
         transparent 100%
       );
     }
@@ -72,18 +73,18 @@
     .btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;height:var(--btn-h);padding:0 16px;border-radius:6px;font-size:var(--btn);font-weight:500;letter-spacing:-.02em;line-height:1;white-space:nowrap;cursor:pointer;transition:background .35s,border .35s,box-shadow .35s,color .35s,filter .35s}
     .btn:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.45) 48%,transparent 76%);transform:translateX(-130%);transition:transform .65s}
     .btn:hover:after{transform:translateX(130%)}
-    .btn-solid{background:linear-gradient(180deg,#f5f7ff,#e2e8ff 48%,#bfc7ee);color:#111225;border:2px solid #ffffff;box-shadow:inset 0 1px rgba(255,255,255,.95)}
+    .btn-solid{background:linear-gradient(180deg,rgba(245,247,255,.75),rgba(226,232,255,.65) 48%,rgba(191,199,238,.6));color:rgba(17,18,37,.85);border:2px solid rgba(255,255,255,.45);box-shadow:inset 0 1px rgba(255,255,255,.6)}
     .btn-solid:hover{background:linear-gradient(180deg,#fff,#edf1ff 42%,#ccd5ff);border-color:#f2f6ff;box-shadow:inset 0 1px #fff,0 0 26px rgba(170,188,255,.42),0 8px 18px rgba(169,161,255,.15)}
     .btn-ghost{background:linear-gradient(135deg,rgba(150,170,255,.14),rgba(0,0,25,.5) 46%,rgba(120,95,200,.15));color:#fff;border:1px solid rgba(172,175,243,.58);box-shadow:inset 0 1px rgba(255,255,255,.12);backdrop-filter:blur(16px)}
     .btn-ghost:hover{background:linear-gradient(135deg,rgba(180,200,255,.24),rgba(0,0,30,.4) 48%,rgba(173,125,255,.2));border-color:rgba(216,215,255,.85);box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 24px rgba(145,144,255,.3)}
     .hero-main{display:flex;align-items:flex-end;justify-content:center;padding:8px 24px var(--hero-gap);min-height:0}
     .hero-copy{position:relative;z-index:101;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:var(--copy-max);width:100%}
-    .badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:9px 15px;border:0;border-radius:5px;background:linear-gradient(90deg,#4d5296,#292354 52%,#100c27);color:#f2f2ff;font-size:var(--badge);font-weight:400;letter-spacing:-.01em;box-shadow:inset 0 1px rgba(200,208,255,.25),0 0 26px rgba(94,81,180,.13)}
+    .badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:9px 15px;border:0;border-radius:5px;background:linear-gradient(90deg,rgba(77,82,150,.6),rgba(41,35,84,.5) 52%,rgba(16,12,39,.55));color:rgba(242,242,255,.75);font-size:var(--badge);font-weight:400;letter-spacing:-.01em;box-shadow:inset 0 1px rgba(200,208,255,.15),0 0 26px rgba(94,81,180,.08)}
     .badge svg{width:18px;height:20px;fill:#fff;filter:drop-shadow(0 0 5px rgba(153,173,255,.6))}
-    .hero-main h1{font-size:var(--h1);font-weight:500;letter-spacing:-.045em;line-height:1.12;color:#fff}
+    .hero-main h1{font-size:var(--h1);font-weight:500;letter-spacing:-.045em;line-height:1.12;color:rgba(220,224,255,.82)}
     .headline-line{display:block;overflow:hidden;padding:.06em .15em .14em}
-    .hero-main h1 em{font-family:'Instrument Serif','Times New Roman',Times,serif;font-weight:400;font-size:1.08em;letter-spacing:-.03em;color:#aaa0f9}
-    .lede{max-width:var(--lede-max);margin-top:18px;color:#aeb3e2;font-size:var(--lede);font-weight:400;line-height:1.55;letter-spacing:-.015em}
+    .hero-main h1 em{font-family:'Instrument Serif','Times New Roman',Times,serif;font-weight:400;font-size:1.08em;letter-spacing:-.03em;color:rgba(170,160,249,.72)}
+    .lede{max-width:var(--lede-max);margin-top:18px;color:rgba(174,179,226,.7);font-size:var(--lede);font-weight:400;line-height:1.55;letter-spacing:-.015em}
     .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
     .hero-actions .btn{height:var(--hero-btn-h);padding:0 18px}
     .stats{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--stats-x) var(--stats-y);padding-bottom:max(var(--stats-y),env(safe-area-inset-bottom));color:#dfe7ff}
@@ -408,7 +409,7 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      color: #ffffff;
+      color: rgba(255,255,255,.5);
       font-size: 15px;
       text-decoration: none;
       transition: transform 0.3s ease;
@@ -425,20 +426,20 @@
       gap: 4px;
     }
     .hero-scroll-hint-text small {
-      color: #ffffff;
+      color: rgba(255,255,255,.45);
       font-size: 11px;
       letter-spacing: 0.15em;
     }
     .hero-scroll-hint-text strong {
       font-size: 15px;
       font-weight: 500;
-      color: #ffffff;
+      color: rgba(255,255,255,.55);
     }
     .hero-scroll-hint-icon {
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      border: 2px solid #ffffff;
+      border: 2px solid rgba(255,255,255,.35);
       background: transparent;
       display: flex;
       align-items: center;
@@ -446,12 +447,13 @@
       transition: all 0.3s ease;
     }
     .hero-scroll-hint:hover .hero-scroll-hint-icon {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.5);
     }
     .hero-scroll-hint-icon svg {
       width: 16px;
       height: 16px;
-      stroke: #ffffff;
+      stroke: rgba(255,255,255,.45);
       fill: none;
       stroke-width: 2;
     }
