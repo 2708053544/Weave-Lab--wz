@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="css/style.css?v=18">
   <style>
     html, body { background: var(--bg-primary, #0a0814); color: var(--text-primary, #f5f7ff); }
+    @font-face{font-family:Inter;src:url('inter.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+    @font-face{font-family:'Instrument Serif';src:url('instrument-serif-italic.woff2') format('woff2');font-style:italic;font-weight:400;font-display:swap}
     :root{--logo:15.5px;--logo-mark:22px;--nav:14px;--nav-h:40px;--btn:13.5px;--btn-h:40px;--hero-btn-h:42px;--h1:48px;--lede:15.5px;--badge:12.5px;--stat-size:13.5px;--header-y:22px;--header-x:40px;--stats-x:72px;--stats-y:36px;--hero-gap:85px;--copy-max:860px;--lede-max:470px}
     *{box-sizing:border-box;margin:0;padding:0}
     a{color:inherit;text-decoration:none}
@@ -30,41 +32,6 @@
     .hero-photo:before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,#3978ff 0%,#6d69f2 46%,#a15bdf 100%);mix-blend-mode:color}
     .hero-photo:after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(5,5,16,.28),rgba(5,5,16,.03) 34%,rgba(5,5,16,.25) 60%,rgba(5,5,16,.8) 100%)}
     .hero-viewport{position:relative;z-index:1;display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;min-height:100dvh}
-    /* 首屏底部柔和过渡 — 从首屏深色渐变到内容区背景 */
-    .hero-viewport::after{
-      content:'';
-      position:absolute;
-      left:0;right:0;bottom:-1px;
-      height:50vh;
-      z-index:5;
-      pointer-events:none;
-      background:linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(5, 5, 16, 0.3) 30%,
-        rgba(7, 5, 17, 0.6) 55%,
-        rgba(9, 7, 19, 0.85) 75%,
-        #0a0814 100%
-      );
-    }
-    /* 内容区顶部柔和衔接 — 从深到浅自然过渡 */
-    .content-glow-wrap::before{
-      content:'';
-      position:absolute;
-      left:0;right:0;top:0;
-      height:60vh;
-      z-index:0;
-      pointer-events:none;
-      background:linear-gradient(
-        to bottom,
-        #0a0814 0%,
-        #0a0814 20%,
-        rgba(10, 8, 20, 0.92) 38%,
-        rgba(10, 8, 20, 0.7) 55%,
-        rgba(10, 8, 20, 0.3) 75%,
-        transparent 100%
-      );
-    }
     .header{position:relative;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--header-y) var(--header-x) 10px}
     .logo{position:absolute;top:40px;left:var(--header-x);display:flex;align-items:center;gap:9px;font-size:var(--logo);font-weight:600;letter-spacing:-.03em;color:#fff}
     .logo svg{width:var(--logo-mark);height:var(--logo-mark)}
@@ -119,94 +86,19 @@
       left: 0;
       right: 0;
       z-index: 200;
-      background: rgba(10, 8, 20, 0.75) !important;
-      backdrop-filter: blur(0px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(0px) saturate(180%) !important;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transform: translateY(-20px) scaleY(0.8);
+      background: rgba(10, 8, 20, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(-100%);
+      transition: transform 0.5s cubic-bezier(.16,1,.3,1), opacity 0.4s ease;
       opacity: 0;
       pointer-events: none;
-      transform-origin: center top;
-      transition: 
-        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.35s ease,
-        backdrop-filter 0.5s ease,
-        -webkit-backdrop-filter 0.5s ease,
-        background 0.5s ease,
-        box-shadow 0.5s ease;
-      box-shadow: 0 0 0 rgba(0,0,0,0);
     }
     .navbar.navbar-show {
-      transform: translateY(0) scaleY(1);
+      transform: translateY(0);
       opacity: 1;
       pointer-events: auto;
-      backdrop-filter: blur(24px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-      background: rgba(10, 8, 20, 0.82) !important;
-      box-shadow: 
-        0 8px 32px rgba(0,0,0,0.25), 
-        0 0 0 1px rgba(255,255,255,0.04) inset,
-        0 0 40px rgba(100, 120, 255, 0.08);
-      transition: 
-        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s,
-        opacity 0.45s ease 0.12s,
-        backdrop-filter 0.7s ease 0.18s,
-        -webkit-backdrop-filter 0.7s ease 0.18s,
-        background 0.55s ease 0.12s,
-        box-shadow 0.7s ease 0.18s;
-    }
-    /* 导航栏出现时的光爆效果 - 柔和版 */
-    .navbar::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(160, 180, 255, 0.35) 0%, rgba(140, 120, 230, 0.2) 35%, transparent 70%);
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      pointer-events: none;
-    }
-    .navbar.navbar-show::before {
-      animation: navBurst 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
-    }
-    @keyframes navBurst {
-      0% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0.5;
-      }
-      50% {
-        opacity: 0.3;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(50);
-        opacity: 0;
-      }
-    }
-    /* 导航栏底部光带 - 柔和版 */
-    .navbar::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(140, 160, 230, 0.35), rgba(170, 130, 230, 0.3), transparent);
-      opacity: 0;
-      transform: scaleX(0.3);
-      transition: opacity 0.4s ease, transform 0.5s ease;
-    }
-    .navbar.navbar-show::after {
-      opacity: 1;
-      transform: scaleX(1);
-      transition: opacity 0.6s ease 0.25s, transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
-      animation: navGlowPulse 3s ease-in-out 0.8s infinite;
-    }
-    @keyframes navGlowPulse {
-      0%, 100% { opacity: 0.25; }
-      50% { opacity: 0.45; }
     }
     .navbar .nav-logo {
       color: #fff !important;
@@ -235,7 +127,7 @@
       border: 1px solid rgba(255,255,255,0.15) !important;
     }
     .navbar .theme-toggle-icon {
-      background-color: transparent !important;
+      background: #fff !important;
     }
     .navbar .nav-toggle span {
       background: #fff !important;
@@ -256,25 +148,6 @@
     /* 内容区块层级 */
     .section, .alt-bg, .cta-banner, .footer { position: relative; z-index: 2; }
     /* 底部玻璃导航 - 横版居中 + 滚动时下移消失 */
-    /* 飞行的导航栏 - 从底部飞到顶部 */
-    .nav-flyer {
-      position: fixed !important;
-      z-index: 250 !important;
-      pointer-events: none !important;
-      transition: 
-        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.4s ease,
-        border-radius 0.6s ease,
-        left 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-        right 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-        width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform, opacity;
-    }
-    .nav-flyer .dock-nav-slot,
-    .nav-flyer .nav-glass {
-      width: 100% !important;
-    }
-
     .bottom-dock {
       position: absolute !important;
       bottom: 40px !important;
@@ -289,44 +162,13 @@
       padding: 0 !important;
       min-height: auto !important;
       gap: 0 !important;
-      transition: 
-        transform 0.65s cubic-bezier(0.65, 0, 0.35, 1),
-        opacity 0.45s cubic-bezier(0.65, 0, 0.35, 1),
-        filter 0.45s ease;
-      will-change: transform, opacity, filter;
-      transform-origin: center center;
+      transition: transform 0.6s cubic-bezier(.16,1,.3,1), opacity 0.4s ease !important;
+      will-change: transform, opacity;
     }
     .bottom-dock.nav-slide-up {
-      transform: translateY(-90vh) scale(0.6) !important;
+      transform: translateY(120%) !important;
       opacity: 0 !important;
       pointer-events: none !important;
-      filter: blur(4px) brightness(1.1);
-      transition: 
-        transform 0.75s cubic-bezier(0.55, 0.06, 0.68, 0.19),
-        opacity 0.6s cubic-bezier(0.7, 0, 0.84, 0),
-        filter 0.6s ease;
-    }
-    .bottom-dock .dock-nav-slot {
-      transition: 
-        box-shadow 0.5s ease,
-        transform 0.5s ease,
-        gap 0.4s ease,
-        padding 0.4s ease;
-    }
-    .bottom-dock.nav-slide-up .dock-nav-slot {
-      box-shadow: 
-        0 8px 32px rgba(0,0,0,0.25),
-        0 0 30px rgba(130, 150, 255, 0.25),
-        0 0 60px rgba(130, 150, 255, 0.12),
-        0 0 90px rgba(180, 140, 255, 0.06) !important;
-    }
-    .bottom-dock.nav-slide-up .dock-nav-slot .nav-glass {
-      gap: 0 !important;
-    }
-    .bottom-dock.nav-slide-up .dock-nav-slot .nav-glass .nav-link {
-      opacity: 0;
-      transform: scale(0.6) !important;
-      transition: all 0.35s ease !important;
     }
     .bottom-dock::before {
       display: none !important;
@@ -506,330 +348,6 @@
         margin-top: 80px;
       }
     }
-    /* 背景装饰光斑层（首屏以下内容区） */
-    .glow-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .glow-blob {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      will-change: transform;
-      transition: transform 0.28s cubic-bezier(0.25, 0.1, 0.3, 1), opacity 0.28s ease;
-    }
-    .glow-blob.pressed {
-      transform: scale(0.82, 0.86);
-      opacity: 0.88;
-    }
-    .glow-blob.bounce {
-      transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-    }
-    .blob-1 { display: none; }
-    .blob-2 { width: 420px; height: 330px; left: calc(12% - 210px); top: calc(20% - 165px); background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.35) 0%, rgba(0, 240, 255, 0) 65%); }
-    .blob-3 { width: 420px; height: 330px; left: calc(88% - 210px); top: calc(26% - 165px); background: radial-gradient(ellipse at center, rgba(255, 110, 220, 0.36) 0%, rgba(255, 110, 220, 0) 65%); }
-    .blob-4 { width: 520px; height: 400px; left: calc(30% - 260px); top: calc(40% - 200px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.40) 0%, rgba(140, 90, 255, 0) 65%); }
-    .blob-5 { width: 340px; height: 260px; left: calc(70% - 170px); top: calc(62% - 130px); background: radial-gradient(ellipse at center, rgba(120, 80, 255, 0.15) 0%, rgba(120, 80, 255, 0) 60%); }
-    .blob-6 { width: 210px; height: 160px; left: calc(74% - 105px); top: calc(76% - 80px); background: radial-gradient(ellipse at center, rgba(0, 220, 255, 0.16) 0%, rgba(0, 220, 255, 0) 60%); }
-    .blob-7 { width: 340px; height: 260px; left: calc(16% - 170px); top: calc(88% - 130px); background: radial-gradient(ellipse at center, rgba(255, 90, 200, 0.14) 0%, rgba(255, 90, 200, 0) 60%); }
-    .blob-8 { width: 210px; height: 160px; left: calc(60% - 105px); top: calc(95% - 80px); background: radial-gradient(ellipse at center, rgba(140, 90, 255, 0.10) 0%, rgba(140, 90, 255, 0) 60%); }
-    @media (max-width: 768px) {
-      .blob-1 { width: 624px; height: 490px; left: calc(100% - 312px); top: -245px; }
-      .blob-2 { width: 240px; height: 190px; left: calc(12% - 120px); top: calc(10% - 95px); }
-      .blob-3 { width: 240px; height: 190px; left: calc(88% - 120px); top: calc(26% - 95px); }
-      .blob-4 { width: 300px; height: 230px; left: calc(30% - 150px); top: calc(40% - 115px); }
-      .blob-5 { width: 200px; height: 150px; left: calc(70% - 100px); top: calc(62% - 75px); }
-      .blob-6 { width: 130px; height: 100px; left: calc(74% - 65px); top: calc(76% - 50px); }
-      .blob-7 { width: 200px; height: 150px; left: calc(16% - 100px); top: calc(88% - 75px); }
-      .blob-8 { width: 130px; height: 100px; left: calc(60% - 65px); top: calc(95% - 50px); }
-    }
-    /* 首屏以下内容区包裹 */
-    .content-glow-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-    .content-glow-wrap .section,
-    .content-glow-wrap .footer { position: relative; z-index: 1; }
-
-    /* ========== 移动端适配修复 ========== */
-    @media (max-width: 900px) {
-      /* --- Hero 区域移动端优化 --- */
-      .hero-viewport {
-        min-height: 100vh;
-        min-height: 100dvh;
-      }
-      .hero-main {
-        padding: 20px 16px 120px !important;
-        justify-content: center;
-      }
-      .hero-copy {
-        max-width: 100%;
-        padding-bottom: 0;
-      }
-      .badge {
-        margin-bottom: 14px;
-        padding: 6px 12px;
-        font-size: 11px;
-      }
-      .badge svg {
-        width: 14px;
-        height: 16px;
-      }
-      .hero-main h1 {
-        line-height: 1.15;
-      }
-      .lede {
-        margin-top: 12px;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-      .hero-actions {
-        margin-top: 18px;
-        gap: 8px;
-      }
-      .hero-actions .btn {
-        height: 42px;
-        padding: 0 14px;
-        font-size: 13px;
-      }
-      .hero-scroll-hint {
-        display: none !important;
-      }
-
-      /* --- 底部导航移动端优化（防止与内容重叠）--- */
-      .bottom-dock {
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 6px 10px calc(10px + env(safe-area-inset-bottom)) !important;
-        width: 100% !important;
-        min-height: auto !important;
-        z-index: 10 !important;
-      }
-      .dock-nav-slot {
-        width: 100% !important;
-        padding: 4px !important;
-        border-radius: 12px !important;
-        min-height: auto !important;
-      }
-      .dock-nav-slot .nav-glass {
-        width: 100% !important;
-        justify-content: space-around !important;
-        gap: 2px !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        min-height: auto !important;
-      }
-      .dock-nav-slot .nav-glass .nav-link {
-        flex: 1 1 auto !important;
-        min-width: auto !important;
-        height: 38px !important;
-        padding: 0 8px !important;
-        font-size: 12px !important;
-        border-radius: 8px !important;
-      }
-      .dock-nav-slot .nav-glass .nav-link .nav-icon {
-        display: none !important;
-      }
-      .dock-nav-slot .nav-arrow {
-        display: none !important;
-      }
-
-      /* --- 顶部导航栏移动端优化 --- */
-      .navbar {
-        height: var(--nav-height, 56px) !important;
-        min-height: var(--nav-height, 56px) !important;
-      }
-      .navbar .nav-menu {
-        display: none !important;
-      }
-      .navbar .nav-toggle {
-        display: flex !important;
-      }
-      /* 内容区域增加顶部内边距，防止被固定导航栏遮住 */
-      .about-research-section {
-        padding-top: 70px !important;
-      }
-
-      /* --- 关于/研究方向移动端优化 --- */
-      .about-research-section {
-        padding: 60px 0 !important;
-      }
-      .about-research-grid {
-        gap: 36px !important;
-      }
-      .about-research-title {
-        font-size: 1.75rem !important;
-        margin: 12px 0 16px !important;
-      }
-      .about-research-text {
-        font-size: 14px !important;
-        line-height: 1.7 !important;
-        margin-bottom: 12px !important;
-      }
-      .section-label {
-        font-size: 11px !important;
-        letter-spacing: 0.2em !important;
-        margin-bottom: 10px !important;
-      }
-      .research-list-item {
-        gap: 14px !important;
-        padding: 14px 0 !important;
-      }
-      .research-list-num {
-        min-width: 26px !important;
-        font-size: 11px !important;
-      }
-      .research-list-name {
-        font-size: 15px !important;
-      }
-      .research-list-desc {
-        font-size: 12px !important;
-        line-height: 1.5 !important;
-      }
-      .research-list-arrow {
-        font-size: 14px !important;
-      }
-
-      /* --- CTA 区域移动端优化 --- */
-      .cta-banner {
-        padding: 50px 0 !important;
-      }
-      .cta-content {
-        text-align: center !important;
-      }
-      .cta-content h2 {
-        font-size: 1.5rem !important;
-        margin-bottom: 14px !important;
-        line-height: 1.3 !important;
-      }
-      .cta-content p {
-        font-size: 14px !important;
-        line-height: 1.6 !important;
-        margin-bottom: 22px !important;
-      }
-      .cta-content .btn {
-        width: 100% !important;
-        max-width: 260px !important;
-        height: 44px !important;
-      }
-
-      /* --- Footer 移动端优化 --- */
-      .footer {
-        padding: 40px 0 24px !important;
-      }
-      .footer-grid {
-        gap: 28px !important;
-        margin-bottom: 32px !important;
-      }
-      .footer-logo {
-        font-size: 1rem !important;
-        gap: 8px !important;
-      }
-      .footer-logo-mark-img {
-        height: 22px !important;
-      }
-      .footer-tagline {
-        font-size: 13px !important;
-        line-height: 1.6 !important;
-      }
-      .footer-column h4 {
-        font-size: 11px !important;
-        margin-bottom: 14px !important;
-        letter-spacing: 0.12em !important;
-      }
-      .footer-links {
-        gap: 8px !important;
-      }
-      .footer-links a {
-        font-size: 13px !important;
-      }
-      .footer-bottom {
-        flex-direction: column !important;
-        gap: 12px !important;
-        text-align: center !important;
-        padding-top: 20px !important;
-        font-size: 11px !important;
-      }
-
-      /* --- 容器内边距移动端优化 --- */
-      .container {
-        padding: 0 20px !important;
-      }
-    }
-
-    /* --- 小屏幕（480px以下）额外优化 --- */
-    @media (max-width: 480px) {
-      .hero-main {
-        padding: 16px 14px 110px !important;
-      }
-      .hero-main h1 {
-        font-size: 28px !important;
-      }
-      .badge {
-        font-size: 10px;
-        padding: 5px 10px;
-        margin-bottom: 12px;
-      }
-      .lede {
-        font-size: 13px !important;
-        margin-top: 10px !important;
-      }
-      .hero-actions {
-        margin-top: 16px !important;
-      }
-      .hero-actions .btn {
-        height: 40px !important;
-        font-size: 12px !important;
-        padding: 0 12px !important;
-      }
-      .dock-nav-slot .nav-glass .nav-link {
-        font-size: 11px !important;
-        padding: 0 6px !important;
-        height: 36px !important;
-      }
-      .bottom-dock {
-        padding: 4px 8px calc(8px + env(safe-area-inset-bottom)) !important;
-      }
-      .about-research-section {
-        padding: 48px 0 !important;
-      }
-      .about-research-title {
-        font-size: 1.5rem !important;
-      }
-      .about-research-text {
-        font-size: 13px !important;
-      }
-      .cta-banner {
-        padding: 40px 0 !important;
-      }
-      .cta-content h2 {
-        font-size: 1.35rem !important;
-      }
-      .cta-content p {
-        font-size: 13px !important;
-      }
-      .container {
-        padding: 0 16px !important;
-      }
-      .research-list-item {
-        padding: 12px 0 !important;
-        gap: 12px !important;
-      }
-      .research-list-name {
-        font-size: 14px !important;
-      }
-      .research-list-desc {
-        font-size: 11px !important;
-      }
-    }
   </style>
   <link rel="stylesheet" href="assets/opening.css?v=9">
   <link rel="stylesheet" href="assets/nav-glass.css">
@@ -850,22 +368,23 @@
   <div class="grain" aria-hidden="true"></div>
 
   <!-- 顶部导航栏（滚动后显示，样式跟其他页面一致） -->
-  <nav class="navbar navbar-hide" id="mainNavbar">
+  <nav class="navbar" id="mainNavbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <div class="nav-logo-mark">W</div>
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <a href="#hero" class="nav-link active">首页 ▾</a>
+          <span class="nav-link active">首页 ▾</span>
           <div class="nav-dropdown">
             <a href="#hero" class="dropdown-item">首页首屏</a>
             <a href="#about" class="dropdown-item">工作室简介</a>
+            <a href="#works" class="dropdown-item">精选项目</a>
           </div>
         </div>
         <div class="nav-item">
-          <a href="pages/about.html" class="nav-link">师生团队 ▾</a>
+          <a href="pages/about.html" class="nav-link">关于工作室 ▾</a>
           <div class="nav-dropdown">
             <a href="pages/about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="pages/about.html#students" class="dropdown-item">学生团队</a>
@@ -888,7 +407,7 @@
           </div>
         </div>
         <div class="nav-item">
-          <a href="pages/contact.html" class="nav-link">联系我们 ▾</a>
+          <span class="nav-link">联系我们 ▾</span>
           <div class="nav-dropdown">
             <a href="pages/contact.html" class="dropdown-item">联系方式</a>
             <a href="pages/contact.html" class="dropdown-item">留言咨询</a>
@@ -903,67 +422,6 @@
       </div>
     </div>
   </nav>
-
-  <script>
-    // 首屏滚动切换导航：底部dock向上飞走 -> 顶部navbar能量汇聚出现
-    (function() {
-      var navbar = document.getElementById('mainNavbar');
-      if (!navbar) return;
-      
-      var isShown = false;
-      var ticking = false;
-      
-      function getBottomDock() {
-        return document.querySelector('.bottom-dock');
-      }
-      
-      function updateNav() {
-        var scrollY = window.scrollY || window.pageYOffset;
-        var vh = window.innerHeight;
-        // 触发点：滑过首屏的55%时开始切换
-        // 底部dock先飞起消失，顶部navbar稍后出现
-        var threshold = vh * 0.55;
-        var bottomDock = getBottomDock();
-        
-        if (scrollY > threshold && !isShown) {
-          isShown = true;
-          // 底部dock立即开始向上飞走
-          if (bottomDock) bottomDock.classList.add('nav-slide-up');
-          // 顶部navbar延迟一点点出现（等dock往上飞一段距离）
-          setTimeout(function() {
-            navbar.classList.remove('navbar-hide');
-            navbar.classList.add('navbar-show');
-          }, 120);
-        } else if (scrollY <= threshold && isShown) {
-          isShown = false;
-          // 往上滑回：顶部先消失
-          navbar.classList.remove('navbar-show');
-          navbar.classList.add('navbar-hide');
-          // 底部稍后出现
-          if (bottomDock) {
-            setTimeout(function() {
-              var dock = getBottomDock();
-              if (dock) dock.classList.remove('nav-slide-up');
-            }, 150);
-          }
-        }
-        ticking = false;
-      }
-      
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(updateNav);
-          ticking = true;
-        }
-      }, { passive: true });
-      // DOM加载完成后再初始化一次，确保能找到bottom-dock
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateNav);
-      } else {
-        updateNav();
-      }
-    })();
-  </script>
 
   <!-- Hero Section -->
   <div class="hero-viewport" id="top">
@@ -997,15 +455,15 @@
       <div class="dock-nav-slot">
     <nav class="nav nav-glass" id="site-nav" aria-label="主导航">
         <a href="#top" class="nav-link appear appear--scale" style="--d:.16s" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v9.2a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3z"/><path d="M9.5 20.5v-6h5v6"/></svg></span><span>首页</span></a>
-        <a href="pages/about.html" class="nav-group nav-link appear appear--soft" style="--d:.24s;" data-jump="pages/about.html">
+        <div class="nav-group nav-link appear appear--soft" style="--d:.24s; cursor: pointer;" data-jump="pages/about.html">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="2.8"/><path d="M3.8 18.7c.3-3.1 2.3-5 5.2-5s4.9 1.9 5.2 5"/><path d="M15.3 5.5a2.8 2.8 0 0 1 0 5.2M16.6 13.9c2.1.4 3.4 2.1 3.6 4.8"/></svg></span>
-          <span>师生团队</span><span class="nav-arrow">▾</span>
+          <span>关于工作室</span><span class="nav-arrow">▾</span>
           <div class="nav-dropdown">
             <a href="pages/about.html#mentors">指导老师</a>
             <a href="pages/about.html#students">学生团队</a>
           </div>
-        </a>
-        <a href="pages/projects.html" class="nav-group nav-link appear appear--scale" style="--d:.32s;" data-jump="pages/projects.html">
+        </div>
+        <div class="nav-group nav-link appear appear--scale" style="--d:.32s; cursor: pointer;" data-jump="pages/projects.html">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="m17 13.3.9 2.7 2.8.9-2.8.9-.9 2.8-.9-2.8-2.8-.9 2.8-.9z"/></svg></span>
           <span>项目成果</span><span class="nav-arrow">▾</span>
           <div class="nav-dropdown">
@@ -1014,15 +472,15 @@
               <a href="pages/projects.html#normal-works">普通作品</a>
             <a href="pages/projects.html?filter=award">获奖作品</a>
           </div>
-        </a>
-        <a href="pages/activities.html" class="nav-group nav-link appear appear--soft" style="--d:.4s;" data-jump="pages/activities.html">
+        </div>
+        <div class="nav-group nav-link appear appear--soft" style="--d:.4s; cursor: pointer;" data-jump="pages/activities.html">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12.2c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="M3 17.6c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="m17.4 4.2.5 1.7 1.7.5-1.7.5-.5 1.7-.5-1.7-1.7-.5 1.7-.5z"/></svg></span>
           <span>活动与合作</span><span class="nav-arrow">▾</span>
           <div class="nav-dropdown">
             <a href="pages/activities.html">活动</a>
             <a href="pages/activities.html#partners">合作资源</a>
           </div>
-        </a>
+        </div>
         <a href="pages/contact.html" class="nav-link appear appear--scale" style="--d:.48s"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.1 5.2h15.8a1.6 1.6 0 0 1 1.6 1.6v9.7a1.6 1.6 0 0 1-1.6 1.6H9l-4.9 3v-3a1.6 1.6 0 0 1-1.6-1.6V6.8a1.6 1.6 0 0 1 1.6-1.6Z"/><path d="M7 10.8h10M7 14.2h6.5"/></svg></span><span>联系我们</span></a>
     </nav>
       </div>
@@ -1030,17 +488,6 @@
   </div>
 
   <!-- About & Research Section -->
-  <div class="content-glow-wrap">
-    <div class="glow-layer" aria-hidden="true">
-      <div class="glow-blob blob-1"></div>
-      <div class="glow-blob blob-2"></div>
-      <div class="glow-blob blob-3"></div>
-      <div class="glow-blob blob-4"></div>
-      <div class="glow-blob blob-5"></div>
-      <div class="glow-blob blob-6"></div>
-      <div class="glow-blob blob-7"></div>
-      <div class="glow-blob blob-8"></div>
-    </div>
   <section id="about" class="section about-research-section">
     <div class="container">
       <div class="about-research-grid">
@@ -1129,6 +576,46 @@
     </div>
   </section>
 
+  <!-- Featured Works -->
+  <section id="works" class="section works-section alt-bg">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-label">Featured Works</span>
+        <h2 class="section-title">精选项目</h2>
+        <p class="section-subtitle">优秀毕业设计与工作室项目</p>
+      </div>
+      <div class="works-grid">
+        <div class="work-card fade-in" style="--delay: 0.1s; cursor: pointer;" onclick="location.href='pages/project-detail.html?id=1'">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">毕设作品</span>
+            <h3 class="work-title">忆路 —— 认知辅助产品设计</h3>
+            <p class="work-desc">面向阿尔茨海默病患者的记忆辅助与安全监护产品，获 2023 年红点设计概念奖。</p>
+          </div>
+        </div>
+        <div class="work-card fade-in" style="--delay: 0.2s; cursor: pointer;" onclick="location.href='pages/project-detail.html?id=3'">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">优秀毕设</span>
+            <h3 class="work-title">药伴 —— 智能用药管理系统</h3>
+            <p class="work-desc">面向慢病人群的用药提醒与依从性管理终端，获 2024 年全国大学生工业设计大赛一等奖。</p>
+          </div>
+        </div>
+        <div class="work-card fade-in" style="--delay: 0.3s; cursor: pointer;" onclick="location.href='pages/project-detail.html?id=5'">
+          <div class="work-image placeholder-pulse"></div>
+          <div class="work-info">
+            <span class="work-category">工作室项目</span>
+            <h3 class="work-title">腔镜手术机器人系统</h3>
+            <p class="work-desc">面向腹腔微创手术的主从式机器人操作平台，聚焦力反馈操控与手术安全体验。</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-more fade-in">
+        <a href="pages/projects.html" class="btn btn-text">查看全部项目 →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="cta-banner">
     <div class="container">
@@ -1146,7 +633,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
+            <div class="footer-logo-mark">W</div>
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -1159,7 +646,7 @@
           <h4>导航</h4>
           <div class="footer-links">
             <a href="index.html">首页</a>
-            <a href="pages/about.html">师生团队</a>
+            <a href="pages/about.html">关于工作室</a>
             <a href="pages/projects.html">项目成果</a>
             <a href="pages/contact.html">联系我们</a>
           </div>
@@ -1190,10 +677,35 @@
       </div>
     </div>
   </footer>
-  </div><!-- /content-glow-wrap -->
 
-  <script src="js/main.js?v=20261007"></script>
+  <script src="js/main.js"></script>
   <script>
+    (()=>{
+      // 滚动时顶部导航栏显示 + 底部导航栏上移
+      const navbar = document.getElementById('mainNavbar');
+      const heroSection = document.getElementById('top');
+      const bottomDock = document.querySelector('.bottom-dock');
+      if (navbar && heroSection) {
+        const checkScroll = () => {
+          const heroBottom = heroSection.getBoundingClientRect().bottom;
+          const scrollPercent = Math.min(1, Math.max(0, (window.innerHeight - heroBottom) / (window.innerHeight * 0.5)));
+          if (heroBottom <= 80) {
+            navbar.classList.add('navbar-show');
+          } else {
+            navbar.classList.remove('navbar-show');
+          }
+          if (bottomDock) {
+            if (scrollPercent > 0.3) {
+              bottomDock.classList.add('nav-slide-up');
+            } else {
+              bottomDock.classList.remove('nav-slide-up');
+            }
+          }
+        };
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
+      }
+
       // 强制启动鼠标拖尾特效（确保开场动画结束后启动）
       function startHeroTrail() {
         if (window.heroTrailStarted) return;
@@ -1227,7 +739,7 @@
       }
       const backdrop=$('.menu-backdrop');
       if(backdrop) backdrop.addEventListener('click',closeMenu);
-      // 底部导航：点击“师生团队/项目成果”主按钮直接跳转对应页面（保留悬停下拉，不影响下拉项）
+      // 底部导航：点击“关于工作室/项目成果”主按钮直接跳转对应页面（保留悬停下拉，不影响下拉项）
       $$('.nav-glass .nav-group[data-jump]').forEach(function (group) {
         group.addEventListener('click', function (e) {
           if (e.target.closest('.nav-dropdown')) return;
@@ -1262,43 +774,9 @@
         }
       }
       requestAnimationFrame(()=>requestAnimationFrame(()=>{for(const el of $$('.appear,.hero-photo')){if(!el.getAnimations().some(a=>a.playState==='running'||a.playState==='paused'||a.playState==='finished'))el.classList.add('is-in')}}));
-  </script>
-  <script>
-    /* 光斑弹性互动：鼠标移到光斑上它会凹陷下去，移开后 QQ 弹弹地弹回 */
-    (function () {
-      var blobs = Array.prototype.slice.call(document.querySelectorAll('.glow-blob'));
-      if (!blobs.length) return;
-      var lastHover = null;
-      function isInside(rect, x, y) {
-        var cx = rect.left + window.pageXOffset + rect.width / 2;
-        var cy = rect.top + window.pageYOffset + rect.height / 2;
-        var dx = (x - cx) / (rect.width / 2);
-        var dy = (y - cy) / (rect.height / 2);
-        return dx * dx + dy * dy <= 1;
-      }
-      document.addEventListener('mousemove', function (e) {
-        var x = e.pageX, y = e.pageY, found = null;
-        for (var i = 0; i < blobs.length; i++) {
-          if (isInside(blobs[i].getBoundingClientRect(), x, y)) { found = blobs[i]; break; }
-        }
-        if (found === lastHover) return;
-        if (lastHover) {
-          lastHover.classList.remove('pressed');
-          lastHover.classList.add('bounce');
-        }
-        if (found) {
-          found.classList.remove('bounce');
-          found.classList.add('pressed');
-        }
-        lastHover = found;
-      });
-      document.addEventListener('transitionend', function (e) {
-        if (e.target && e.target.classList) e.target.classList.remove('bounce');
-      });
     })();
   </script>
-  <script src="assets/opening.js?v=13"></script>
-  <script src="assets/hero-trail.js?v=11"></script>
+  <script src="assets/opening.js?v=11"></script>
+  <script src="assets/hero-trail.js?v=7"></script>
 </body>
 </html>
-

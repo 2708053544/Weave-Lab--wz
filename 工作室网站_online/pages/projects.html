@@ -6,7 +6,6 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=1">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -349,107 +348,6 @@
       }
     }
     /* ===== 项目成果页：黑底 + 彩色光斑整页分布（弹性可交互光斑，越往下越浅） ===== */
-    /* 入场动画 */
-    .page-header {
-      position: relative;
-      overflow: hidden;
-      transition: min-height 1s cubic-bezier(0.77, 0, 0.175, 1), padding 1s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .page-header.intro-hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .page-header.intro-hero .container-narrow {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    .page-header.intro-hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      opacity: 0;
-      animation: titleReveal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
-    }
-    .page-header.intro-hero .section-label {
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.05s forwards;
-    }
-    .page-header.intro-hero p {
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-    }
-    @keyframes titleReveal {
-      0% { opacity: 0; transform: scale(0.85); filter: blur(20px); }
-      60% { opacity: 1; filter: blur(0); }
-      100% { opacity: 1; transform: scale(1); filter: blur(0); }
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .intro-glow {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.3);
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(120, 140, 255, 0.55) 0%, rgba(170, 80, 255, 0.25) 35%, rgba(0, 200, 255, 0.1) 55%, transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      z-index: 1;
-    }
-    .intro-hero .intro-glow {
-      animation: glowBurst 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
-    }
-    @keyframes glowBurst {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); filter: blur(40px); }
-      30% { opacity: 1; filter: blur(20px); }
-      70% { opacity: 0.7; filter: blur(10px); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); filter: blur(30px); }
-    }
-    .intro-rays {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0;
-    }
-    .intro-hero .intro-rays {
-      animation: raysFlash 1.2s ease-out 0.1s forwards;
-    }
-    .intro-rays::before,
-    .intro-rays::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 140%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(150, 170, 255, 0.6), transparent);
-    }
-    .intro-rays::after {
-      width: 2px;
-      height: 140%;
-      background: linear-gradient(180deg, transparent, rgba(150, 170, 255, 0.6), transparent);
-    }
-    @keyframes raysFlash {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-      40% { opacity: 1; }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
-    }
-    @media (max-width: 768px) {
-      .intro-glow { width: 400px; height: 400px; }
-    }
     .glow-layer {
       position: absolute;
       top: 0;
@@ -584,12 +482,12 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <div class="nav-logo-mark">W</div>
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <a href="../index.html" class="nav-link">首页 ▾</a>
+          <span class="nav-link">首页 ▾</span>
           <div class="nav-dropdown">
             <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
@@ -597,14 +495,14 @@
           </div>
         </div>
         <div class="nav-item">
-          <a href="about.html" class="nav-link">师生团队 ▾</a>
+          <span class="nav-link">关于工作室 ▾</span>
           <div class="nav-dropdown">
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
           </div>
         </div>
         <div class="nav-item">
-          <a href="projects.html" class="nav-link active">项目成果 ▾</a>
+          <span class="nav-link active">项目成果 ▾</span>
           <div class="nav-dropdown">
             <a href="projects.html#studio" class="dropdown-item">工作室项目</a>
             <a href="projects.html#works" class="dropdown-item">毕设作品</a>
@@ -615,15 +513,15 @@
         <div class="nav-item">
           <a href="activities.html" class="nav-link">活动与合作 ▾</a>
           <div class="nav-dropdown">
-            <a href="activities.html#activities" class="dropdown-item">活动</a>
+            <a href="activities.html" class="dropdown-item">活动</a>
             <a href="activities.html#partners" class="dropdown-item">合作资源</a>
           </div>
         </div>
         <div class="nav-item">
-          <a href="contact.html" class="nav-link">联系我们 ▾</a>
+          <span class="nav-link">联系我们 ▾</span>
           <div class="nav-dropdown">
-            <a href="contact.html#contact-info" class="dropdown-item">联系方式</a>
-            <a href="contact.html#contact-form" class="dropdown-item">留言咨询</a>
+            <a href="contact.html" class="dropdown-item">联系方式</a>
+            <a href="contact.html" class="dropdown-item">留言咨询</a>
           </div>
         </div>
       </div>
@@ -642,9 +540,7 @@
   </a>
 
   <!-- Page Header -->
-  <section class="page-header intro-hero" id="pageHeader">
-    <div class="intro-glow"></div>
-    <div class="intro-rays"></div>
+  <section class="page-header">
     <div class="container-narrow">
       <span class="section-label fade-in">Our Works</span>
       <h1 class="fade-in">项目成果</h1>
@@ -895,7 +791,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
+            <div class="footer-logo-mark">W</div>
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -908,7 +804,7 @@
           <h4>导航</h4>
           <div class="footer-links">
             <a href="../index.html">首页</a>
-            <a href="about.html">师生团队</a>
+            <a href="about.html">关于工作室</a>
             <a href="projects.html">项目成果</a>
             <a href="contact.html">联系我们</a>
           </div>
@@ -940,35 +836,7 @@
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20261007"></script>
-  <script>
-    // 页面入场动画：标题光晕爆发 → 自动下滑到内容区
-    (function() {
-      var header = document.getElementById('pageHeader');
-      var target = document.getElementById('studio');
-      if (!header) return;
-
-      var INTRO_DURATION = 1500;
-
-      function scrollToContent() {
-        header.classList.remove('intro-hero');
-        setTimeout(function() {
-          if (target) {
-            var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-            var scrollTo = targetTop - window.innerHeight + 80;
-            window.scrollTo({ top: Math.max(0, scrollTo), behavior: 'smooth' });
-          }
-        }, 200);
-      }
-
-      if (location.hash && location.hash !== '#top') {
-        header.classList.remove('intro-hero');
-        return;
-      }
-
-      setTimeout(scrollToContent, INTRO_DURATION);
-    })();
-  </script>
+  <script src="../js/main.js"></script>
   <script>
     // 11个毕设项目数据
     const graduationProjects = [
@@ -1250,101 +1118,11 @@
       window._rebuildGraduationMarquee = function() {
         measure();
         duplicate();
-        initJSMarquee();
       };
 
       window.addEventListener('resize', measure);
       measure();
       duplicate();
-
-      // 纯JS跑马灯 + 鼠标滚轮控制
-      var currentY = 0;
-      var halfHeight = 0;
-      var autoSpeed = 0.8;
-      var wheelSpeed = 1.5;
-      var hoverPause = false;
-      var marqueeAnimId = null;
-
-      function updateHalfHeight() {
-        halfHeight = grid.offsetHeight / 2;
-      }
-
-      function wrapY(y) {
-        if (halfHeight <= 0) return y;
-        while (y > 0) y -= halfHeight;
-        while (y < -halfHeight) y += halfHeight;
-        return y;
-      }
-
-      function marqueeLoop() {
-        if (!hoverPause) {
-          currentY = wrapY(currentY - autoSpeed);
-          track.style.transform = 'translateY(' + currentY + 'px)';
-        }
-        marqueeAnimId = requestAnimationFrame(marqueeLoop);
-      }
-
-      function initJSMarquee() {
-        // 禁用CSS动画
-        track.style.animation = 'none';
-        track.style.animationPlayState = '';
-        track.style.transform = 'translateY(0px)';
-        currentY = 0;
-        updateHalfHeight();
-        if (marqueeAnimId) cancelAnimationFrame(marqueeAnimId);
-        marqueeAnimId = requestAnimationFrame(marqueeLoop);
-      }
-
-      // 鼠标滚轮控制
-      viewport.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        updateHalfHeight();
-        currentY = wrapY(currentY + e.deltaY * wheelSpeed);
-        track.style.transform = 'translateY(' + currentY + 'px)';
-      }, { passive: false, capture: true });
-
-      // 悬停时暂停自动滚动
-      viewport.addEventListener('mouseenter', function() {
-        hoverPause = true;
-      });
-      viewport.addEventListener('mouseleave', function() {
-        hoverPause = false;
-      });
-
-      // 等图片加载完再启动JS跑马灯
-      if (document.readyState === 'complete') {
-        setTimeout(initJSMarquee, 200);
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(initJSMarquee, 200);
-        });
-      }
-
-      // 优秀毕设模式：暂停滚动、移除克隆、静止展示全部
-      window._pauseGraduationMarquee = function() {
-        hoverPause = true;
-        if (marqueeAnimId) {
-          cancelAnimationFrame(marqueeAnimId);
-          marqueeAnimId = null;
-        }
-        var clones = grid.querySelectorAll('.graduation-clone');
-        clones.forEach(function(c) { c.remove(); });
-        track.style.transform = 'translateY(0px)';
-        track.style.animation = 'none';
-        currentY = 0;
-        viewport.style.maxHeight = 'none';
-        // 重新测量布局
-        measure();
-      };
-
-      // 恢复自动滚动
-      window._resumeGraduationMarquee = function() {
-        hoverPause = false;
-        measure();
-        duplicate();
-        initJSMarquee();
-      };
     }
 
     // 筛选标签切换
@@ -1374,13 +1152,8 @@
             }
           });
 
-          // 优秀毕设：停止自动滚动，移除克隆，静止展示
-          if (filter === 'excellent') {
-            if (window._pauseGraduationMarquee) window._pauseGraduationMarquee();
-          } else {
-            // 恢复自动滚动
-            if (window._resumeGraduationMarquee) window._resumeGraduationMarquee();
-          }
+          // 筛选变化：重建轮播序列（取前 3 张可见卡循环），其余卡片隐藏
+          if (window._rebuildGraduationMarquee) window._rebuildGraduationMarquee();
         });
       });
     }
@@ -1525,7 +1298,7 @@
         '</div>' +
         '<span class="nwork-arrow-text">查看全部</span>';
       arrowCard.addEventListener('click', function() {
-        location.href = 'normal-works.html';
+        location.href = 'graduation-works.html';
       });
       document.getElementById('normalViewport').appendChild(arrowCard);
       /* 初始化普通作品匀速滚动 */
@@ -1543,7 +1316,7 @@
       const BASE_CARD_W = 250;
       const BASE_GAP = 36;
       const COLS = 4;
-      const VISIBLE_ROWS = 2;
+      const VISIBLE_ROWS = 3;
       const PX_PER_SEC = 50;
 
       function measure() {
@@ -1585,66 +1358,6 @@
       window.addEventListener('resize', measure);
       measure();
       duplicate();
-
-      // 纯JS跑马灯 + 鼠标滚轮控制
-      var nCurrentY = 0;
-      var nHalfHeight = 0;
-      var nAutoSpeed = 0.8;
-      var nWheelSpeed = 1.5;
-      var nHoverPause = false;
-      var nMarqueeAnimId = null;
-
-      function nUpdateHalfHeight() {
-        nHalfHeight = grid.offsetHeight / 2;
-      }
-
-      function nWrapY(y) {
-        if (nHalfHeight <= 0) return y;
-        while (y > 0) y -= nHalfHeight;
-        while (y < -nHalfHeight) y += nHalfHeight;
-        return y;
-      }
-
-      function nMarqueeLoop() {
-        if (!nHoverPause) {
-          nCurrentY = nWrapY(nCurrentY - nAutoSpeed);
-          track.style.transform = 'translateY(' + nCurrentY + 'px)';
-        }
-        nMarqueeAnimId = requestAnimationFrame(nMarqueeLoop);
-      }
-
-      function nInitJSMarquee() {
-        track.style.animation = 'none';
-        track.style.animationPlayState = '';
-        track.style.transform = 'translateY(0px)';
-        nCurrentY = 0;
-        nUpdateHalfHeight();
-        if (nMarqueeAnimId) cancelAnimationFrame(nMarqueeAnimId);
-        nMarqueeAnimId = requestAnimationFrame(nMarqueeLoop);
-      }
-
-      viewport.addEventListener('wheel', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        nUpdateHalfHeight();
-        nCurrentY = nWrapY(nCurrentY + e.deltaY * nWheelSpeed);
-        track.style.transform = 'translateY(' + nCurrentY + 'px)';
-      }, { passive: false, capture: true });
-
-      viewport.addEventListener('mouseenter', function() {
-        nHoverPause = true;
-      });
-      viewport.addEventListener('mouseleave', function() {
-        nHoverPause = false;
-      });
-
-      if (document.readyState === 'complete') {
-        setTimeout(nInitJSMarquee, 200);
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(nInitJSMarquee, 200);
-        });
-      }
     }
 
   </script>
@@ -1683,4 +1396,3 @@
   </script>
 </body>
 </html>
-
