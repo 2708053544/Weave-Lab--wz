@@ -1,5 +1,5 @@
-const ORIGIN = 'https://2708053544.github.io';
-const HOSTNAME = '2708053544.github.io';
+const ORIGIN = 'https://weavelab.website';
+const HOSTNAME = 'weavelab.website';
 const ACTION = 'weave-contact';
 const configured = env => Boolean(env.RESEND_API_KEY && env.CONTACT_FROM && env.TURNSTILE_SECRET_KEY && env.TURNSTILE_SITE_KEY);
 function reply(request, body, status = 200) {
@@ -31,7 +31,7 @@ export default {
       const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret:env.TURNSTILE_SECRET_KEY,response:token,remoteip:request.headers.get('CF-Connecting-IP') || undefined}),signal:AbortSignal.timeout(10000)});
       const check = await verification.json();
       if (!verification.ok || !check.success || check.hostname!==HOSTNAME || check.action!==ACTION) return reply(request,{error:'验证已失效，请重新验证后提交。'},400);
-      const result = await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':`weave-contact-${requestId}`},body:JSON.stringify({from:env.CONTACT_FROM,to:['1016520133@qq.com'],reply_to:email,subject:`Weave Lab 留言咨询：${subject}`,text:`姓名：${name}\n回复邮箱：${email}\n主题：${subject}\n\n${message}\n\n来源：${ORIGIN}/Weave-Lab--wz/pages/contact.html`}),signal:AbortSignal.timeout(15000)});
+      const result = await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':`weave-contact-${requestId}`},body:JSON.stringify({from:env.CONTACT_FROM,to:['1016520133@qq.com'],reply_to:email,subject:`Weave Lab 留言咨询：${subject}`,text:`姓名：${name}\n回复邮箱：${email}\n主题：${subject}\n\n${message}\n\n来源：${ORIGIN}/pages/contact.html`}),signal:AbortSignal.timeout(15000)});
       if (!result.ok) return reply(request,{error:'邮件服务未接受留言，请稍后重试。'},502);
       const receipt = await result.json();
       if (typeof receipt.id !== 'string' || !receipt.id) return reply(request,{error:'暂未确认投递结果，请稍后重试。'},502);
