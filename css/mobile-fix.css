@@ -656,3 +656,33 @@ body.theme-light .navbar .dropdown-item:hover { background: rgba(80,60,150,.08) 
 body.theme-light .content-glow-wrap::before { background: linear-gradient(to bottom,#fff,rgba(255,255,255,.9) 30%,transparent); }
 body.theme-light .hero-viewport::after { background: linear-gradient(to bottom,transparent 55%,rgba(255,255,255,.3) 80%,#fff 100%); }
 body.theme-light .m3-section .m3-glow { display: block !important; opacity: .2; }
+/* Theme tokens also cover the mentor component's independent palette. */
+body.theme-light {
+  color-scheme: light;
+  --text-tertiary: #62606b;
+  --m3-bg: #fff;
+  --m3-ink: #211c30;
+  --m3-ink-dim: #625c70;
+  --m3-card-bg: #f3f1f7;
+  --m3-card-border: rgba(33,28,48,.16);
+}
+body.theme-light .m3-section .m3-sec-header .section-label,
+body.theme-light .m3-section .m3-sec-header .section-title,
+body.theme-light .m3-section .m3-sec-header .section-subtitle { opacity: 1; }
+body.theme-light .m3-section .m3-sec-header .section-subtitle,
+body.theme-light .m3-section .m3-info-label,
+body.theme-light .m3-section .m3-info-key,
+body.theme-light .m3-section .m3-scroll-hint { color: #625c70 !important; }
+body.theme-light .m3-section .m3-info-val,
+body.theme-light .m3-section .m3-counter .cur,
+body.theme-light .m3-section .m3-info-val a:hover { color: #211c30 !important; }
+body.theme-light .m3-section .m3-info-val a { text-decoration-color: #76658e; }
+/* Photo captions keep white text over their existing dark image gradient. */
+body.theme-light .m3-card-caption { color: #fff; }
+body.theme-light .m3-card-caption .cap-idx { color: rgba(255,255,255,.8); }
+body.theme-light .m3-dot:focus-visible { outline-color: #4b388f; }
+body.theme-light .m3-scroll-hint .line { background: #76658e; }
+body.theme-light .mentor-contact-link { text-decoration-color: #76658e; }
+body.theme-light .mentor-contact-link:hover { color: #4b388f; text-decoration-color: currentColor; }
+body.theme-light .footer-logo-mark-img { filter: invert(1); }
+body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #625c70 !important; }
