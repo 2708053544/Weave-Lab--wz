@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -145,9 +145,11 @@
       .normal-masonry { grid-template-columns: 1fr; max-width: 280px; }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -167,7 +169,7 @@
   <nav id="navbar" class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <img decoding="async" src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
@@ -178,7 +180,7 @@
             <a href="about.html" class="dropdown-item">工作室简介</a>
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
-            <a href="about.html#directions" class="dropdown-item">研究方向</a>
+            <a href="../index.html#about" class="dropdown-item">研究方向</a>
           </div>
         </div>
         <div class="nav-item">
@@ -206,7 +208,7 @@
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
-      <div class="nav-toggle"><span></span><span></span><span></span></div>
+      <button type="button" class="nav-toggle" aria-label="打开导航菜单" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -284,7 +286,7 @@
       });
     })();
   </script>
-  <script src="../js/main.js?v=20261007"></script>
+  <script src="../js/main.js?v=20261023-flow1"></script>
   <script>
     const normalWorks = [
       { id: 1, title: "穹枝归所——全周期安宁社区服务设计", author: "郭心蕊", board: "normal1.jpg" },
@@ -332,9 +334,11 @@
       normalWorks.forEach(function(work) {
         const card = document.createElement('div');
         card.className = 'nwork-card';
+        card.id = 'work-' + work.id;
+        card.style.scrollMarginTop = '100px';
 
         card.innerHTML = '<div class="nwork-board">' +
-          '<img src="../images/normal-works/' + work.board + '" alt="' + work.title + '" loading="lazy">' +
+          '<img decoding="async" src="../images/graduation/artwork-unavailable.svg" alt="' + work.title + '" loading="lazy">' +
           '<div class="nwork-info">' +
           '<h3 class="nwork-title">' + work.title + '</h3>' +
           '<p class="nwork-author">' + work.author + '</p>' +
@@ -344,7 +348,16 @@
       });
     }
 
-    document.addEventListener('DOMContentLoaded', renderNormalWorks);
+    document.addEventListener('DOMContentLoaded', function () {
+      renderNormalWorks();
+      // Gallery cards are generated after the browser's initial fragment lookup.
+      const selected = /^#work-\d+$/.test(location.hash) && document.getElementById(location.hash.slice(1));
+      if (selected) {
+        selected.style.outline = '2px solid var(--text-secondary)';
+        selected.style.outlineOffset = '6px';
+        selected.scrollIntoView({block: 'center'});
+      }
+    });
   </script>
 </body>
 </html>

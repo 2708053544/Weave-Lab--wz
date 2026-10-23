@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -6,11 +6,9 @@
   <title>联系我们 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="联系 Weave Lab 智能体验与服务工程实验室">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow1">
+
+<style>
     /* 入场动画 */
     .page-header {
       position: relative;
@@ -158,6 +156,9 @@
     /* 让section内容在光斑之上 */
     section, footer, .page-header, .back-button { position: relative; z-index: 1; }
   </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -177,16 +178,16 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <img decoding="async" src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
           <a href="../index.html" class="nav-link">首页 ▾</a>
           <div class="nav-dropdown">
-            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#top" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
-            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+            <a href="projects.html#studio" class="dropdown-item">精选项目</a>
           </div>
         </div>
         <div class="nav-item">
@@ -221,11 +222,11 @@
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
-      <div class="nav-toggle">
+      <button type="button" class="nav-toggle" aria-label="打开导航菜单" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
@@ -279,7 +280,7 @@
         </div>
 
         <div class="contact-image-wrapper fade-in">
-          <img src="../images/workspace-16x9.jpg" alt="Weave Lab 工作室空间" class="contact-workspace-img">
+          <img loading="lazy" decoding="async" src="../images/workspace-16x9.jpg" alt="Weave Lab 工作室空间" class="contact-workspace-img">
         </div>
       </div>
 
@@ -323,7 +324,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
+            <img decoding="async" src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -360,9 +361,9 @@
       <div class="footer-bottom">
         <p>&copy; 2024 Weave Lab. All rights reserved.</p>
         <div class="footer-social">
-          <a href="#" aria-label="WeChat">W</a>
-          <a href="#" aria-label="Weibo">B</a>
-          <a href="#" aria-label="Email">@</a>
+          <span aria-label="社交账号暂未提供">W</span>
+          <span aria-label="社交账号暂未提供">B</span>
+          <a href="mailto:1016520133@qq.com" aria-label="邮箱">@</a>
         </div>
       </div>
     </div>
@@ -401,7 +402,7 @@
       });
     })();
   </script>
-  <script src="../js/main.js?v=20261007"></script>
+  <script src="../js/main.js?v=20261023-flow1"></script>
   <script>
     (function() {
       var header = document.getElementById('pageHeader');

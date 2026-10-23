@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -12,10 +12,8 @@
     window.addEventListener('pageshow', () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
   </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cg transform='rotate(-30 12 12)'%3E%3Ccircle cx='7.3' cy='3.2' r='1.45'/%3E%3Crect x='5.5' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Crect x='14.9' y='4.7' width='3.6' height='14.6' rx='1.8'/%3E%3Ccircle cx='16.7' cy='20.8' r='1.45'/%3E%3C/g%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=18">
+
+<link rel="stylesheet" href="css/style.css?v=18">
   <style>
     html, body { background: var(--bg-primary, #0a0814); color: var(--text-primary, #f5f7ff); }
     :root{--logo:15.5px;--logo-mark:22px;--nav:14px;--nav-h:40px;--btn:13.5px;--btn-h:40px;--hero-btn-h:42px;--h1:48px;--lede:15.5px;--badge:12.5px;--stat-size:13.5px;--header-y:22px;--header-x:40px;--stats-x:72px;--stats-y:36px;--hero-gap:85px;--copy-max:860px;--lede-max:470px}
@@ -839,6 +837,10 @@
   <link rel="stylesheet" href="assets/nav-glass.css">
   <link rel="stylesheet" href="assets/liquid-home.css?v=7">
   <link rel="stylesheet" href="assets/bottom-navigation.css?v=8">
+  <link rel="stylesheet" href="css/mobile-fix.css?v=20261023-flow1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="opening" id="opening" aria-label="Weave Lab智能体验与服务工程实验室开场动画">
@@ -857,14 +859,14 @@
   <nav class="navbar navbar-hide" id="mainNavbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <img decoding="async" src="assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
-          <a href="#hero" class="nav-link active">首页 ▾</a>
+          <a href="#top" class="nav-link active">首页 ▾</a>
           <div class="nav-dropdown">
-            <a href="#hero" class="dropdown-item">首页首屏</a>
+            <a href="#top" class="dropdown-item">首页首屏</a>
             <a href="#about" class="dropdown-item">工作室简介</a>
           </div>
         </div>
@@ -900,11 +902,11 @@
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
-      <div class="nav-toggle">
+      <button type="button" class="nav-toggle" aria-label="打开导航菜单" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
@@ -975,7 +977,7 @@
     <canvas class="hero-trail-canvas" aria-hidden="true"></canvas>
     <div class="menu-backdrop" aria-hidden="true"></div>
     <header class="header">
-      <a href="index.html" class="logo appear appear--scale" style="--d:.08s" aria-label="Weave Lab智能体验与服务工程实验室"><span class="logo-symbol" aria-hidden="true"><img src="assets/weave-lab-mark.png" alt=""></span><span>Weave<span class="logo-suffix"> Lab</span></span></a>
+      <a href="index.html" class="logo appear appear--scale" style="--d:.08s" aria-label="Weave Lab智能体验与服务工程实验室"><span class="logo-symbol" aria-hidden="true"><img decoding="async" src="assets/weave-lab-mark.png" alt=""></span><span>Weave<span class="logo-suffix"> Lab</span></span></a>
     </header>
 
     <main class="hero-main"><div class="hero-copy">
@@ -1000,32 +1002,32 @@
       <div class="dock-nav-slot">
     <nav class="nav nav-glass" id="site-nav" aria-label="主导航">
         <a href="#top" class="nav-link appear appear--scale" style="--d:.16s" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v9.2a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3z"/><path d="M9.5 20.5v-6h5v6"/></svg></span><span>首页</span></a>
-        <a href="pages/about.html" class="nav-group nav-link appear appear--soft" style="--d:.24s;" data-jump="pages/about.html">
+        <div class="nav-group"><a href="pages/about.html" class="nav-link appear appear--soft" style="--d:.24s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="2.8"/><path d="M3.8 18.7c.3-3.1 2.3-5 5.2-5s4.9 1.9 5.2 5"/><path d="M15.3 5.5a2.8 2.8 0 0 1 0 5.2M16.6 13.9c2.1.4 3.4 2.1 3.6 4.8"/></svg></span>
           <span>师生团队</span><span class="nav-arrow">▾</span>
-          <div class="nav-dropdown">
+          </a><div class="nav-dropdown">
             <a href="pages/about.html#mentors">指导老师</a>
             <a href="pages/about.html#students">学生团队</a>
           </div>
-        </a>
-        <a href="pages/projects.html" class="nav-group nav-link appear appear--scale" style="--d:.32s;" data-jump="pages/projects.html">
+        </div>
+        <div class="nav-group"><a href="pages/projects.html" class="nav-link appear appear--scale" style="--d:.32s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="m17 13.3.9 2.7 2.8.9-2.8.9-.9 2.8-.9-2.8-2.8-.9 2.8-.9z"/></svg></span>
           <span>项目成果</span><span class="nav-arrow">▾</span>
-          <div class="nav-dropdown">
+          </a><div class="nav-dropdown">
             <a href="pages/projects.html">全部项目</a>
             <a href="pages/graduation-works.html">毕设作品</a>
               <a href="pages/projects.html#normal-works">普通作品</a>
-            <a href="pages/projects.html?filter=award">获奖作品</a>
+            <a href="pages/projects.html#awards">获奖作品</a>
           </div>
-        </a>
-        <a href="pages/activities.html" class="nav-group nav-link appear appear--soft" style="--d:.4s;" data-jump="pages/activities.html">
+        </div>
+        <div class="nav-group"><a href="pages/activities.html" class="nav-link appear appear--soft" style="--d:.4s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12.2c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="M3 17.6c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="m17.4 4.2.5 1.7 1.7.5-1.7.5-.5 1.7-.5-1.7-1.7-.5 1.7-.5z"/></svg></span>
           <span>活动与合作</span><span class="nav-arrow">▾</span>
-          <div class="nav-dropdown">
+          </a><div class="nav-dropdown">
             <a href="pages/activities.html">活动</a>
             <a href="pages/activities.html#partners">合作资源</a>
           </div>
-        </a>
+        </div>
         <a href="pages/contact.html" class="nav-link appear appear--scale" style="--d:.48s"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.1 5.2h15.8a1.6 1.6 0 0 1 1.6 1.6v9.7a1.6 1.6 0 0 1-1.6 1.6H9l-4.9 3v-3a1.6 1.6 0 0 1-1.6-1.6V6.8a1.6 1.6 0 0 1 1.6-1.6Z"/><path d="M7 10.8h10M7 14.2h6.5"/></svg></span><span>联系我们</span></a>
     </nav>
       </div>
@@ -1149,7 +1151,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
+            <img decoding="async" src="assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -1186,16 +1188,16 @@
       <div class="footer-bottom">
         <p>&copy; 2024 Weave Lab 智能体验与服务工程实验室. All rights reserved.</p>
         <div class="footer-social">
-          <a href="#" aria-label="微信">微信</a>
-          <a href="#" aria-label="微博">微博</a>
-          <a href="#" aria-label="邮箱">邮箱</a>
+          <span aria-label="社交账号暂未提供">微信</span>
+          <span aria-label="社交账号暂未提供">微博</span>
+          <a href="mailto:1016520133@qq.com" aria-label="邮箱">邮箱</a>
         </div>
       </div>
     </div>
   </footer>
   </div><!-- /content-glow-wrap -->
 
-  <script src="js/main.js?v=20261007"></script>
+  <script src="js/main.js?v=20261023-flow1"></script>
   <script>
       // 强制启动鼠标拖尾特效（确保开场动画结束后启动）
       function startHeroTrail() {
@@ -1230,14 +1232,6 @@
       }
       const backdrop=$('.menu-backdrop');
       if(backdrop) backdrop.addEventListener('click',closeMenu);
-      // 底部导航：点击“师生团队/项目成果”主按钮直接跳转对应页面（保留悬停下拉，不影响下拉项）
-      $$('.nav-glass .nav-group[data-jump]').forEach(function (group) {
-        group.addEventListener('click', function (e) {
-          if (e.target.closest('.nav-dropdown')) return;
-          var href = group.getAttribute('data-jump');
-          if (href) location.href = href;
-        });
-      });
       matchMedia('(min-width: 901px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
       if(matchMedia('(hover: hover) and (pointer: fine)').matches){
         $$('.nav-glass .nav-link').forEach(el=>{
@@ -1300,8 +1294,8 @@
       });
     })();
   </script>
-  <script src="assets/opening.js?v=13"></script>
-  <script src="assets/hero-trail.js?v=11"></script>
+  <script src="assets/opening.js?v=20261023-burst1"></script>
+  <script src="assets/hero-trail.js?v=20261023-perf1"></script>
 </body>
 </html>
 

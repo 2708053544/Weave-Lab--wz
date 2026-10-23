@@ -32,11 +32,13 @@ body.m3-page {
 /* ---------- 嵌入 section 模式 ---------- */
 section.m3-section {
   position: relative;
-  height: 55vh;
-  min-height: 380px;
-  overflow-x: clip;
-  overflow-y: visible;
+  height: 100vh;
+  min-height: 620px;
+  overflow: visible;
   background: var(--m3-bg);
+  color: var(--m3-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 /* 底部光晕延伸 — 让导师区紫蓝光晕完整过渡到下方学生区 */
@@ -147,9 +149,10 @@ section.m3-section .m3-sec-header {
   left: 6vw;
   z-index: 25;
 }
-section.m3-section .m3-sec-header .section-label { color: var(--text-secondary); opacity: 1; font-size: 0.75rem; letter-spacing: 0.3em; font-weight: 500; margin-bottom: 20px; }
-section.m3-section .m3-sec-header .section-title { color: var(--text-primary); opacity: 1; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 16px; letter-spacing: normal; }
-section.m3-section .m3-sec-header .section-subtitle { color: var(--text-secondary); opacity: 1; font-size: 1.125rem; font-weight: 400; max-width: 600px; }
+section.m3-section .m3-sec-header .section-label { color: var(--m3-ink-dim); opacity: 0.45; font-size: 12px; letter-spacing: 0.3em; }
+section.m3-section .m3-sec-header .section-title { color: var(--m3-ink); opacity: 0.35; font-size: 22px; font-weight: 500; letter-spacing: 0.1em; }
+section.m3-section .m3-sec-header .section-subtitle { color: var(--m3-ink-dim); opacity: 0.3; font-size: 14px; font-weight: 300; }
+section.m3-section .m3-sec-header .section-title { margin: 0 0 6px; }
 
 /* ---------- 顶部返回 / 计数 ---------- */
 .m3-back {
@@ -185,8 +188,8 @@ section.m3-section .m3-counter { top: 96px; }
 /* ---------- 左侧文字区 ---------- */
 .m3-info {
   position: absolute;
-  left: 14vw;
-  top: 38%;
+  left: 6vw;
+  top: 50%;
   transform: translateY(-50%);
   z-index: 20;
   max-width: 34vw;
@@ -216,24 +219,20 @@ section.m3-section .m3-counter { top: 96px; }
 .m3-info-name {
   font-family: 'Cormorant Garamond', 'Noto Sans SC', serif;
   font-weight: 600;
-  font-size: clamp(32px, 4vw, 46px);
-  line-height: 1.1;
-  margin: 0 0 14px;
+  font-size: clamp(42px, 5.2vw, 76px);
+  line-height: 1.05;
+  margin: 0 0 16px;
   min-height: 1.1em;
   letter-spacing: 0.04em;
   text-shadow: 0 0 30px rgba(79, 107, 255, 0.15), 0 0 60px rgba(155, 92, 255, 0.08);
 }
 
 .m3-info-title {
-  font-size: clamp(14px, 1.5vw, 20px);
-  font-weight: 500;
-  color: var(--m3-ink);
-  letter-spacing: 0.05em;
+  font-size: 14px;
+  color: var(--m3-ink-dim);
+  letter-spacing: 0.08em;
   margin: 0 0 20px;
   min-height: 1.4em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* 详情字段 */
@@ -328,16 +327,20 @@ section.m3-section .m3-counter { top: 96px; }
 .m3-stage {
   position: absolute;
   right: 8vw;
-  top: 38%;
+  top: 50%;
   transform: translateY(-50%);
   z-index: 10;
   width: min(30vw, 420px);
   aspect-ratio: 3 / 3.8;
+  perspective: 1400px;
 }
 
 .m3-stack {
   position: absolute;
   inset: 0;
+  transform-style: preserve-3d;
+  /* 鼠标视差倾斜（JS 写 CSS 变量） */
+  transform: rotateX(calc(var(--my, 0) * -6deg)) rotateY(calc(var(--mx, 0) * 8deg));
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -472,6 +475,9 @@ section.m3-section .m3-counter { top: 96px; }
   gap: 18px;
 }
 .m3-dot {
+  padding: 0;
+  border: 0;
+  appearance: none;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -480,6 +486,7 @@ section.m3-section .m3-counter { top: 96px; }
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   position: relative;
 }
+.m3-dot:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .m3-dot.active {
   background: #fff;
   transform: scale(1.25);
@@ -504,7 +511,7 @@ section.m3-section .m3-counter { top: 96px; }
 /* ---------- 底部提示 ---------- */
 .m3-scroll-hint {
   position: absolute;
-  bottom: 10px;
+  bottom: 26px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 30;
@@ -557,39 +564,68 @@ section.m3-section .m3-counter { top: 96px; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 900px) {
-  /* 移动端裁剪光晕溢出，避免水平滚动条 */
-  section.m3-section { overflow: hidden; }
-
-  .m3-info {
-    left: 50%;
+  body.m3-page { height: auto; overflow-x: hidden; overflow-y: auto; }
+  section.m3-section { height: auto; min-height: 0; }
+  .m3-root,
+  section.m3-section .m3-root {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 88px 24px 48px;
+    min-height: 100svh;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .m3-stage {
+    position: relative;
+    order: 0;
+    flex: none;
+    right: auto;
     top: auto;
-    bottom: 9vh;
-    transform: translateX(-50%);
-    max-width: 86vw;
+    transform: none;
+    width: min(64vw, 300px);
+    margin: 20px 0 12px;
+    touch-action: pan-y pinch-zoom;
+  }
+  .m3-info {
+    position: relative;
+    order: 1;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    max-width: 520px;
     text-align: center;
   }
   .m3-info-name { font-size: clamp(30px, 8vw, 44px); }
+  .m3-info-label { margin-bottom: 14px; }
   .m3-info-hint::before { display: none; }
-  .m3-info-hint { letter-spacing: 0.08em; }
-  .m3-info-title { margin-bottom: 14px; }
-  .m3-info-details { gap: 8px; margin-bottom: 18px; }
-  .m3-info-key { min-width: 48px; font-size: 10px; }
-  .m3-info-val { font-size: 13px; }
-
-  .m3-stage {
-    right: 50%;
-    top: 42%;
-    transform: translate(50%, -50%);
-    width: min(64vw, 320px);
+  .m3-info-hint { letter-spacing: 0.04em; font-size: 11px; }
+  .m3-info-title { margin-bottom: 14px; line-height: 1.6; }
+  .m3-info-details { gap: 10px; margin-bottom: 18px; text-align: left; }
+  .m3-info-key { min-width: 48px; font-size: 10px; flex: none; }
+  .m3-info-val { font-size: 13px; line-height: 1.6; min-width: 0; overflow-wrap: anywhere; word-break: normal; }
+  .m3-dots {
+    position: relative;
+    order: 2;
+    right: auto;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    gap: 4px;
   }
-
-  .m3-dots { right: 14px; gap: 14px; }
-  .m3-counter { top: auto; bottom: 20px; right: 20px; }
-  section.m3-section .m3-counter { top: auto; bottom: 20px; }
-  .m3-back { top: 18px; left: 18px; }
+  .m3-dot { width: 44px; height: 44px; border: 18px solid transparent; background-clip: content-box; box-sizing: border-box; }
+  .m3-dot.active { transform: none; box-shadow: none; }
+  .m3-counter,
+  section.m3-section .m3-counter { top: 32px; bottom: auto; right: 24px; }
+  .m3-back { top: 24px; left: 18px; }
   .m3-arrow { display: none; }
-  .m3-scroll-hint { display: none; } /* 触屏用户自然滑动，避免与文字区重叠 */
-  section.m3-section .m3-sec-header { display: none; } /* 手机端信息块已含 OUR MENTORS */
+  .m3-scroll-hint { display: none; }
+  section.m3-section .m3-sec-header { display: none; }
 }
 
 /* 尊重系统减少动效偏好 */

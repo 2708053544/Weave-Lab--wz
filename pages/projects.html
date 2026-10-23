@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=1">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow1">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -562,9 +562,10 @@
       .nwork-author { font-size: 0.6875rem; }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -584,16 +585,16 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <img decoding="async" src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
         <div class="nav-item">
           <a href="../index.html" class="nav-link">首页 ▾</a>
           <div class="nav-dropdown">
-            <a href="../index.html#hero" class="dropdown-item">首页首屏</a>
+            <a href="../index.html#top" class="dropdown-item">首页首屏</a>
             <a href="../index.html#about" class="dropdown-item">工作室简介</a>
-            <a href="../index.html#works" class="dropdown-item">精选项目</a>
+            <a href="projects.html#studio" class="dropdown-item">精选项目</a>
           </div>
         </div>
         <div class="nav-item">
@@ -628,11 +629,11 @@
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
-      <div class="nav-toggle">
+      <button type="button" class="nav-toggle" aria-label="打开导航菜单" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
@@ -664,7 +665,7 @@
       <div class="project-grid fade-in">
         <!-- Studio Project 01 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=5'">
-          <div class="project-card-image"><img src="../images/uav-cover.jpg" alt="无人机选种 AI 系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
+          <div class="project-card-image"><img loading="lazy" decoding="async" src="../images/uav-cover.jpg" alt="无人机选种 AI 系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
             <h3 class="project-card-title">无人机选种 AI 系统</h3>
@@ -681,7 +682,7 @@
 
         <!-- Studio Project 02 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=6'">
-          <div class="project-card-image"><img src="../images/wonder-cover.jpg" alt="WonderWash 智能洗衣归集方案" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
+          <div class="project-card-image"><img loading="lazy" decoding="async" src="../images/wonder-cover.jpg" alt="WonderWash 智能洗衣归集方案" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
             <h3 class="project-card-title">WonderWash 智能洗衣归集方案</h3>
@@ -699,7 +700,7 @@
 
         <!-- Studio Project 03 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=9'">
-          <div class="project-card-image"><img src="../images/uro-cover.jpg" alt="输尿管软镜手术机器人系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
+          <div class="project-card-image"><img loading="lazy" decoding="async" src="../images/uro-cover.jpg" alt="输尿管软镜手术机器人系统" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目 · Project No.1</div>
             <h3 class="project-card-title">输尿管软镜手术机器人系统</h3>
@@ -715,7 +716,7 @@
 
         <!-- Studio Project 04 -->
         <div class="project-card" data-category="studio" onclick="location.href='project-detail.html?id=10'">
-          <div class="project-card-image"><img src="../images/hto-vr-cover.png?v=3" alt="面向HTO骨科手术机器人的全流程VR系统设计" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
+          <div class="project-card-image"><img loading="lazy" decoding="async" src="../images/hto-vr-cover.png?v=3" alt="面向HTO骨科手术机器人的全流程VR系统设计" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div>
           <div class="project-card-content">
             <div class="project-card-category">工作室项目</div>
             <h3 class="project-card-title">面向HTO骨科手术机器人的全流程VR系统设计</h3>
@@ -789,7 +790,7 @@
       <div class="scroll-container fade-in">
         <!-- 奖状 01 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-nuke1.jpg" alt="天津市大学生工业与艺术设计竞赛一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-nuke1.jpg" alt="天津市大学生工业与艺术设计竞赛一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛一等奖</h3>
@@ -803,7 +804,7 @@
 
         <!-- 奖状 02 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-bus2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-bus2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛二等奖</h3>
@@ -817,7 +818,7 @@
 
         <!-- 奖状 03 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-dream2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-dream2.jpg" alt="天津市大学生工业与艺术设计竞赛二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛二等奖</h3>
@@ -831,7 +832,7 @@
 
         <!-- 奖状 04 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-flow3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-flow3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛三等奖</h3>
@@ -845,7 +846,7 @@
 
         <!-- 奖状 05 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-smart3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-smart3.jpg" alt="天津市大学生工业与艺术设计竞赛三等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">天津市大学生工业与艺术设计竞赛三等奖</h3>
@@ -859,7 +860,7 @@
 
         <!-- 奖状 06 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-ncda1.jpg" alt="未来设计师NCDA大赛天津赛区一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-ncda1.jpg" alt="未来设计师NCDA大赛天津赛区一等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">未来设计师NCDA大赛天津赛区一等奖</h3>
@@ -873,7 +874,7 @@
 
         <!-- 奖状 07 -->
         <div class="scroll-card">
-          <div class="scroll-card-image"><img src="../images/award-ncda2.jpg" alt="未来设计师NCDA大赛天津赛区二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
+          <div class="scroll-card-image"><img decoding="async" src="../images/award-ncda2.jpg" alt="未来设计师NCDA大赛天津赛区二等奖" style="width:100%;height:100%;object-fit:cover;" loading="lazy"></div>
           <div class="scroll-card-content">
             <span class="scroll-card-tag">获奖荣誉</span>
             <h3 class="scroll-card-title">未来设计师NCDA大赛天津赛区二等奖</h3>
@@ -895,7 +896,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
+            <img decoding="async" src="../assets/mx-icon-white.png" class="footer-logo-mark-img" alt="Weave Lab">
             <span>Weave Lab</span>
           </div>
           <p class="footer-tagline">
@@ -932,15 +933,15 @@
       <div class="footer-bottom">
         <p>&copy; 2024 Weave Lab. All rights reserved.</p>
         <div class="footer-social">
-          <a href="#" aria-label="WeChat">W</a>
-          <a href="#" aria-label="Weibo">B</a>
-          <a href="#" aria-label="Email">@</a>
+          <span aria-label="社交账号暂未提供">W</span>
+          <span aria-label="社交账号暂未提供">B</span>
+          <a href="mailto:1016520133@qq.com" aria-label="邮箱">@</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20261007"></script>
+  <script src="../js/main.js?v=20261023-flow1"></script>
   <script>
     // 页面入场动画：标题光晕爆发 → 自动下滑到内容区
     (function() {
@@ -1078,28 +1079,28 @@
         title: "三轨滑轨沙发",
         author: "尹欣 · 苏俊旭",
         category: "graduation",
-        boards: ["project15_1.jpg"]
+        boards: ["artwork-unavailable.svg"]
       },
       {
         id: 16,
         title: "中医治未病理念下家庭健康自检设备设计",
         author: "马伊玟 · 苏俊旭",
         category: "graduation",
-        boards: ["project16_1.jpg"]
+        boards: ["artwork-unavailable.svg"]
       },
       {
         id: 17,
         title: "叙事化团泊镇文化IP及衍生品设计",
         author: "申琰硕 · 苏俊旭",
         category: "graduation",
-        boards: ["project17_1.jpg"]
+        boards: ["artwork-unavailable.svg"]
       },
       {
         id: 18,
         title: "情绪亚健康青年自我庇护家居设计",
         author: "苏小铭 · 苏俊旭",
         category: "graduation",
-        boards: ["project18_1.jpg"]
+        boards: ["artwork-unavailable.svg"]
       }
     ];
 
@@ -1131,7 +1132,7 @@
         let slidesHtml = '';
         project.boards.forEach((board, idx) => {
           slidesHtml += '<div class="graduation-board-slide' + (idx === 0 ? ' active' : '') + '">' +
-            '<img src="../images/graduation/' + board + '" alt="' + project.title + '" loading="lazy">' +
+            '<img decoding="async" src="../images/graduation/' + board + '" alt="' + project.title + '" loading="lazy">' +
             '</div>';
         });
 
@@ -1506,10 +1507,10 @@
         card.className = 'nwork-card';
         card.setAttribute('data-id', w.id);
         card.onclick = function() {
-          location.href = 'normal-detail.html?id=' + w.id;
+          location.href = 'normal-works.html#work-' + w.id;
         };
         card.innerHTML = '<div class="nwork-board">' +
-          '<img src="../images/normal-works/' + w.board + '" alt="' + w.title + '" loading="lazy">' +
+          '<img decoding="async" src="../images/graduation/artwork-unavailable.svg" alt="' + w.title + '" loading="lazy">' +
           '<div class="nwork-info">' +
           '<h3 class="nwork-title">' + w.title + '</h3>' +
           '<p class="nwork-author">' + w.author + '</p>' +
@@ -1575,7 +1576,7 @@
           var pid = clone.getAttribute('data-id');
           if (pid) {
             clone.onclick = function() {
-              location.href = 'normal-detail.html?id=' + pid;
+              location.href = 'normal-works.html#work-' + pid;
             };
           }
           grid.appendChild(clone);

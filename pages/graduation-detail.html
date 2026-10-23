@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -181,9 +181,11 @@
       .back-button { left: 20px; top: calc(var(--nav-height) + 20px); }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -203,7 +205,7 @@
   <nav id="navbar" class="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
+        <img decoding="async" src="../assets/mx-icon-white.png" class="nav-logo-mark-img" alt="Weave Lab">
         <span>Weave Lab</span>
       </a>
       <div class="nav-menu">
@@ -214,7 +216,7 @@
             <a href="about.html" class="dropdown-item">工作室简介</a>
             <a href="about.html#mentors" class="dropdown-item">指导老师</a>
             <a href="about.html#students" class="dropdown-item">学生团队</a>
-            <a href="about.html#directions" class="dropdown-item">研究方向</a>
+            <a href="../index.html#about" class="dropdown-item">研究方向</a>
           </div>
         </div>
         <div class="nav-item">
@@ -242,7 +244,7 @@
         </div>
       </div>
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题"><span class="theme-toggle-icon"></span></button>
-      <div class="nav-toggle"><span></span><span></span><span></span></div>
+      <button type="button" class="nav-toggle" aria-label="打开导航菜单" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -259,7 +261,7 @@
   <!-- 大图展示 -->
   <section class="grad-detail-gallery">
     <div class="grad-gallery-main fade-in">
-      <img id="mainImage" src="" alt="作品展示">
+      <img loading="lazy" decoding="async" id="mainImage" src="" alt="作品展示">
       <button class="grad-gallery-arrow prev" id="prevBtn" aria-label="上一张">‹</button>
       <button class="grad-gallery-arrow next" id="nextBtn" aria-label="下一张">›</button>
       <div class="grad-gallery-count" id="imgCount">1 / 1</div>
@@ -325,7 +327,7 @@
       });
     })();
   </script>
-  <script src="../js/main.js?v=20261007"></script>
+  <script src="../js/main.js?v=20261023-flow1"></script>
   <script>
     // 毕设作品数据（和 projects.html 保持一致）
     const graduationProjects = [
@@ -343,10 +345,10 @@
       { id: 12, title: "HTO术前VR决策系统设计", author: "曹骞予 · 张寞轩", boards: ["project12_1.jpg", "project12_2.jpg", "project12_3.jpg", "project12_4.jpg"] },
       { id: 13, title: "禾火新生—农民断代背景下EcoCube生态农铺", author: "黄玉冰", boards: ["project13_1.jpg", "project13_2.jpg"] },
       { id: 14, title: "基于心流理论的沉浸式乐器陪练系统", author: "于渤", boards: ["project14_1.jpg"] },
-      { id: 15, title: "三轨滑轨沙发", author: "尹欣 · 苏俊旭", boards: ["project15_1.jpg"] },
-      { id: 16, title: "中医治未病理念下家庭健康自检设备设计", author: "马伊玟 · 苏俊旭", boards: ["project16_1.jpg"] },
-      { id: 17, title: "叙事化团泊镇文化IP及衍生品设计", author: "申琰硕 · 苏俊旭", boards: ["project17_1.jpg"] },
-      { id: 18, title: "情绪亚健康青年自我庇护家居设计", author: "苏小铭 · 苏俊旭", boards: ["project18_1.jpg"] }
+      { id: 15, title: "三轨滑轨沙发", author: "尹欣 · 苏俊旭", boards: ["artwork-unavailable.svg"] },
+      { id: 16, title: "中医治未病理念下家庭健康自检设备设计", author: "马伊玟 · 苏俊旭", boards: ["artwork-unavailable.svg"] },
+      { id: 17, title: "叙事化团泊镇文化IP及衍生品设计", author: "申琰硕 · 苏俊旭", boards: ["artwork-unavailable.svg"] },
+      { id: 18, title: "情绪亚健康青年自我庇护家居设计", author: "苏小铭 · 苏俊旭", boards: ["artwork-unavailable.svg"] }
     ];
 
     // 获取URL参数
@@ -379,7 +381,7 @@
       project.boards.forEach(function(board, idx) {
         var thumb = document.createElement('div');
         thumb.className = 'grad-gallery-thumb' + (idx === 0 ? ' active' : '');
-        thumb.innerHTML = '<img src="../images/graduation/' + board + '" alt="第' + (idx + 1) + '张">';
+        thumb.innerHTML = '<img loading="lazy" decoding="async" src="../images/graduation/' + board + '" alt="第' + (idx + 1) + '张">';
         thumb.addEventListener('click', function() { goTo(idx); });
         thumbsContainer.appendChild(thumb);
       });

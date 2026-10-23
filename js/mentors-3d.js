@@ -19,7 +19,7 @@ const TEACHERS = [
     title: '讲师 / 创新创业教育导师 / 工作室负责人',
     email: '1016520133@qq.com',
     major: '服务设计与互联网营销 / AI产品与智能交互',
-    blog: 'https://c7-4.github.io/-/',
+    blog: 'https://blog.weavelab.com/zhangmoxuan',
     photo: '../images/teachers/teacher1.jpg',
     photoPos: 'center top',
     link: 'mentor-detail.html?id=1'
@@ -29,7 +29,7 @@ const TEACHERS = [
     name: '刘海斌',
     short: '刘',
     title: '副教授 / 人工智能教育专家',
-    email: 'tjracx2018@163.com',
+    email: '#',
     major: '人工智能教育 / 智能硬件 / AI工程化',
     blog: 'https://lhbzx1984.github.io/personal-blog/',
     photo: '../images/teachers/teacher2.png',
@@ -53,7 +53,7 @@ const TEACHERS = [
     name: '苏俊旭',
     short: '苏',
     title: '助教 / 设计实践导师',
-    email: '739672050@qq.com',
+    email: '#',
     major: '用户体验 / 产品服务设计',
     blog: 'https://hkh168.github.io/sujunxu-homepage/',
     photo: '../images/teachers/teacher4.png',
@@ -78,7 +78,7 @@ const TEACHERS = [
   const majorEl = document.getElementById('m3Major');
   const blogEl = document.getElementById('m3Blog');
   const curEl = document.getElementById('m3Cur');
-  const hintEl = document.querySelector('.m3-info-hint');
+  const hintEl = root.querySelector('.m3-info-hint');
 
   const total = TEACHERS.length;
   let current = 0;
@@ -115,7 +115,9 @@ const TEACHERS = [
 
   /* 生成导航点 */
   TEACHERS.forEach((t, i) => {
-    const dot = document.createElement('div');
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `查看${t.name}的资料`);
     dot.className = 'm3-dot';
     dot.dataset.name = t.name;
     dot.addEventListener('click', () => goTo(i));
@@ -138,6 +140,17 @@ const TEACHERS = [
     });
   }
 
+  /* 让博客整行都可以点击 */
+  const blogRow = blogEl.closest('.m3-info-row');
+  if (blogRow) {
+    blogRow.style.cursor = 'pointer';
+    blogRow.style.pointerEvents = 'auto';
+    blogRow.addEventListener('click', function (e) {
+      if (e.target === blogEl) return; /* 避免重复触发 */
+      window.open(blogEl.href, '_blank', 'noopener');
+    });
+  }
+
   function renderText() {
     const t = TEACHERS[current];
     curEl.textContent = '0' + (current + 1);
@@ -152,8 +165,10 @@ const TEACHERS = [
     majorEl.textContent = t.major;
     blogEl.textContent = t.blog;
     blogEl.href = t.blog;
-    blogEl.target = '_blank';
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-pressed', String(i === current));
+    });
   }
 
   function goTo(target, direction) {
@@ -198,6 +213,10 @@ const TEACHERS = [
   function playEntrance() {
     if (entranceStarted) return; /* 只播一次 */
     entranceStarted = true;
+    if (window.matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) {
+      root.classList.remove('m3-booting');
+      return;
+    }
     entrancePlaying = true;
     /* 文字/控件由 HTML 上的 m3-booting 类预先隐藏（CSS），收回后再浮现 */
 
@@ -217,7 +236,7 @@ const TEACHERS = [
     /* 计算扇形几何：4 张卡横向铺满屏幕且旋转外扩也不出屏 */
     const vw = window.innerWidth;
     const cardW = stage.offsetWidth || vw * 0.3;
-    const cardH = cardW * 4 / 3; /* 卡片纵横比 3:4（与 CSS aspect-ratio 一致） */
+    const cardH = stage.offsetHeight || cardW * 3.8 / 3; /* 卡片纵横比 3:4（与 CSS aspect-ratio 一致） */
     const ANG = 9;               /* 相邻卡夹角的一半幅度 */
     const swing = Math.sin(ANG * Math.PI / 180) * cardH * 1.35; /* 旋转使顶部外摆的宽度 */
     const margin = swing * 1.35 + 24; /* 1.35 倍冗余：旋转同时平移卡片中心 */
@@ -270,20 +289,16 @@ const TEACHERS = [
 
       /* 所有弹出物收回后，解除隐藏并让文字/控件逐个浮现 */
       root.classList.remove('m3-booting');
-      const infoRows = root.querySelectorAll('.m3-info-row');
       const seq = [
-        ['.m3-sec-header', 0.05],
-        ['.m3-info-label', 0.15],
-        ['#m3Name', 0.3],
-        ['#m3Title', 0.45],
-        ['.m3-info-row:nth-child(1)', 0.6],
-        ['.m3-info-row:nth-child(2)', 0.72],
-        ['.m3-info-row:nth-child(3)', 0.84],
-        ['.m3-info-hint', 0.96],
-        ['.m3-counter', 0.3],
-        ['#m3Dots', 0.45],
-        ['.m3-arrow.prev', 0.6],
-        ['.m3-arrow.next', 0.66]
+        ['.m3-sec-header', 0.15],
+        ['.m3-info-label', 0.35],
+        ['#m3Name', 0.6],
+        ['#m3Title', 0.85],
+        ['.m3-info-hint', 1.1],
+        ['.m3-counter', 0.6],
+        ['#m3Dots', 0.85],
+        ['.m3-arrow.prev', 1.1],
+        ['.m3-arrow.next', 1.2]
       ];
       seq.forEach(([sel, delay]) => {
         const el = root.querySelector(sel);
@@ -294,33 +309,30 @@ const TEACHERS = [
         /* 用 WAAPI 播放：结束后自动停留在 to 状态，不依赖 animationend */
         el.animate(
           [
-            { opacity: 0, transform: 'translateY(14px)' },
-            { opacity: 1, transform: 'translateY(0)' }
+            { opacity: 0 },
+            { opacity: 1 }
           ],
-          { duration: 600, delay: delay * 1000, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'both' }
+          { duration: 1000, delay: delay * 1000, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'both' }
         );
       });
     }, 4200);
   }
 
-  if (standalone) {
+  if (standalone || window.matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce)').matches) {
     playEntrance();
   } else {
-    /* 滚到板块顶部进入视口下方 300px 范围内时播放展开动画 */
-    let scrollHandler = function () {
-      if (entranceStarted) {
-        window.removeEventListener('scroll', scrollHandler);
-        return;
-      }
-      var r = section.getBoundingClientRect();
-      var triggerLine = window.innerHeight - 300;
-      if (r.top < triggerLine) {
-        window.removeEventListener('scroll', scrollHandler);
-        playEntrance();
-      }
-    };
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-    scrollHandler();
+    /* 滚到板块首次占住视口时播放；另设兜底定时器，
+       避免 IO 因渲染暂停等原因不触发导致文字永久隐藏 */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting && en.intersectionRatio >= 0.45) {
+          io.disconnect();
+          playEntrance();
+        }
+      });
+    }, { threshold: [0.45] });
+    io.observe(section);
+    setTimeout(() => playEntrance(), 3000);
   }
 
   /* ============================================================
@@ -364,9 +376,10 @@ const TEACHERS = [
   window.addEventListener('touchmove', (e) => {
     if (hijack === null) {
       if (!sectionActive()) { hijack = false; return; }
+      const dx = e.touches[0].clientX - tsX;
       const dy = e.touches[0].clientY - tsY;
-      if (Math.abs(dy) < 10) return;
-      hijack = true; /* 按在照片上：始终接管并循环切换 */
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 10) return;
+      hijack = Math.abs(dx) > Math.abs(dy); /* 仅横向手势切换，纵向继续滚页 */
     }
     if (hijack) e.preventDefault();
   }, { passive: false });
@@ -396,8 +409,8 @@ const TEACHERS = [
   });
 
   /* ---------------- 箭头按钮 / 导航点 ---------------- */
-  const prevBtn = document.querySelector('.m3-arrow.prev');
-  const nextBtn = document.querySelector('.m3-arrow.next');
+  const prevBtn = root.querySelector('.m3-arrow.prev');
+  const nextBtn = root.querySelector('.m3-arrow.next');
   if (prevBtn) prevBtn.addEventListener('click', prev);
   if (nextBtn) nextBtn.addEventListener('click', next);
 
@@ -415,7 +428,9 @@ const TEACHERS = [
   if (hintEl) {
     hintEl.textContent = standalone
       ? '滚动切换 · 点击卡片查看详情'
-      : '照片上滚动滚轮切换 · 点击卡片查看详情';
+      : (window.matchMedia('(pointer: coarse)').matches
+        ? '左右滑动照片切换 · 点击卡片查看详情'
+        : '照片上滚动滚轮切换 · 点击卡片查看详情');
   }
 
   /* 初始渲染 */

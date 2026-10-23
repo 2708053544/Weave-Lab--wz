@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
 /* ---------- Theme Toggle ---------- */
 function initTheme() {
   // Read saved preference
-  var saved = localStorage.getItem('theme') || 'dark';
+  var saved = 'dark';
+  try { saved = localStorage.getItem('theme') || 'dark'; } catch {}
   if (saved === 'light') {
     document.body.classList.add('theme-light');
   }
@@ -36,7 +37,7 @@ function initTheme() {
   toggle.addEventListener('click', function () {
     document.body.classList.toggle('theme-light');
     var mode = document.body.classList.contains('theme-light') ? 'light' : 'dark';
-    localStorage.setItem('theme', mode);
+    try { localStorage.setItem('theme', mode); } catch {}
   });
 }
 
@@ -93,36 +94,28 @@ function initNavbar() {
 function initMobileNav() {
   const toggle = document.querySelector('.nav-toggle');
   const menu = document.querySelector('.nav-menu');
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener('click', function () {
-    // Toggle mobile menu state
-    const isOpen = menu.style.display === 'flex';
-    menu.style.display = isOpen ? 'none' : 'flex';
-
-    if (!isOpen) {
-      menu.style.position = 'absolute';
-      menu.style.top = '100%';
-      menu.style.left = '0';
-      menu.style.right = '0';
-      menu.style.flexDirection = 'column';
-      menu.style.background = 'var(--bg-primary)';
-      menu.style.borderBottom = '1px solid var(--border-color)';
-      menu.style.padding = '20px';
-      menu.style.gap = '8px';
-    }
-
-    // Animate toggle icon
-    const spans = toggle.querySelectorAll('span');
-    if (!isOpen) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-    } else {
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
-    }
+  const navbar = document.querySelector('.navbar');
+  if (!toggle || !menu || !navbar) return;
+  if (!menu.id) menu.id = 'primary-navigation';
+  toggle.setAttribute('aria-controls', menu.id);
+  const setOpen = open => {
+    navbar.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+  };
+  setOpen(false);
+  toggle.addEventListener('click', () => setOpen(!navbar.classList.contains('nav-open')));
+  menu.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+  document.addEventListener('click', event => {
+    if (!navbar.contains(event.target)) setOpen(false);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setOpen(false);
   });
 }
 
@@ -161,6 +154,8 @@ function initHorizontalScroll() {
     let autoScrollInterval;
     let autoScrollSpeed = 1;
     let isPaused = false;
+    let inView = !('IntersectionObserver' in window);
+    let autoScrollReady = false;
 
     // Mouse drag
     container.addEventListener('mousedown', (e) => {
@@ -221,7 +216,7 @@ function initHorizontalScroll() {
 
     // Auto scroll
     function startAutoScroll() {
-      if (autoScrollInterval) return;
+      if (autoScrollInterval || !autoScrollReady || !inView || document.hidden || isPaused || isDown) return;
 
       autoScrollInterval = setInterval(() => {
         if (isPaused || isDown) return;
@@ -276,8 +271,19 @@ function initHorizontalScroll() {
       }
     }
 
+    if ('IntersectionObserver' in window) {
+      const visibility = new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        if (inView) startAutoScroll(); else stopAutoScroll();
+      });
+      visibility.observe(container);
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoScroll(); else startAutoScroll();
+    });
+
     // Start auto scroll after a delay
-    setTimeout(startAutoScroll, 2000);
+    setTimeout(() => { autoScrollReady = true; startAutoScroll(); }, 2000);
   });
 }
 
@@ -301,6 +307,7 @@ function initProjectFilter() {
 
       // Filter cards
       cards.forEach(card => {
+        clearTimeout(card._filterTimer);
         const category = card.dataset.category;
 
         if (filter === 'all' || category === filter) {
@@ -308,7 +315,7 @@ function initProjectFilter() {
           // Trigger reflow for animation
           card.style.opacity = '0';
           card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
+          card._filterTimer = setTimeout(() => {
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
@@ -316,7 +323,7 @@ function initProjectFilter() {
         } else {
           card.style.opacity = '0';
           card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
+          card._filterTimer = setTimeout(() => {
             card.style.display = 'none';
           }, 300);
         }
