@@ -1,5 +1,15 @@
 # Weave Lab 留言邮件后端
 
+## 当前收信通道（2026-10-23）
+
+正式联系页使用 FormSubmit 的原生 POST 表单，收件人为 `1016520133@qq.com`。
+保留服务方默认 reCAPTCHA 和隐藏诱捕字段；姓名、邮箱、主题、留言内容均随邮件发送。
+`email` 字段用于 Reply-To，收到留言后点击“回复”即可回复访客。
+首次使用须由邮箱所有者点击 FormSubmit 邮件中的 Activate Form；未经激活不能视为已接通。
+正式表单不再加载 `js/contact-form.js`，因此不会因未配置 Resend/Turnstile 而禁用提交按钮。
+
+## 保留的 Resend 后端
+
 网站地址为 https://weavelab.website/，继续使用 GitHub Pages；接口为 https://weave-lab-contact.pages.dev/api/contact。
 收件人固定为 1016520133@qq.com。访客邮箱作为 Reply-To，直接回复邮件即可回复留言者。
 
