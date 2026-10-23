@@ -639,3 +639,20 @@
   .footer-bottom { align-items: center !important; justify-content: center !important; }
   .footer-bottom > p { width: 100%; text-align: center; text-wrap: balance; }
 }
+/* Keep light navigation readable even on the landing page's dark hero. */
+body.theme-light .navbar,
+body.theme-light .navbar.navbar-show { background: rgba(255,255,255,.96) !important; border-color: rgba(20,16,35,.12) !important; }
+body.theme-light .navbar .nav-logo,
+body.theme-light .navbar .nav-link,
+body.theme-light .navbar .nav-link:hover,
+body.theme-light .navbar .nav-link.active,
+body.theme-light .navbar .dropdown-item,
+body.theme-light .navbar .dropdown-item:hover { color: #211c30 !important; }
+body.theme-light .navbar .nav-logo-mark-img { filter: invert(1); }
+body.theme-light .navbar .nav-toggle span { background: #211c30 !important; }
+body.theme-light .navbar .theme-toggle { background: rgba(30,24,50,.06) !important; border-color: rgba(30,24,50,.16) !important; }
+body.theme-light .navbar .nav-dropdown { background: #fff !important; border-color: rgba(30,24,50,.12) !important; }
+body.theme-light .navbar .dropdown-item:hover { background: rgba(80,60,150,.08) !important; }
+body.theme-light .content-glow-wrap::before { background: linear-gradient(to bottom,#fff,rgba(255,255,255,.9) 30%,transparent); }
+body.theme-light .hero-viewport::after { background: linear-gradient(to bottom,transparent 55%,rgba(255,255,255,.3) 80%,#fff 100%); }
+body.theme-light .m3-section .m3-glow { display: block !important; opacity: .2; }
