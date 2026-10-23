@@ -9,7 +9,8 @@
       var nav = performance.getEntriesByType('navigation')[0];
       if (nav && nav.type === 'reload') {
         // 用 sessionStorage 记住刷新前的滚动位置
-        var savedScroll = parseInt(sessionStorage.getItem('about-scroll') || '0', 10);
+        var savedScroll = 0;
+        try { savedScroll = parseInt(sessionStorage.getItem('about-scroll') || '0', 10); } catch {}
         if (savedScroll > 100) {
           document.documentElement.classList.add('skip-intro');
         }
@@ -17,14 +18,14 @@
     }
     // 持续记录滚动位置
     window.addEventListener('scroll', function() {
-      sessionStorage.setItem('about-scroll', window.pageYOffset.toString());
+      try { sessionStorage.setItem('about-scroll', window.pageYOffset.toString()); } catch {}
     }, { passive: true });
   </script>
   <title>师生团队 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="了解 Weave Lab 智能体验与服务工程实验室的导师团队和学生成员">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow1">
-  <link rel="stylesheet" href="../css/mentors-3d.css?v=20261023-flow1">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow2">
+  <link rel="stylesheet" href="../css/mentors-3d.css?v=20261023-flow2">
 
 <style>
     /* 刷新时跳过入场动画 */
@@ -462,17 +463,17 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 Weave Lab. All rights reserved.</p>
+        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
         <div class="footer-social">
-          <span aria-label="社交账号暂未提供">W</span>
-          <span aria-label="社交账号暂未提供">B</span>
-          <a href="mailto:1016520133@qq.com" aria-label="邮箱">@</a>
+          
+          
+          <a href="mailto:1016520133@qq.com" aria-label="邮箱">发送邮件</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20261023-flow1"></script>
+  <script src="../js/main.js?v=20261023-flow2"></script>
   <script>
     // 页面入场动画：标题光晕爆发 → 自动下滑到内容区
     (function() {
@@ -611,7 +612,7 @@
       goToSlide(0);
     })();
   </script>
-  <script src="../js/mentors-3d.js?v=20261023-flow1"></script>
+  <script src="../js/mentors-3d.js?v=20261023-flow2"></script>
   <script>
     document.getElementById('m3Total').textContent = TEACHERS.length;
   </script>

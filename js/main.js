@@ -981,33 +981,28 @@ function initStudent3DCarousel() {
     }
   });
 
-  // Wheel scroll
-  let wheelTimeout;
+  // Wheel scroll: vertical gestures belong to the page, horizontal gestures to cards.
   carousel.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 8) return;
     e.preventDefault();
-    clearTimeout(wheelTimeout);
-    
-    if (!isAnimating) {
-      const direction = e.deltaY > 0 ? 1 : -1;
-      goTo(current + direction);
-    }
-    
-    wheelTimeout = setTimeout(() => {}, 100);
+    if (!isAnimating) goTo(current + (e.deltaX > 0 ? 1 : -1));
   }, { passive: false });
 
   // Touch swipe
   let touchStartX = 0;
   let touchEndX = 0;
+  let touchStartY = 0;
   
   carousel.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
   }, { passive: true });
 
   carousel.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     const diff = touchStartX - touchEndX;
     
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 40 && Math.abs(diff) > Math.abs(e.changedTouches[0].screenY - touchStartY)) {
       goTo(current + (diff > 0 ? 1 : -1));
     }
   }, { passive: true });
