@@ -2,11 +2,13 @@
 
 ## 当前收信通道（2026-10-23）
 
-正式联系页使用 FormSubmit 的原生 POST 表单，收件人为 `1016520133@qq.com`。
-保留服务方默认 reCAPTCHA 和隐藏诱捕字段；姓名、邮箱、主题、留言内容均随邮件发送。
+正式联系页使用 FormSubmit 的 AJAX 接口，收件人为 `1016520133@qq.com`。
+访客在页面内提交，页面仅在服务方返回成功后提示已提交；失败保留内容，不自动重复发送。
+保留服务方反垃圾过滤和隐藏诱捕字段；姓名、邮箱、主题、留言内容均随邮件发送。
 `email` 字段用于 Reply-To，收到留言后点击“回复”即可回复访客。
 首次使用须由邮箱所有者点击 FormSubmit 邮件中的 Activate Form；未经激活不能视为已接通。
-正式表单不再加载 `js/contact-form.js`，因此不会因未配置 Resend/Turnstile 而禁用提交按钮。
+`js/contact-form.js` 调用已验证可收信的 AJAX 通道，不依赖未配置的 Resend/Turnstile。
+未加载脚本时仍可使用原生 POST，服务方会显示额外 reCAPTCHA；该页面尚不代表留言发出。
 
 ## 保留的 Resend 后端
 
