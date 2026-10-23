@@ -33,7 +33,7 @@ test('ordinary work cards and clones navigate to generated gallery anchors', () 
   assert.equal(new Set(records.map(x => x.id)).size, 36);
   assert.match(gallery, /card\.id = 'work-' \+ work\.id/);
   assert.match(gallery, /selected\.scrollIntoView/);
-  for (const record of records) assert.ok(fs.existsSync(path.join('images/normal-works', record.img)), record.img);
+  for (const record of records) assert.ok(fs.existsSync(path.join('images/normal-works', record.board)), record.board);
   for (const name of ['projects.html', 'normal-works.html']) {
     assert.match(page(name), /src="\.\.\/images\/normal-works\//);
     assert.doesNotMatch(page(name), /src="\.\.\/images\/graduation\/artwork-unavailable\.svg"/);
