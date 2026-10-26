@@ -19,7 +19,7 @@ const TEACHERS = [
     title: '讲师 / 创新创业教育导师 / 工作室负责人',
     email: '1016520133@qq.com',
     major: '服务设计与互联网营销 / AI产品与智能交互',
-    blog: 'https://blog.weavelab.com/zhangmoxuan',
+    blog: 'https://c7-4.github.io/-/',
     photo: '../images/teachers/teacher1.jpg',
     photoPos: 'center top',
     link: 'mentor-detail.html?id=1'

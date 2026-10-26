@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-flow-restored">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-fullflow">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -931,17 +931,15 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Weave Lab. All rights reserved.</p>
+        <p>&copy; 2026 Weave Lab 智能体验与服务工程实验室. All rights reserved.</p>
         <div class="footer-social">
-          
-          
           <a href="mailto:1016520133@qq.com" aria-label="邮箱">发送邮件</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="../js/main.js?v=20261023-flow2"></script>
+  <script src="../js/main.js?v=20261026-fullflow"></script>
   <script>
     // 页面入场动画：标题光晕爆发 → 自动下滑到内容区
     (function() {
@@ -1213,17 +1211,18 @@
         var parentStyle = getComputedStyle(viewport.parentElement);
         var avail = viewport.parentElement.clientWidth - parseFloat(parentStyle.paddingLeft || 0) - parseFloat(parentStyle.paddingRight || 0);
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
-        var cardWidth = Math.round(BASE_CARD_W * scale);
-        var gap = Math.round(BASE_GAP * scale);
+        var cardWidth = mobile ? Math.floor((avail - 12) / 2) : Math.round(BASE_CARD_W * scale);
+        var gap = mobile ? 12 : Math.round(BASE_GAP * scale);
         var cardHeight = Math.round(cardWidth * (mobile ? 5 / 3 : CARD_ASPECT));
-        var rowHeight = cardHeight + gap;
+        var rowGap = mobile ? 16 : gap;
+        var rowHeight = cardHeight + rowGap;
         grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
         viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        grid.querySelectorAll(':scope > .graduation-card').forEach(function(card) { card.style.display = ''; });
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - rowGap) + 'px';
+
         var previews = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-hidden):not(.graduation-clone)');
 
         var items = previews.length;
@@ -1339,9 +1338,8 @@
         track.style.transform = 'translateY(0px)';
         track.style.animation = 'none';
         currentY = 0;
-        viewport.style.maxHeight = 'none';
-        // 重新测量布局
         measure();
+        viewport.style.maxHeight = 'none';
       };
 
       // 恢复自动滚动
@@ -1557,20 +1555,20 @@
         var parentStyle = getComputedStyle(viewport.parentElement);
         var avail = viewport.parentElement.clientWidth - parseFloat(parentStyle.paddingLeft || 0) - parseFloat(parentStyle.paddingRight || 0);
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
-        var cardWidth = Math.round(BASE_CARD_W * scale);
-        var gap = Math.round(BASE_GAP * scale);
+        var cardWidth = mobile ? Math.floor((avail - 12) / 2) : Math.round(BASE_CARD_W * scale);
+        var gap = mobile ? 12 : Math.round(BASE_GAP * scale);
         var cardHeight = Math.round(cardWidth * (mobile ? 5 / 3 : CARD_ASPECT));
-        var rowHeight = cardHeight + gap;
+        var rowGap = mobile ? 16 : gap;
+        var rowHeight = cardHeight + rowGap;
         grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
         viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
+        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - rowGap) + 'px';
         grid.querySelectorAll(':scope > .nwork-card').forEach(function(card) { card.style.display = ''; });
         var previews = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-hidden):not(.nwork-clone)');
-        previews.forEach(function(card, index) { card.style.display = mobile && index >= 4 ? 'none' : ''; });
-        if (mobile) viewport.style.maxHeight = 'none';
+
         var items = previews.length;
         var rows = Math.ceil(items / COLS);
         var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);

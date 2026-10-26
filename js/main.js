@@ -903,7 +903,7 @@ function initStudent3DCarousel() {
       if (offset < -total / 2) offset += total;
       
       const absOffset = Math.abs(offset);
-      
+      card.classList.toggle('active', absOffset === 0);
       if (absOffset > 2) {
         card.style.opacity = '0';
         card.style.transform = 'translateX(' + (offset > 0 ? '400px' : '-400px') + ') scale(0.5) rotateY(' + (offset > 0 ? '-45deg' : '45deg') + ')';
