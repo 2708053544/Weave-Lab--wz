@@ -721,3 +721,25 @@ body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #62
   body.theme-light .graduation-card-author,
   body.theme-light .nwork-author { color: #625c70; }
 }
+/* Bottom dock: direct links and separate, keyboard-accessible menu controls. */
+.dock-nav-slot .nav-group { display: flex; align-items: center; position: relative; }
+.dock-nav-slot .dock-dropdown-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 36px; border: 0; border-radius: 50%;
+  background: transparent; color: #fff; cursor: pointer;
+}
+.dock-nav-slot .dock-dropdown-toggle:hover,
+.dock-nav-slot .dock-dropdown-toggle[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+.dock-nav-slot .nav-group > .nav-link { padding-right: 4px !important; }
+.dock-nav-slot .nav-group .nav-dropdown {
+  z-index: 30; margin-bottom: 0; padding-bottom: 8px;
+  background: #171324; color: #f5f5f5; border-radius: 12px;
+}
+.dock-nav-slot .nav-dropdown a { display: block; padding: 12px 20px; white-space: nowrap; }
+.dock-nav-slot .nav-dropdown a:hover,
+.dock-nav-slot .nav-dropdown a:focus-visible { background: rgba(255,255,255,.12); }
+.dock-nav-slot .nav-group.dock-open .nav-dropdown {
+  visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0);
+}
+.dock-nav-slot .nav-group:not(.dock-open) .nav-dropdown { visibility: hidden; opacity: 0; pointer-events: none; }
+.dock-nav-slot .nav-group.dock-open .nav-dropdown { pointer-events: auto; }

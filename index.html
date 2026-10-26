@@ -837,7 +837,7 @@
   <link rel="stylesheet" href="assets/nav-glass.css">
   <link rel="stylesheet" href="assets/liquid-home.css?v=7">
   <link rel="stylesheet" href="assets/bottom-navigation.css?v=8">
-  <link rel="stylesheet" href="css/mobile-fix.css?v=20261023-flow2">
+  <link rel="stylesheet" href="css/mobile-fix.css?v=20261026-dock">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Instrument+Serif:ital@1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -1004,16 +1004,16 @@
         <a href="#top" class="nav-link appear appear--scale" style="--d:.16s" aria-current="page"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v9.2a1.3 1.3 0 0 1-1.3 1.3H4.8a1.3 1.3 0 0 1-1.3-1.3z"/><path d="M9.5 20.5v-6h5v6"/></svg></span><span>首页</span></a>
         <div class="nav-group"><a href="pages/about.html" class="nav-link appear appear--soft" style="--d:.24s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="2.8"/><path d="M3.8 18.7c.3-3.1 2.3-5 5.2-5s4.9 1.9 5.2 5"/><path d="M15.3 5.5a2.8 2.8 0 0 1 0 5.2M16.6 13.9c2.1.4 3.4 2.1 3.6 4.8"/></svg></span>
-          <span>师生团队</span><span class="nav-arrow">▾</span>
-          </a><div class="nav-dropdown">
+          <span>师生团队</span>
+          </a><button class="dock-dropdown-toggle" type="button" aria-label="展开师生团队菜单" aria-expanded="false" aria-controls="dock-team">▾</button><div class="nav-dropdown" id="dock-team">
             <a href="pages/about.html#mentors">指导老师</a>
             <a href="pages/about.html#students">学生团队</a>
           </div>
         </div>
         <div class="nav-group"><a href="pages/projects.html" class="nav-link appear appear--scale" style="--d:.32s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="m17 13.3.9 2.7 2.8.9-2.8.9-.9 2.8-.9-2.8-2.8-.9 2.8-.9z"/></svg></span>
-          <span>项目成果</span><span class="nav-arrow">▾</span>
-          </a><div class="nav-dropdown">
+          <span>项目成果</span>
+          </a><button class="dock-dropdown-toggle" type="button" aria-label="展开项目成果菜单" aria-expanded="false" aria-controls="dock-projects">▾</button><div class="nav-dropdown" id="dock-projects">
             <a href="pages/projects.html">全部项目</a>
             <a href="pages/graduation-works.html">毕设作品</a>
               <a href="pages/projects.html#normal-works">普通作品</a>
@@ -1022,8 +1022,8 @@
         </div>
         <div class="nav-group"><a href="pages/activities.html" class="nav-link appear appear--soft" style="--d:.4s;">
           <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12.2c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="M3 17.6c3-3.4 5.7-3.4 8.8 0s5.8 3.4 9.2 0"/><path d="m17.4 4.2.5 1.7 1.7.5-1.7.5-.5 1.7-.5-1.7-1.7-.5 1.7-.5z"/></svg></span>
-          <span>活动与合作</span><span class="nav-arrow">▾</span>
-          </a><div class="nav-dropdown">
+          <span>活动与合作</span>
+          </a><button class="dock-dropdown-toggle" type="button" aria-label="展开活动与合作菜单" aria-expanded="false" aria-controls="dock-activities">▾</button><div class="nav-dropdown" id="dock-activities">
             <a href="pages/activities.html">活动</a>
             <a href="pages/activities.html#partners">合作资源</a>
           </div>
@@ -1296,6 +1296,7 @@
   </script>
   <script src="assets/opening.js?v=20261023-burst1"></script>
   <script src="assets/hero-trail.js?v=20261023-perf1"></script>
+  <script src="js/dock-navigation.js?v=20261026"></script>
 </body>
 </html>
 
