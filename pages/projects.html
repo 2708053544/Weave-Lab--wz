@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-fullflow">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-realtest1">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -1204,6 +1204,7 @@
       const BASE_GAP = 36;
       const VISIBLE_ROWS = 2;
       const PX_PER_SEC = 50;
+      var showAllGraduation = false;
 
       function measure() {
         var mobile = window.innerWidth <= 600;
@@ -1221,7 +1222,7 @@
         viewport.style.width = (COLS * cardWidth + (COLS - 1) * gap) + 'px';
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
-        viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - rowGap) + 'px';
+        viewport.style.maxHeight = showAllGraduation ? 'none' : (rowHeight * VISIBLE_ROWS - rowGap) + 'px';
 
         var previews = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-hidden):not(.graduation-clone)');
 
@@ -1302,6 +1303,7 @@
 
       // 鼠标滚轮控制
       viewport.addEventListener('wheel', function(e) {
+        if (showAllGraduation) return;
         e.preventDefault();
         e.stopPropagation();
         updateHalfHeight();
@@ -1328,6 +1330,7 @@
 
       // 优秀毕设模式：暂停滚动、移除克隆、静止展示全部
       window._pauseGraduationMarquee = function() {
+        showAllGraduation = true;
         hoverPause = true;
         if (marqueeAnimId) {
           cancelAnimationFrame(marqueeAnimId);
@@ -1344,6 +1347,7 @@
 
       // 恢复自动滚动
       window._resumeGraduationMarquee = function() {
+        showAllGraduation = false;
         hoverPause = false;
         measure();
         duplicate();
@@ -1400,7 +1404,7 @@
         const countBadge = carousel.querySelector('.graduation-board-count');
         const prevBtn = carousel.querySelector('.graduation-arrow.prev');
         const nextBtn = carousel.querySelector('.graduation-arrow.next');
-        let current = 0;
+        let current = Math.max(0, Array.from(slides).findIndex(slide => slide.classList.contains('active')));
         const total = slides.length;
 
         function goTo(index) {

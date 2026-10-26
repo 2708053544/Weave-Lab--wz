@@ -801,3 +801,16 @@ body.theme-light .glow-layer {
 @media (max-width: 900px) and (max-height: 640px) {
   .hero-main .hero-actions { margin-top: 20px !important; }
 }
+
+/* Light mode retains the blue-purple ambient palette instead of a blank canvas. */
+body.theme-light { --bg-primary: #f7f6fc; --bg-secondary: #eeecf7; }
+body.theme-light::before {
+  opacity: 1;
+  background: radial-gradient(ellipse at 12% 16%,rgba(110,139,255,.22),transparent 55%),
+    radial-gradient(ellipse at 88% 65%,rgba(177,122,244,.20),transparent 57%),
+    radial-gradient(ellipse at 40% 100%,rgba(91,191,231,.12),transparent 56%);
+}
+body.theme-light .m3-section,
+body.theme-light .student-3d-section {
+  background: linear-gradient(180deg,#f7f6fc 0%,rgba(240,237,250,.78) 45%,#f7f6fc 100%) !important;
+}
