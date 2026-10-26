@@ -812,5 +812,9 @@ body.theme-light::before {
 }
 body.theme-light .m3-section,
 body.theme-light .student-3d-section {
-  background: linear-gradient(180deg,#f7f6fc 0%,rgba(240,237,250,.78) 45%,#f7f6fc 100%) !important;
+  background: linear-gradient(180deg,rgba(247,246,252,0) 0%,rgba(240,237,250,.65) 30%,rgba(240,237,250,.65) 70%,rgba(247,246,252,0) 100%) !important;
+}
+
+body.theme-light .footer {
+  background: linear-gradient(180deg,rgba(247,246,252,0),#f7f6fc 140px);
 }
