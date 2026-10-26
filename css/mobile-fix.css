@@ -821,3 +821,17 @@ body.theme-light .footer {
 
 /* Hero copy has its own stacking context; keep the dock above its transparent area. */
 .hero-viewport > .bottom-dock { z-index: 40 !important; }
+
+/* Preserve each section's center color and blend only its padding at the edges. */
+body.theme-light .graduation-section { --section-fill: var(--bg-primary); }
+body.theme-light .mentor-gallery-section,
+body.theme-light .research-pills-section,
+body.theme-light .section[style*="background: var(--bg-secondary)"] { --section-fill: var(--bg-secondary); }
+body.theme-light .graduation-section,
+body.theme-light .mentor-gallery-section,
+body.theme-light .research-pills-section,
+body.theme-light .section[style*="background: var(--bg-secondary)"] {
+  --section-edge: clamp(48px,8vw,120px);
+  background: linear-gradient(to bottom,transparent 0%,var(--section-fill) var(--section-edge),
+    var(--section-fill) calc(100% - var(--section-edge)),transparent 100%) !important;
+}
