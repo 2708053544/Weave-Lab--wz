@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-gallery2">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-layout3">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -1223,7 +1223,11 @@
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
         viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        var items = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-clone)').length;
+        grid.querySelectorAll(':scope > .graduation-card').forEach(function(card) { card.style.display = ''; });
+        var previews = grid.querySelectorAll(':scope > .graduation-card:not(.graduation-hidden):not(.graduation-clone)');
+        previews.forEach(function(card, index) { card.style.display = mobile && index >= 4 ? 'none' : ''; });
+        if (mobile) viewport.style.maxHeight = 'none';
+        var items = previews.length;
         var rows = Math.ceil(items / COLS);
         var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
         track.style.animationDuration = duration + 's';
@@ -1564,7 +1568,11 @@
         viewport.style.marginLeft = 'auto';
         viewport.style.marginRight = 'auto';
         viewport.style.maxHeight = (rowHeight * VISIBLE_ROWS - gap) + 'px';
-        var items = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-clone)').length;
+        grid.querySelectorAll(':scope > .nwork-card').forEach(function(card) { card.style.display = ''; });
+        var previews = grid.querySelectorAll(':scope > .nwork-card:not(.nwork-hidden):not(.nwork-clone)');
+        previews.forEach(function(card, index) { card.style.display = mobile && index >= 4 ? 'none' : ''; });
+        if (mobile) viewport.style.maxHeight = 'none';
+        var items = previews.length;
         var rows = Math.ceil(items / COLS);
         var duration = Math.max(10, (rows * rowHeight) / PX_PER_SEC);
         track.style.animationDuration = duration + 's';

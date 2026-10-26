@@ -787,3 +787,18 @@ body.theme-light .glow-layer {
   -webkit-mask-image: linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);
   mask-image: linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);
 }
+/* Keep the original single-row dock on phones. */
+@media (max-width: 900px) {
+  .dock-nav-slot .nav-glass { flex-wrap: nowrap !important; overflow: visible !important; gap: 0 !important; }
+  .dock-nav-slot .nav-group { flex: 1 1 0; min-width: 0; }
+  .dock-nav-slot .nav-glass > .nav-link { flex: 1 1 0 !important; min-width: 0 !important; }
+  .dock-nav-slot .nav-glass .nav-link { padding: 0 5px !important; font-size: clamp(10px,2.9vw,12px) !important; white-space: nowrap; }
+  .dock-nav-slot .nav-group > .nav-link { width: 100%; }
+  .dock-nav-slot .dock-dropdown-toggle { display: none; }
+  .dock-nav-slot { border-radius: 999px !important; }
+}
+@media (max-width: 600px) {
+  .graduation-viewport, .normal-viewport { width: 100% !important; max-width: 100%; max-height: none !important; }
+  .graduation-viewport .graduation-grid, .normal-viewport .normal-grid { width: 100%; grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap: 16px 12px !important; }
+  .graduation-viewport .graduation-card, .normal-viewport .nwork-card { width: 100%; min-width: 0; }
+}
