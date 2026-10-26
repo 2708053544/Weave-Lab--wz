@@ -818,3 +818,6 @@ body.theme-light .student-3d-section {
 body.theme-light .footer {
   background: linear-gradient(180deg,rgba(247,246,252,0),#f7f6fc 140px);
 }
+
+/* Hero copy has its own stacking context; keep the dock above its transparent area. */
+.hero-viewport > .bottom-dock { z-index: 40 !important; }
