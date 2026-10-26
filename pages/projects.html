@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-gallery">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-gallery2">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -1210,7 +1210,8 @@
       function measure() {
         var mobile = window.innerWidth <= 600;
         var COLS = mobile ? 2 : 4;
-        var avail = viewport.parentElement.clientWidth;
+        var parentStyle = getComputedStyle(viewport.parentElement);
+        var avail = viewport.parentElement.clientWidth - parseFloat(parentStyle.paddingLeft || 0) - parseFloat(parentStyle.paddingRight || 0);
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         var cardWidth = Math.round(BASE_CARD_W * scale);
         var gap = Math.round(BASE_GAP * scale);
@@ -1550,7 +1551,8 @@
       function measure() {
         var mobile = window.innerWidth <= 600;
         var COLS = mobile ? 2 : 4;
-        var avail = viewport.parentElement.clientWidth;
+        var parentStyle = getComputedStyle(viewport.parentElement);
+        var avail = viewport.parentElement.clientWidth - parseFloat(parentStyle.paddingLeft || 0) - parseFloat(parentStyle.paddingRight || 0);
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         var cardWidth = Math.round(BASE_CARD_W * scale);
         var gap = Math.round(BASE_GAP * scale);

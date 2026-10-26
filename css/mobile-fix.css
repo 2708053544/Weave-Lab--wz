@@ -743,3 +743,13 @@ body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #62
 }
 .dock-nav-slot .nav-group:not(.dock-open) .nav-dropdown { visibility: hidden; opacity: 0; pointer-events: none; }
 .dock-nav-slot .nav-group.dock-open .nav-dropdown { pointer-events: auto; }
+
+@media (max-width: 600px) {
+  .graduation-viewport .graduation-board-slide img,
+  .normal-viewport .nwork-board > img { object-fit: contain; object-position: center; }
+  /* A stable preview avoids showing half a row while the visitor reads. */
+  .graduation-viewport .graduation-track,
+  .normal-viewport .normal-track { animation: none !important; transform: none !important; }
+  .graduation-viewport .graduation-clone,
+  .normal-viewport .nwork-clone { display: none !important; }
+}
