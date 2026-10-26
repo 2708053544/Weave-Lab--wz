@@ -753,3 +753,37 @@ body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #62
   .graduation-viewport .graduation-clone,
   .normal-viewport .nwork-clone { display: none !important; }
 }
+/* Continuous page canvas: section backgrounds must not cut off ambient light. */
+body.theme-light::before { opacity: .22; }
+body.theme-light .section,
+body.theme-light .detail-section,
+body.theme-light .about-research-section,
+body.theme-light .cooperation-section,
+body.theme-light .contact-section,
+body.theme-light .mentor-content-section,
+body.theme-light .mentor-gallery-section,
+body.theme-light .research-pills-section,
+body.theme-light .research-cta-section,
+body.theme-light .mentors-preview-section,
+body.theme-light .mentor-thumbs-section,
+body.theme-light .marquee-section,
+body.theme-light .cta-section,
+body.theme-light .cta-banner,
+body.theme-light .student-3d-section,
+body.theme-light .about-v2,
+body.theme-light .research-item-v2,
+body.theme-light .footer-v2,
+body.theme-light .horizontal-scroll-section,
+body.theme-light .m3-section,
+body.theme-light .alt-bg,
+body.theme-light .footer { background: transparent !important; }
+/* Fade only decorative layers, preserving the opacity of text and photographs. */
+.m3-section .m3-glow-field {
+  -webkit-mask-image: linear-gradient(to bottom,transparent,black 18%,black 65%,transparent);
+  mask-image: linear-gradient(to bottom,transparent,black 18%,black 65%,transparent);
+}
+body.theme-light .content-glow-wrap::before { background: linear-gradient(to bottom,#fff,rgba(255,255,255,.65) 35%,transparent); }
+body.theme-light .glow-layer {
+  -webkit-mask-image: linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);
+  mask-image: linear-gradient(to bottom,transparent,black 12%,black 88%,transparent);
+}
