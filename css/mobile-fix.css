@@ -748,9 +748,7 @@ body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #62
   .graduation-viewport .graduation-board-slide img,
   .normal-viewport .nwork-board > img { object-fit: contain; object-position: center; }
   /* A stable preview avoids showing half a row while the visitor reads. */
-  .graduation-viewport .graduation-track,
   .normal-viewport .normal-track { animation: none !important; transform: none !important; }
-  .graduation-viewport .graduation-clone,
   .normal-viewport .nwork-clone { display: none !important; }
 }
 /* Continuous page canvas: section backgrounds must not cut off ambient light. */
@@ -798,7 +796,8 @@ body.theme-light .glow-layer {
   .dock-nav-slot { border-radius: 999px !important; }
 }
 @media (max-width: 600px) {
-  .graduation-viewport, .normal-viewport { width: 100% !important; max-width: 100%; max-height: none !important; }
+  .graduation-viewport, .normal-viewport { width: 100% !important; max-width: 100%; }
+  .normal-viewport { max-height: none !important; }
   .graduation-viewport .graduation-grid, .normal-viewport .normal-grid { width: 100%; grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap: 16px 12px !important; }
   .graduation-viewport .graduation-card, .normal-viewport .nwork-card { width: 100%; min-width: 0; }
 }
