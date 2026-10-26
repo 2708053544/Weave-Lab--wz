@@ -686,3 +686,38 @@ body.theme-light .mentor-contact-link { text-decoration-color: #76658e; }
 body.theme-light .mentor-contact-link:hover { color: #4b388f; text-decoration-color: currentColor; }
 body.theme-light .footer-logo-mark-img { filter: invert(1); }
 body.theme-light .project-card-content > p[style*="color:rgba(255"] { color: #625c70 !important; }
+
+/* Reserve a caption row so mobile work previews remain visible. */
+@media (max-width: 600px) {
+  .graduation-viewport .graduation-board-carousel,
+  .normal-viewport .nwork-board { aspect-ratio: 3 / 5; }
+  .graduation-viewport .graduation-board-slide { height: calc(100% - 76px); }
+  .normal-viewport .nwork-board > img { height: calc(100% - 76px); }
+  .graduation-viewport .graduation-card-info,
+  .normal-viewport .nwork-info {
+    height: 76px; padding: 8px 10px; overflow: hidden;
+    background: #17151f; backdrop-filter: none;
+  }
+  .graduation-viewport .graduation-card-title,
+  .normal-viewport .nwork-title { font-size: 13px; line-height: 17px; height: 34px; }
+  .graduation-viewport .graduation-card-author,
+  .normal-viewport .nwork-author { font-size: 11px; line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .graduation-viewport .graduation-carousel-dots { bottom: 82px; }
+  .graduation-viewport .graduation-arrow,
+  .normal-viewport .nwork-arrow { top: calc((100% - 76px) / 2); }
+  .graduation-viewport .graduation-arrow-card,
+  .normal-viewport .nwork-arrow-card {
+    position: absolute; bottom: 0; right: 0; width: 100%; height: 44px;
+    margin-top: 0; border-radius: 8px; flex-direction: row; gap: 8px;
+  }
+  .graduation-viewport,
+  .normal-viewport { padding-bottom: 56px; box-sizing: content-box; }
+  .graduation-arrow-card .graduation-arrow-icon,
+  .nwork-arrow-card .nwork-arrow-icon { margin-bottom: 0; }
+  body.theme-light .graduation-card-info,
+  body.theme-light .nwork-info { background: #f4f2f8; }
+  body.theme-light .graduation-card-title,
+  body.theme-light .nwork-title { color: #211c30; }
+  body.theme-light .graduation-card-author,
+  body.theme-light .nwork-author { color: #625c70; }
+}

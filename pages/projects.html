@@ -6,7 +6,7 @@
   <title>项目成果 | Weave Lab 智能体验与服务工程实验室</title>
   <meta name="description" content="Weave Lab 智能体验与服务工程实验室的获奖荣誉与设计作品展示">
   <link rel="stylesheet" href="../css/style.css?v=18">
-  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261023-flow2">
+  <link rel="stylesheet" href="../css/mobile-fix.css?v=20261026-gallery">
   <style>
     /* Graduation Works Showcase */
     .graduation-section {
@@ -1204,16 +1204,17 @@
       const CARD_ASPECT = 4 / 3;
       const BASE_CARD_W = 250;
       const BASE_GAP = 36;
-      const COLS = 4;
       const VISIBLE_ROWS = 2;
       const PX_PER_SEC = 50;
 
       function measure() {
-        var avail = viewport.clientWidth;
+        var mobile = window.innerWidth <= 600;
+        var COLS = mobile ? 2 : 4;
+        var avail = viewport.parentElement.clientWidth;
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         var cardWidth = Math.round(BASE_CARD_W * scale);
         var gap = Math.round(BASE_GAP * scale);
-        var cardHeight = Math.round(cardWidth * CARD_ASPECT);
+        var cardHeight = Math.round(cardWidth * (mobile ? 5 / 3 : CARD_ASPECT));
         var rowHeight = cardHeight + gap;
         grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
@@ -1543,16 +1544,17 @@
       const CARD_ASPECT = 4 / 3;
       const BASE_CARD_W = 250;
       const BASE_GAP = 36;
-      const COLS = 4;
       const VISIBLE_ROWS = 2;
       const PX_PER_SEC = 50;
 
       function measure() {
-        var avail = viewport.clientWidth;
+        var mobile = window.innerWidth <= 600;
+        var COLS = mobile ? 2 : 4;
+        var avail = viewport.parentElement.clientWidth;
         var scale = Math.min(1, avail / (COLS * BASE_CARD_W + (COLS - 1) * BASE_GAP));
         var cardWidth = Math.round(BASE_CARD_W * scale);
         var gap = Math.round(BASE_GAP * scale);
-        var cardHeight = Math.round(cardWidth * CARD_ASPECT);
+        var cardHeight = Math.round(cardWidth * (mobile ? 5 / 3 : CARD_ASPECT));
         var rowHeight = cardHeight + gap;
         grid.style.gridTemplateColumns = 'repeat(' + COLS + ', ' + cardWidth + 'px)';
         grid.style.gap = gap + 'px ' + gap + 'px';
